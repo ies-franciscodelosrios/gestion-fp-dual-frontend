@@ -1,0 +1,7 @@
+{
+  "name": "gestionfp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

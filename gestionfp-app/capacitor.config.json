@@ -1,0 +1,11 @@
+{
+  "appId": "com.gestionfp.app",
+  "appName": "gestionfp",
+  "bundledWebRuntime": false,
+  "webDir": "dist",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  }
+}
