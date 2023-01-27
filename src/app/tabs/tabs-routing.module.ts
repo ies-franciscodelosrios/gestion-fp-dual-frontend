@@ -9,15 +9,19 @@ const routes: Routes = [
     children: [
       {
         path: 'admin',
-        loadChildren: () => import('../admin/admin.module').then(m => m.Tab1PageModule)
+        loadChildren: () => import('../admin/admin.module').then(m => m.AdminPageModule)
       },
       {
-        path: 'tab2',
-        loadChildren: () => import('../tab2/tab2.module').then(m => m.Tab2PageModule)
+        path: 'educativo',
+        loadChildren: () => import('../educativo/educativo.module').then(m => m.EducativoPageModule)
       },
       {
-        path: 'tab3',
-        loadChildren: () => import('../tab3/tab3.module').then(m => m.Tab3PageModule)
+        path: 'empresa',
+        loadChildren: () => import('../empresa/empresa.module').then(m => m.EmpresaPageModule)
+      },
+      {
+        path: 'alumno',
+        loadChildren: () => import('../alumno/alumno.module').then(m => m.AlumnoPageModule)
       },
       {
         path: '',
