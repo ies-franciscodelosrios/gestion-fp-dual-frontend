@@ -1,38 +1,30 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>usuarioEdit</ion-title>
+    <ion-title>Inline Modal</ion-title>
   </ion-toolbar>
 </ion-header>
-
-<ion-content>
-  <ion-modal #modal trigger="open-modal">
+<ion-content class="ion-padding">
+  <ion-button id="open-modal" expand="block">Open</ion-button>
+  <p>{{ message }}</p>
+  <ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
     <ng-template>
+      <ion-header>
         <ion-toolbar>
-          <ion-title>Modal</ion-title>
+          <ion-buttons slot="start">
+            <ion-button (click)="cancel()">Cancel</ion-button>
+          </ion-buttons>
+          <ion-title>Welcome</ion-title>
           <ion-buttons slot="end">
-            <ion-button color="light" (click)="modal.dismiss()">Close</ion-button>
+            <ion-button (click)="confirm()" [strong]="true">Confirm</ion-button>
           </ion-buttons>
         </ion-toolbar>
-        <form [formGroup]="todo">
-          <ion-item>
-            <ion-label>Nombre</ion-label>
-            <ion-input type="text" formControlName="nombre"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label>Correo</ion-label>
-            <ion-textarea formControlName="correo"></ion-textarea>
-          </ion-item>
-          <ion-item>
-            <ion-label>DNI/NIF</ion-label>
-            <ion-textarea formControlName="doc"></ion-textarea>
-          </ion-item>
-          <ion-item>
-            <ion-label>De Alta</ion-label>
-            <ion-textarea formControlName="alta"></ion-textarea>
-          </ion-item>
-
-          <ion-button shape="round" color="primary" fill="outline" type="submit" [disabled]="!todo.valid">Guardar</ion-button>
-        </form>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-item>
+          <ion-label position="stacked">Enter your name</ion-label>
+          <ion-input type="text" placeholder="Your name" [(ngModel)]="name"></ion-input>
+        </ion-item>
+      </ion-content>
     </ng-template>
   </ion-modal>
 </ion-content>

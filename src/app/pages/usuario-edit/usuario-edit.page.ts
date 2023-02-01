@@ -1,7 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { Usuario } from 'src/model/Usuario';
+import { IonModal } from '@ionic/angular';
+import { OverlayEventDetail } from '@ionic/core/components';
 import { LoginService } from '../../services/login.service';
 
 @Component({
@@ -11,25 +13,29 @@ import { LoginService } from '../../services/login.service';
 })
 export class UsuarioEditPage implements OnInit {
 
-  @Input('user') user:Usuario;
-  public todo: FormGroup ;
-  constructor(
-    private formBuilder:FormBuilder,
-    private loginS:LoginService,
-    private modalCTRL:ModalController
-  ) {
+
+  @ViewChild(IonModal) modal: IonModal;
+
+  message = 'This modal example uses triggers to automatically open a modal when the button is clicked.';
+  name: string;
+
+  cancel() {
+    this.modal.dismiss(null, 'cancel');
   }
-  ngOnInit() {
-    if(!this.user){
-      console.log("Crear Usuario");
-    } else{
-      this.todo = this.formBuilder.group({
-        nombre :[this.user.nombre],
-        correo : [this.user.correo],
-        doc : [this.user.doc],
-        alta : [this.user.alta],
-      })
+
+  confirm() {
+    this.modal.dismiss(this.name, 'confirm');
+  }
+
+  onWillDismiss(event: Event) {
+    const ev = event as CustomEvent<OverlayEventDetail<string>>;
+    if (ev.detail.role === 'confirm') {
+      this.message = `Hello, ${ev.detail.data}!`;
     }
+  }
+
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
   }
 
 }

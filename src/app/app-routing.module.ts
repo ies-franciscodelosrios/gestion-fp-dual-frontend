@@ -8,23 +8,23 @@ const routes: Routes = [
   },
   {
     path: 'alumno',
-    loadChildren: () => import('./alumno/alumno.module').then( m => m.AlumnoPageModule)
+    loadChildren: () => import('./centroeducativo/alumno/alumno.module').then( m => m.AlumnoPageModule)
   },
   {
     path: 'alumno',
-    loadChildren: () => import('./alumno/alumno.module').then( m => m.AlumnoPageModule)
+    loadChildren: () => import('./centroeducativo/alumno/alumno.module').then( m => m.AlumnoPageModule)
   },
   {
     path: 'empresa',
-    loadChildren: () => import('./empresa/empresa.module').then( m => m.EmpresaPageModule)
+    loadChildren: () => import('./centroeducativo/empresa/empresa.module').then( m => m.EmpresaPageModule)
   },
   {
     path: 'periodopracticas',
-    loadChildren: () => import('./periodopracticas/periodopracticas.module').then( m => m.PeriodopracticasPageModule)
+    loadChildren: () => import('./centroeducativo/periodopracticas/periodopracticas.module').then( m => m.PeriodopracticasPageModule)
   },
   {
     path: 'modulo',
-    loadChildren: () => import('./modulo/modulo.module').then( m => m.ModuloPageModule)
+    loadChildren: () => import('./centroeducativo/modulo/modulo.module').then( m => m.ModuloPageModule)
   },
   {
     path: 'usuario-edit',
