@@ -8,14 +8,6 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'admin',
-        loadChildren: () => import('../admin/admin.module').then(m => m.AdminPageModule)
-      },
-      {
-        path: 'educativo',
-        loadChildren: () => import('../educativo/educativo.module').then(m => m.EducativoPageModule)
-      },
-      {
         path: 'empresa',
         loadChildren: () => import('../empresa/empresa.module').then(m => m.EmpresaPageModule)
       },
@@ -24,15 +16,23 @@ const routes: Routes = [
         loadChildren: () => import('../alumno/alumno.module').then(m => m.AlumnoPageModule)
       },
       {
+        path: 'modulo',
+        loadChildren: () => import('../modulo/modulo.module').then(m => m.ModuloPageModule)
+      },
+      {
+        path: 'periodopracticas',
+        loadChildren: () => import('../periodopracticas/periodopracticas.module').then(m => m.PeriodopracticasPageModule)
+      },
+      {
         path: '',
-        redirectTo: '/tabs/admin',
+        redirectTo: '/tabs/empresa',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/admin',
+    redirectTo: '/tabs/empresa',
     pathMatch: 'full'
   }
 ];

@@ -15,16 +15,20 @@ const routes: Routes = [
     loadChildren: () => import('./alumno/alumno.module').then( m => m.AlumnoPageModule)
   },
   {
-    path: 'admin',
-    loadChildren: () => import('./admin/admin.module').then( m => m.AdminPageModule)
-  },
-  {
     path: 'empresa',
     loadChildren: () => import('./empresa/empresa.module').then( m => m.EmpresaPageModule)
   },
   {
-    path: 'educativo',
-    loadChildren: () => import('./educativo/educativo.module').then( m => m.EducativoPageModule)
+    path: 'periodopracticas',
+    loadChildren: () => import('./periodopracticas/periodopracticas.module').then( m => m.PeriodopracticasPageModule)
+  },
+  {
+    path: 'modulo',
+    loadChildren: () => import('./modulo/modulo.module').then( m => m.ModuloPageModule)
+  },
+  {
+    path: 'usuario-edit',
+    loadChildren: () => import('./pages/usuario-edit/usuario-edit.module').then( m => m.UsuarioEditPageModule)
   }
 ];
 @NgModule({
