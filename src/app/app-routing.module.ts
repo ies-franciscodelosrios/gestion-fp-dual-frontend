@@ -1,35 +1,48 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './guards/auth.guard';
+import { AuthGuardAdmin } from './guards/auth.guardAdmin';
+import { AuthGuardAlumno } from './guards/auth.guardAlumno';
+import { AuthGuardCE } from './guards/auth.guardCE';
+import { AuthGuardEmpresa } from './guards/auth.guardEmpresa';
+import { Error404Page } from './pages/error404/error404.page';
 
 const routes: Routes = [
   {
-    path: '',
-    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
+    path: 'login',
+    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
   },
   {
-    path: 'alumno',
-    loadChildren: () => import('./centroeducativo/alumno/alumno.module').then( m => m.AlumnoPageModule)
-  },
-  {
-    path: 'alumno',
-    loadChildren: () => import('./centroeducativo/alumno/alumno.module').then( m => m.AlumnoPageModule)
-  },
+    path: 'centroeducativo',
+    loadChildren: () => import('./tabs_centrosEducativo/tabs.module').then(m => m.TabsPageModule),
+    canActivate:[AuthGuard,AuthGuardCE]
+  }, //para hacer pruebas
   {
     path: 'empresa',
-    loadChildren: () => import('./centroeducativo/empresa/empresa.module').then( m => m.EmpresaPageModule)
-  },
+    loadChildren: () => import('./tabs_Empresa/tabs.module').then(m => m.TabsPageModule),
+    canActivate:[AuthGuard,AuthGuardEmpresa]
+  }, //para hacer pruebas
   {
-    path: 'periodopracticas',
-    loadChildren: () => import('./centroeducativo/periodopracticas/periodopracticas.module').then( m => m.PeriodopracticasPageModule)
-  },
-  {
-    path: 'modulo',
-    loadChildren: () => import('./centroeducativo/modulo/modulo.module').then( m => m.ModuloPageModule)
-  },
-  {
-    path: 'usuario-edit',
+    path: 'editar_usuario',
     loadChildren: () => import('./pages/usuario-edit/usuario-edit.module').then( m => m.UsuarioEditPageModule)
-  }
+  },
+  {
+    path: 'admin',
+    loadChildren: () => import('./admin/admin.module').then( m => m.AdminPageModule),
+    canActivate:[AuthGuard,AuthGuardAdmin]
+  },
+  {
+    path: 'alumnos',
+    loadChildren: () => import('./empresa/alumnos/alumnos.module').then( m => m.AlumnosPageModule),
+    canActivate:[AuthGuard,AuthGuardAlumno]
+  },
+  {
+    path: 'error404',
+    loadChildren: () => import('./pages/error404/error404.module').then( m => m.Error404PageModule)
+  },
+  { path: '**', pathMatch: 'full', 
+  component: Error404Page },
+
 ];
 @NgModule({
   imports: [
