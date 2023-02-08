@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tareas',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TareasPage implements OnInit {
 
-  constructor() { }
+  constructor(private modalCtrl: ModalController) {
+    
+  }
 
   ngOnInit() {
+  }
+  
+  public async addTask(){
+    console.log("Esto añade una tarea en el futuro");
+    
+    /*
+    const modal = await this.modalCtrl.create(
+
+    )
+    */
   }
 
 }
