@@ -42,6 +42,11 @@ const routes: Routes = [
   },
   { path: '**', pathMatch: 'full', 
   component: Error404Page },
+  {
+    path: 'form',
+    loadChildren: () => import('./pages/form/form.module').then( m => m.FormPageModule)
+  },
+
 
 ];
 @NgModule({
