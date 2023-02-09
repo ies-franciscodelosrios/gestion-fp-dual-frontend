@@ -33,15 +33,17 @@ const routes: Routes = [
   },
   {
     path: 'alumnos',
-    loadChildren: () => import('./empresa/alumnos/alumnos.module').then( m => m.AlumnosPageModule),
+    loadChildren: () => import('./tabs_alumno/tabs.module').then( m => m.TabsAlumnoModule),
     canActivate:[AuthGuard,AuthGuardAlumno]
   },
   {
     path: 'error404',
     loadChildren: () => import('./pages/error404/error404.module').then( m => m.Error404PageModule)
   },
-  { path: '**', pathMatch: 'full', 
-  component: Error404Page },
+ 
+
+/*  { path: '**', pathMatch: 'full', 
+  component: Error404Page },*/
 
 ];
 @NgModule({
