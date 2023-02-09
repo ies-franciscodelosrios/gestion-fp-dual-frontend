@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { TareaComponent } from '../../components/tarea/tarea.component';
 
 @Component({
   selector: 'app-tareas',
@@ -16,7 +17,10 @@ export class TareasPage implements OnInit {
   }
   
   public async addTask(){
-    console.log("Esto añade una tarea en el futuro");
+    const modal = await this.modalCtrl.create({
+      component: TareaComponent,
+    });
+    return await modal.present();
     
     /*
     const modal = await this.modalCtrl.create(
