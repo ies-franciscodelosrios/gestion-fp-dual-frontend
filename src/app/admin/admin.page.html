@@ -1,6 +1,11 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>GFP Admin</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrarSesion()">
+        <ion-icon slot="icon-only" name="exit"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -23,4 +28,8 @@
         </ion-label>
       </ion-item>
   </ion-list>
+
+  <div class="editCE">
+    <ion-icon name="pencil-outline" (click)="editForm()"></ion-icon>
+  </div>
 </ion-content>
