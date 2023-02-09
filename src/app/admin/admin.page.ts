@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { EditCEComponent } from '../components/edit-ce/edit-ce.component';
 import { FormPage } from '../pages/form/form.page';
 
 @Component({
@@ -19,7 +20,14 @@ export class AdminPage implements OnInit {
 
   async openForm() {
     const modal = await this.modalCtrl.create({
-      component: FormPage,
+      component: EditCEComponent,
+    });
+    return await modal.present();
+  }
+
+  async editForm() {
+    const modal = await this.modalCtrl.create({
+      component: EditCEComponent,
     });
     return await modal.present();
   }
@@ -34,4 +42,7 @@ export class AdminPage implements OnInit {
     }
   }
 
+  cerrarSesion() {
+
+  }
 }
