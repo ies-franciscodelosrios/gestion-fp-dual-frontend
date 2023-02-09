@@ -33,7 +33,7 @@ const routes: Routes = [
   },
   {
     path: 'alumnos',
-    loadChildren: () => import('./empresa/alumnos/alumnos.module').then( m => m.AlumnosPageModule),
+    loadChildren: () => import('./tabs_alumno/tabs.module').then( m => m.TabsAlumnoModule),
     canActivate:[AuthGuard,AuthGuardAlumno]
   },
   {
@@ -46,8 +46,6 @@ const routes: Routes = [
     path: 'form',
     loadChildren: () => import('./pages/form/form.module').then( m => m.FormPageModule)
   },
-
-
 ];
 @NgModule({
   imports: [
