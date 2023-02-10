@@ -1,9 +1,28 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>modulo</ion-title>
+    <ion-title><ion-icon name="arrow-back-outline" (click)="toBack()"></ion-icon> {{titulo}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-searchbar id="searchmodule" placeholder="Buscar"></ion-searchbar>
+  <ion-list lines="inset">
+    <ion-item id="open-modal" expand="block" (click)="listaRAModul()"> 
+      <ion-label>
+        <h3>Có. Boja: {{0486.}}</h3>
+        <p>Acceso a datos</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" color = "floatbuton">
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button color = "floatbuton">
+        <ion-icon name="add" (click)="addModul()"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
 </ion-content>
