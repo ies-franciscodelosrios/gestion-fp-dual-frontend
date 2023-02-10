@@ -13,6 +13,7 @@ import { APIService } from './services/api.service';
   declarations: [AppComponent],
   imports: [BrowserModule, IonicModule.forRoot(), HttpClientModule, AppRoutingModule, TabsPageModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },APIService],
+
   bootstrap: [AppComponent],
 })
 export class AppModule {}
