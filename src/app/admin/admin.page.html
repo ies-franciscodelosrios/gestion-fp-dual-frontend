@@ -1,9 +1,35 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>admin</ion-title>
+    <ion-title>GFP Admin</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrarSesion()">
+        <ion-icon slot="icon-only" name="exit"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-Admin!
+  <div class="block">
+    <ion-searchbar (ionChange)="searchAdmin($event)"></ion-searchbar>
+  </div>
+  <div class="blockButton">
+    <ion-fab>
+      <ion-fab-button class="buttonAdd" (click)="openForm()">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </div>
+  <ion-list>
+      <ion-item *ngFor="let user of searchedUser">
+        <ion-label>
+          <h2>{{user.name}}</h2>
+          <p>{{user.descripcion}}</p>
+        </ion-label>
+      </ion-item>
+  </ion-list>
+
+  <div class="editCE">
+    <ion-icon name="pencil-outline" (click)="editForm()"></ion-icon>
+  </div>
 </ion-content>

@@ -10,11 +10,17 @@ export const environment = {
     storageBucket: "proyectodepresa-40bf2.appspot.com",
   
     messagingSenderId: "972392582120",
-  
+
     appId: "1:972392582120:web:9899eb6d23e24ada9eb25d",
   
     measurementId: "G-VL4SYDVK2F"
   
   },
-  endpoint: 'http://localhost/3000'
+  api:{
+    url:'http://localhost:8100/api',
+    endpoints:{
+      titulo:'/titulo',
+      user: '/users'
+    },
+  }
 };

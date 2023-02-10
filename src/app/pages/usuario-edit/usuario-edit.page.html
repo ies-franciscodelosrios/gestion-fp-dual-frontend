@@ -1,30 +1,29 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Inline Modal</ion-title>
+    <ion-title>Crear </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cancel()" [strong]="true"><ion-icon name="close-outline"></ion-icon></ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding">
-  <ion-button id="open-modal" expand="block">Open</ion-button>
-  <p>{{ message }}</p>
-  <ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
-    <ng-template>
-      <ion-header>
-        <ion-toolbar>
-          <ion-buttons slot="start">
-            <ion-button (click)="cancel()">Cancel</ion-button>
-          </ion-buttons>
-          <ion-title>Welcome</ion-title>
-          <ion-buttons slot="end">
-            <ion-button (click)="confirm()" [strong]="true">Confirm</ion-button>
-          </ion-buttons>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content class="ion-padding">
-        <ion-item>
-          <ion-label position="stacked">Enter your name</ion-label>
-          <ion-input type="text" placeholder="Your name" [(ngModel)]="name"></ion-input>
-        </ion-item>
-      </ion-content>
-    </ng-template>
-  </ion-modal>
+  <form [formGroup]="formUsuario" (ngSubmit)="submitForm()">
+    <ion-item>
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input formControlName="nombre" placeholder="nombre de usuario" ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Correo</ion-label>
+      <ion-input formControlName="correo" placeholder="correo electrónico" ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">DNI/NIF</ion-label>
+      <ion-input formControlName="doc" placeholder="documento de identidad" ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Alta</ion-label>
+      <ion-checkbox formControlName="alta" slot="end" ></ion-checkbox>
+    </ion-item>
+    <ion-button shape="round" color="primary" fill="outline" type="submit" [disabled]="!formUsuario.valid">Guardar</ion-button>
+  </form>
 </ion-content>

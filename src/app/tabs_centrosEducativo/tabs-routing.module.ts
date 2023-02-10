@@ -16,6 +16,10 @@ const routes: Routes = [
         loadChildren: () => import('../centroeducativo/alumno/alumno.module').then(m => m.AlumnoPageModule)
       },
       {
+        path: 'titulo',
+        loadChildren: () => import('../centroeducativo/titulo/titulo.module').then(m => m.TituloPageModule)
+      },
+      {
         path: 'modulo',
         loadChildren: () => import('../centroeducativo/modulo/modulo.module').then(m => m.ModuloPageModule)
       },

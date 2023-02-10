@@ -5,43 +5,69 @@ import { AuthGuardAdmin } from './guards/auth.guardAdmin';
 import { AuthGuardAlumno } from './guards/auth.guardAlumno';
 import { AuthGuardCE } from './guards/auth.guardCE';
 import { AuthGuardEmpresa } from './guards/auth.guardEmpresa';
-import { Error404Page } from './pages/error404/error404.page';
+import { TabsAlumnoModule } from './tabs_alumno/tabs.module';
+//import { Error404Page } from './pages/error404/error404.page';
 
 const routes: Routes = [
   {
     path: 'login',
-    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule)
   },
   {
     path: 'centroeducativo',
     loadChildren: () => import('./tabs_centrosEducativo/tabs.module').then(m => m.TabsPageModule),
-    canActivate:[AuthGuard,AuthGuardCE]
+    canActivate: [AuthGuard, AuthGuardCE]
   }, //para hacer pruebas
   {
     path: 'empresa',
     loadChildren: () => import('./tabs_Empresa/tabs.module').then(m => m.TabsPageModule),
-    canActivate:[AuthGuard,AuthGuardEmpresa]
+    canActivate: [AuthGuard, AuthGuardEmpresa]
   }, //para hacer pruebas
   {
     path: 'editar_usuario',
-    loadChildren: () => import('./pages/usuario-edit/usuario-edit.module').then( m => m.UsuarioEditPageModule)
+    loadChildren: () => import('./pages/usuario-edit/usuario-edit.module').then(m => m.UsuarioEditPageModule)
   },
   {
     path: 'admin',
-    loadChildren: () => import('./admin/admin.module').then( m => m.AdminPageModule),
-    canActivate:[AuthGuard,AuthGuardAdmin]
+    loadChildren: () => import('./admin/admin.module').then(m => m.AdminPageModule),
+    canActivate: [AuthGuard, AuthGuardAdmin]
   },
   {
     path: 'alumnos',
-    loadChildren: () => import('./empresa/alumnos/alumnos.module').then( m => m.AlumnosPageModule),
-    canActivate:[AuthGuard,AuthGuardAlumno]
+    loadChildren: () => import('./tabs_alumno/tabs.module').then(m => m.TabsAlumnoModule),
+    canActivate: [AuthGuard, AuthGuardAlumno]
   },
   {
     path: 'error404',
-    loadChildren: () => import('./pages/error404/error404.module').then( m => m.Error404PageModule)
+    loadChildren: () => import('./pages/error404/error404.module').then(m => m.Error404PageModule)
   },
-  { path: '**', pathMatch: 'full', 
-  component: Error404Page },
+  {
+    path: 'modulo-lista-ra',
+    loadChildren: () => import('./pages/modulo-lista-ra/modulo-lista-ra.module').then(m => m.ModuloListaRaPageModule)
+  },
+  {
+    path: 'modulo-edit',
+    loadChildren: () => import('./pages/modulo-edit/modulo-edit.module').then( m => m.ModuloEditPageModule)
+  },
+  {
+    path: 'titulo',
+    loadChildren: () => import('./centroeducativo/titulo/titulo.module').then( m => m.TituloPageModule)
+  },
+  {
+    path: 'titulo-edit',
+    loadChildren: () => import('./pages/titulo-edit/titulo-edit.module').then( m => m.TituloEditPageModule)
+  },
+  {
+    path: 'practicas',
+    loadChildren: () => import('./pages/practicas/practicas.module').then( m => m.PracticasPageModule)
+  },
+  {
+    path: 'edit-ce',
+    loadChildren: () => import('./edit-ce/edit-ce.module').then( m => m.EditCePageModule)
+  }
+  //,
+  //{ path: '**', pathMatch: 'full', 
+  //component: Error404Page },
 
 ];
 @NgModule({
@@ -50,4 +76,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
