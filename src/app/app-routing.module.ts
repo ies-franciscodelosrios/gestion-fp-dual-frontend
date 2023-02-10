@@ -6,7 +6,7 @@ import { AuthGuardAlumno } from './guards/auth.guardAlumno';
 import { AuthGuardCE } from './guards/auth.guardCE';
 import { AuthGuardEmpresa } from './guards/auth.guardEmpresa';
 import { TabsAlumnoModule } from './tabs_alumno/tabs.module';
-//import { Error404Page } from './pages/error404/error404.page';
+import { Error404Page } from './pages/error404/error404.page';
 
 const routes: Routes = [
   {
@@ -64,11 +64,9 @@ const routes: Routes = [
   {
     path: 'edit-ce',
     loadChildren: () => import('./edit-ce/edit-ce.module').then( m => m.EditCePageModule)
-  }
-  //,
-  //{ path: '**', pathMatch: 'full', 
-  //component: Error404Page },
-
+  },
+  { path: '**', pathMatch: 'full', 
+  component: Error404Page },
 ];
 @NgModule({
   imports: [
