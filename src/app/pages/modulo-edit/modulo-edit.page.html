@@ -1,0 +1,30 @@
+
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Crear {{ionTitle}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cancel()" [strong]="true"><ion-icon name="close-outline"></ion-icon></ion-button>
+      
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <form  (ngSubmit)="logForm()">
+    <ion-item>
+      <ion-label position="floating">Co. Módulo</ion-label>
+      <ion-input [(ngModel)]="modul.cod" placeholder="Codigo del modulo" ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input [(ngModel)]="modul.modNombre" laceholder="Nombre" ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-select interface="popover" placeholder="Titulo">
+        <ion-select-option value="ASIR">ASIR</ion-select-option>
+        <ion-select-option value="DAMN">DAMN</ion-select-option>
+        <ion-select-option value="RAM">RAM</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-button shape="round" color="primary" fill="outline" type="submit" [disabled]="!todo.valid">Guardar</ion-button>
+  </form>
+</ion-content>
