@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { InfiniteScrollCustomEvent, IonInfiniteScroll, ModalController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
-import { Usuario } from 'src/model/Usuario';
-import { ModalController } from '@ionic/angular';
+import { UsuarioEditPage } from 'src/app/pages/usuario-edit/usuario-edit.page';
+import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-empresa',
@@ -9,29 +11,35 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['./empresa.page.scss'],
 })
 export class EmpresaPage implements OnInit {
+  public titulo:string;
+  empresa = 'Empresa';
+  public empresas: UsuarioEditPage[] = [];
+  public results = this.empresas;
+
   constructor(
+    private titleSV: Title,
     private http: HttpClient,
-    private modalCtrl: ModalController) {
-     }
+    private router: Router,
+    private modalCtrl: ModalController) { 
+      this.titulo = this.titleSV.getTitle();
+    }
 
   ngOnInit() {
   }
 
+  public async nuevaempresa() {
+    let emp = document.getElementById("Alumno");
 
-  public async nuevaempresa(){
+    if (emp != null ) {
+      emp.id= "Empresa"
+    }
     const modal = await this.modalCtrl.create({
-      component: ModalController
+      component: UsuarioEditPage,
+      componentProps:{
+        empresa: this.empresa
+      }
     });
     return await modal.present();
-  
   }
 
-
-  //sin uso pero es para solicitar datos con Springboot (En desarrollo)
-  sendData(usuario:Usuario) {
-    this.http.post('http://localhost:8080/gestionfp/user', usuario)
-      .subscribe(response => {
-        console.log(response);
-      });
-  }
 }

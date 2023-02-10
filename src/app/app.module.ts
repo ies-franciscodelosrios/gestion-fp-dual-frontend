@@ -7,12 +7,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { AdminPageModule } from './admin/admin.module';
 import { TabsPageModule } from './tabs_centrosEducativo/tabs.module';
-import { TabsAlumnoModule } from './tabs_alumno/tabs.module';
+import { APIService } from './services/api.service';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), HttpClientModule, AppRoutingModule, TabsAlumnoModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  imports: [BrowserModule, IonicModule.forRoot(), HttpClientModule, AppRoutingModule, TabsPageModule],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },APIService],
+
   bootstrap: [AppComponent],
 })
 export class AppModule {}
