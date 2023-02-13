@@ -67,6 +67,15 @@ const routes: Routes = [
   },
   { path: '**', pathMatch: 'full', 
   component: Error404Page },
+  {
+    path: 'edit-ce',
+    loadChildren: () => import('./pages/edit-ce/edit-ce.module').then( m => m.EditCEPageModule)
+  },
+  {
+    path: 'add-ce',
+    loadChildren: () => import('./pages/add-ce/add-ce.module').then( m => m.AddCEPageModule)
+  },
+
 ];
 @NgModule({
   imports: [
