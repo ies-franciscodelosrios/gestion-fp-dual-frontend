@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { FormPageRoutingModule } from './form-routing.module';
+import { EditCEPageRoutingModule } from './edit-ce-routing.module';
 
-import { FormPage } from './form.page';
+import { EditCEPage } from './edit-ce.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    FormPageRoutingModule
+    EditCEPageRoutingModule
   ],
-  declarations: [FormPage]
+  declarations: [EditCEPage]
 })
-export class FormPageModule {}
+export class EditCEPageModule {}

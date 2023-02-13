@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { AdminPageRoutingModule } from './admin-routing.module';
 
 import { AdminPage } from './admin.page';
-import { EditCEComponent } from '../components/edit-ce/edit-ce.component';
+import { PlantillaFormComponent } from '../components/plantilla-form/plantilla-form.component';
 
 @NgModule({
   imports: [
@@ -16,6 +16,6 @@ import { EditCEComponent } from '../components/edit-ce/edit-ce.component';
     IonicModule,
     AdminPageRoutingModule
   ],
-  declarations: [AdminPage, EditCEComponent]
+  declarations: [AdminPage, PlantillaFormComponent]
 })
 export class AdminPageModule {}
