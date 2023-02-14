@@ -1,26 +1,20 @@
 export const environment = {
   production: false,
-  firebaseConfig : {
-    apiKey: "AIzaSyBszWy1UtqmzYoK2OnBohtH9PTOIvSdfJA",
-
-    authDomain: "proyectodepresa-40bf2.firebaseapp.com",
-  
-    projectId: "proyectodepresa-40bf2",
-  
-    storageBucket: "proyectodepresa-40bf2.appspot.com",
-  
-    messagingSenderId: "972392582120",
-
-    appId: "1:972392582120:web:9899eb6d23e24ada9eb25d",
-  
-    measurementId: "G-VL4SYDVK2F"
-  
+  firebaseConfig: {
+    apiKey: "AIzaSyBZa96-X3IRhfcx_z_Q9pgCJnCJ1z-b-ss",
+    authDomain: "gestionfp-83d49.firebaseapp.com",
+    projectId: "gestionfp-83d49",
+    storageBucket: "gestionfp-83d49.appspot.com",
+    messagingSenderId: "67865224389",
+    appId: "1:67865224389:web:e797e497bb2fa132a6bcac",
+    measurementId: "G-JFM99SLYMK"
   },
-  api:{
-    url:'http://localhost:8100/api',
-    endpoints:{
-      titulo:'/titulo',
-      user: '/users'
+  api: {
+    url: 'http://localhost:8100/api',
+    endpoints: {
+      titulo: '/titulo',
+      user: '/users',
+      roles: '/roles'
     },
   }
 };

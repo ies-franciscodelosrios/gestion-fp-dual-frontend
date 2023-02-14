@@ -31,5 +31,8 @@ export class PeriodopracticasPage implements OnInit {
     });
     return await modal.present();
   }
+  cerrarSesion(){
+    
+  }
 
 }

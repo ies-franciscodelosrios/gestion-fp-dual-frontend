@@ -12,7 +12,7 @@ export class LoginService {
   constructor(
     private platform:Platform) {
     GoogleAuth.initialize({
-      clientId: '972392582120-pv6c028tmu0v1mfvsnd87229b9l9a4dl.apps.googleusercontent.com',
+      clientId: '67865224389-e65ir4vhqavhm38n116qb2ebtp58h9an.apps.googleusercontent.com',
       scopes: ['profile', 'email'],
       grantOfflineAccess: true,
     });

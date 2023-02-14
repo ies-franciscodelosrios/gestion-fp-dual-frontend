@@ -39,4 +39,9 @@ export class ModuloPage implements OnInit {
     });
     return await modal.present();
   }
+  cerrarSesion(){
+    
+  }
 }
+
+
