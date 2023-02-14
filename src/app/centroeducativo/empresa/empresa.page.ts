@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { UsuarioEditPage } from 'src/app/pages/usuario-edit/usuario-edit.page';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
+import { Usuario } from 'src/model/Usuario';
+import { APIService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-empresa',
@@ -13,6 +15,8 @@ import { Title } from '@angular/platform-browser';
 export class EmpresaPage implements OnInit {
   public titulo:string;
   empresa = 'Empresa';
+  public listEmpresa: Usuario[] = [];
+
   public empresas: UsuarioEditPage[] = [];
   public results = this.empresas;
 
@@ -20,12 +24,14 @@ export class EmpresaPage implements OnInit {
     private titleSV: Title,
     private http: HttpClient,
     private router: Router,
+    private apiS: APIService,
     private modalCtrl: ModalController) { 
       this.titulo = this.titleSV.getTitle();
     }
 
-  ngOnInit() {
+  async ngOnInit() {
   }
+
 
   public async nuevaempresa() {
     let emp = document.getElementById("Alumno");
@@ -40,6 +46,12 @@ export class EmpresaPage implements OnInit {
       }
     });
     return await modal.present();
+  }
+
+
+
+  cerrarSesion(){
+
   }
 
 }

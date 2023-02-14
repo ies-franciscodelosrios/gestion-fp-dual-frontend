@@ -46,4 +46,7 @@ export class AlumnoPage implements OnInit {
       //this.users = this.results.filter(d => d.name.toLowerCase().indexOf(query) > -1);
     }
   }
+  cerrarSesion(){
+    
+  }
 }
