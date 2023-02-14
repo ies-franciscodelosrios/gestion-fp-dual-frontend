@@ -6,7 +6,7 @@ import { AuthGuardAlumno } from './guards/auth.guardAlumno';
 import { AuthGuardCE } from './guards/auth.guardCE';
 import { AuthGuardEmpresa } from './guards/auth.guardEmpresa';
 import { TabsAlumnoModule } from './tabs_alumno/tabs.module';
-//import { Error404Page } from './pages/error404/error404.page';
+import { Error404Page } from './pages/error404/error404.page';
 
 const routes: Routes = [
   {
@@ -61,13 +61,28 @@ const routes: Routes = [
     path: 'practicas',
     loadChildren: () => import('./pages/practicas/practicas.module').then( m => m.PracticasPageModule)
   },
+  { path: '**', pathMatch: 'full', 
+  component: Error404Page },
   {
     path: 'edit-ce',
-    loadChildren: () => import('./edit-ce/edit-ce.module').then( m => m.EditCePageModule)
-  }
-  //,
-  //{ path: '**', pathMatch: 'full', 
-  //component: Error404Page },
+    loadChildren: () => import('./pages/edit-ce/edit-ce.module').then( m => m.EditCEPageModule)
+  },
+  {
+    path: 'add-ce',
+    loadChildren: () => import('./pages/add-ce/add-ce.module').then( m => m.AddCEPageModule)
+  },
+  {
+    path: 'newtask',
+    loadChildren: () => import('./pages/newtask/newtask.module').then( m => m.NewtaskPageModule)
+  },
+  {
+    path: 'new',
+    loadChildren: () => import('./pages/new/new.module').then( m => m.NewPageModule)
+  },
+  {
+    path: 'new-task',
+    loadChildren: () => import('./pages/new-task/new-task.module').then( m => m.NewTaskPageModule)
+  },
 
 ];
 @NgModule({
