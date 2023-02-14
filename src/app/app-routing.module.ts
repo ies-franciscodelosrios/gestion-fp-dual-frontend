@@ -74,7 +74,19 @@ const routes: Routes = [
   {
     path: 'add-ce',
     loadChildren: () => import('./pages/add-ce/add-ce.module').then( m => m.AddCEPageModule)
+  },  {
+    path: 'newtask',
+    loadChildren: () => import('./pages/newtask/newtask.module').then( m => m.NewtaskPageModule)
   },
+  {
+    path: 'new',
+    loadChildren: () => import('./pages/new/new.module').then( m => m.NewPageModule)
+  },
+  {
+    path: 'new-task',
+    loadChildren: () => import('./pages/new-task/new-task.module').then( m => m.NewTaskPageModule)
+  },
+
 
 ];
 @NgModule({
