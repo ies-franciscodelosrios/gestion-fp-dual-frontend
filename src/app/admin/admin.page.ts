@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { AddCEPage } from '../pages/add-ce/add-ce.page';
 import { EditCEPage } from '../pages/edit-ce/edit-ce.page';
+import { EditCEComponent } from '../components/edit-ce/edit-ce.component';
+import { FormPage } from '../pages/form/form.page';
 
 @Component({
   selector: 'app-admin',
@@ -21,6 +23,7 @@ export class AdminPage implements OnInit {
   async openForm() {
     const modal = await this.modalCtrl.create({
       component: AddCEPage,
+      component: EditCEComponent,
     });
     return await modal.present();
   }
@@ -28,6 +31,7 @@ export class AdminPage implements OnInit {
   async editForm() {
     const modal = await this.modalCtrl.create({
       component: EditCEPage
+      component: EditCEComponent,
     });
     return await modal.present();
   }

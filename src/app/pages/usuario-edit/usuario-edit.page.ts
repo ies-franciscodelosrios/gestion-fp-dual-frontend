@@ -42,7 +42,6 @@ export class UsuarioEditPage implements OnInit {
 
   submitForm() {
     let emp = document.getElementById("Empresa");
-
     console.log(this.formUsuario.get('nombre')?.value);
     //mostrar un loading....
 

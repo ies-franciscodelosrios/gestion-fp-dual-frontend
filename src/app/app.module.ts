@@ -14,9 +14,11 @@ import { TareaComponent } from './components/tarea/tarea.component';
 import { TareasPageModule } from './empresa/tareas/tareas.module';
 import { TabsAlumnoModule } from './tabs_alumno/tabs.module';
 
+
+
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), HttpClientModule, AppRoutingModule, TabsPageModule, TareasPageModule, AdminPageModule, EmpresaPageModule, TabsAlumnoModule],
+  imports: [BrowserModule, IonicModule.forRoot(), HttpClientModule, AppRoutingModule, TabsPageModule ,TareasPageModule, AdminPageModule, EmpresaPageModule, TabsAlumnoModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },APIService],
   bootstrap: [AppComponent],
 })

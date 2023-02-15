@@ -1,27 +1,26 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>{{titulo}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrarSesion()">
+        <ion-icon slot="icon-only" name="exit"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-searchbar id="searchmodule" placeholder="Buscar"></ion-searchbar>
-  <ion-list lines="inset">
+  <div id="divsearch" >
+    <ion-searchbar id="searchempresa" placeholder="Buscar"></ion-searchbar>
+    <ion-button (click)="this.addTitle()" style="zoom:1.25"><ion-icon name="duplicate-outline"></ion-icon></ion-button>
+  </div>
+
+  <ion-list lines="inset" *ngFor="let lista of this.listTitulo;let i=index">
     <ion-item id="open-modal" expand="block" (click)="toTitleToModul()"> 
       <ion-label>
-        <h1>ASIR</h1>
+        <h1>{{lista.nombre}}</h1>
       </ion-label>
     </ion-item>
   </ion-list>
 
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed" color = "floatbuton">
-    <ion-fab-button>
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-    <ion-fab-list side="top">
-      <ion-fab-button color = "floatbuton" (click)="addTitle()">
-        <ion-icon name="add" ></ion-icon>
-      </ion-fab-button>
-    </ion-fab-list>
-  </ion-fab>
 </ion-content>

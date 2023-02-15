@@ -6,12 +6,17 @@ ion-card{
     align-content: center;
     width: 200px;
 }
-ion-content{
+#divlist{
   display: flex;
   justify-content: center;
   align-content: center;
   align-items: center;
   width: 50%;
+}
+
+#divsearch{
+  display: flex; 
+  flex-direction: row;
 }
 
 img{

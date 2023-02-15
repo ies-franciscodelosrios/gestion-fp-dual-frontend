@@ -1,17 +1,32 @@
 <ion-header [translucent]="true" id="Empresa">
   <ion-toolbar>
     <ion-title>{{empresa}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrarSesion()">
+        <ion-icon slot="icon-only" name="exit"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 
 <ion-content>
-  <ion-searchbar id="searchempresa" placeholder="Buscar"></ion-searchbar>
-  <ion-card  id="open-modal" (click)="nuevaempresa()">
-    <img src="assets/add.png"  />
-    <ion-card-header>
-      <ion-card-title>Nueva empresa</ion-card-title>
-      <ion-card-subtitle>Agrega un nueva empresa</ion-card-subtitle>
-    </ion-card-header>
-  </ion-card>
+  <div id="divsearch">
+    <ion-searchbar id="searchempresa" placeholder="Buscar"></ion-searchbar>
+    <ion-button (click)="this.nuevaempresa()" style="zoom:1.25"><ion-icon name="duplicate-outline"></ion-icon></ion-button>
+  </div>
+
+  <ion-refresher slot="fixed" >
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div id="divlist">
+    <ion-card  id="open-modal" *ngFor="let lista of this.listEmpresa;let i=index">
+      <img src="assets/add.png" style="z-index: -1;"/>
+      <ion-card-header>
+        <ion-card-title style="z-index: -1;">.</ion-card-title>
+        <ion-card-subtitle style="z-index: -1;">.</ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
+  </div>
+
 </ion-content>
