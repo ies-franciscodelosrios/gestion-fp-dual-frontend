@@ -3,6 +3,8 @@ import { InfiniteScrollCustomEvent, IonInfiniteScroll, ModalController } from '@
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { PracticasPage } from 'src/app/pages/practicas/practicas.page';
+import { APIService } from 'src/app/services/api.service';
+import { PeriodoPracticas } from 'src/model/PeriodoPracticas';
 
 @Component({
   selector: 'app-periodopracticas',
@@ -14,25 +16,30 @@ export class PeriodopracticasPage implements OnInit {
   public practicas: PracticasPage[] = [];
   public results = this.practicas;
 
+  public listPracticas: PeriodoPracticas[] = [];
   constructor(
     private http: HttpClient,
     private router: Router,
+    private apiS: APIService,
     private modalCtrl: ModalController) { }
 
   ngOnInit() {
+    this.apiS.GetPP().subscribe(listPracticas => {
+      this.listPracticas = listPracticas;
+    })
   }
 
   public async nuevaPractica() {
     const modal = await this.modalCtrl.create({
       component: PracticasPage,
-      componentProps:{
+      componentProps: {
         practica: this.practica
       }
     });
     return await modal.present();
   }
-  cerrarSesion(){
-    
+  cerrarSesion() {
+
   }
 
 }

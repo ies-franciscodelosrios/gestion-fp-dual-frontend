@@ -1,25 +1,9 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Nuevo Centro</ion-title>
+    <ion-title>editCE</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-  <ion-list>
-    <div style="display: flex; flex-direction: row;">
-      <ion-icon color="danger" *ngIf="editable=='false'" name="trash" style="zoom:1.5"></ion-icon>
-    </div>
-    <ion-item>
-      <ion-label position="floating">Nombre</ion-label>
-      <ion-input type="text"></ion-input>
-      <ion-label position="floating">Documento</ion-label>
-      <ion-input type="text"></ion-input>
+<ion-content>
 
-      <ion-label position="floating">Correo electrónico</ion-label>
-      <ion-input type="email"></ion-input>
-    </ion-item>
-  </ion-list>
-  <ion-button>Update</ion-button>
-  <ion-button (click)="back()">Cancel</ion-button>
 </ion-content>
-

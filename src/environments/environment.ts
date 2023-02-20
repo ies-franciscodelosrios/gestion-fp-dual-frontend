@@ -14,7 +14,8 @@ export const environment = {
     endpoints: {
       titulo: '/titulo',
       user: '/users',
-      roles: '/roles'
+      roles: '/roles',
+      periodopracticas: '/periodo_practica' 
     },
   }
 };

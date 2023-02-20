@@ -300,3 +300,43 @@ body {
 	  }
 	}
   }
+
+
+
+.ion-color-floatbuton {
+    --ion-color-base: var(--ion-color-floatbuton);
+    --ion-color-base-rgb: var(--ion-color-floatbuton-rgb);
+    --ion-color-contrast: var(--ion-color-floatbuton-contrast);
+    --ion-color-contrast-rgb: var(--ion-color-floatbuton-contrast-rgb);
+    --ion-color-shade: var(--ion-color-floatbuton-shade);
+    --ion-color-tint: var(--ion-color-floatbuton-tint);
+}
+
+ion-fab-button {
+    --background: #33d9f0;
+    --background-activated: #2dbfd3;
+    --background-hover: #47ddf2;
+    --border-radius: 15px;
+    --box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, .3), 0px 1px 3px 1px rgba(0, 0, 0, .15);
+    --color: black;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+label,
+ion-title, ion-card-title{
+    color: #33d9f0;
+}
+
+ion-label{
+    color: #000000;
+    font-weight: 4px;
+}
+
+#lisras{
+    display: flex;
+    align-items: flex-start;
+    }
