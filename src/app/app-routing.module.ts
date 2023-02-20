@@ -7,6 +7,7 @@ import { AuthGuardCE } from './guards/auth.guardCE';
 import { AuthGuardEmpresa } from './guards/auth.guardEmpresa';
 import { TabsAlumnoModule } from './tabs_alumno/tabs.module';
 import { Error404Page } from './pages/error404/error404.page';
+import { LoginPage } from './pages/login/login.page';
 
 const routes: Routes = [
   {
@@ -62,7 +63,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/practicas/practicas.module').then( m => m.PracticasPageModule)
   },
   { path: '**', pathMatch: 'full', 
-  component: Error404Page },
+  component: LoginPage },
   {
     path: 'edit-ce',
     loadChildren: () => import('./pages/edit-ce/edit-ce.module').then( m => m.EditCEPageModule)
@@ -70,14 +71,6 @@ const routes: Routes = [
   {
     path: 'add-ce',
     loadChildren: () => import('./pages/add-ce/add-ce.module').then( m => m.AddCEPageModule)
-  },
-  {
-    path: 'newtask',
-    loadChildren: () => import('./pages/newtask/newtask.module').then( m => m.NewtaskPageModule)
-  },
-  {
-    path: 'new',
-    loadChildren: () => import('./pages/new/new.module').then( m => m.NewPageModule)
   },
   {
     path: 'new-task',

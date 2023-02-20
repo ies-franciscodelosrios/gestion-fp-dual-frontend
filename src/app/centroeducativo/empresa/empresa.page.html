@@ -13,18 +13,19 @@
 <ion-content>
   <div id="divsearch">
     <ion-searchbar id="searchempresa" placeholder="Buscar"></ion-searchbar>
-    <ion-button (click)="this.nuevaempresa()" style="zoom:1.25"><ion-icon name="duplicate-outline"></ion-icon></ion-button>
+    <ion-button (click)="this.nuevaempresa()" style="zoom:1.25"><ion-icon
+        name="duplicate-outline"></ion-icon></ion-button>
   </div>
 
-  <ion-refresher slot="fixed" >
+  <ion-refresher slot="fixed">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <div id="divlist">
-    <ion-card  id="open-modal" *ngFor="let lista of this.listEmpresa;let i=index">
-      <img src="assets/add.png" style="z-index: -1;"/>
+    <ion-card id="open-modal" *ngFor="let lista of this.listEmpresa;let i=index">
+      <img src="assets/add.png" style="z-index: -1;" />
       <ion-card-header>
-        <ion-card-title style="z-index: -1;">.</ion-card-title>
-        <ion-card-subtitle style="z-index: -1;">.</ion-card-subtitle>
+        <ion-card-title>{{lista.nombre}}</ion-card-title>
+        <ion-card-subtitle>{{lista.correo}}</ion-card-subtitle>
       </ion-card-header>
     </ion-card>
   </div>

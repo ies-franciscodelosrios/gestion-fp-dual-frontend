@@ -10,12 +10,23 @@
 </ion-header>
 
 <ion-content>
-  <ion-searchbar id="searchempresa" placeholder="Buscar"></ion-searchbar>
-  <ion-card id="open-modal" (click)="nuevaPractica()">
-    <ion-card-header>
-      <ion-card-title>Nueva Practica</ion-card-title>
-      <ion-card-subtitle>Agrega un nueva practica</ion-card-subtitle>
-    </ion-card-header>
-  </ion-card>
-
+  <div id="divsearch" >
+    <ion-searchbar id="searchempresa" placeholder="Buscar"></ion-searchbar>
+    <ion-button (click)="nuevaPractica()" style="zoom:1.25"><ion-icon name="duplicate-outline"></ion-icon></ion-button>
+  </div>
+  <div id="divlist">
+    <ion-card id="open-modal" *ngFor="let lista of this.listPracticas;let i=index">
+      <img src="assets/add.png" style="z-index: -1;" />
+      <ion-card-header>
+        <ion-card-title>{{lista.tInicio}}</ion-card-title>
+        <ion-card-subtitle>{{lista.tFin}}</ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
+  </div>
+  <ion-modal [keepContentsMounted]="true">
+    <ng-template>
+      <ion-datetime id="finicio"></ion-datetime>
+      <ion-datetime id="ffin"></ion-datetime>
+    </ng-template>
+  </ion-modal>
 </ion-content>

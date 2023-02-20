@@ -13,7 +13,7 @@ import { APIService } from 'src/app/services/api.service';
   styleUrls: ['./empresa.page.scss'],
 })
 export class EmpresaPage implements OnInit {
-  public titulo:string;
+  public titulo: string;
   empresa = 'Empresa';
   public listEmpresa: Usuario[] = [];
 
@@ -25,23 +25,27 @@ export class EmpresaPage implements OnInit {
     private http: HttpClient,
     private router: Router,
     private apiS: APIService,
-    private modalCtrl: ModalController) { 
-      this.titulo = this.titleSV.getTitle();
-    }
+    private modalCtrl: ModalController) {
+    this.titulo = this.titleSV.getTitle();
+  }
 
-  async ngOnInit() {
+   ngOnInit() {
+    this.apiS.GetUsuarioEmpresa().subscribe(rol => {
+      this.listEmpresa =<Usuario[]> rol.user;
+      return this.listEmpresa 
+    })
   }
 
 
   public async nuevaempresa() {
     let emp = document.getElementById("Alumno");
 
-    if (emp != null ) {
-      emp.id= "Empresa"
+    if (emp != null) {
+      emp.id = "Empresa"
     }
     const modal = await this.modalCtrl.create({
       component: UsuarioEditPage,
-      componentProps:{
+      componentProps: {
         empresa: this.empresa
       }
     });
@@ -50,7 +54,7 @@ export class EmpresaPage implements OnInit {
 
 
 
-  cerrarSesion(){
+  cerrarSesion() {
 
   }
 

@@ -3,6 +3,9 @@ import { InfiniteScrollCustomEvent, IonTitle, IonInfiniteScroll, ModalController
 import { HttpClient } from '@angular/common/http';
 import { UsuarioEditPage } from 'src/app/pages/usuario-edit/usuario-edit.page';
 import { Usuario } from 'src/model/Usuario';
+import { APIService } from 'src/app/services/api.service';
+
+
 
 @Component({
   selector: 'app-alumno',
@@ -14,13 +17,19 @@ export class AlumnoPage implements OnInit {
   @ViewChild('infinitescroll') infinitescroll : ElementRef;
   public users:UsuarioEditPage[] =[];
   public results = this.users;
+  public listAlumno: Usuario[] = [];
   
   constructor(
     private http: HttpClient,
+    private apiS: APIService,
     private modalCtrl: ModalController) {
      }
 
   ngOnInit() {
+    this.apiS.GetUsuarioAlumno().subscribe(rol => {
+      this.listAlumno =<Usuario[]> rol.user;
+      return this.listAlumno 
+    })
   }
   
   public async nuevoalumno(){

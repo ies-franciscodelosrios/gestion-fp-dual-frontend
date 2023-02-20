@@ -9,44 +9,42 @@
 
 <ion-content>
   <form [formGroup]="formPractica" (ngSubmit)="submitForm()">
+
+
+    <!--SELECIONAR EMPRESA-->
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">Empresa</ion-label>
+        <ion-select interface="popover" formControlName="Empresa" placeholder="Selecciona empresa">
+          <ion-select-option value="apples"
+            *ngFor="let listaE of this.listEmp;let i=index">{{listaE.nombre}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
+    <!--SELECIONAR ALUMNO-->
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">Alumno</ion-label>
+        <ion-select interface="popover" formControlName="Alumno" placeholder="Selecciona alumno">
+          <ion-select-option value="apples"
+            *ngFor="let listaA of this.listAlu;let i=index">{{listaA.nombre}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
+    <!--SELECIONAR FECHA INICIO-->
     <ion-item>
-      <ion-label position="floating">Empresa</ion-label>
-      <ion-select interface="action-sheet" formControlName="Empresa" placeholder="Selecciona empresa">
-        <ion-select-option value="apples">FEMASA</ion-select-option>
-        <ion-select-option value="oranges">APPizate</ion-select-option>
-      </ion-select>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Alumno</ion-label>
-      <ion-input id="popover-button" #inputElement formControlName="Alumno" placeholder="Selecciona alumno"></ion-input>
-      <ion-popover trigger="popover-button" [dismissOnSelect]="true">
-        <ng-template>
-          <ion-content>
-            <ion-list>
-              <ion-item [button]="true" (click)="selecAlum('valor 1')" [detail]="false">Sandro</ion-item>
-              <ion-item [button]="true" (click)="selecAlum('valor 1')" [detail]="false">nicolas </ion-item>
-              <ion-item [button]="true" (click)="selecAlum('valor 1')" id="nested-trigger">Pepe ejemplo</ion-item>
-            </ion-list>
-          </ion-content>
-        </ng-template>
-      </ion-popover>
-    </ion-item>
-
-
-    <ion-item>
-      <ion-label position="fixed">F. inicio</ion-label>
-
-
-      <ion-input formControlName="fInicio" value="selectedDate" readonly></ion-input>
-
-
-      <ion-button (click)="opencalendar()"><ion-icon name="calendar-outline"></ion-icon></ion-button>
-
-
-      <ion-datetime id="datetimePicker" displayFormat="DD/MM/YYYY" style="display: none;"
-        formControlName="calendar"></ion-datetime>
+      <ion-label position="fixed">F. Inicio</ion-label>
+      <ion-datetime-button datetime="finicio" ></ion-datetime-button>
     </ion-item>
 
+
+    <!--SELECIONAR FECHA FIN-->
+    <ion-item>
+      <ion-label position="fixed">F. fin</ion-label>
+      <ion-datetime-button datetime="ffin"></ion-datetime-button>
+    </ion-item>
     <ion-button shape="round" color="primary" fill="outline" type="submit"
       [disabled]="!formPractica.valid">Guardar</ion-button>
   </form>
