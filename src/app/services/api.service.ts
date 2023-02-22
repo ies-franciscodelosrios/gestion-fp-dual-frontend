@@ -22,6 +22,12 @@ export class APIService {
     return this.http.post(url, titulo);
   }
 
+  addTarea(encargo: any): Observable<any> {
+    console.log(environment.api.url + environment.api.endpoints.titulo)
+    const url = environment.api.url + environment.api.endpoints.encargo
+    return this.http.post(url, encargo);
+  }
+
   addUsuario(user: any): Observable<any> {
     const url = environment.api.url + environment.api.endpoints.user
     return this.http.post(url, user, {
