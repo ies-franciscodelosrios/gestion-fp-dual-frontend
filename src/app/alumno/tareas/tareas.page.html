@@ -1,10 +1,12 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Tareas</ion-title>
+    <ion-title id="title">Tareas</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
-<tarea editable="true"></tarea>
-<tarea></tarea>
+  <ion-list>
+    <ng-container *ngFor="let tarea of this.encargos" >
+      <tarea [encargo]=tarea style="cursor: pointer;"></tarea>
+    </ng-container>
+  </ion-list>
 </ion-content>

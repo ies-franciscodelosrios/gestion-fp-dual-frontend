@@ -70,4 +70,14 @@ export class APIService {
     return this.http.get<PeriodoPracticas[]>(url, {
     });
   }
+
+  getEncargos():Observable<any>{
+    const url = environment.api.url+environment.api.endpoints.encargo
+    return this.http.get(url);
+  }
+
+  updateEncargo(encargo:any):Observable<any>{
+    const url = environment.api.url+environment.api.endpoints.encargo
+    return this.http.put(url, encargo);
+  }
 }

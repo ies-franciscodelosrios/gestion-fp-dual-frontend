@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalController, NavParams } from '@ionic/angular';
-import { Tarea } from 'src/app/model/Tarea';
+import { Encargo } from 'src/model/Encargo';
 import { APIService } from 'src/app/services/api.service';
 import { Usuario } from 'src/model/Usuario';
 

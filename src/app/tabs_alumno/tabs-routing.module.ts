@@ -11,22 +11,15 @@ const routes: Routes = [
         path: 'tareas',
         loadChildren: () => import('../alumno/tareas/tareas.module').then(m => m.TareasPageModule)
       },
-      {
-        path: 'diario',
-        loadChildren: () => import('../alumno/diario/diario.module').then(m => m.DiarioPageModule)
-      },
+      
       {
         path: '',
-        redirectTo: '/tareas',
+        redirectTo: '/alumnos/tareas',
         pathMatch: 'full'
       }
     ]
   },
-  {
-    path: '',
-    redirectTo: '/tareas',
-    pathMatch: 'full'
-  }
+ 
 ];
 
 @NgModule({
