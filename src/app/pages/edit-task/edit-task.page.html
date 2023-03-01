@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Tarea</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cancel()" [strong]="true"><ion-icon name="close-outline"></ion-icon></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="formTask" (ngSubmit)="submitForm()">
+    <ion-item>
+      <ion-label position="floating">Tarea</ion-label>
+      <ion-input formControlName="taskname" placeholder="Nombre de la Tarea" ></ion-input>
+    </ion-item>
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">Alumno</ion-label>
+        <ion-select interface="popover" formControlName="taskuser" placeholder="Selecciona alumno">
+          <ion-select-option
+            *ngFor="let alumnos of this.alumnos;let i=index">{{alumnos.nombre}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+    <ion-item>
+      <ion-label>Estado</ion-label>
+      <ion-checkbox formControlName="taskstatus" slot="end" ></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Fecha</ion-label>
+      <ion-input formControlName="taskdate" placeholder="Fecha actual" ></ion-input>
+    </ion-item>
+
+    <ion-button shape="round" color="primary" fill="outline" type="submit" [disabled]="!formTask.valid">Guardar</ion-button>
+  </form>
+</ion-content>

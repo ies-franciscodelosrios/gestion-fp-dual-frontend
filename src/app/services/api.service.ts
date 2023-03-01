@@ -7,13 +7,13 @@ import { Titulo } from 'src/model/Titulo';
 import { Usuario } from 'src/model/Usuario';
 import { map } from 'rxjs/operators';
 import { PeriodoPracticas } from 'src/model/PeriodoPracticas';
+import { Tarea } from 'src/model/Tarea';
 
 @Injectable({
   providedIn: 'root'
 })
 export class APIService {
   constructor(private http: HttpClient) { }
-
 
   //añade un contenido a la bbdd
   addTitulo(titulo: any): Observable<any> {
@@ -68,6 +68,12 @@ export class APIService {
   GetPP(): Observable<PeriodoPracticas[]> {
     const url = environment.api.url + environment.api.endpoints.periodopracticas
     return this.http.get<PeriodoPracticas[]>(url, {
+    });
+  }
+
+  GetTarea(): Observable<Tarea[]> {
+    const url = environment.api.url + environment.api.endpoints.encargo
+    return this.http.get<Tarea[]>(url, {
     });
   }
 }

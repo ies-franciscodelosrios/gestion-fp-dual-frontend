@@ -18,14 +18,11 @@
 
 <ion-content>
   <div class="container">
-    <div class="item">
-      <ion-card>
-        <ion-icon name="document-attach-outline" style="zoom:10"></ion-icon>
-        <ion-card-header>
-          <ion-card-title>Tarea1</ion-card-title>
-          <ion-card-subtitle>Alumno1</ion-card-subtitle>
-        </ion-card-header>
-      </ion-card>
-    </div>
+    <ion-card (click)="this.editTask()" class="item" id="open-modal" *ngFor="let lista of this.tareas;let i=index">
+      <ion-icon name="document-attach-outline" style="zoom:10"></ion-icon>
+      <ion-card-header>
+        <ion-card-title>{{lista.tarea}}</ion-card-title>
+      </ion-card-header>
+    </ion-card>
   </div>
 </ion-content>
