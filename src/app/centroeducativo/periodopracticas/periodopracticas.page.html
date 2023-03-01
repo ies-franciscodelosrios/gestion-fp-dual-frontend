@@ -18,15 +18,9 @@
     <ion-card id="open-modal" *ngFor="let lista of this.listPracticas;let i=index">
       <img src="assets/add.png" style="z-index: -1;" />
       <ion-card-header>
-        <ion-card-title>{{lista.tInicio}}</ion-card-title>
-        <ion-card-subtitle>{{lista.tFin}}</ion-card-subtitle>
+        <ion-card-title> {{lista.id_empresa?.nombre}} -- {{lista.id_alumno?.nombre}} </ion-card-title>
+        <ion-card-subtitle > {{ lista.tiempo_inicio |date : 'd MMM, y' }} -- {{lista.tiempo_final |date : 'd MMM, y'}}</ion-card-subtitle>
       </ion-card-header>
     </ion-card>
   </div>
-  <ion-modal [keepContentsMounted]="true">
-    <ng-template>
-      <ion-datetime id="finicio"></ion-datetime>
-      <ion-datetime id="ffin"></ion-datetime>
-    </ng-template>
-  </ion-modal>
 </ion-content>

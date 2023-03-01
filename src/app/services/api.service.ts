@@ -35,6 +35,13 @@ export class APIService {
     });
   }
 
+  addPractica(practica: any): Observable<any> {
+    const url = environment.api.url + environment.api.endpoints.periodopracticas
+    return this.http.post(url, practica, {
+
+    });
+  }
+
   //devuelve un valor al frontend
   GetUsuarioAdmin(): Observable<Rol> {
     const url = environment.api.url + environment.api.endpoints.roles + '/1'
@@ -68,6 +75,12 @@ export class APIService {
   GetPP(): Observable<PeriodoPracticas[]> {
     const url = environment.api.url + environment.api.endpoints.periodopracticas
     return this.http.get<PeriodoPracticas[]>(url, {
+    });
+  }
+
+  GetAUsuario(): Observable<Usuario[]> {
+    const url = environment.api.url + environment.api.endpoints.user
+    return this.http.get<Usuario[]>(url, {
     });
   }
 
