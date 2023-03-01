@@ -12,7 +12,6 @@ import { APIService } from './services/api.service';
 import { EmpresaPageModule } from './centroeducativo/empresa/empresa.module';
 import { TareasPageModule } from './empresa/tareas/tareas.module';
 import { TabsAlumnoModule } from './tabs_alumno/tabs.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import es from '@angular/common/locales/es';
 registerLocaleData(es);
 
@@ -20,8 +19,6 @@ registerLocaleData(es);
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, FormsModule, IonicModule.forRoot(), HttpClientModule, AppRoutingModule, TabsPageModule ,TareasPageModule, AdminPageModule, EmpresaPageModule, TabsAlumnoModule, ReactiveFormsModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },APIService],
   imports: [BrowserModule, IonicModule.forRoot(), HttpClientModule, AppRoutingModule, 
     TabsPageModule ,TareasPageModule, AdminPageModule, EmpresaPageModule, TabsAlumnoModule,
   ],
