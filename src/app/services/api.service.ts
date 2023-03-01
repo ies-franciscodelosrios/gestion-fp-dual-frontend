@@ -71,9 +71,14 @@ export class APIService {
     });
   }
 
-  GetTarea(): Observable<Tarea[]> {
-    const url = environment.api.url + environment.api.endpoints.encargo
-    return this.http.get<Tarea[]>(url, {
-    });
+  getEncargos():Observable<any>{
+    const url = environment.api.url+environment.api.endpoints.encargo
+    return this.http.get(url);
+  }
+
+  updateEncargo(encargo:any):Observable<any>{
+    const url = environment.api.url+environment.api.endpoints.encargo
+    return this.http.put(url, encargo);
+
   }
 }

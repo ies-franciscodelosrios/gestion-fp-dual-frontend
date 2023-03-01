@@ -1,12 +1,15 @@
-<nav>
-  <div style="display: flex; flex-direction: row;">
-    <ion-title id="title">Nombre tarea</ion-title>
-    <ion-icon name="pencil" style="zoom:1.5"></ion-icon>
-    <ion-icon color="danger" *ngIf="editable=='true'" name="trash" style="zoom:1.5"></ion-icon>
+<nav (click)="editEncargo()" >
+  <div  style="display: flex; flex-direction: row;">
+    <ion-title id="title">{{encargo.tarea}}</ion-title>
+    <ion-icon *ngIf="edit" name="pencil" style="zoom:1.5"></ion-icon>
+    <ion-icon *ngIf="edit" color="danger" name="trash" style="zoom:1.5"></ion-icon>
   </div>
-  <ion-title>Comentario</ion-title>
-  <ion-title>Estado</ion-title>
-  <ion-title>Fecha</ion-title>
+  <ion-title *ngIf="encargo.comentario.length > 0">{{encargo.comentario}}</ion-title>
+  <div style="display: flex; flex-direction: row;">
+    <ion-icon id="proces" *ngIf="!encargo.estado" name="clipboard"></ion-icon>
+    <ion-icon id="check" *ngIf="encargo.estado" name="checkbox"></ion-icon>
+    <ion-title  id="fecha">{{encargo.fecha | date: 'dd/MM/yyyy'}}</ion-title>
+  </div>
 </nav>
 <hr>
 
