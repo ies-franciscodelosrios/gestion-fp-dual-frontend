@@ -6,7 +6,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "startProxy":"ionic serve --proxy-config proxy.conf.json",
+    "startProxy": "ionic serve --proxy-config proxy.conf.json",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
@@ -27,6 +27,7 @@
     "@capacitor/status-bar": "4.1.1",
     "@codetrix-studio/capacitor-google-auth": "^3.0.2",
     "@ionic/angular": "^6.1.9",
+    "date-fns": "^2.29.3",
     "install": "^0.13.0",
     "ionicons": "^6.0.3",
     "rxjs": "~7.5.0",

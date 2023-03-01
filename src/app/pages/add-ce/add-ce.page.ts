@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { APIService } from 'src/app/services/api.service';
 import { Usuario } from 'src/model/Usuario';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-add-ce',
@@ -10,6 +11,7 @@ import { Usuario } from 'src/model/Usuario';
   styleUrls: ['./add-ce.page.scss'],
 })
 export class AddCEPage implements OnInit {
+
   @Input('editable') editable:string = "false";
 
   userCEList: Usuario[] = [];
@@ -58,6 +60,10 @@ export class AddCEPage implements OnInit {
       // Cerrar cualquier diálogo o modal que esté abierto
       this.modalCtrl.dismiss();
     }
+
+  constructor() { }
+
+  ngOnInit() {
   }
 
 }

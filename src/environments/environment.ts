@@ -10,11 +10,14 @@ export const environment = {
     measurementId: "G-JFM99SLYMK"
   },
   api: {
+    //url: 'http://localhost:8080',
     url: 'http://localhost:8100/api',
     endpoints: {
       titulo: '/titulo',
       user: '/users',
-      roles: '/roles'
+      roles: '/roles',
+      periodopracticas: '/periodo_practica',
+      encargo: '/encargo'
     },
   }
 };

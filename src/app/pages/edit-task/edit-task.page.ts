@@ -1,20 +1,20 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalController, NavParams } from '@ionic/angular';
-import { Tarea } from 'src/model/Tarea';
 import { APIService } from 'src/app/services/api.service';
+import { Tarea } from 'src/model/Tarea';
 import { Usuario } from 'src/model/Usuario';
 
 @Component({
-  selector: 'app-new-task',
-  templateUrl: './new-task.page.html',
-  styleUrls: ['./new-task.page.scss'],
+  selector: 'app-edit-task',
+  templateUrl: './edit-task.page.html',
+  styleUrls: ['./edit-task.page.scss'],
 })
-export class NewTaskPage implements OnInit {
+export class EditTaskPage implements OnInit {
   public alumnos: Usuario[] = [];
   public encargo: string = "";
   public formTask: FormGroup;  //importar ReactiveFormModule en module.ts
-  
+  @Input('data') data:Tarea;
   constructor(
     private formBuilder: FormBuilder,
     private modalCTRL: ModalController,
@@ -28,10 +28,10 @@ export class NewTaskPage implements OnInit {
     const now: Date = new Date();
     const isoDate: string = now.toISOString();
     this.formTask = this.formBuilder.group({   //creando los campos que serán controlados y validados por formTitulo
-      taskname: ['', [Validators.required, Validators.minLength(4)]],
-      taskuser: '',
-      taskstatus: true,
-      taskdate: isoDate
+      taskname: [this.data.tarea, [Validators.required, Validators.minLength(4)]],
+      taskuser: [this.data.periodo_practica?.idAlumno],
+      taskstatus: [this.data.estado],
+      taskdate: [this.data.fecha]
     })
     this.apiS.GetUsuarioAlumno().subscribe(rol => {
       this.alumnos = <Usuario[]>rol.user;

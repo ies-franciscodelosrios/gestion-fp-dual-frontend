@@ -4,6 +4,9 @@ import { Usuario } from 'src/model/Usuario';
 import { AddCEPage } from '../pages/add-ce/add-ce.page';
 import { EditCEPage } from '../pages/edit-ce/edit-ce.page';
 import { APIService } from '../services/api.service';
+import { EditCEComponent } from '../components/edit-ce/edit-ce.component';
+import { FormPage } from '../pages/form/form.page';
+
 
 @Component({
   selector: 'app-admin',
@@ -27,14 +30,22 @@ export class AdminPage implements OnInit {
 
   async openForm() {
     const modal = await this.modalCtrl.create({
+
       component: AddCEPage,
+
+      component: EditCEComponent,
+
     });
     return await modal.present();
   }
 
   async editForm() {
     const modal = await this.modalCtrl.create({
+
       component: EditCEPage,
+
+      component: EditCEComponent,
+
     });
     return await modal.present();
   }

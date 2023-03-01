@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { EditCePage } from './edit-ce.page';
+import { EditTaskPage } from './edit-task.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: EditCePage
+    component: EditTaskPage
   }
 ];
 
@@ -14,4 +14,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class EditCePageRoutingModule {}
+export class EditTaskPageRoutingModule {}

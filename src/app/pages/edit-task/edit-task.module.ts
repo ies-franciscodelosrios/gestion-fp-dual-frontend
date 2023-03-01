@@ -4,9 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { EmpresaPageRoutingModule } from './empresa-routing.module';
+import { EditTaskPageRoutingModule } from './edit-task-routing.module';
 
-import { EmpresaPage } from './empresa.page';
+import { EditTaskPage } from './edit-task.page';
 
 @NgModule({
   imports: [
@@ -14,8 +14,8 @@ import { EmpresaPage } from './empresa.page';
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    EmpresaPageRoutingModule
+    EditTaskPageRoutingModule
   ],
-  declarations: [EmpresaPage]
+  declarations: [EditTaskPage]
 })
-export class EmpresaPageModule {}
+export class EditTaskPageModule {}

@@ -1,25 +1,26 @@
-ion-card{
-    
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;    
-    align-content: center;
-    width: 200px;
-}
-#divlist{
+ion-card {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-content: center;
-  align-items: center;
-  width: 50%;
+  width: 200px;
 }
 
-#divsearch{
-  display: flex; 
+#divlist {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+#divsearch {
+  display: flex;
   flex-direction: row;
 }
 
-img{
+img {
   width: 150px;
   height: 150px;
 }
@@ -31,4 +32,21 @@ img{
   padding: 0;
   width: 10px;
   height: 10px;
+}
+
+@media only screen and (max-width:320px) {
+  ion-card {
+    display: flex;
+    flex-wrap: wrap;
+    width: 40%;
+  }
+
+  #divlist {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: center;
+    width: 100%;
+  }
 }

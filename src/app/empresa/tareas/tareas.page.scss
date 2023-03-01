@@ -1,6 +1,11 @@
 .container {
     display: flex;
-    flex-wrap: wrap;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-content: center;
+  align-items: center;
+  width: 100%;
+
 }
 
 .item {
@@ -8,4 +13,5 @@
     height: 250px;
     margin: 0.5%;
     text-align: center;
+
 }
