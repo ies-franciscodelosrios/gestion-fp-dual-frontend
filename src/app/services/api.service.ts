@@ -29,6 +29,7 @@ export class APIService {
   }
 
   addUsuario(user: any): Observable<any> {
+    console.log(environment.api.url + environment.api.endpoints.user)
     const url = environment.api.url + environment.api.endpoints.user
     return this.http.post(url, user, {
 
@@ -78,6 +79,12 @@ export class APIService {
     });
   }
 
+  GetCentroEducativo(): Observable<Usuario> {
+    const url = environment.api.url + environment.api.endpoints.user
+    return this.http.get <Usuario>(url, {
+
+    });
+
   GetAUsuario(): Observable<Usuario[]> {
     const url = environment.api.url + environment.api.endpoints.user
     return this.http.get<Usuario[]>(url, {
@@ -87,6 +94,7 @@ export class APIService {
   getEncargos():Observable<any>{
     const url = environment.api.url+environment.api.endpoints.encargo
     return this.http.get(url);
+
   }
 
   updateEncargo(encargo:any):Observable<any>{

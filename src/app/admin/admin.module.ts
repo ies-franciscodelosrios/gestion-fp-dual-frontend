@@ -16,6 +16,7 @@ import { EditCEComponent } from '../components/edit-ce/edit-ce.component';
     IonicModule,
     AdminPageRoutingModule
   ],
+  declarations: [AdminPage]
   declarations: [AdminPage, EditCEComponent]
 })
 export class AdminPageModule {}
