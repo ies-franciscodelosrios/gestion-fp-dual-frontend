@@ -7,8 +7,6 @@ import { IonicModule } from '@ionic/angular';
 import { AdminPageRoutingModule } from './admin-routing.module';
 
 import { AdminPage } from './admin.page';
-import { AddCEPage } from '../pages/add-ce/add-ce.page';
-import { EditCEPage } from '../pages/edit-ce/edit-ce.page';
 
 @NgModule({
   imports: [

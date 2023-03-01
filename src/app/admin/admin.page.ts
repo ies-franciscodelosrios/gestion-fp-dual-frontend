@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { Usuario } from 'src/model/Usuario';
 import { AddCEPage } from '../pages/add-ce/add-ce.page';
 import { EditCEPage } from '../pages/edit-ce/edit-ce.page';
+import { APIService } from '../services/api.service';
 
 @Component({
   selector: 'app-admin',
@@ -9,13 +11,18 @@ import { EditCEPage } from '../pages/edit-ce/edit-ce.page';
   styleUrls: ['./admin.page.scss'],
 })
 export class AdminPage implements OnInit {
+
+  userCEList: Usuario[] = [];
   users: any = [];
   searchedUser: any;
 
-  constructor(private modalCtrl: ModalController) { }
+  constructor(private modalCtrl: ModalController, private userApiService: APIService) { }
 
   ngOnInit() {
     this.searchedUser = this.users;
+    this.userApiService.GetCentroEducativo().subscribe((response) => {
+      this.users = response
+    });
   }
 
   async openForm() {
@@ -41,6 +48,13 @@ export class AdminPage implements OnInit {
       })
     }
   }
+
+  handleRefresh(event:any) {
+    setTimeout(() => {
+      // Any calls to load data go here
+      event.target.complete();
+    }, 1000);
+  };
 
   cerrarSesion() {
 

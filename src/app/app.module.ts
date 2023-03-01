@@ -13,12 +13,13 @@ import { EmpresaPageModule } from './centroeducativo/empresa/empresa.module';
 import { TareaComponent } from './components/tarea/tarea.component';
 import { TareasPageModule } from './empresa/tareas/tareas.module';
 import { TabsAlumnoModule } from './tabs_alumno/tabs.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), HttpClientModule, AppRoutingModule, TabsPageModule ,TareasPageModule, AdminPageModule, EmpresaPageModule, TabsAlumnoModule],
+  imports: [BrowserModule, FormsModule, IonicModule.forRoot(), HttpClientModule, AppRoutingModule, TabsPageModule ,TareasPageModule, AdminPageModule, EmpresaPageModule, TabsAlumnoModule, ReactiveFormsModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },APIService],
   bootstrap: [AppComponent],
 })
