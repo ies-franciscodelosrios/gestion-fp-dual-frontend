@@ -15,10 +15,6 @@ import { APIService } from 'src/app/services/api.service';
 
 export class PracticasPage implements OnInit {
   public practica: string = "";
-  public selectDate: String;
-  public fincio: boolean = false;
-  public ffin: boolean = false;
-  public fselect: Date = new Date();
   public formPractica: FormGroup;  //el grupo del formulario reactivo , ojo con importar ReactiveFormModule
   public valor: string;
   public listAlu: Usuario[] = [];
@@ -37,10 +33,11 @@ export class PracticasPage implements OnInit {
   }
   ngOnInit() {
     this.formPractica = this.formBuilder.group({   //creando los campos que serán controlados y validados por formTitulo
-      empresa: ['', [Validators.required, Validators.minLength(4)]],
-      alumno: '',
-      fInicio: '',
-      fFin: '',
+      id_empresa: ['', [Validators.required, Validators.minLength(4)]],
+      id_alumno: ['', [Validators.required, Validators.minLength(4)]],
+      tiempo_inicio: '',
+      tiempo_final: '',
+      estado: true,
     })
     this.apiS.GetUsuarioEmpresa().subscribe(rol => {
       this.listEmp = <Usuario[]>rol.user;
@@ -51,6 +48,7 @@ export class PracticasPage implements OnInit {
       return this.listAlu
     })
   }
+
   cancel() {
     this.modalCTRL.dismiss(null, 'cancel');
   }
@@ -63,24 +61,50 @@ export class PracticasPage implements OnInit {
     this.valor = valors;
     this.inputElement.nativeElement = valors;
   }
-  submitForm() {
-    console.log(this.formPractica.get('nombre')?.value);
-    //mostrar un loading....
-    try {
-      this.apiS.addUsuario({
-        nombre: this.formPractica.get('nombre')?.value,
-        correo: this.formPractica.get('correo')?.value,
-        doc: this.formPractica.get('doc')?.value,
-        id_rol: this.formPractica.get('id_rol')?.value,
-        alta: this.formPractica.get('alta')?.value,
-      }).subscribe(d => {
-        //la respuesta del servidor
-        console.log(d);
-        //ocultador loading
-      })
-    } catch (error) {
-      console.error(error);
-      //ocular loading
-    }
+
+  onDateChange(event:any) {
+    let newDate = new Date(event.detail.value);
+    let formattedDate = newDate.toISOString();
   }
+
+  onItemClick(item:any) {
+    let selectedItem = this.listEmp.find(i => i.nombre === item.name);
+  }
+
+  submitForm() {
+    //metodo A para pasar el tipo de fecha a otro
+    const a = new Date (this.formPractica.get('tiempo_inicio')?.value)
+    const t_inicio = a.toISOString();
+    console.log(t_inicio)
+
+    const b = new Date (this.formPractica.get('tiempo_final')?.value)
+    const t_final = b.toISOString();
+    console.log(t_final)
+    //metodo B
+    //let b: string = JSON.stringify(this.formPractica.get('tiempo_final')?.value)
+    //const t_fi = b.split("+");
+    //b = t_fi[0].substring(1) + ".000Z"
+
+
+    
+
+    //mostrar un loading....
+      try {
+        this.apiS.addPractica({
+          id_empresa:{id:this.formPractica.get('id_empresa')?.value}, 
+          id_centro:{id:12},
+          id_alumno: {id:this.formPractica.get('id_alumno')?.value},
+          tiempo_inicio: t_inicio,
+          tiempo_final: t_final,
+          estado: this.formPractica.get('estado')?.value,
+        }).subscribe(d => {
+          //la respuesta del servidor
+          console.log(d);
+          //ocultador loading
+        })
+      } catch (error) {
+        console.error(error);
+        //ocular loading
+      }
+    }
 }
