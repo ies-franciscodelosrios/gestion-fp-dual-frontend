@@ -30,10 +30,7 @@ export class AdminPage implements OnInit {
 
   async openForm() {
     const modal = await this.modalCtrl.create({
-
-      component: AddCEPage,
-
-      component: EditCEComponent,
+      component: AddCEPage
 
     });
     return await modal.present();
@@ -42,9 +39,7 @@ export class AdminPage implements OnInit {
   async editForm() {
     const modal = await this.modalCtrl.create({
 
-      component: EditCEPage,
-
-      component: EditCEComponent,
+      component: null
 
     });
     return await modal.present();
