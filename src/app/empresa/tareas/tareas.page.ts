@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { APIService } from 'src/app/services/api.service';
 import { ModalController } from '@ionic/angular';
 import { Tarea } from 'src/model/Tarea';
 import { NewTaskPage } from 'src/app/pages/new-task/new-task.page';
 import { EditTaskPage } from 'src/app/pages/edit-task/edit-task.page';
+import { Encargo } from 'src/model/Encargo';
 
 @Component({
   selector: 'app-tareas',
@@ -11,13 +12,15 @@ import { EditTaskPage } from 'src/app/pages/edit-task/edit-task.page';
   styleUrls: ['./tareas.page.scss'],
 })
 export class TareasPage implements OnInit {
+
+  @Input('tarea') tarea:Encargo; 
   public tareas:Array<Tarea>=[]=[];
   constructor(private modalCtrl: ModalController, private apiS: APIService) {
 
   }
 
   ngOnInit() {
-    this.apiS.GetTarea().subscribe( (datos) => {
+    this.apiS.getEncargos().subscribe( (datos) => {
       for(let elemento of datos){
        this.tareas.push(<any>elemento);
       }
@@ -35,21 +38,9 @@ export class TareasPage implements OnInit {
   public async editTask(){
     const modal = await this.modalCtrl.create({
       component: EditTaskPage,
+      componentProps: { myTarea : this.tarea }
     });
     return await modal.present();
-
-    const { data, role } = await modal.onWillDismiss();
-    if(!role){
-      //actualizar
-      this.tareas=this.tareas.map((e)=>{
-        if(e.id==data.id){
-          return data;
-        }else{
-          return e;
-        }
-      })
-    }
-    console.log(data);
   }
 
   cerrarSesion(){

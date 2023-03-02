@@ -72,13 +72,6 @@ export class APIService {
     });
   }
 
-  GetCentroEducativo(): Observable<Usuario> {
-    const url = environment.api.url + environment.api.endpoints.user
-    return this.http.get <Usuario>(url, {
-
-    });
-  }
-
   GetPP(): Observable<PeriodoPracticas[]> {
     const url = environment.api.url + environment.api.endpoints.periodopracticas
     return this.http.get<PeriodoPracticas[]>(url, {
