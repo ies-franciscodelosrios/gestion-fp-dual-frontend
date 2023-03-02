@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalController, NavParams } from '@ionic/angular';
 import { APIService } from 'src/app/services/api.service';
+import { Encargo } from 'src/model/Encargo';
 import { Tarea } from 'src/model/Tarea';
 import { Usuario } from 'src/model/Usuario';
 
@@ -12,26 +13,24 @@ import { Usuario } from 'src/model/Usuario';
 })
 export class EditTaskPage implements OnInit {
   public alumnos: Usuario[] = [];
-  public encargo: string = "";
+
   public formTask: FormGroup;  //importar ReactiveFormModule en module.ts
-  @Input('data') data:Tarea;
+  @Input() encargo:Tarea;
   constructor(
     private formBuilder: FormBuilder,
     private modalCTRL: ModalController,
     private apiS: APIService,
-    navParams: NavParams
   ) {
-    this.encargo = navParams.get('Encargo')
   }
 
   ngOnInit() {
     const now: Date = new Date();
     const isoDate: string = now.toISOString();
     this.formTask = this.formBuilder.group({   //creando los campos que serán controlados y validados por formTitulo
-      taskname: [this.data.tarea, [Validators.required, Validators.minLength(4)]],
-      taskuser: [this.data.periodo_practica?.idAlumno],
-      taskstatus: [this.data.estado],
-      taskdate: [this.data.fecha]
+      taskname: `${this.encargo.tarea, [Validators.required, Validators.minLength(4)]}`,
+      taskuser: [this.encargo.periodo_practica?.id_alumno],
+      taskstatus: [this.encargo.estado],
+      taskdate: [this.encargo.fecha]
     })
     this.apiS.GetUsuarioAlumno().subscribe(rol => {
       this.alumnos = <Usuario[]>rol.user;
@@ -45,18 +44,19 @@ export class EditTaskPage implements OnInit {
 
 
   submitForm() {
-    let pepra = document.getElementById("Encargo");
-
-    console.log(this.formTask.get('taskname')?.value);
-    //mostrar un loading....
+    this.encargo.tarea=this.formTask.get('taskname')?.value;
+    this.encargo.estado= this.formTask.get('taskstatus')?.value;
+    this.encargo.periodo_practica= this.formTask.get('1')?.value;
+    this.encargo.fecha= this.formTask.get('taskdate')?.value;
+    this.encargo.comentario= this.formTask.get('taskcomment')?.value;
 
     try {
-      this.apiS.addTarea({
-        tarea: this.formTask.get('taskname')?.value,
-        estado: this.formTask.get('taskstatus')?.value,
+      this.apiS.updateEncargo({
+        tarea: this.encargo.tarea,
+        estado: this.encargo.estado,
         periodo_practica: {id:1},
-        fecha: this.formTask.get('taskdate')?.value,
-        comentario: ''
+        fecha: this.encargo.fecha,
+        comentario: this.encargo.comentario
       }).subscribe(d => {
         //la respuesta del servidor
         console.log(d);
