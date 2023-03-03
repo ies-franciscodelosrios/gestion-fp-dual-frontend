@@ -92,4 +92,11 @@ export class APIService {
     return this.http.put(url, encargo);
 
   }
+
+  GetCentroEducativo(): Observable<any> {
+    const url = environment.api.url + environment.api.endpoints.user
+    return this.http.get <Usuario>(url, {
+
+    });
+  }
 }

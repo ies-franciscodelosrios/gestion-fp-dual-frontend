@@ -33,7 +33,11 @@ export class TareaEditPage implements OnInit {
 
   async submitForm() {
       this.myEncargo.comentario=this.formEncargo.get('comentario')?.value;
-      this.myEncargo.estado= this.formEncargo.get('estado')?.value;
+      if(this.formEncargo.get('estado')?.value=="true"){
+        this.myEncargo.estado=true;
+      }else{
+        this.myEncargo.estado=false;
+      }
       
       try{
         const response = await lastValueFrom(this.apiS.updateEncargo({
