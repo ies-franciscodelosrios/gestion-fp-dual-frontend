@@ -38,7 +38,7 @@ export class ModuloListaRaPage implements OnInit {
         nombre: [this.usuario.nombre, [Validators.required,
         Validators.minLength(5)]],
         correo: [this.usuario.correo],
-        doc: [this.usuario.doc],
+        doc: [this.usuario.documentos],
         alta: [this.usuario.alta],
       })
     }

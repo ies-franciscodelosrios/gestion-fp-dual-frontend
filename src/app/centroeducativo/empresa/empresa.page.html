@@ -1,6 +1,7 @@
 <ion-header [translucent]="true" id="Empresa">
   <ion-toolbar>
     <ion-title>{{empresa}}</ion-title>
+    <!--Botón qu permite salir de la sesión actual con el ultimo usuario logueado-->
     <ion-buttons slot="end">
       <ion-button (click)="cerrarSesion()">
         <ion-icon slot="icon-only" name="exit"></ion-icon>
@@ -9,19 +10,17 @@
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content>
   <div id="divsearch">
+    <!--Busqueda y filtrado de empresas-->
     <ion-searchbar id="searchempresa" placeholder="Buscar"></ion-searchbar>
+    <!--Botón para agregar una nueva empresa-->
     <ion-button (click)="this.nuevaempresa()" style="zoom:1.25"><ion-icon
         name="duplicate-outline"></ion-icon></ion-button>
   </div>
-
-  <ion-refresher slot="fixed">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
+<!--Lista de objetos de tipo empresa que al seleccionar un "ion-card" se abra un modal con el contenido de esa empresa en concreto-->
   <div id="divlist">
-    <ion-card id="open-modal" *ngFor="let lista of this.listEmpresa;let i=index">
+    <ion-card id="open-modal" *ngFor="let lista of this.listEmpresa;let i=index" (click) ="this.editaempresa(lista)">
       <img src="assets/add.png" style="z-index: -1;" />
       <ion-card-header>
         <ion-card-title>{{lista.nombre}}</ion-card-title>
@@ -29,5 +28,4 @@
       </ion-card-header>
     </ion-card>
   </div>
-
 </ion-content>

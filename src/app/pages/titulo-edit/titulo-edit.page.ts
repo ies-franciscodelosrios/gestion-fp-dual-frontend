@@ -23,18 +23,14 @@ export class TituloEditPage implements OnInit {
   ) {
     this.title = navParams.get('titulo')
   }
-
   ngOnInit() {
     this.formTitulo = this.formBuilder.group({   //creando los campos que serán controlados y validados por formTitulo
       titulo: ['', [Validators.required, Validators.minLength(2)]],
     })
   }
-
-
   cancel() {
     this.modalCTRL.dismiss(null, 'cancel');
   }
-
   submitForm() {
     console.log(this.formTitulo.get('titulo')?.value);
     //mostrar un loading....
@@ -49,10 +45,4 @@ export class TituloEditPage implements OnInit {
       //ocular loading
     }
   }
-
-  /*onWillDismiss(event: Event) {
-    const ev = event as CustomEvent<OverlayEventDetail<string>>;
-    if (ev.detail.role === 'confirm') {
-    }
-  }*/
 }
