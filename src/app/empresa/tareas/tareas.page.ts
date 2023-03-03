@@ -12,7 +12,6 @@ import { Encargo } from 'src/model/Encargo';
   styleUrls: ['./tareas.page.scss'],
 })
 export class TareasPage implements OnInit {
-
   @Input('tarea') tarea:Encargo; 
   public tareas:Array<Tarea>=[]=[];
   constructor(private modalCtrl: ModalController, private apiS: APIService) {
@@ -25,7 +24,6 @@ export class TareasPage implements OnInit {
        this.tareas.push(<any>elemento);
       }
     })
-    console.log(this.tareas)
   }
   
   public async addTask(){
@@ -35,10 +33,11 @@ export class TareasPage implements OnInit {
     return await modal.present();
   }
 
-  public async editTask(){
+  public async editTask(tarea:any){
+    console.log(tarea)
     const modal = await this.modalCtrl.create({
       component: EditTaskPage,
-      componentProps: { myTarea : this.tarea }
+      componentProps: { encargo : tarea }
     });
     return await modal.present();
   }
