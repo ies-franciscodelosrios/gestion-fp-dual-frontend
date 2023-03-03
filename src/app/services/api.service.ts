@@ -29,6 +29,7 @@ export class APIService {
   }
 
   addUsuario(user: any): Observable<any> {
+    console.log(user)
     const url = environment.api.url + environment.api.endpoints.user
     return this.http.post(url, user, {
 
@@ -69,6 +70,13 @@ export class APIService {
   GetTitulo(): Observable<Titulo[]> {
     const url = environment.api.url + environment.api.endpoints.titulo
     return this.http.get<Titulo[]>(url, {
+    });
+  }
+
+  GetCentroEducativo(): Observable<any> {
+    const url = environment.api.url + environment.api.endpoints.user
+    return this.http.get <Usuario>(url, {
+
     });
   }
 

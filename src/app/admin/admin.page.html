@@ -20,16 +20,18 @@
       </ion-fab-button>
     </ion-fab>
   </div>
+
   <ion-list>
       <ion-item *ngFor="let user of searchedUser">
         <ion-label>
-          <h2>{{users.nombre}}</h2>
+          <h2>{{user.nombre}}</h2>
         </ion-label>
       </ion-item>
   </ion-list>
+
   <ion-list>
-    <ion-item *ngFor="let user of userCEList">
-      <h2>{{users.nombre}}</h2>
+    <ion-item *ngFor="let user of userCEList" (click)="editForm()">
+      <h2>{{user.nombre}}</h2>
     </ion-item>
   </ion-list>
 
@@ -37,7 +39,4 @@
     <ion-refresher-content pullingIcon="chevron-down-circle-outline" refreshingSpinner="circles"></ion-refresher-content>
   </ion-refresher>
   
-  <div class="editCE">
-    <ion-icon name="pencil-outline" (click)="editForm()"></ion-icon>
-  </div>
 </ion-content>

@@ -26,21 +26,27 @@ export class AdminPage implements OnInit {
     this.userApiService.GetCentroEducativo().subscribe((response) => {
       this.users = response
     });
+    this.refresUsers();
+  }
+
+  refresUsers(){
+    this.userApiService.GetCentroEducativo().subscribe((datos) => {
+      for (let elemento of datos) {
+        this.userCEList.push(<any>elemento);
+      }
+    });
   }
 
   async openForm() {
     const modal = await this.modalCtrl.create({
       component: AddCEPage
-
     });
     return await modal.present();
   }
 
   async editForm() {
     const modal = await this.modalCtrl.create({
-
-      component: null
-
+      component: EditCEPage
     });
     return await modal.present();
   }
