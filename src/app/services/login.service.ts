@@ -11,7 +11,7 @@ import { APIService } from 'src/app/services/api.service';
 export class LoginService {
 
   public user: Usuario;
-  public userDb: Usuario[] = [];
+
 
   constructor(
     private platform: Platform, private apiS: APIService,) {
@@ -22,24 +22,15 @@ export class LoginService {
     });
   }
 
-  ngOnInit() {
-    this.apiS.GetAUsuario().subscribe(userDb => {
-      this.userDb = userDb;
-    });
-  }
-
   //permite hacer un login comparando si el correo escrito existe en la bbdd y se logueara en una pagina o en otra dependiendo del correo
-  public async login() {
+  public async  login() {
     let userlog = await GoogleAuth.signIn();
     const mailLog = userlog.email
-
-    this.user = userlog;
     localStorage.setItem('login', JSON.stringify(userlog));
-
-
-    if (mailLog == this.user.correo) {
-
-    }
+   
+    this.apiS.GetMailUsuario(mailLog).subscribe(userDb => {
+      this.user = userDb;
+    })
   }
 
   public async logout() {

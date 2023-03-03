@@ -17,7 +17,8 @@ export const environment = {
       user: '/users',
       roles: '/roles',
       periodopracticas: '/periodo_practica',
-      encargo: '/encargo'
+      encargo: '/encargo',
+      mail: '/users/email/'
     },
   }
 };
