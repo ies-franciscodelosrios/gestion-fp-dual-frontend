@@ -15,11 +15,8 @@ export class TituloPage implements OnInit {
   titulo = 'Título';
   public tituls: TituloEditPage[] = [];
   public results = this.tituls;
-
   public listTitulo: Titulo[] = [];
-
-
-
+  
   constructor(
     private http: HttpClient,
     private router: Router,

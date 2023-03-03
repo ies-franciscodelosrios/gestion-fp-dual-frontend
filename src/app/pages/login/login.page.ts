@@ -25,6 +25,26 @@ export class LoginPage implements OnInit {
   }
 
   public async signin() {
-    await this.loginS.login();
+    this.loginS.login();
+    //await new Promise(resolve => setTimeout(resolve, 5000)); // Esperar 5 segundos
+
+    await this.redirectLogged(this.loginS.user.id_rol);
+  }
+
+  public async redirectLogged(rol?: number): Promise<any> {
+    if (rol == 1) {
+      this.router.navigate(['/admin']);
+    } else if (rol == 2) {
+      this.router.navigate(['/centroeducativo']);
+    }else if (rol == 3) {
+      this.router.navigate(['/empresa']);
+    }else if (rol == 4) {
+      this.router.navigate(['/alumno']);
     }
+
+    return new Promise(resolve => {
+      this.loginS.login();
+      resolve;
+    });
+  }
 }

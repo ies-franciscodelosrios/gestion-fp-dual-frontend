@@ -13,25 +13,26 @@ import { Usuario } from 'src/model/Usuario';
 })
 export class EditTaskPage implements OnInit {
   public alumnos: Usuario[] = [];
-
-  public formTask: FormGroup;  //importar ReactiveFormModule en module.ts
-  @Input() encargo:Tarea;
+  
+  @Input() encargo:Encargo;
+  public formTask: FormGroup;
   constructor(
     private formBuilder: FormBuilder,
     private modalCTRL: ModalController,
     private apiS: APIService,
-  ) {
-  }
+  ) {}
 
   ngOnInit() {
+    console.log(this.encargo)
     const now: Date = new Date();
     const isoDate: string = now.toISOString();
     this.formTask = this.formBuilder.group({   //creando los campos que serán controlados y validados por formTitulo
-      taskname: `${this.encargo.tarea, [Validators.required, Validators.minLength(4)]}`,
-      taskuser: [this.encargo.periodo_practica?.id_alumno],
-      taskstatus: [this.encargo.estado],
-      taskdate: [this.encargo.fecha]
+      taskname: [this.encargo.tarea,[Validators.required, Validators.minLength(4)]],
+      taskuser: '',
+      taskstatus: this.encargo.estado,
+      taskdate: this.encargo.fecha
     })
+    console.log(this.encargo)
     this.apiS.GetUsuarioAlumno().subscribe(rol => {
       this.alumnos = <Usuario[]>rol.user;
       return this.alumnos
@@ -46,16 +47,17 @@ export class EditTaskPage implements OnInit {
   submitForm() {
     this.encargo.tarea=this.formTask.get('taskname')?.value;
     this.encargo.estado= this.formTask.get('taskstatus')?.value;
-    this.encargo.periodo_practica= this.formTask.get('1')?.value;
+    this.encargo.id_periodo= this.formTask.get('1')?.value;
     this.encargo.fecha= this.formTask.get('taskdate')?.value;
     this.encargo.comentario= this.formTask.get('taskcomment')?.value;
 
     try {
       this.apiS.updateEncargo({
+        id: this.encargo.id,
         tarea: this.encargo.tarea,
-        estado: this.encargo.estado,
-        periodo_practica: {id:1},
         fecha: this.encargo.fecha,
+        estado: this.encargo.estado,
+        id_periodo: {id:1},
         comentario: this.encargo.comentario
       }).subscribe(d => {
         //la respuesta del servidor

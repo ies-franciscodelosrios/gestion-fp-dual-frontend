@@ -1,10 +1,7 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { IonTitle, ModalController, NavParams } from '@ionic/angular';
+import {ModalController, NavParams } from '@ionic/angular';
 import { Usuario } from 'src/model/Usuario';
-import { IonModal } from '@ionic/angular';
-import { OverlayEventDetail } from '@ionic/core/components';
-import { LoginService } from '../../services/login.service';
 import { APIService } from 'src/app/services/api.service';
 
 @Component({
@@ -13,46 +10,61 @@ import { APIService } from 'src/app/services/api.service';
   styleUrls: ['./usuario-edit.page.scss'],
 })
 export class UsuarioEditPage implements OnInit {
-  public usuario: string = "";
-  public formUsuario: FormGroup;  //el grupo del formulario reactivo , ojo con importar ReactiveFormModule
+  public tname: string = "";
+  @Input('atribuser') atribuser: Usuario;
+  public putUsuario: FormGroup;  //el grupo del formulario reactivo , ojo con importar ReactiveFormModule
 
+  @Input('mode') mode: string;
   constructor(
     private formBuilder: FormBuilder,
     private modalCTRL: ModalController,
     private apiS: APIService,
     navParams: NavParams
   ) {
-    this.usuario = navParams.get('Empresa')
+    this.tname = navParams.get('Empresa')
   }
 
   ngOnInit() {
-    this.formUsuario = this.formBuilder.group({   //creando los campos que serán controlados y validados por formTitulo
-      nombre: ['', [Validators.required, Validators.minLength(4)]],
-      correo: '',
-      doc: '',
-      rol: '',
-      alta: true,
-    })
+    if (this.mode == "create") {
+      this.putUsuario = this.formBuilder.group({ //creando los campos que serán controlados y validados por putUsuario
+        nombre: ['', [Validators.required, Validators.minLength(4)]],
+        correo: '',
+        documentos: '',
+        rol: '',
+        alta: true,
+      }) 
+    } else if (this.mode == "edit"){
+        this.apiS.GetMailUsuario(<string>this.atribuser.correo).subscribe(elem => {
+        this.atribuser = <Usuario>elem;
+        return this.atribuser
+      })
+      this.putUsuario = this.formBuilder.group({   
+        nombre: [this.atribuser.nombre, [Validators.required, Validators.minLength(4)]],
+        correo: [this.atribuser.correo],
+        documentos: [this.atribuser?.documentos],
+        rol: [this.atribuser.id_rol],
+        alta: [this.atribuser.alta],
+      })
+      console.log(this.putUsuario)
+    }
   }
 
   cancel() {
     this.modalCTRL.dismiss(null, 'cancel');
   }
 
-
   submitForm() {
     let emp = document.getElementById("Empresa");
-    console.log(this.formUsuario.get('nombre')?.value);
+    console.log(this.putUsuario.get('nombre')?.value);
     //mostrar un loading....
-
     if (emp != null) {
       try {
         this.apiS.addUsuario({
-          nombre: this.formUsuario.get('nombre')?.value,
-          correo: this.formUsuario.get('correo')?.value,
-          documentos: this.formUsuario.get('doc')?.value,
+          nombre: this.putUsuario.get('nombre')?.value,
+          correo: this.putUsuario.get('correo')?.value,
+          documentos: this.putUsuario.get('documentos')?.value,
           rol: { nombre: "Empresa"},
-          alta: this.formUsuario.get('alta')?.value,
+          alta: this.putUsuario.get('alta')?.value,
         }).subscribe(d => {
           //la respuesta del servidor
           console.log(d);
@@ -65,11 +77,11 @@ export class UsuarioEditPage implements OnInit {
     } else {
       try {
         this.apiS.addUsuario({
-          nombre: this.formUsuario.get('nombre')?.value,
-          correo: this.formUsuario.get('correo')?.value,
-          documentos: this.formUsuario.get('doc')?.value,
+          nombre: this.putUsuario.get('nombre')?.value,
+          correo: this.putUsuario.get('correo')?.value,
+          documentos: this.putUsuario.get('documentos')?.value,
           rol: { nombre: "Alumno" },
-          alta: this.formUsuario.get('alta')?.value,
+          alta: this.putUsuario.get('alta')?.value,
         }).subscribe(d => {
           //la respuesta del servidor
           console.log(d);
