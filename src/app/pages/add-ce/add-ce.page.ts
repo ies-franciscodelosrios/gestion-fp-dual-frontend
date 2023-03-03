@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
-import { lastValueFrom } from 'rxjs';
 import { APIService } from 'src/app/services/api.service';
 import { Usuario } from 'src/model/Usuario';
 
@@ -38,13 +37,14 @@ export class AddCEPage implements OnInit {
     return { 'invalidDocumento': true };
   }
 
-  async onSubmit() {
+  onSubmit() {
+
     this.apiS.addUsuario({
       nombre: this.addUserCEForm.get('nombre')?.value,
-      alta: true,
       documentos: this.addUserCEForm.get('doc')?.value,
       correo: this.addUserCEForm.get('correo')?.value,
-      rol: {id:2,nombre:'Centro educativo'}
+      alta: true,
+      id_rol: {id:2,nombre:'Centro educativo'}
     }).subscribe(d => {
         console.log(d);
     });

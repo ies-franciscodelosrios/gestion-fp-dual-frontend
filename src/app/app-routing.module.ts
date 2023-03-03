@@ -80,6 +80,8 @@ const routes: Routes = [
     path: 'edit-task',
     loadChildren: () => import('./pages/edit-task/edit-task.module').then( m => m.EditTaskPageModule)
   },
+
+
 ];
 @NgModule({
   imports: [
