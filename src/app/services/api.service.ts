@@ -83,7 +83,7 @@ export class APIService {
   }
 
   getEncargosAlumno(id?:number): Observable<any>{
-    const url = environment.api.url + environment.api.endpoints.encargoUser+id
+    const url = environment.api.url + environment.api.endpoints.encargoAlumno+id
     return this.http.get(url);
   }
 

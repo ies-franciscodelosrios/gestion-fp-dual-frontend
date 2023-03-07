@@ -18,7 +18,8 @@ export const environment = {
       roles: '/roles',
       periodopracticas: '/periodo_practica',
       encargo: '/encargo',
-      encargoUser: '/encargo/user/',
+      encargoAlumno: '/encargo/alumno/',
+      encargoEmpresa: '/encargo/empresa/',
       mail: '/users/email/'
     },
   }
