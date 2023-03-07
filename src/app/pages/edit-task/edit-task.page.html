@@ -30,6 +30,10 @@
       <ion-label position="floating">Fecha</ion-label>
       <ion-input formControlName="taskdate" placeholder="Fecha actual" ></ion-input>
     </ion-item>
+    <ion-item>
+      <ion-label position="floating">Comentario:</ion-label>
+      <ion-input formControlName="taskcomment"></ion-input>
+    </ion-item>
 
     <ion-button shape="round" color="primary" fill="outline" type="submit" [disabled]="!formTask.valid">Guardar</ion-button>
   </form>

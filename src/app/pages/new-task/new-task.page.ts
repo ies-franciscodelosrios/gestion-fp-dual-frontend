@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalController, NavParams } from '@ionic/angular';
 import { Tarea } from 'src/model/Tarea';
@@ -14,7 +14,7 @@ export class NewTaskPage implements OnInit {
   public alumnos: Usuario[] = [];
   public encargo: string = "";
   public formTask: FormGroup;  //importar ReactiveFormModule en module.ts
-  
+  @Output() closeModal: EventEmitter<boolean> = new EventEmitter<boolean>();
   constructor(
     private formBuilder: FormBuilder,
     private modalCTRL: ModalController,
@@ -66,7 +66,7 @@ export class NewTaskPage implements OnInit {
       console.error(error);
       //ocular loading
     }
+    this.closeModal.emit(true)
     this.modalCTRL.dismiss()
-    
   }
 }

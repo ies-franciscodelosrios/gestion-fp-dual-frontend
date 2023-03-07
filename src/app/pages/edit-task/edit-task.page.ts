@@ -23,14 +23,14 @@ export class EditTaskPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log(this.encargo)
     const now: Date = new Date();
     const isoDate: string = now.toISOString();
     this.formTask = this.formBuilder.group({   //creando los campos que serán controlados y validados por formTitulo
       taskname: [this.encargo.tarea,[Validators.required, Validators.minLength(4)]],
       taskuser: '',
       taskstatus: this.encargo.estado,
-      taskdate: this.encargo.fecha
+      taskdate: this.encargo.fecha,
+      taskcomment: this.encargo.comentario
     })
     console.log(this.encargo)
     this.apiS.GetUsuarioAlumno().subscribe(rol => {
@@ -47,9 +47,8 @@ export class EditTaskPage implements OnInit {
   submitForm() {
     this.encargo.tarea=this.formTask.get('taskname')?.value;
     this.encargo.estado= this.formTask.get('taskstatus')?.value;
-    this.encargo.id_periodo= this.formTask.get('1')?.value;
+    this.encargo.id_periodo= 1;
     this.encargo.fecha= this.formTask.get('taskdate')?.value;
-    this.encargo.comentario= this.formTask.get('taskcomment')?.value;
 
     try {
       this.apiS.updateEncargo({
@@ -57,8 +56,10 @@ export class EditTaskPage implements OnInit {
         tarea: this.encargo.tarea,
         fecha: this.encargo.fecha,
         estado: this.encargo.estado,
-        id_periodo: {id:1},
-        comentario: this.encargo.comentario
+        comentario: this.encargo.comentario,
+        periodo_practica: {
+          id: this.encargo.id_periodo
+        }
       }).subscribe(d => {
         //la respuesta del servidor
         console.log(d);
@@ -68,7 +69,9 @@ export class EditTaskPage implements OnInit {
       console.error(error);
       //ocular loading
     }
+    console.log(this.encargo)
     this.modalCTRL.dismiss()
     
   }
+ 
 }

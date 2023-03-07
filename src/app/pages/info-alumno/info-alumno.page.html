@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Tarea</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cancel()" [strong]="true"><ion-icon name="close-outline"></ion-icon></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label>Nombre:</ion-label>
+      <ion-text>{{ user.nombre }}</ion-text>
+    </ion-item>
+    <ion-item>
+      <ion-label>Email:</ion-label>
+      <ion-text>{{ user.correo }}</ion-text>
+    </ion-item>
+    <ion-item>
+      <ion-label>Documento:</ion-label>
+      <ion-text>{{ user.documentos }}</ion-text>
+    </ion-item>
+  </ion-list>
+</ion-content>

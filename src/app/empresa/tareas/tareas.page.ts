@@ -30,15 +30,18 @@ export class TareasPage implements OnInit {
     const modal = await this.modalCtrl.create({
       component: NewTaskPage,
     });
+    modal.onDidDismiss().then(() => {
+      window.location.reload();
+    });
     return await modal.present();
   }
 
   public async editTask(tarea:any){
-    console.log(tarea)
     const modal = await this.modalCtrl.create({
       component: EditTaskPage,
       componentProps: { encargo : tarea }
     });
+    console.log(modal)
     return await modal.present();
   }
 
