@@ -1,12 +1,10 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IonTitle, ModalController } from '@ionic/angular';
-import { Usuario } from 'src/model/Usuario';
-import { IonModal } from '@ionic/angular';
-import { OverlayEventDetail } from '@ionic/core/components';
-import { LoginService } from '../../services/login.service';
-import { EmpresaPage } from 'src/app/centroeducativo/empresa/empresa.page';
-import { AlumnoPage } from 'src/app/centroeducativo/alumno/alumno.page';
+import { APIService } from 'src/app/services/api.service';
+import { Modulo } from 'src/model/Modulo';
+import { Ra } from 'src/model/Ra';
+
 
 @Component({
   selector: 'app-modulo-lista-ra',
@@ -14,52 +12,55 @@ import { AlumnoPage } from 'src/app/centroeducativo/alumno/alumno.page';
   styleUrls: ['./modulo-lista-ra.page.scss'],
 })
 export class ModuloListaRaPage implements OnInit {
+  public formRA: FormGroup;
+  public modulos: Modulo;
+  public ListaRa: Ra[] =[];
 
-  @Input('user') usuario: Usuario;
-  public todo: FormGroup;
-  @ViewChild(IonTitle) public ionTitle: IonTitle;
-  @ViewChild(IonModal) modal: IonModal;
-  public usuarios: Usuario[] = [];
-  public results = this.usuarios;
-  showText: boolean = false;
+
+  customCounterFormatter(inputLength: number, maxLength: number) {
+    return `${maxLength - inputLength} characters remaining`;
+  }
+  @Output() RaUpdate: EventEmitter<boolean> = new EventEmitter<boolean>();
+
 
   constructor(
     private formBuilder: FormBuilder,
-    private loginS: LoginService,
-    private modalCTRL: ModalController
+    private modalCTRL: ModalController,
+    private apiS: APIService,
   ) {
   }
 
   ngOnInit() {
-    if (!this.usuario) {
-      console.log("Crear usuario");
-    } else {
-      this.todo = this.formBuilder.group({
-        nombre: [this.usuario.nombre, [Validators.required,
-        Validators.minLength(5)]],
-        correo: [this.usuario.correo],
-        doc: [this.usuario.documentos],
-        alta: [this.usuario.alta],
-      })
-    }
-  }
-
-  content() {
-    this.showText = !this.showText;
-  }
-
-  logForm() {
-    console.log(this.todo.value);
+    this.formRA = this.formBuilder.group({
+      cod_mod_boja: ['', [Validators.required, Validators.pattern('\[0-9]{4}')]],
+      nombre: ['', [Validators.required, Validators.pattern('[A-zÁ-ÿ ]{3,120}')]],
+      titulo: ['', [Validators.required, Validators.required]],
+    })
+    this.apiS.getTitulo().subscribe(titulo => {
+      //this.listaTitulos = titulo;
+    })
   }
 
   cancel() {
-    this.modal.dismiss(null, 'cancel');
+    this.RaUpdate.emit(true);
+    this.modalCTRL.dismiss(null, 'cancel');
   }
 
-  onWillDismiss(event: Event) {
-    const ev = event as CustomEvent<OverlayEventDetail<string>>;
-    if (ev.detail.role === 'confirm') {
+  submitForm() {
+    try {
+      this.apiS.addModulo({
+        cod_mod_boja: this.formRA.get('cod_mod_boja')?.value,
+        nombre: this.formRA.get('nombre')?.value,
+        titulo: { id: this.formRA.get('titulo')?.value },
+      }).subscribe(d => {
+        //la respuesta del servidor
+        //ocultador loading
+      })
+    } catch (error) {
+      console.error(error);
+      //ocular loading
     }
+    this.cancel();
   }
 
 }

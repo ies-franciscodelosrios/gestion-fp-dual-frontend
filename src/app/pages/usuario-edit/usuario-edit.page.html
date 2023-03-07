@@ -1,13 +1,16 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Crear </ion-title>
+    <!--Botón que permite cancelar y cerrar el modal-->
     <ion-buttons slot="end">
       <ion-button (click)="cancel()" [strong]="true"><ion-icon name="close-outline"></ion-icon></ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
+
+<!--contenido dentro del modal que permite introducir datos y "guardarlos"-->
 <ion-content class="ion-padding">
-  <form [formGroup]="putUsuario" (ngSubmit)="submitForm()">
+  <form [formGroup]="formUsuario" (ngSubmit)="submitForm()">
     <ion-item>
       <ion-label position="floating">Nombre</ion-label>
       <ion-input formControlName="nombre" placeholder="nombre de usuario" ></ion-input>
@@ -24,6 +27,6 @@
       <ion-label>Alta</ion-label>
       <ion-checkbox formControlName="alta" slot="end" ></ion-checkbox>
     </ion-item>
-    <ion-button shape="round" color="primary" fill="outline" type="submit" [disabled]="!putUsuario.valid">Guardar</ion-button>
+    <ion-button shape="round" color="primary" fill="outline" type="submit" [disabled]="!formUsuario.valid">Guardar</ion-button>
   </form>
 </ion-content>
