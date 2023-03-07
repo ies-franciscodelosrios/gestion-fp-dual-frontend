@@ -82,6 +82,11 @@ export class APIService {
     });
   }
 
+  getEncargosAlumno(id?:number): Observable<any>{
+    const url = environment.api.url + environment.api.endpoints.encargoUser+id
+    return this.http.get(url);
+  }
+
   getEncargos(): Observable<any> {
     const url = environment.api.url + environment.api.endpoints.encargo
     return this.http.get(url);
