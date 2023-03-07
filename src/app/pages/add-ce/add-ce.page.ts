@@ -44,7 +44,7 @@ export class AddCEPage implements OnInit {
       documentos: this.addUserCEForm.get('doc')?.value,
       correo: this.addUserCEForm.get('correo')?.value,
       alta: true,
-      id_rol: {id:2,nombre:'Centro educativo'}
+      rol: {id:2,nombre:'Centro educativo'}
     }).subscribe(d => {
         console.log(d);
     });

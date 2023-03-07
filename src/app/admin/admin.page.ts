@@ -6,6 +6,7 @@ import { APIService } from '../services/api.service';
 import { EditCEComponent } from '../components/edit-ce/edit-ce.component';
 import { FormPage } from '../pages/form/form.page';
 import { EditCEPage } from '../pages/edit-ce/edit-ce.page';
+import { LoginService } from '../services/login.service';
 
 
 @Component({
@@ -19,7 +20,9 @@ export class AdminPage implements OnInit {
   users: any = [];
   searchedUser: any;
 
-  constructor(private modalCtrl: ModalController, private userApiService: APIService) { }
+  constructor(private modalCtrl: ModalController, 
+    private userApiService: APIService,
+    private loginS:LoginService) { }
 
   ngOnInit() {
     this.searchedUser = this.users;
@@ -69,6 +72,6 @@ export class AdminPage implements OnInit {
   };
 
   cerrarSesion() {
-
+    this.loginS.logout();
   }
 }

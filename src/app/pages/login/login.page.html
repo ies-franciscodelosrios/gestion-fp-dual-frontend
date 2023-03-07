@@ -9,7 +9,7 @@
 <ion-content>
   <div id="header">
     <h1>Bienvenido <br> a GestionFP</h1>
-    <ion-button style="display: grid; justify-content: center;" color="floatbuton" (click)="signin()">Iniciar sesión con
+    <ion-button [disabled]="this.logging" style="cursor:pointer;display: grid; justify-content: center;" color="floatbuton" (click)="signin()">Iniciar sesión con
       Google</ion-button>
   </div>
 

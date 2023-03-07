@@ -17,18 +17,23 @@ export class LoginPage implements OnInit {
     private router: Router) {
   }
 
+  public logging=false;
+
   ngOnInit() {
     if (localStorage.getItem('login') != null) {
       this.loginS.user = JSON.parse(localStorage.getItem('login')!);
-      this.router.navigate(['/login']);
+      //this.router.navigate(['/login']);
     }
   }
 
   public async signin() {
-    this.loginS.login();
-    //await new Promise(resolve => setTimeout(resolve, 5000)); // Esperar 5 segundos
-
-    await this.redirectLogged(this.loginS.user.id_rol);
+    this.logging=true;
+   let valid= await this.loginS.login();
+    if(valid){
+      this.redirectLogged(this.loginS.user.id_rol);
+    }else{
+      this.logging = false;
+    }
   }
 
   public async redirectLogged(rol?: number): Promise<any> {
@@ -39,12 +44,7 @@ export class LoginPage implements OnInit {
     }else if (rol == 3) {
       this.router.navigate(['/empresa']);
     }else if (rol == 4) {
-      this.router.navigate(['/alumno']);
+      this.router.navigate(['/alumnos']);
     }
-
-    return new Promise(resolve => {
-      this.loginS.login();
-      resolve;
-    });
   }
 }
