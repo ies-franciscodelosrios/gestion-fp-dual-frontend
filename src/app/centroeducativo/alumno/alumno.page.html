@@ -13,14 +13,14 @@
 <ion-content>
   <div id="divsearch">
     <!--Busqueda y filtrado de alumnos-->
-    <ion-searchbar id="searchempresa" placeholder="Buscar"></ion-searchbar>
+    <ion-searchbar id="searchempresa" placeholder="Buscar" animated (ionChange)="handleChange($event)" ></ion-searchbar>
      <!--Botón para agregar un nuevo alumno-->
-    <ion-button (click)="this.nuevoalumno()" style="zoom:1.25"><ion-icon
+    <ion-button (click)="nuevoalumno()" style="zoom:1.25"><ion-icon
         name="duplicate-outline"></ion-icon></ion-button>
   </div>
   <!--Lista de objetos de tipo alumno que al seleccionar un "ion-card" se abra un modal con el contenido de ese alumno en concreto-->
-  <div id="divlist">
-    <ion-card id="open-modal" *ngFor="let lista of this.listAlumno;let i=index" (click) ="this.editalumno(lista)">
+  <div id="divlist" *ngIf="permision">
+    <ion-card id="open-modal" *ngFor="let lista of this.filter;let i=index" (click) ="this.editalumno(lista)">
       <img src="assets/add.png" style="z-index: -1;" />
       <ion-card-header>
         <ion-card-title>{{lista.nombre}}</ion-card-title>

@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { InfiniteScrollCustomEvent, ModalController } from '@ionic/angular';
 import { UsuarioEditPage } from 'src/app/pages/usuario-edit/usuario-edit.page';
 import { Usuario } from 'src/model/Usuario';
 import { APIService } from 'src/app/services/api.service';
+import { LoginService } from 'src/app/services/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-alumno',
@@ -11,18 +13,26 @@ import { APIService } from 'src/app/services/api.service';
 })
 export class AlumnoPage implements OnInit {
 
-  public alumnos: UsuarioEditPage[] = [];
+  //public alumnos: UsuarioEditPage[] = [];
   public listAlumno: Usuario[] = [];
-
+  public filter: Usuario[] = [];
+  public permision: boolean;
   constructor(
     private apiS: APIService,
+    private login: LoginService,
+    private router:Router,
     private modalCtrl: ModalController) {
   }
 
   ngOnInit() {
-    this.apiS.GetUsuarioAlumno().subscribe(rol => {
+    this.permision = true;
+    this.apiS.getUsuarioAlumno().subscribe(rol => {
       this.listAlumno = <Usuario[]>rol.user;
       return this.listAlumno
+    })
+    this.apiS.getUsuarioAlumno().subscribe(rol => {
+      this.filter = <Usuario[]>rol.user;
+      return this.filter
     })
   }
 
@@ -33,7 +43,8 @@ export class AlumnoPage implements OnInit {
     }
     const modal = await this.modalCtrl.create({
       component: UsuarioEditPage,
-      componentProps: { mode: "create" }
+      componentProps: { 
+        mode: "create" }
     });
     return await modal.present();
   }
@@ -45,10 +56,24 @@ export class AlumnoPage implements OnInit {
     }
     const modal = await this.modalCtrl.create({
       component: UsuarioEditPage,
-      componentProps: { mode: "edit", atribuser: alum }
+      componentProps: { 
+        mode: "edit",
+        atribuser: alum }
     });
     return await modal.present();
   }
+
+  handleChange(event: any) {
+    const searchTerm = event.target.value;
+    this.filter = this.listAlumno;
+    if (searchTerm && searchTerm.trim() != '') {
+      this.filter = this.filter.filter((usuario: any) => {
+        return (usuario.nombre?.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1);
+      })
+    }
+  }
+
   cerrarSesion() {
+    this.login.logout();
   }
 }

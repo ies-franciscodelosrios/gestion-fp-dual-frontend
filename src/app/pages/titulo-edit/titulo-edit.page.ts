@@ -32,17 +32,16 @@ export class TituloEditPage implements OnInit {
     this.modalCTRL.dismiss(null, 'cancel');
   }
   submitForm() {
-    console.log(this.formTitulo.get('titulo')?.value);
     //mostrar un loading....
     try {
       this.apiS.addTitulo({ nombre: this.formTitulo.get('titulo')?.value }).subscribe(d => {
         //la respuesta del servidor
-        console.log(d);
+
         //ocultador loading
       })
     } catch (error) {
-      console.error(error);
       //ocular loading
     }
+    this.cancel();
   }
 }

@@ -1,18 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
-import { AlumnoPageRoutingModule } from './alumno-routing.module';
-import { AlumnoPage } from './alumno.page';
 
+import { IonicModule } from '@ionic/angular';
+
+import { RaPageRoutingModule } from './ra-routing.module';
+
+import { RaPage } from './ra.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    AlumnoPageRoutingModule
+    RaPageRoutingModule
   ],
-  declarations: [AlumnoPage]
+  declarations: [RaPage]
 })
-export class AlumnoPageModule {}
+export class RaPageModule {}
