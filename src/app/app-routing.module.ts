@@ -79,7 +79,8 @@ const routes: Routes = [
   {
     path: 'edit-task',
     loadChildren: () => import('./pages/edit-task/edit-task.module').then( m => m.EditTaskPageModule)
-  },{
+  },
+  {
     path: 'info-alumno',
     loadChildren: () => import('./pages/info-alumno/info-alumno.module').then( m => m.InfoAlumnoPageModule)
   },
