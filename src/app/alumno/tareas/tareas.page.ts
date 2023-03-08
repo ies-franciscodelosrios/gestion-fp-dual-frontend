@@ -19,20 +19,18 @@ export class TareasPage implements OnInit {
     private router:Router) { }
 
   ngOnInit() {
-    this.login.keepSecion();
+    this.login.keepSession();
     //se obtienen los encargos y se insertan en el array encargos
     this.refresEncargos();
   
   }
 
   refresEncargos(){
-    console.log(this.login.user.id)
     this.apiS.getEncargosAlumno(this.login.user.id).subscribe((datos) => {
       for (let elemento of datos) {
         this.encargos.push(<any>elemento);
       }
-    });
-    
+    });  
   }
 }
 

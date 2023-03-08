@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output,EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalController, NavParams } from '@ionic/angular';
 import { APIService } from 'src/app/services/api.service';
@@ -18,6 +18,8 @@ export class EditTaskPage implements OnInit {
   public encargos: PeriodoPracticas[] = [];
   
   @Input() encargo:Encargo;
+  @Output() closeModal: EventEmitter<boolean> = new EventEmitter<boolean>();
+
   public formTask: FormGroup;
   constructor(
     private formBuilder: FormBuilder,
@@ -36,12 +38,6 @@ export class EditTaskPage implements OnInit {
       taskdate: this.encargo.fecha,
       taskcomment: this.encargo.comentario
     })
-    //console.log(this.encargo)
-    /*this.apiS.getUsuarioAlumno().subscribe(rol => {
-      this.alumnos = <Usuario[]>rol.user;
-      return this.alumnos
-    })*/
-
     this.apiS.getPeriodobyEmpresa(this.login.user.id).subscribe(periodo => {
       for(let elemento of periodo){
         this.encargos.push(<any>elemento);
@@ -80,6 +76,7 @@ export class EditTaskPage implements OnInit {
       //ocular loading
     }
     console.log(this.encargo)
+    this.closeModal.emit(true)
     this.modalCTRL.dismiss()
     
   }

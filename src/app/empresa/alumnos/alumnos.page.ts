@@ -3,6 +3,9 @@ import { APIService } from 'src/app/services/api.service';
 import { Usuario } from 'src/model/Usuario';
 import { InfoAlumnoPage } from 'src/app/pages/info-alumno/info-alumno.page';
 import { ModalController } from '@ionic/angular';
+import { LoginService } from 'src/app/services/login.service';
+import { Router } from '@angular/router';
+import { PeriodoPracticas } from 'src/model/PeriodoPracticas';
 
 @Component({
   selector: 'app-alumnos',
@@ -11,13 +14,31 @@ import { ModalController } from '@ionic/angular';
 })
 export class AlumnosPage implements OnInit {
   public alumnos:Array<Usuario>=[]=[];
-  constructor(private modalCtrl: ModalController, private apiS: APIService ) { }
+  public periodos: Array<PeriodoPracticas>=[]=[];
+  constructor(
+    private modalCtrl: ModalController,
+    private apiS: APIService,
+    private login: LoginService,
+    private route: Router
+    ) {}
 
   ngOnInit() {
-    this.apiS.getUsuarioAlumno().subscribe(rol => {
+    this.loadUsers();
+  }
+
+  public async loadUsers(){
+    await this.login.keepSession();
+   /* this.apiS.getUsuarioAlumno().subscribe(rol => {
       this.alumnos =<Usuario[]> rol.user;
       return this.alumnos 
+    })*/
+
+    this.apiS.getPeriodobyEmpresa(this.login.user.id).subscribe(periodos=>{
+      for (let elemento of periodos) {
+        this.periodos.push(<any>elemento);
+      }
     })
+    console.log(this.periodos);
   }
 
   public async viewAlumn(alumno:any){
@@ -30,6 +51,6 @@ export class AlumnosPage implements OnInit {
   }
 
   cerrarSesion(){
-    
+    this.login.logout();
   }
 }
