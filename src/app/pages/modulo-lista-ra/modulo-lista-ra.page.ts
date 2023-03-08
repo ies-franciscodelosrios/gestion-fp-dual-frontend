@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { IonTitle, ModalController } from '@ionic/angular';
 import { APIService } from 'src/app/services/api.service';
 import { Modulo } from 'src/model/Modulo';
@@ -15,26 +16,22 @@ export class ModuloListaRaPage implements OnInit {
   public formRA: FormGroup;
   public modulos: Modulo;
   public ListaRa: Ra[] =[];
+  
 
-
-  customCounterFormatter(inputLength: number, maxLength: number) {
-    return `${maxLength - inputLength} characters remaining`;
-  }
+  @Input('codmodul') codmodul: any;
+  @Input('nommodul') nommodul: any;
   @Output() RaUpdate: EventEmitter<boolean> = new EventEmitter<boolean>();
-
-
   constructor(
     private formBuilder: FormBuilder,
     private modalCTRL: ModalController,
+    private router: Router,
     private apiS: APIService,
   ) {
   }
 
   ngOnInit() {
     this.formRA = this.formBuilder.group({
-      cod_mod_boja: ['', [Validators.required, Validators.pattern('\[0-9]{4}')]],
-      nombre: ['', [Validators.required, Validators.pattern('[A-zÁ-ÿ ]{3,120}')]],
-      titulo: ['', [Validators.required, Validators.required]],
+      resultado: ['', [Validators.required, Validators.pattern('[A-zÁ-ÿ ]{3,120}')]],
     })
     this.apiS.getTitulo().subscribe(titulo => {
       //this.listaTitulos = titulo;
@@ -48,10 +45,9 @@ export class ModuloListaRaPage implements OnInit {
 
   submitForm() {
     try {
-      this.apiS.addModulo({
-        cod_mod_boja: this.formRA.get('cod_mod_boja')?.value,
-        nombre: this.formRA.get('nombre')?.value,
-        titulo: { id: this.formRA.get('titulo')?.value },
+      this.apiS.addRA({
+        modulo: this.formRA.get('modulo')?.value,
+        resultado: this.formRA.get('resultado')?.value,
       }).subscribe(d => {
         //la respuesta del servidor
         //ocultador loading

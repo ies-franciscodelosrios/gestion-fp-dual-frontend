@@ -5,8 +5,8 @@ import { AddCEPage } from '../pages/add-ce/add-ce.page';
 import { APIService } from '../services/api.service';
 import { EditCEComponent } from '../components/edit-ce/edit-ce.component';
 import { FormPage } from '../pages/form/form.page';
-import { EditCEPage } from '../pages/edit-ce/edit-ce.page';
 import { LoginService } from '../services/login.service';
+import { EditCePageModule } from '../pages/edit-ce/edit-ce.module';
 
 
 @Component({
@@ -49,7 +49,7 @@ export class AdminPage implements OnInit {
 
   async editForm() {
     const modal = await this.modalCtrl.create({
-      component: EditCEPage
+      component: EditCePageModule
     });
     return await modal.present();
   }

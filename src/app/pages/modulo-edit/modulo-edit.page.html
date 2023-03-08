@@ -13,16 +13,16 @@
   <form [formGroup]="formModulo" (ngSubmit)="submitForm()">
     <ion-item counter="true" fill="solid">
       <ion-label position="floating">Co. Módulo</ion-label>
-      <ion-input  maxlength="4" formControlName="cod_mod_boja" placeholder="Codigo del modulo"></ion-input>
+      <ion-input  maxlength="4" formControlName="cod_mod_boja" placeholder="Código del módulo"></ion-input>
       <ion-note slot="error">solo permite números</ion-note>
     </ion-item>
     <ion-item counter="true" fill="solid">
       <ion-label position="floating">Nombre</ion-label>
-      <ion-input maxlength="120" formControlName="nombre" laceholder="Nombre"></ion-input>
+      <ion-input maxlength="120" formControlName="nombre" placeholder="Nombre"></ion-input>
       <ion-note slot="error">solo permite letras</ion-note>
     </ion-item>
     <ion-item counter="true" fill="solid">
-      <ion-select interface="popover" formControlName="titulo" placeholder="Selecciona titulo">
+      <ion-select interface="popover" formControlName="titulo" placeholder="Selecciona título">
         <ion-select-option *ngFor="let lista of listaTitulos"
           [value]="lista.id">{{lista.nombre}}</ion-select-option>
       </ion-select>
