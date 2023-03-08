@@ -30,7 +30,7 @@ export class LoginService {
     try {
       let userlog = await GoogleAuth.signIn();
       const mailLog = userlog.email
-      this.user = await lastValueFrom(this.apiS.GetMailUsuario(mailLog));
+      this.user = await lastValueFrom(this.apiS.getMailUsuario(mailLog));
       localStorage.setItem('login', JSON.stringify(this.user));
       result=true;
     } catch (err) {
@@ -56,7 +56,6 @@ export class LoginService {
     }
     else { 
       let a= ''+localStorage.getItem('login');
-      console.log(a)
       this.user = JSON.parse(a);
     }
   }

@@ -26,13 +26,11 @@ export class TareasPage implements OnInit {
   }
 
   refresEncargos(){
-    console.log(this.login.user.id)
     this.apiS.getEncargosAlumno(this.login.user.id).subscribe((datos) => {
       for (let elemento of datos) {
         this.encargos.push(<any>elemento);
       }
-    });
-    
+    });  
   }
 }
 
