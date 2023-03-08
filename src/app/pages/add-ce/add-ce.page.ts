@@ -1,7 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
-import { lastValueFrom } from 'rxjs';
 import { APIService } from 'src/app/services/api.service';
 import { Usuario } from 'src/model/Usuario';
 
@@ -17,6 +16,7 @@ export class AddCEPage implements OnInit {
   userCEList: Usuario[] = [];
   addUserCEForm: FormGroup;
   enEdicion = false; // variable que indica si el formulario está en modo de edición
+  @Output() closeModal: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(private modalCtrl: ModalController, 
     private apiS: APIService,
@@ -33,12 +33,12 @@ export class AddCEPage implements OnInit {
   validateDocumento(control:any) {
     const pattern = /^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKET]$/i;
     if (pattern.test(control.value)) {
-      return null;
+      return pattern;
     }
     return { 'invalidDocumento': true };
   }
 
-  async onSubmit() {
+  onSubmit() {
     this.apiS.addUsuario({
       nombre: this.addUserCEForm.get('nombre')?.value,
       alta: true,
@@ -48,6 +48,7 @@ export class AddCEPage implements OnInit {
     }).subscribe(d => {
         console.log(d);
     });
+    this.closeModal.emit(true);
     this.modalCtrl.dismiss();
   }
 

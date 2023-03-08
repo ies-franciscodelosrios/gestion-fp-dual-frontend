@@ -4,6 +4,7 @@ import { Usuario } from 'src/model/Usuario';
 import { AddCEPage } from '../pages/add-ce/add-ce.page';
 import { EditCEPage } from '../pages/edit-ce/edit-ce.page';
 import { APIService } from '../services/api.service';
+import { LoginService } from '../services/login.service';
 
 
 @Component({
@@ -18,7 +19,9 @@ export class AdminPage implements OnInit {
   users: any = [];
   searchedUser: any;
 
-  constructor(private modalCtrl: ModalController, private userApiService: APIService) {
+  constructor(private modalCtrl: ModalController, 
+    private userApiService: APIService,
+    private login: LoginService) {
    }
 
   ngOnInit() {
@@ -49,10 +52,9 @@ export class AdminPage implements OnInit {
     const modal = await this.modalCtrl.create({
       component: EditCEPage,
       componentProps: {
-        user: user
+        dUserCE: user
       }
     });
-    this.userApiService.Usuario = user;
     return await modal.present();
   }
 
@@ -67,6 +69,6 @@ export class AdminPage implements OnInit {
   }
 
   cerrarSesion() {
-
+    this.login.logout();
   }
 }

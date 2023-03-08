@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ModalController, NavParams } from '@ionic/angular';
+import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ModalController } from '@ionic/angular';
 import { APIService } from 'src/app/services/api.service';
 import { Usuario } from 'src/model/Usuario';
 
@@ -11,25 +12,47 @@ import { Usuario } from 'src/model/Usuario';
 export class EditCEPage implements OnInit {
 
   @Input('editable') editable:string = "false";
-  dUserCE: Usuario;
+  @Input() dUserCE: Usuario;
+  @Output() closeModal: EventEmitter<boolean> = new EventEmitter<boolean>();
+  public formEdit: FormGroup
 
-  constructor(private modalCtrl: ModalController, private apiS: APIService) {
+  constructor(private modalCtrl: ModalController, 
+    private formBuilder: FormBuilder, 
+    private apiS: APIService) {
   }
 
   ngOnInit() {
-    const aux = this.apiS.Usuario;
-    console.log(aux);
+    this.formEdit = this.formBuilder.group({
+      nombre: [this.dUserCE.nombre, [Validators.required]],
+      doc: [this.dUserCE.documentos],
+      correo: [this.dUserCE.correo]
+    })
   }
 
   updateUserCE() {
+    this.dUserCE.nombre = this.formEdit.get('nombre')?.value;
+    this.dUserCE.documentos = this.formEdit.get('doc')?.value;
+    this.dUserCE.correo = this.formEdit.get('correo')?.value;
 
     this.apiS.updateCentroEducativo({
+      id: this.dUserCE.id,
       nombre: this.dUserCE.nombre,
+      documentos: this.dUserCE.documentos,
+      correo: this.dUserCE.correo,
       alta: this.dUserCE.alta,
-      rol: this.dUserCE.rol,
-      doc: this.dUserCE.doc,
-      correo: this.dUserCE.correo
+      rol: {"nombre":"Centro educativo"}
+  
+    }).subscribe(d => {
+      console.log(d);
+    });
+    
+    this.closeModal.emit(true);
+    this.modalCtrl.dismiss();
+  }
 
+  deleteUserCE() {
+    this.apiS.deleteCentroEducativo(this.dUserCE.id).subscribe((respuesta) => {
+      console.log(respuesta);
     });
     this.modalCtrl.dismiss();
   }

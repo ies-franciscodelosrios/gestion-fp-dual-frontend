@@ -6,28 +6,28 @@
 
 <ion-content class="ion-padding">
 
-  <form *ngIf="dUserCE">
+  <form [formGroup]="formEdit" (ngSubmit)="updateUserCE()">
     <ion-list>
       <div style="display: flex; flex-direction: row;">
-        <ion-icon color="danger" *ngIf="editable=='false'" name="trash" style="zoom:1.5"></ion-icon>
+        <ion-icon (click)="deleteUserCE()" color="danger" *ngIf="editable=='false'" name="trash" style="zoom:1.5"></ion-icon>
       </div>
       <ion-item>
         <ion-label position="floating">Nombre</ion-label>
-        <ion-input type="text" [(ngModel)]="dUserCE.nombre"></ion-input>
+        <ion-input type="text" formControlName="nombre" name="nombre"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label position="floating">Documento</ion-label>
-        <ion-input type="text"[(ngModel)]="dUserCE.doc"></ion-input>
+        <ion-input type="text" formControlName="doc" name="doc"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label position="floating">Correo electrónico</ion-label>
-        <ion-input type="email" [(ngModel)]="dUserCE.correo"></ion-input>
+        <ion-input type="email" formControlName="correo" name="correo"></ion-input>
       </ion-item>
     </ion-list>
 
-    <ion-button type="submit" (click)="updateUserCE()">Update</ion-button>
+    <ion-button type="submit" [disabled]="!formEdit.valid">Update</ion-button>
   </form>
 
 </ion-content>
