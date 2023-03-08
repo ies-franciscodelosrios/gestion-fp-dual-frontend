@@ -14,7 +14,6 @@ import { PeriodoPracticas } from 'src/model/PeriodoPracticas';
 })
 export class AlumnosPage implements OnInit {
   public alumnos:Array<Usuario>=[]=[];
-  public periodos: Array<PeriodoPracticas>=[]=[];
   constructor(
     private modalCtrl: ModalController,
     private apiS: APIService,
@@ -28,17 +27,13 @@ export class AlumnosPage implements OnInit {
 
   public async loadUsers(){
     await this.login.keepSession();
-   /* this.apiS.getUsuarioAlumno().subscribe(rol => {
-      this.alumnos =<Usuario[]> rol.user;
-      return this.alumnos 
-    })*/
 
     this.apiS.getPeriodobyEmpresa(this.login.user.id).subscribe(periodos=>{
       for (let elemento of periodos) {
-        this.periodos.push(<any>elemento);
+        this.alumnos.push(<any>elemento.id_alumno)
       }
     })
-    console.log(this.periodos);
+    console.log(this.alumnos);
   }
 
   public async viewAlumn(alumno:any){
