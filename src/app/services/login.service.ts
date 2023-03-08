@@ -49,7 +49,7 @@ export class LoginService {
     if (this.user != null) return true; else return false;
   }
 
-  public async keepSecion(){
+  public async keepSession(){
     if(localStorage.getItem('login') == null) {
       this.router.navigate(['']);
       return;

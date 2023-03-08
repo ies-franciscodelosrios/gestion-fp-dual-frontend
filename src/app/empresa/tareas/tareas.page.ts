@@ -23,6 +23,7 @@ export class TareasPage implements OnInit {
   }
 
   ngOnInit() {
+    this.login.keepSession;
     this.loadTareas();
   }
 
@@ -56,7 +57,7 @@ export class TareasPage implements OnInit {
   }
 
   cerrarSesion(){
-    
+    this.login.logout
   }
 
 }
