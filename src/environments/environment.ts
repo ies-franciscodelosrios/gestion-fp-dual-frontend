@@ -16,9 +16,11 @@ export const environment = {
       titulo: '/titulo',
       user: '/users',
       roles: '/roles',
-      periodopracticas: '/periodo_practica',
+      periodopracticas: '/periodo_practica/',
+      periodoEmpresa: '/periodo_practica/empresa/',
       encargo: '/encargo',
-      encargoUser: '/encargo/user/',
+      encargoAlumno: '/encargo/alumno/',
+      encargoEmpresa: '/encargo/empresa/',
       mail: '/users/email/'
     },
   }
