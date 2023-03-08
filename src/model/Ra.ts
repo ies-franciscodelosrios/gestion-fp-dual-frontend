@@ -1,7 +1,7 @@
 import { Modulo } from "./Modulo"
 
 export interface Ra{
-    id?:string,
-    idModulo?:Modulo
+    id?:number,
+    modulo?:Modulo,
     resultado?:string
 }

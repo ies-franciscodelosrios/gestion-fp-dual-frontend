@@ -8,6 +8,9 @@ import { Usuario } from 'src/model/Usuario';
 import { map } from 'rxjs/operators';
 import { PeriodoPracticas } from 'src/model/PeriodoPracticas';
 import { Tarea } from 'src/model/Tarea';
+import { Modulo } from 'src/model/Modulo';
+import { Ra } from 'src/model/Ra';
+import { Ce } from 'src/model/Ce';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +25,21 @@ export class APIService {
     return this.http.post(url, titulo);
   }
 
+  addModulo(modulo: any): Observable<any> {
+    const url = environment.api.url + environment.api.endpoints.modulos
+    return this.http.post(url, modulo);
+  }
+
+  addRA(ra: any): Observable<any> {
+    const url = environment.api.url + environment.api.endpoints.ra
+    return this.http.post(url, ra);
+  }
+
+  addCE(ce: any): Observable<any> {
+    const url = environment.api.url + environment.api.endpoints.ce
+    return this.http.post(url, ce);
+  }
+
   addTarea(encargo: any): Observable<any> {
     console.log(environment.api.url + environment.api.endpoints.titulo)
     const url = environment.api.url + environment.api.endpoints.encargo
@@ -29,45 +47,42 @@ export class APIService {
   }
 
   addUsuario(user: any): Observable<any> {
-    console.log(user)
     const url = environment.api.url + environment.api.endpoints.user
     return this.http.post(url, user, {
 
     });
   }
-
   addPractica(practica: any): Observable<any> {
     const url = environment.api.url + environment.api.endpoints.periodopracticas
     return this.http.post(url, practica, {
 
     });
   }
-
   //devuelve un valor al frontend
-  GetUsuarioAdmin(): Observable<Rol> {
+  getUsuarioAdmin(): Observable<Rol> {
     const url = environment.api.url + environment.api.endpoints.roles + '/1'
     return this.http.get<Rol>(url, {
     });
   }
-  GetUsuarioCentro(): Observable<Rol> {
+  getUsuarioCentro(): Observable<Rol> {
     const url = environment.api.url + environment.api.endpoints.roles + '/2'
     return this.http.get<Rol>(url, {
     });
   }
 
-  GetUsuarioAlumno(): Observable<Rol> {
+  getUsuarioAlumno(): Observable<Rol> {
     const url = environment.api.url + environment.api.endpoints.roles + '/4'
     return this.http.get<Rol>(url, {
     });
   }
 
-  GetUsuarioEmpresa(): Observable<Rol> {
+  getUsuarioEmpresa(): Observable<Rol> {
     const rolUrl = environment.api.url + environment.api.endpoints.roles + '/3'
     return this.http.get<Rol>(rolUrl, {
     });
   }
 
-  GetTitulo(): Observable<Titulo[]> {
+  getTitulo(): Observable<Titulo[]> {
     const url = environment.api.url + environment.api.endpoints.titulo
     return this.http.get<Titulo[]>(url, {
     });
@@ -79,27 +94,66 @@ export class APIService {
     });
   }
 
-  GetPP(): Observable<PeriodoPracticas[]> {
+  getRA(): Observable<Ra[]> {
+    const url = environment.api.url + environment.api.endpoints.ra
+    return this.http.get<Ra[]>(url, {
+    });
+  }
+
+  getPP(): Observable<PeriodoPracticas[]> {
     const url = environment.api.url + environment.api.endpoints.periodopracticas
     return this.http.get<PeriodoPracticas[]>(url, {
     });
   }
 
-  GetAUsuario(): Observable<Usuario[]> {
-    const url = environment.api.url + environment.api.endpoints.user
-    return this.http.get<Usuario[]>(url, {
+  getCE(): Observable<Ce[]> {
+    const url = environment.api.url + environment.api.endpoints.ce
+    return this.http.get<Ce[]>(url, {
     });
   }
 
-  getEncargos():Observable<any>{
-    const url = environment.api.url+environment.api.endpoints.encargo
+  getMailUsuario(email: string): Observable<Usuario> {
+    const url = environment.api.url + environment.api.endpoints.mail + email
+    return this.http.get<Usuario>(url, {
+    });
+  }
+
+  getEncargosAlumno(id?: number): Observable<any> {
+    const url = environment.api.url + environment.api.endpoints.encargoAlumno + id
     return this.http.get(url);
   }
 
-  updateEncargo(encargo:any):Observable<any>{
-    const url = environment.api.url+environment.api.endpoints.encargo
-    return this.http.put(url, encargo);
+  getEncargos(): Observable<any> {
+    const url = environment.api.url + environment.api.endpoints.encargo
+    return this.http.get(url);
+  }
 
+  updateEncargo(encargo: any): Observable<any> {
+    const url = environment.api.url + environment.api.endpoints.encargo
+    return this.http.put(url, encargo);
+  }
+
+  GetCentroEducativo(): Observable<any> {
+    const url = environment.api.url + environment.api.endpoints.user
+    return this.http.get<Usuario>(url, {
+    });
+  }
+
+  getEncargosEmpresa(id?: number): Observable<any> {
+    const url = environment.api.url + environment.api.endpoints.encargoEmpresa + id
+    return this.http.get(url);
+  }
+
+  getPeriodobyEmpresa(id?: number): Observable<any> {
+    const url = environment.api.url + environment.api.endpoints.periodoEmpresa + id
+    return this.http.get(url);
+  }
+
+  //actualiza un valor al backend
+  updatePractica(practica: any): Observable<any> {
+    const url = environment.api.url + environment.api.endpoints.periodopracticas
+    return this.http.put(url, practica, {
+    });
   }
 
   updateCentroEducativo(user: any): Observable<any> {

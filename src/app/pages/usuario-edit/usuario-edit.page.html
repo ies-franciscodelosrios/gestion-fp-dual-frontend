@@ -1,11 +1,14 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Crear </ion-title>
+    <ion-title>{{usuario}} </ion-title>
+    <!--Botón que permite cancelar y cerrar el modal-->
     <ion-buttons slot="end">
       <ion-button (click)="cancel()" [strong]="true"><ion-icon name="close-outline"></ion-icon></ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
+
+<!--contenido dentro del modal que permite introducir datos y "guardarlos"-->
 <ion-content class="ion-padding">
   <form [formGroup]="formUsuario" (ngSubmit)="submitForm()">
     <ion-item>
@@ -18,7 +21,7 @@
     </ion-item>
     <ion-item>
       <ion-label position="floating">DNI/NIF</ion-label>
-      <ion-input formControlName="doc" placeholder="documento de identidad" ></ion-input>
+      <ion-input formControlName="documentos" placeholder="documento de identidad" ></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Alta</ion-label>

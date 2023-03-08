@@ -7,7 +7,6 @@ import { Usuario } from 'src/model/Usuario';
 @Component({
   selector: 'app-edit-ce',
   templateUrl: './edit-ce.page.html',
-  styleUrls: ['./edit-ce.page.scss'],
 })
 export class EditCEPage implements OnInit {
 

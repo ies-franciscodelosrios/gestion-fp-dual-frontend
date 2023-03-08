@@ -1,41 +1,25 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Có. {{0486}} </ion-title>
+    <ion-title>Nuevo RA  {{codmodul}}</ion-title>
+    <!--Botón que permite cancelar y cerrar el modal-->
     <ion-buttons slot="end">
       <ion-button (click)="cancel()" [strong]="true"><ion-icon name="close-outline"></ion-icon></ion-button>
     </ion-buttons>
   </ion-toolbar>
-  <div class="ion-padding">Resultado de Apredizaje de "Acceso a Datos"</div>
 </ion-header>
-
-
-
 <ion-content class="ion-padding">
-  <form (ngSubmit)="logForm()">
-    <ion-toolbar>
-      <ion-accordion-group expand="inset">
-        <ion-accordion value="first">
-          <ion-item slot="header" color="floatbuton">
-            <ion-label>{{1}}. Desarrolla aplicaciones que gestionan información almacenada</ion-label>
-          </ion-item>
-          <ion-item class="ion-padding" slot="content">
-            <ion-label >a). se ha utilizado clases para ficheros </ion-label>
-          </ion-item>
-          <ion-item class="ion-padding" slot="content">
-            <ion-label >b). se ha reusado las coisiones </ion-label>
-          </ion-item>
-          
-        </ion-accordion>
-        <ion-accordion value="second">
-          <ion-item slot="header" color="floatbuton">
-            <ion-label>Second Accordion</ion-label>
-          </ion-item>
-          <div class="ion-padding" slot="content">
-            Second Content
-          </div>
-        </ion-accordion>
-      </ion-accordion-group>
-    </ion-toolbar>
-
-  </form>
+  <!--contenido dentro del modal que permite introducir datos y "guardarlos"-->
+  <form [formGroup]="formRA" (ngSubmit)="submitForm()">
+  <ion-item>
+    <ion-label position="floating">Nombre</ion-label>
+    <ion-input formControlName="resultado"> </ion-input>
+  </ion-item>
+  <ion-grid>
+    <ion-row>
+      <ion-col style="text-align: right;">
+        <ion-button shape="round" color="success" type="submit" [disabled]="this.formRA.pristine">Guardar</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</form>
 </ion-content>

@@ -2,6 +2,7 @@
   <ion-toolbar>
     <ion-title>{{titulo}}</ion-title>
     <ion-buttons slot="end">
+      <!--Botón qu permite salir de la sesión actual con el ultimo usuario logueado-->
       <ion-button (click)="cerrarSesion()">
         <ion-icon slot="icon-only" name="exit"></ion-icon>
       </ion-button>
@@ -10,13 +11,15 @@
 </ion-header>
 
 <ion-content>
-  <div id="divsearch" >
-    <ion-searchbar id="searchempresa" placeholder="Buscar"></ion-searchbar>
+  <div id="divsearch">
+    <!--Busqueda y filtrado de títulos-->
+    <ion-searchbar id="searchtitulo" placeholder="Buscar" animated (ionChange)="handleChange($event)"></ion-searchbar>
+    <!--Botón para agregar un nuevo título-->
     <ion-button (click)="this.addTitle()" style="zoom:1.25"><ion-icon name="duplicate-outline"></ion-icon></ion-button>
   </div>
-
-  <ion-list lines="inset" *ngFor="let lista of this.listTitulo;let i=index">
-    <ion-item id="open-modal" expand="block" (click)="toTitleToModul()"> 
+<!--Lista de objetos de tipo título que al seleccionar un "ion-item" pasa a la siguiente ventana en el que muestra los módulos de este título en concreto-->
+  <ion-list lines="inset" *ngFor="let lista of this.filter;let i=index">
+    <ion-item id="open-modal" expand="block" (click)="toTitleToModul(lista)">
       <ion-label>
         <h1>{{lista.nombre}}</h1>
       </ion-label>

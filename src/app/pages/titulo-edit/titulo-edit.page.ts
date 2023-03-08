@@ -23,36 +23,25 @@ export class TituloEditPage implements OnInit {
   ) {
     this.title = navParams.get('titulo')
   }
-
   ngOnInit() {
     this.formTitulo = this.formBuilder.group({   //creando los campos que serán controlados y validados por formTitulo
       titulo: ['', [Validators.required, Validators.minLength(2)]],
     })
   }
-
-
   cancel() {
     this.modalCTRL.dismiss(null, 'cancel');
   }
-
   submitForm() {
-    console.log(this.formTitulo.get('titulo')?.value);
     //mostrar un loading....
     try {
       this.apiS.addTitulo({ nombre: this.formTitulo.get('titulo')?.value }).subscribe(d => {
         //la respuesta del servidor
-        console.log(d);
+
         //ocultador loading
       })
     } catch (error) {
-      console.error(error);
       //ocular loading
     }
+    this.cancel();
   }
-
-  /*onWillDismiss(event: Event) {
-    const ev = event as CustomEvent<OverlayEventDetail<string>>;
-    if (ev.detail.role === 'confirm') {
-    }
-  }*/
 }

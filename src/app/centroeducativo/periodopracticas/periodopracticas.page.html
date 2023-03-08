@@ -2,6 +2,7 @@
   <ion-toolbar>
     <ion-title>Periodo de {{practica}}</ion-title>
     <ion-buttons slot="end">
+       <!--Botón qu permite salir de la sesión actual con el ultimo usuario logueado-->
       <ion-button (click)="cerrarSesion()">
         <ion-icon slot="icon-only" name="exit"></ion-icon>
       </ion-button>
@@ -11,14 +12,18 @@
 
 <ion-content>
   <div id="divsearch" >
-    <ion-searchbar id="searchempresa" placeholder="Buscar"></ion-searchbar>
+     <!--Busqueda y filtrado de periodos de practicas-->
+    <ion-searchbar id="searchpp" placeholder="Buscar" animated (ionChange)="handleChange($event)"></ion-searchbar>
+      <!--Botón para agregar un nuevo periodo de practicas-->
     <ion-button (click)="nuevaPractica()" style="zoom:1.25"><ion-icon name="duplicate-outline"></ion-icon></ion-button>
   </div>
+
+  <!--Lista de objetos de tipo periodos de practicas que al seleccionar un "ion-card" se abra un modal con el contenido de este periodo de practicas en concreto-->
   <div id="divlist">
-    <ion-card id="open-modal" *ngFor="let lista of this.listPracticas;let i=index">
+    <ion-card id="open-modal" *ngFor="let lista of this.filter;let i=index" (click)="this.editPractica(lista)">
       <img src="assets/add.png" style="z-index: -1;" />
       <ion-card-header>
-        <ion-card-title> {{lista.id_empresa?.nombre}} -- {{lista.id_alumno?.nombre}} </ion-card-title>
+        <ion-card-title > {{lista.id_empresa?.nombre}} -- {{lista.id_alumno?.nombre}} </ion-card-title>
         <ion-card-subtitle > {{ lista.tiempo_inicio |date : 'd MMM, y' }} -- {{lista.tiempo_final |date : 'd MMM, y'}}</ion-card-subtitle>
       </ion-card-header>
     </ion-card>

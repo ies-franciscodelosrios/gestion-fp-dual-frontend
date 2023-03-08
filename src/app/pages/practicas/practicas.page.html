@@ -1,12 +1,13 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>crear {{practica}}</ion-title>
+    <ion-title> {{practica}}</ion-title>
+    <!--Botón que permite cancelar y cerrar el modal-->
     <ion-buttons slot="end">
       <ion-button (click)="cancel()" [strong]="true"><ion-icon name="close-outline"></ion-icon></ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-
+<!--contenido dentro del modal que permite introducir datos y "guardarlos"-->
 <ion-content>
   <form [formGroup]="formPractica" (ngSubmit)="submitForm()">
     <!--SELECIONAR EMPRESA-->

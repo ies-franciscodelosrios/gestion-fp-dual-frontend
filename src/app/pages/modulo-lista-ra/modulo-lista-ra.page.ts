@@ -1,12 +1,11 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { IonTitle, ModalController } from '@ionic/angular';
-import { Usuario } from 'src/model/Usuario';
-import { IonModal } from '@ionic/angular';
-import { OverlayEventDetail } from '@ionic/core/components';
-import { LoginService } from '../../services/login.service';
-import { EmpresaPage } from 'src/app/centroeducativo/empresa/empresa.page';
-import { AlumnoPage } from 'src/app/centroeducativo/alumno/alumno.page';
+import { APIService } from 'src/app/services/api.service';
+import { Modulo } from 'src/model/Modulo';
+import { Ra } from 'src/model/Ra';
+
 
 @Component({
   selector: 'app-modulo-lista-ra',
@@ -14,19 +13,19 @@ import { AlumnoPage } from 'src/app/centroeducativo/alumno/alumno.page';
   styleUrls: ['./modulo-lista-ra.page.scss'],
 })
 export class ModuloListaRaPage implements OnInit {
+  public formRA: FormGroup;
+  public modulos: Modulo;
+  public ListaRa: Ra[] =[];
+  
 
-  @Input('user') usuario: Usuario;
-  public todo: FormGroup;
-  @ViewChild(IonTitle) public ionTitle: IonTitle;
-  @ViewChild(IonModal) modal: IonModal;
-  public usuarios: Usuario[] = [];
-  public results = this.usuarios;
-  showText: boolean = false;
-
+  @Input('codmodul') codmodul: any;
+  @Input('nommodul') nommodul: any;
+  @Output() RaUpdate: EventEmitter<boolean> = new EventEmitter<boolean>();
   constructor(
     private formBuilder: FormBuilder,
-    private loginS: LoginService,
-    private modalCTRL: ModalController
+    private modalCTRL: ModalController,
+    private router: Router,
+    private apiS: APIService,
   ) {
   }
 
@@ -53,13 +52,24 @@ export class ModuloListaRaPage implements OnInit {
   }
 
   cancel() {
-    this.modal.dismiss(null, 'cancel');
+    this.RaUpdate.emit(true);
+    this.modalCTRL.dismiss(null, 'cancel');
   }
 
-  onWillDismiss(event: Event) {
-    const ev = event as CustomEvent<OverlayEventDetail<string>>;
-    if (ev.detail.role === 'confirm') {
+  submitForm() {
+    try {
+      this.apiS.addRA({
+        modulo: this.formRA.get('modulo')?.value,
+        resultado: this.formRA.get('resultado')?.value,
+      }).subscribe(d => {
+        //la respuesta del servidor
+        //ocultador loading
+      })
+    } catch (error) {
+      console.error(error);
+      //ocular loading
     }
+    this.cancel();
   }
 
 }

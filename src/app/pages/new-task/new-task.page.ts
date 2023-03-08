@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalController, NavParams } from '@ionic/angular';
 import { Tarea } from 'src/model/Tarea';
@@ -14,7 +14,7 @@ export class NewTaskPage implements OnInit {
   public alumnos: Usuario[] = [];
   public encargo: string = "";
   public formTask: FormGroup;  //importar ReactiveFormModule en module.ts
-  
+  @Output() closeModal: EventEmitter<boolean> = new EventEmitter<boolean>();
   constructor(
     private formBuilder: FormBuilder,
     private modalCTRL: ModalController,
@@ -33,7 +33,7 @@ export class NewTaskPage implements OnInit {
       taskstatus: true,
       taskdate: isoDate
     })
-    this.apiS.GetUsuarioAlumno().subscribe(rol => {
+    this.apiS.getUsuarioAlumno().subscribe(rol => {
       this.alumnos = <Usuario[]>rol.user;
       return this.alumnos
     })
@@ -54,7 +54,7 @@ export class NewTaskPage implements OnInit {
       this.apiS.addTarea({
         tarea: this.formTask.get('taskname')?.value,
         estado: this.formTask.get('taskstatus')?.value,
-        periodo_practica: {id:1},
+        periodo_practica: {id:4},
         fecha: this.formTask.get('taskdate')?.value,
         comentario: ''
       }).subscribe(d => {
@@ -66,7 +66,7 @@ export class NewTaskPage implements OnInit {
       console.error(error);
       //ocular loading
     }
+    this.closeModal.emit(true)
     this.modalCTRL.dismiss()
-    
   }
 }
