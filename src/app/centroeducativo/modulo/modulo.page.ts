@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { InfiniteScrollCustomEvent, IonTitle, IonInfiniteScroll, ModalController } from '@ionic/angular';
-import { ModuloListaRaPage } from 'src/app/pages/modulo-lista-ra/modulo-lista-ra.page';
+import { IonTitle, ModalController } from '@ionic/angular';
 import { ModuloEditPage } from 'src/app/pages/modulo-edit/modulo-edit.page';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { LoginService } from 'src/app/services/login.service';
+import { APIService } from 'src/app/services/api.service';
+import { Modulo } from 'src/model/Modulo';
+import { RaPage } from '../ra/ra.page';
 
 @Component({
   selector: 'app-modulo',
@@ -11,24 +14,37 @@ import { Router } from '@angular/router';
   styleUrls: ['./modulo.page.scss'],
 })
 export class ModuloPage implements OnInit {
-  titulo = 'Módulo';
-
+  public listModulo: Modulo[] = [];
+  public filter: Modulo[] = [];
+  public permision: boolean;
   constructor(
     private http: HttpClient,
     private router: Router,
+    private apiS: APIService,
+    private login: LoginService,
     private modalCtrl: ModalController) { }
 
   ngOnInit() {
+    this.apiS.getModulo().subscribe(listmodulos => {
+      this.listModulo = listmodulos;
+    })
+    this.apiS.getModulo().subscribe(listmodulos => {
+      this.filter = listmodulos;
+      return this.filter;
+    })
   }
 
-
-  toBack(){
+  toBack() {
     this.router.navigate(['/centroeducativo/titulo']);
   }
 
-  public async listaRAModul() {
+  public async listaRAModul(atribModul: any) {
     const modal = await this.modalCtrl.create({
-      component: ModuloListaRaPage
+      component: RaPage,
+      componentProps: {
+        codmodul: atribModul.cod_mod_boja,
+        nommodul: atribModul.nombre
+      }
     });
     return await modal.present();
   }
@@ -39,8 +55,19 @@ export class ModuloPage implements OnInit {
     });
     return await modal.present();
   }
-  cerrarSesion(){
-    
+
+  handleChange(event: any) {
+    const searchTerm = event.target.value;
+    this.filter = this.listModulo;
+    if (searchTerm && searchTerm.trim() != '') {
+      this.filter = this.filter.filter((modulo: any) => {
+        return (modulo.nombre?.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1);
+      })
+    }
+  }
+
+  cerrarSesion() {
+    this.login.logout();
   }
 }
 

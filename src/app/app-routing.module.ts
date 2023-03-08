@@ -66,7 +66,7 @@ const routes: Routes = [
   component: LoginPage },
   {
     path: 'edit-ce',
-    loadChildren: () => import('./pages/edit-ce/edit-ce.module').then( m => m.EditCEPageModule)
+    loadChildren: () => import('./pages/edit-ce/edit-ce.module').then( m => m.EditCePageModule)
   },
   {
     path: 'add-ce',
@@ -80,6 +80,19 @@ const routes: Routes = [
     path: 'edit-task',
     loadChildren: () => import('./pages/edit-task/edit-task.module').then( m => m.EditTaskPageModule)
   },
+  {
+    path: 'ra',
+    loadChildren: () => import('./centroeducativo/ra/ra.module').then( m => m.RaPageModule)
+  },
+  {
+    path: 'ce',
+    loadChildren: () => import('./centroeducativo/ce/ce.module').then( m => m.CePageModule)
+  },
+  {
+    path: 'info-alumno',
+    loadChildren: () => import('./pages/info-alumno/info-alumno.module').then( m => m.InfoAlumnoPageModule)
+  },
+
 
 
 ];

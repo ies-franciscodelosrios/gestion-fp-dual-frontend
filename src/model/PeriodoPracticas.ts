@@ -1,7 +1,7 @@
 import { Usuario } from "./Usuario";
 
 export interface PeriodoPracticas {
-    id?: string,
+    id?: number,
     id_centro?: Usuario,
     id_empresa?: Usuario,
     id_alumno?: Usuario,

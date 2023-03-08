@@ -18,7 +18,7 @@
         <ion-label position="floating">Alumno</ion-label>
         <ion-select interface="popover" formControlName="taskuser" placeholder="Selecciona alumno">
           <ion-select-option
-            *ngFor="let alumnos of this.alumnos;let i=index">{{alumnos.nombre}}</ion-select-option>
+            *ngFor="let alumno of this.encargos;let i=index">Nombre: {{alumno.id_alumno}}</ion-select-option>
         </ion-select>
       </ion-item>
     </ion-list>
@@ -29,6 +29,10 @@
     <ion-item>
       <ion-label position="floating">Fecha</ion-label>
       <ion-input formControlName="taskdate" placeholder="Fecha actual" ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Comentario:</ion-label>
+      <ion-input formControlName="taskcomment"></ion-input>
     </ion-item>
 
     <ion-button shape="round" color="primary" fill="outline" type="submit" [disabled]="!formTask.valid">Guardar</ion-button>

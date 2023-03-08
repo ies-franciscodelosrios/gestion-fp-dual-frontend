@@ -1,7 +1,7 @@
 import { Titulo } from "./Titulo"
 
 export interface Modulo{
-    cod?:number
-    modNombre?:string
-    idtitul?:Titulo
+    cod_mod_boja?:number,
+    nombre?:string,
+    titulo?:Titulo
 }

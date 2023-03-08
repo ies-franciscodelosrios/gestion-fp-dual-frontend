@@ -1,9 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { IonicModule } from '@ionic/angular';
-import { ModuloEditPageRoutingModule } from './modulo-edit-routing.module';
-import { ModuloEditPage } from './modulo-edit.page';
+
+import { InfoAlumnoPageRoutingModule } from './info-alumno-routing.module';
+
+import { InfoAlumnoPage } from './info-alumno.page';
 
 @NgModule({
   imports: [
@@ -11,8 +14,8 @@ import { ModuloEditPage } from './modulo-edit.page';
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    ModuloEditPageRoutingModule
+    InfoAlumnoPageRoutingModule
   ],
-  declarations: [ModuloEditPage]
+  declarations: [InfoAlumnoPage]
 })
-export class ModuloEditPageModule {}
+export class InfoAlumnoPageModule {}
