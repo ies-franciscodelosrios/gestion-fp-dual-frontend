@@ -8,6 +8,9 @@ import { Usuario } from 'src/model/Usuario';
 import { map } from 'rxjs/operators';
 import { PeriodoPracticas } from 'src/model/PeriodoPracticas';
 import { Tarea } from 'src/model/Tarea';
+import { Modulo } from 'src/model/Modulo';
+import { Ra } from 'src/model/Ra';
+import { Ce } from 'src/model/Ce';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +23,21 @@ export class APIService {
     console.log(environment.api.url + environment.api.endpoints.titulo)
     const url = environment.api.url + environment.api.endpoints.titulo
     return this.http.post(url, titulo);
+  }
+
+  addModulo(modulo: any): Observable<any> {
+    const url = environment.api.url + environment.api.endpoints.modulos
+    return this.http.post(url, modulo);
+  }
+
+  addRA(ra: any): Observable<any> {
+    const url = environment.api.url + environment.api.endpoints.ra
+    return this.http.post(url, ra);
+  }
+
+  addCE(ce: any): Observable<any> {
+    const url = environment.api.url + environment.api.endpoints.ce
+    return this.http.post(url, ce);
   }
 
   addTarea(encargo: any): Observable<any> {
@@ -70,9 +88,22 @@ export class APIService {
     });
   }
 
-  GetPP(): Observable<PeriodoPracticas[]> {
-    const url = environment.api.url + environment.api.endpoints.periodopracticas
-    return this.http.get<PeriodoPracticas[]>(url, {
+
+  getModulo(): Observable<Modulo[]> {
+    const url = environment.api.url + environment.api.endpoints.modulos
+    return this.http.get<Modulo[]>(url, {
+    });
+  }
+
+  getRA(): Observable<Ra[]> {
+    const url = environment.api.url + environment.api.endpoints.ra
+    return this.http.get<Ra[]>(url, {
+    });
+  }
+
+  getCE(): Observable<Ce[]> {
+    const url = environment.api.url + environment.api.endpoints.ce
+    return this.http.get<Ce[]>(url, {
     });
   }
 

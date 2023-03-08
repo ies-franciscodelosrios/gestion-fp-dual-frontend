@@ -1,25 +1,25 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Có. Boja {{modulos.cod_mod_boja}} </ion-title>
+    <ion-title>Có. Boja {{codmodul}} </ion-title>
     <!--Botón que permite cancelar y cerrar el modal-->
     <ion-buttons slot="end">
       <ion-button (click)="cancel()" [strong]="true"><ion-icon name="close-outline"></ion-icon></ion-button>
     </ion-buttons>
   </ion-toolbar>
-  <div class="ion-padding">Resultado de Apredizaje de {{modulos.nombre}}</div>
+  <div class="ion-padding">Resultado de Apredizaje de {{nommodul}}</div>
 </ion-header>
 <ion-content class="ion-padding">
   <!--contenido dentro del modal que permite introducir datos y "guardarlos"-->
   <form (ngSubmit)="submitForm()">
     <ion-toolbar>
       <ion-accordion-group expand="inset">
-        <ion-accordion value="first">
+        <ion-accordion value="first" *ngFor="let lista of this.ListaRa;let i=index">
           <ion-item slot="header" color="floatbuton">
-            <ion-label>{{1}}.        </ion-label>
+            <ion-label>{{i}}. {{ListaRa}} </ion-label>
           </ion-item>
           <ion-item class="ion-padding" slot="content">
-            <ion-label >a). se ha utilizado clases para ficheros </ion-label>
-          </ion-item>         
+            <ion-label>a). se ha utilizado clases para ficheros </ion-label>
+          </ion-item>
         </ion-accordion>
       </ion-accordion-group>
     </ion-toolbar>

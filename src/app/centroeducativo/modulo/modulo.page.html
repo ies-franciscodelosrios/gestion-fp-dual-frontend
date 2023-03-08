@@ -1,7 +1,9 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title><ion-icon name="arrow-back-outline" (click)="toBack()"></ion-icon> {{titulo}}</ion-title>
+    <!--nos permite dirigirnos a la pagina anterior a esta-->
+    <ion-title><ion-icon name="arrow-back-outline" (click)="toBack()"></ion-icon> Volver atras</ion-title>
     <ion-buttons slot="end">
+      <!--Botón que permite salir de la sesión actual con el ultimo usuario logueado-->
       <ion-button (click)="cerrarSesion()">
         <ion-icon slot="icon-only" name="exit"></ion-icon>
       </ion-button>
@@ -11,16 +13,17 @@
 
 <ion-content>
   <div id="divsearch">
-    <ion-searchbar id="searchempresa" placeholder="Buscar"></ion-searchbar>
+    <!--Busqueda y filtrado de modulos-->
+    <ion-searchbar id="searchmodulo" placeholder="Buscar" animated (ionChange)="handleChange($event)"></ion-searchbar>
+    <!--Botón para agregar una nuevo módulo-->
     <ion-button (click)="this.addModul()" style="zoom:1.25"><ion-icon name="duplicate-outline"></ion-icon></ion-button>
   </div>
-
-
+<!--Lista de objetos de tipo modulo que al seleccionar un "ion-item" se abra un modal con el contenido de RA que se da en este modulo en concreto-->
   <ion-list lines="inset">
-    <ion-item id="open-modal" expand="block" (click)="listaRAModul()">
+    <ion-item id="open-modal" *ngFor="let lista of this.filter;let i=index" expand="block" (click)="listaRAModul(lista)">
       <ion-label>
-        <h3>Có. Boja: {{0486.}}</h3>
-        <p>Acceso a datos</p>
+        <h3>Có. Boja: {{lista.cod_mod_boja}}</h3>
+        <p>{{lista.nombre}}</p>
       </ion-label>
     </ion-item>
   </ion-list>
