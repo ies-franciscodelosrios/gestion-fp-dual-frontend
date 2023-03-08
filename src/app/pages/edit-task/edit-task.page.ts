@@ -14,12 +14,10 @@ import { PeriodoPracticas } from 'src/model/PeriodoPracticas';
   styleUrls: ['./edit-task.page.scss'],
 })
 export class EditTaskPage implements OnInit {
-  public alumnos: Usuario[] = [];
-  public encargos: PeriodoPracticas[] = [];
+  public periodos: PeriodoPracticas[] = [];
   
   @Input() encargo:Encargo;
   @Output() closeModal: EventEmitter<boolean> = new EventEmitter<boolean>();
-
   public formTask: FormGroup;
   constructor(
     private formBuilder: FormBuilder,
@@ -37,12 +35,18 @@ export class EditTaskPage implements OnInit {
       taskstatus: this.encargo.estado,
       taskdate: this.encargo.fecha,
       taskcomment: this.encargo.comentario
-    })
+    });
     this.apiS.getPeriodobyEmpresa(this.login.user.id).subscribe(periodo => {
       for(let elemento of periodo){
-        this.encargos.push(<any>elemento);
+        this.periodos.push(<any>elemento);
        }
-    })
+    });
+
+    console.log(this.periodos)
+
+    
+    
+    
   }
 
   cancel() {
@@ -51,6 +55,7 @@ export class EditTaskPage implements OnInit {
 
 
   submitForm() {
+    console.log(this.formTask.get('taskuser')?.value)
     this.encargo.tarea=this.formTask.get('taskname')?.value;
     this.encargo.estado= this.formTask.get('taskstatus')?.value;
     this.encargo.id_periodo= 4;
