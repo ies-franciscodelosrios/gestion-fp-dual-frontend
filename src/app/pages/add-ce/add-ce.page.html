@@ -5,7 +5,6 @@
 </ion-header>
  
 <ion-content class="ion-padding">
-  <ion-card-content>
     <form [formGroup]="addUserCEForm" (ngSubmit)="onSubmit()">
       <div style="display: flex; flex-direction: row;">
         <ion-icon color="danger" *ngIf="editable=='true'" name="trash" style="zoom:1.5"></ion-icon>
@@ -28,6 +27,5 @@
       <ion-button type="submit" [disabled]="!addUserCEForm.valid">Save</ion-button>
       <ion-button (click)="back()">Cancel</ion-button>
     </form>
-  </ion-card-content>
 
 <ion-content>

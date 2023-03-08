@@ -4,7 +4,7 @@ export interface Usuario {
     id?:number,
     nombre?:string,
     alta?:boolean,
-    id_rol?:number,
+    rol?:Rol,
     documentos?:string,
     password?:string,
     correo?:string
