@@ -26,7 +26,12 @@ export class TituloPage implements OnInit {
     private login: LoginService,
     private modalCtrl: ModalController) { }
 
+
   ngOnInit() {
+    this.load();
+  }
+  public async load() {
+    await this.login.keepSession();
     this.apiS.getTitulo().subscribe(listTitulo => {
       this.listTitulo = listTitulo;
     })
@@ -36,8 +41,9 @@ export class TituloPage implements OnInit {
     })
   }
 
-  public async toTitleToModul() {
+  public async toTitleToModul(lista: any) {
     this.router.navigate(['/centroeducativo/modulo']);
+
   }
 
   public async addTitle() {
@@ -46,6 +52,9 @@ export class TituloPage implements OnInit {
       componentProps: {
         titulo: this.titulo,
       }
+    });
+    modal.onDidDismiss().then(() => {
+      window.location.reload();
     });
     return await modal.present();
   }

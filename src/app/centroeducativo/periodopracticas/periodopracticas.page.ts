@@ -16,10 +16,10 @@ export class PeriodopracticasPage implements OnInit {
   practica = 'Practicas';
   public practicas: PracticasPage[] = [];
   public listPracticas: PeriodoPracticas[] = [];
-  public filter : PeriodoPracticas[] = [];
+  public filter: PeriodoPracticas[] = [];
   public results = this.practicas;
 
-  
+
   constructor(
     private http: HttpClient,
     private router: Router,
@@ -27,7 +27,12 @@ export class PeriodopracticasPage implements OnInit {
     private apiS: APIService,
     private modalCtrl: ModalController) { }
 
+
   ngOnInit() {
+    this.load();
+  }
+  public async load() {
+    await this.login.keepSession();
     this.apiS.getPP().subscribe(listPracticas => {
       this.listPracticas = listPracticas;
     })
@@ -41,11 +46,31 @@ export class PeriodopracticasPage implements OnInit {
     const modal = await this.modalCtrl.create({
       component: PracticasPage,
       componentProps: {
-        practica: this.practica
+        practica: this.practica,
+        mode: "create"
       }
+    });
+    modal.onDidDismiss().then(() => {
+      window.location.reload();
     });
     return await modal.present();
   }
+
+  public async editPractica(pract: PeriodoPracticas) {
+    const modal = await this.modalCtrl.create({
+      component: PracticasPage,
+      componentProps: {
+        practica: this.practica,
+        mode: "edit",
+        atribPP: pract
+      }
+    });
+    modal.onDidDismiss().then(() => {
+      window.location.reload();
+    });
+    return await modal.present();
+  }
+
   handleChange(event: any) {
     const searchTerm = event.target.value;
     this.filter = this.listPracticas;

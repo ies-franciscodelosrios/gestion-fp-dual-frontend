@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import {ModalController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
 import { UsuarioEditPage } from 'src/app/pages/usuario-edit/usuario-edit.page';
 import { Title } from '@angular/platform-browser';
 import { Usuario } from 'src/model/Usuario';
@@ -18,26 +18,29 @@ export class EmpresaPage implements OnInit {
   public listEmpresa: Usuario[] = [];
   public filter: Usuario[] = [];
   public empresas: UsuarioEditPage[] = [];
-  
 
   constructor(
     private titleSV: Title,
     private apiS: APIService,
     private login: LoginService,
-    private router:Router,
+    private router: Router,
     private modalCtrl: ModalController) {
     this.titulo = this.titleSV.getTitle();
   }
 
   ngOnInit() {
+    this.load();
+  }
+  public async load() {
+    await this.login.keepSession();
     this.apiS.getUsuarioEmpresa().subscribe(rol => {
       this.listEmpresa = <Usuario[]>rol.user;
       return this.listEmpresa
-    })
+    });
     this.apiS.getUsuarioEmpresa().subscribe(rol => {
       this.filter = <Usuario[]>rol.user;
       return this.filter
-    })
+    });
   }
 
   public async nuevaempresa() {
@@ -48,8 +51,11 @@ export class EmpresaPage implements OnInit {
     const modal = await this.modalCtrl.create({
       component: UsuarioEditPage,
       componentProps: {
-        mode: "create" 
+        mode: "create"
       }
+    });
+    modal.onDidDismiss().then(() => {
+      window.location.reload();
     });
     return await modal.present();
   }
@@ -62,11 +68,15 @@ export class EmpresaPage implements OnInit {
       component: UsuarioEditPage,
       componentProps: {
         mode: "edit",
-        atribuser: empr }
+        atribuser: empr
+      }
+    });
+    modal.onDidDismiss().then(() => {
+      window.location.reload();
     });
     return await modal.present();
   }
-  
+
   handleChange(event: any) {
     const searchTerm = event.target.value;
     this.filter = this.listEmpresa;
