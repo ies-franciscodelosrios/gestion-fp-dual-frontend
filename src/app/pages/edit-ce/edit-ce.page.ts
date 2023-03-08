@@ -13,7 +13,7 @@ export class EditCEPage implements OnInit {
   @Input('editable') editable:string = "false";
   dUserCE: Usuario;
 
-  constructor(private modalCtrl: ModalController, private apiS: APIService, private navParams: NavParams) {
+  constructor(private modalCtrl: ModalController, private apiS: APIService) {
   }
 
   ngOnInit() {
