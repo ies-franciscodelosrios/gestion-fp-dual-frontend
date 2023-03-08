@@ -19,9 +19,11 @@ export const environment = {
       modulos: '/modulo',
       ra: '/ra',
       ce: '/ce',
-      periodopracticas: '/periodo_practica',
+      periodopracticas: '/periodo_practica/',
+      periodoEmpresa: '/periodo_practica/empresa/',
       encargo: '/encargo',
-      encargoUser: '/encargo/user/',
+      encargoAlumno: '/encargo/alumno/',
+      encargoEmpresa: '/encargo/empresa/',
       mail: '/users/email/'
     },
   }

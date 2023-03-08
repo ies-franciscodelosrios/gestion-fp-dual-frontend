@@ -54,7 +54,7 @@ export class NewTaskPage implements OnInit {
       this.apiS.addTarea({
         tarea: this.formTask.get('taskname')?.value,
         estado: this.formTask.get('taskstatus')?.value,
-        periodo_practica: {id:1},
+        periodo_practica: {id:4},
         fecha: this.formTask.get('taskdate')?.value,
         comentario: ''
       }).subscribe(d => {
