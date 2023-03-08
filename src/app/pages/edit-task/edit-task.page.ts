@@ -5,6 +5,8 @@ import { APIService } from 'src/app/services/api.service';
 import { Encargo } from 'src/model/Encargo';
 import { Tarea } from 'src/model/Tarea';
 import { Usuario } from 'src/model/Usuario';
+import { LoginService } from 'src/app/services/login.service';
+import { PeriodoPracticas } from 'src/model/PeriodoPracticas';
 
 @Component({
   selector: 'app-edit-task',
@@ -13,6 +15,7 @@ import { Usuario } from 'src/model/Usuario';
 })
 export class EditTaskPage implements OnInit {
   public alumnos: Usuario[] = [];
+  public encargos: PeriodoPracticas[] = [];
   
   @Input() encargo:Encargo;
   public formTask: FormGroup;
@@ -20,6 +23,7 @@ export class EditTaskPage implements OnInit {
     private formBuilder: FormBuilder,
     private modalCTRL: ModalController,
     private apiS: APIService,
+    private login : LoginService
   ) {}
 
   ngOnInit() {
@@ -32,10 +36,16 @@ export class EditTaskPage implements OnInit {
       taskdate: this.encargo.fecha,
       taskcomment: this.encargo.comentario
     })
-    console.log(this.encargo)
-    this.apiS.GetUsuarioAlumno().subscribe(rol => {
+    //console.log(this.encargo)
+    /*this.apiS.GetUsuarioAlumno().subscribe(rol => {
       this.alumnos = <Usuario[]>rol.user;
       return this.alumnos
+    })*/
+
+    this.apiS.getPeriodobyEmpresa(this.login.user.id).subscribe(periodo => {
+      for(let elemento of periodo){
+        this.encargos.push(<any>elemento);
+       }
     })
   }
 
@@ -47,7 +57,7 @@ export class EditTaskPage implements OnInit {
   submitForm() {
     this.encargo.tarea=this.formTask.get('taskname')?.value;
     this.encargo.estado= this.formTask.get('taskstatus')?.value;
-    this.encargo.id_periodo= 1;
+    this.encargo.id_periodo= 4;
     this.encargo.fecha= this.formTask.get('taskdate')?.value;
 
     try {

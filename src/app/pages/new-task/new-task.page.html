@@ -18,7 +18,7 @@
         <ion-label position="floating">Alumno</ion-label>
         <ion-select interface="popover" formControlName="taskuser" placeholder="Selecciona alumno">
           <ion-select-option
-            *ngFor="let alumnos of this.alumnos;let i=index">{{alumnos.nombre}}</ion-select-option>
+            *ngFor="let alumno of this.alumnos;let i=index">Nombre: {{alumno.nombre}} DNI: {{alumno.documentos}}</ion-select-option>
         </ion-select>
       </ion-item>
     </ion-list>
