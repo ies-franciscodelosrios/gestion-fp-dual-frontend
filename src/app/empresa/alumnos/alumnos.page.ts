@@ -14,7 +14,7 @@ export class AlumnosPage implements OnInit {
   constructor(private modalCtrl: ModalController, private apiS: APIService ) { }
 
   ngOnInit() {
-    this.apiS.GetUsuarioAlumno().subscribe(rol => {
+    this.apiS.getUsuarioAlumno().subscribe(rol => {
       this.alumnos =<Usuario[]> rol.user;
       return this.alumnos 
     })

@@ -38,6 +38,11 @@ export class ModuloPage implements OnInit {
     this.router.navigate(['/centroeducativo/titulo']);
   }
 
+
+  public async toModultoRA() {
+    this.router.navigate(['/centroeducativo/modulo']);
+  }
+
   public async listaRAModul(atribModul: any) {
     const modal = await this.modalCtrl.create({
       component: RaPage,

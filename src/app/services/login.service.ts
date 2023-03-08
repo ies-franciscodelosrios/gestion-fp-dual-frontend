@@ -31,7 +31,7 @@ export class LoginService {
       let userlog = await GoogleAuth.signIn();
       const mailLog = userlog.email
       localStorage.setItem('login', JSON.stringify(userlog));
-      this.user = await lastValueFrom(this.apiS.GetMailUsuario(mailLog));
+      this.user = await lastValueFrom(this.apiS.getMailUsuario(mailLog));
       result = true;
     } catch (err) {
       console.error(err)

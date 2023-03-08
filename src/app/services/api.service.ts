@@ -59,30 +59,30 @@ export class APIService {
     });
   }
   //devuelve un valor al frontend
-  GetUsuarioAdmin(): Observable<Rol> {
+  getUsuarioAdmin(): Observable<Rol> {
     const url = environment.api.url + environment.api.endpoints.roles + '/1'
     return this.http.get<Rol>(url, {
     });
   }
-  GetUsuarioCentro(): Observable<Rol> {
+  getUsuarioCentro(): Observable<Rol> {
     const url = environment.api.url + environment.api.endpoints.roles + '/2'
     return this.http.get<Rol>(url, {
     });
   }
 
-  GetUsuarioAlumno(): Observable<Rol> {
+  getUsuarioAlumno(): Observable<Rol> {
     const url = environment.api.url + environment.api.endpoints.roles + '/4'
     return this.http.get<Rol>(url, {
     });
   }
 
-  GetUsuarioEmpresa(): Observable<Rol> {
+  getUsuarioEmpresa(): Observable<Rol> {
     const rolUrl = environment.api.url + environment.api.endpoints.roles + '/3'
     return this.http.get<Rol>(rolUrl, {
     });
   }
 
-  GetTitulo(): Observable<Titulo[]> {
+  getTitulo(): Observable<Titulo[]> {
     const url = environment.api.url + environment.api.endpoints.titulo
     return this.http.get<Titulo[]>(url, {
     });
@@ -101,13 +101,19 @@ export class APIService {
     });
   }
 
+  getPP(): Observable<PeriodoPracticas[]> {
+    const url = environment.api.url + environment.api.endpoints.periodopracticas
+    return this.http.get<PeriodoPracticas[]>(url, {
+    });
+  }
+
   getCE(): Observable<Ce[]> {
     const url = environment.api.url + environment.api.endpoints.ce
     return this.http.get<Ce[]>(url, {
     });
   }
 
-  GetMailUsuario(email:string): Observable<Usuario> {
+  getMailUsuario(email:string): Observable<Usuario> {
     const url = environment.api.url + environment.api.endpoints.mail+ email
     return this.http.get<Usuario>(url, {
     });

@@ -33,7 +33,7 @@ export class NewTaskPage implements OnInit {
       taskstatus: true,
       taskdate: isoDate
     })
-    this.apiS.GetUsuarioAlumno().subscribe(rol => {
+    this.apiS.getUsuarioAlumno().subscribe(rol => {
       this.alumnos = <Usuario[]>rol.user;
       return this.alumnos
     })

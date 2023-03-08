@@ -33,7 +33,7 @@ export class EditTaskPage implements OnInit {
       taskcomment: this.encargo.comentario
     })
     console.log(this.encargo)
-    this.apiS.GetUsuarioAlumno().subscribe(rol => {
+    this.apiS.getUsuarioAlumno().subscribe(rol => {
       this.alumnos = <Usuario[]>rol.user;
       return this.alumnos
     })
