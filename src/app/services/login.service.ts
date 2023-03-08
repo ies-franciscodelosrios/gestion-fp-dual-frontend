@@ -30,9 +30,9 @@ export class LoginService {
     try {
       let userlog = await GoogleAuth.signIn();
       const mailLog = userlog.email
-      localStorage.setItem('login', JSON.stringify(userlog));
       this.user = await lastValueFrom(this.apiS.GetMailUsuario(mailLog));
-      result = true;
+      localStorage.setItem('login', JSON.stringify(this.user));
+      result=true;
     } catch (err) {
       console.error(err)
     }
@@ -49,5 +49,15 @@ export class LoginService {
     if (this.user != null) return true; else return false;
   }
 
-
+  public async keepSecion(){
+    if(localStorage.getItem('login') == null) {
+      this.router.navigate(['']);
+      return;
+    }
+    else { 
+      let a= ''+localStorage.getItem('login');
+      console.log(a)
+      this.user = JSON.parse(a);
+    }
+  }
 }
