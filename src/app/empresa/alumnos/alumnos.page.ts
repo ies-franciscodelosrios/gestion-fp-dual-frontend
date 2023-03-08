@@ -20,7 +20,7 @@ export class AlumnosPage implements OnInit {
 
   ngOnInit() {
     this.login.keepSession;
-    this.apiS.GetUsuarioAlumno().subscribe(rol => {
+    this.apiS.getUsuarioAlumno().subscribe(rol => {s
       this.alumnos =<Usuario[]> rol.user;
       return this.alumnos 
     })

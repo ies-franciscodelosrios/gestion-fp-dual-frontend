@@ -1,9 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { IonTitle, ModalController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
 import { ModuloListaRaPage } from 'src/app/pages/modulo-lista-ra/modulo-lista-ra.page';
 import { APIService } from 'src/app/services/api.service';
-import { Modulo } from 'src/model/Modulo';
 import { Ra } from 'src/model/Ra';
 
 @Component({
@@ -11,7 +10,9 @@ import { Ra } from 'src/model/Ra';
   templateUrl: './ra.page.html',
   styleUrls: ['./ra.page.scss'],
 })
+
 export class RaPage implements OnInit {
+  public letras = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n','ñ', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
   public formRA: FormGroup;
   public ListaRa: Ra[] = [];
 
