@@ -11,7 +11,7 @@
 
 <ion-content class="ion-padding">
   <div class="block">
-    <ion-searchbar (ionChange)="searchAdmin($event)"></ion-searchbar>
+    <ion-searchbar (ionChange)="searchUserCentEduc($event)"></ion-searchbar>
   </div>
   <div class="blockButton">
     <ion-fab>
@@ -30,13 +30,11 @@
   </ion-list>
 
   <ion-list>
-    <ion-item *ngFor="let user of userCEList" (click)="editForm()">
-      <h2>{{user.nombre}}</h2>
+    <ion-item *ngFor="let user of userCEList" (click)="editUserCE(user)">
+      <ion-label *ngIf="user">
+        <h2>{{user.nombre}}</h2>
+      </ion-label>
     </ion-item>
   </ion-list>
-
-  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
-    <ion-refresher-content pullingIcon="chevron-down-circle-outline" refreshingSpinner="circles"></ion-refresher-content>
-  </ion-refresher>
   
 </ion-content>

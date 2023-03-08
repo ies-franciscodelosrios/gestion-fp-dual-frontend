@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavParams } from '@ionic/angular';
+import { APIService } from 'src/app/services/api.service';
+import { Usuario } from 'src/model/Usuario';
 
 @Component({
   selector: 'app-edit-ce',
@@ -9,21 +11,27 @@ import { ModalController } from '@ionic/angular';
 export class EditCEPage implements OnInit {
 
   @Input('editable') editable:string = "false";
-  enEdicion = false; // variable que indica si el formulario está en modo de edición
+  dUserCE: Usuario;
 
-  constructor(private modalCtrl: ModalController) { }
-
-  ngOnInit() {
+  constructor(private modalCtrl: ModalController, private apiS: APIService, private navParams: NavParams) {
   }
 
-  back() {
-    if (this.enEdicion) {
-      // Desactivar el modo de edición del formulario
-      this.enEdicion = false;
-    } else {
-      // Cerrar cualquier diálogo o modal que esté abierto
-      this.modalCtrl.dismiss();
-    }
+  ngOnInit() {
+    const aux = this.apiS.Usuario;
+    console.log(aux);
+  }
+
+  updateUserCE() {
+
+    this.apiS.updateCentroEducativo({
+      nombre: this.dUserCE.nombre,
+      alta: this.dUserCE.alta,
+      rol: this.dUserCE.rol,
+      doc: this.dUserCE.doc,
+      correo: this.dUserCE.correo
+
+    });
+    this.modalCtrl.dismiss();
   }
 
 }

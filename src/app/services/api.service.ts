@@ -14,6 +14,7 @@ import { Tarea } from 'src/model/Tarea';
 })
 export class APIService {
   constructor(private http: HttpClient) { }
+  Usuario:Usuario;
 
   //añade un contenido a la bbdd
   addTitulo(titulo: any): Observable<any> {
@@ -76,7 +77,6 @@ export class APIService {
   GetCentroEducativo(): Observable<any> {
     const url = environment.api.url + environment.api.endpoints.user
     return this.http.get <Usuario>(url, {
-
     });
   }
 
@@ -101,5 +101,10 @@ export class APIService {
     const url = environment.api.url+environment.api.endpoints.encargo
     return this.http.put(url, encargo);
 
+  }
+
+  updateCentroEducativo(user: any): Observable<any> {
+    const url = environment.api.url + environment.api.endpoints.user
+    return this.http.put(url, user);
   }
 }

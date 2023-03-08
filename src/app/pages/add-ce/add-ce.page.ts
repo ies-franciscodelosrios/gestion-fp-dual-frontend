@@ -42,9 +42,9 @@ export class AddCEPage implements OnInit {
     this.apiS.addUsuario({
       nombre: this.addUserCEForm.get('nombre')?.value,
       alta: true,
+      rol: {id:2, nombre:'Centro educativo'},
       documentos: this.addUserCEForm.get('doc')?.value,
-      correo: this.addUserCEForm.get('correo')?.value,
-      rol: {id:2,nombre:'Centro educativo'}
+      correo: this.addUserCEForm.get('correo')?.value,    
     }).subscribe(d => {
         console.log(d);
     });
