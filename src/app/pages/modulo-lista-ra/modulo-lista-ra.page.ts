@@ -30,12 +30,25 @@ export class ModuloListaRaPage implements OnInit {
   }
 
   ngOnInit() {
-    this.formRA = this.formBuilder.group({
-      resultado: ['', [Validators.required, Validators.pattern('[A-zÁ-ÿ ]{3,120}')]],
-    })
-    this.apiS.getTitulo().subscribe(titulo => {
-      //this.listaTitulos = titulo;
-    })
+    if (!this.usuario) {
+      console.log("Crear usuario");
+    } else {
+      this.todo = this.formBuilder.group({
+        nombre: [this.usuario.nombre, [Validators.required,
+        Validators.minLength(5)]],
+        correo: [this.usuario.correo],
+        doc: [this.usuario.documentos],
+        alta: [this.usuario.alta],
+      })
+    }
+  }
+
+  content() {
+    this.showText = !this.showText;
+  }
+
+  logForm() {
+    console.log(this.todo.value);
   }
 
   cancel() {

@@ -25,6 +25,10 @@ export class ModuloPage implements OnInit {
     private modalCtrl: ModalController) { }
 
   ngOnInit() {
+    this.load();
+  }
+  public async load() {
+    await this.login.keepSession();
     this.apiS.getModulo().subscribe(listmodulos => {
       this.listModulo = listmodulos;
     })
@@ -51,12 +55,18 @@ export class ModuloPage implements OnInit {
         nommodul: atribModul.nombre
       }
     });
+    modal.onDidDismiss().then(() => {
+      window.location.reload();
+    });
     return await modal.present();
   }
 
   public async addModul() {
     const modal = await this.modalCtrl.create({
       component: ModuloEditPage
+    });
+    modal.onDidDismiss().then(() => {
+      window.location.reload();
     });
     return await modal.present();
   }

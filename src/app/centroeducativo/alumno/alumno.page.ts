@@ -20,11 +20,15 @@ export class AlumnoPage implements OnInit {
   constructor(
     private apiS: APIService,
     private login: LoginService,
-    private router:Router,
+    private router: Router,
     private modalCtrl: ModalController) {
   }
 
   ngOnInit() {
+    this.load();
+  }
+  public async load() {
+    await this.login.keepSession();
     this.permision = true;
     this.apiS.getUsuarioAlumno().subscribe(rol => {
       this.listAlumno = <Usuario[]>rol.user;
@@ -35,7 +39,7 @@ export class AlumnoPage implements OnInit {
       return this.filter
     })
   }
-
+  
   public async nuevoalumno() {
     let emp = document.getElementById("Empresa");
     if (emp != null) {
@@ -43,8 +47,12 @@ export class AlumnoPage implements OnInit {
     }
     const modal = await this.modalCtrl.create({
       component: UsuarioEditPage,
-      componentProps: { 
-        mode: "create" }
+      componentProps: {
+        mode: "create"
+      }
+    });
+    modal.onDidDismiss().then(() => {
+      window.location.reload();
     });
     return await modal.present();
   }
@@ -56,9 +64,13 @@ export class AlumnoPage implements OnInit {
     }
     const modal = await this.modalCtrl.create({
       component: UsuarioEditPage,
-      componentProps: { 
+      componentProps: {
         mode: "edit",
-        atribuser: alum }
+        atribuser: alum
+      }
+    });
+    modal.onDidDismiss().then(() => {
+      window.location.reload();
     });
     return await modal.present();
   }

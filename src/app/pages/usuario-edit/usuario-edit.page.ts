@@ -1,9 +1,8 @@
 import { Component, Input, OnInit, Output,EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ModalController, NavParams } from '@ionic/angular';
+import { ModalController, NavParams, NavController} from '@ionic/angular';
 import { Usuario } from 'src/model/Usuario';
-import { APIService } from 'src/app/services/api.service';
-import { lastValueFrom } from 'rxjs';
+import { APIService } from 'src/app/services/api.service';;
 
 @Component({
   selector: 'app-usuario-edit',
@@ -11,14 +10,16 @@ import { lastValueFrom } from 'rxjs';
   styleUrls: ['./usuario-edit.page.scss'],
 })
 export class UsuarioEditPage implements OnInit {
-  @Input('atribuser') atribuser: Usuario;
+  public usuario: string = "";
+
   public formUsuario: FormGroup;  //el grupo del formulario reactivo , ojo con importar ReactiveFormModule
-  
+  @Input('atribuser') atribuser: Usuario;
   @Input('mode') mode: string;
   @Output() usrUpdate: EventEmitter<boolean>=new EventEmitter<boolean>();
   constructor(
     private formBuilder: FormBuilder,
     private modalCTRL: ModalController,
+    private navController: NavController,
     private apiS: APIService,
     navParams: NavParams
   ) {
@@ -26,6 +27,7 @@ export class UsuarioEditPage implements OnInit {
 
   async ngOnInit() {
     if (this.mode == "create") {
+      this.usuario = "Crear"
       this.formUsuario = this.formBuilder.group({ //creando los campos que serán controlados y validados por putUsuario
         nombre: ['', [Validators.required, Validators.minLength(4)]],
         correo: '',
@@ -34,6 +36,7 @@ export class UsuarioEditPage implements OnInit {
         alta: true,
       })
     } else if (this.mode == "edit") {
+      this.usuario = "Editar"
       //this.atribuser = await lastValueFrom(this.apiS.GetMailUsuario(<string>this.atribuser.correo));   
       this.formUsuario =  this.formBuilder.group({
         nombre: [this.atribuser.nombre, [Validators.required, Validators.minLength(4)]],

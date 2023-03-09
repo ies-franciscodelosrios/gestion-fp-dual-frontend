@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { ModuloListaRaPage } from 'src/app/pages/modulo-lista-ra/modulo-lista-ra.page';
 import { APIService } from 'src/app/services/api.service';
+import { LoginService } from 'src/app/services/login.service';
 import { Ra } from 'src/model/Ra';
 
 @Component({
@@ -23,11 +24,16 @@ export class RaPage implements OnInit {
     private formBuilder: FormBuilder,
     private modalCTRL: ModalController,
     private apiS: APIService,
+    private login: LoginService,
     private modalCtrl: ModalController,
   ) {
   }
 
   ngOnInit() {
+    this.load();
+  }
+  public async load() {
+    await this.login.keepSession();
     this.apiS.getRA().subscribe(listaRA => {
       this.ListaRa = listaRA;
     })
@@ -38,6 +44,9 @@ export class RaPage implements OnInit {
       component: ModuloListaRaPage,
       componentProps: {
       }
+    });
+    modal.onDidDismiss().then(() => {
+      window.location.reload();
     });
     return await modal.present();
   }

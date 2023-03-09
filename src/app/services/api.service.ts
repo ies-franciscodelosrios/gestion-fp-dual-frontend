@@ -88,10 +88,9 @@ export class APIService {
     });
   }
 
-
-  getModulo(): Observable<Modulo[]> {
-    const url = environment.api.url + environment.api.endpoints.modulos
-    return this.http.get<Modulo[]>(url, {
+  GetCentroEducativo(): Observable<any> {
+    const url = environment.api.url + environment.api.endpoints.user
+    return this.http.get <Usuario>(url, {
     });
   }
 
@@ -113,14 +112,14 @@ export class APIService {
     });
   }
 
-  getMailUsuario(email:string): Observable<Usuario> {
-    const url = environment.api.url + environment.api.endpoints.mail+ email
+  getMailUsuario(email: string): Observable<Usuario> {
+    const url = environment.api.url + environment.api.endpoints.mail + email
     return this.http.get<Usuario>(url, {
     });
   }
 
-  getEncargosAlumno(id?:number): Observable<any>{
-    const url = environment.api.url + environment.api.endpoints.encargoAlumno+id
+  getEncargosAlumno(id?: number): Observable<any> {
+    const url = environment.api.url + environment.api.endpoints.encargoAlumno + id
     return this.http.get(url);
   }
 
@@ -132,28 +131,43 @@ export class APIService {
   updateEncargo(encargo: any): Observable<any> {
     const url = environment.api.url + environment.api.endpoints.encargo
     return this.http.put(url, encargo);
-
   }
 
   GetCentroEducativo(): Observable<any> {
     const url = environment.api.url + environment.api.endpoints.user
-    return this.http.get <Usuario>(url, {
-
+    return this.http.get<Usuario>(url, {
     });
   }
 
-  getEncargosEmpresa(id?:number): Observable<any>{
-    const url = environment.api.url + environment.api.endpoints.encargoEmpresa+id
+  getEncargosEmpresa(id?: number): Observable<any> {
+    const url = environment.api.url + environment.api.endpoints.encargoEmpresa + id
     return this.http.get(url);
   }
 
-  getPeriodobyEmpresa(id?:number): Observable<any> {
-    const url = environment.api.url + environment.api.endpoints.periodoEmpresa+id
+  getPeriodobyEmpresa(id?: number): Observable<any> {
+    const url = environment.api.url + environment.api.endpoints.periodoEmpresa + id
     return this.http.get(url);
   }
 
   deleteEncargo(id?:number){
     const url = environment.api.url + environment.api.endpoints.encargo+id
+    return this.http.delete(url);
+  }
+
+  //actualiza un valor al backend
+  updatePractica(practica: any): Observable<any> {
+    const url = environment.api.url + environment.api.endpoints.periodopracticas
+    return this.http.put(url, practica, {
+    });
+  }
+
+  updateCentroEducativo(user: any): Observable<any> {
+    const url = environment.api.url + environment.api.endpoints.user
+    return this.http.put(url, user);
+  }
+
+  deleteCentroEducativo(user: any): Observable<any> {
+    const url = environment.api.url + environment.api.endpoints.user
     return this.http.delete(url);
   }
 }
