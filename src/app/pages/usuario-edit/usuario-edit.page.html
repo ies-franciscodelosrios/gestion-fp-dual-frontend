@@ -11,27 +11,31 @@
 <!--contenido dentro del modal que permite introducir datos y "guardarlos"-->
 <ion-content class="ion-padding">
   <form [formGroup]="formUsuario" (ngSubmit)="submitForm()">
-    <ion-item>
+    <ion-item fill="solid">
       <ion-label position="floating">Nombre</ion-label>
       <ion-input formControlName="nombre" placeholder="nombre de usuario" ></ion-input>
     </ion-item>
-    <ion-item>
+    <ion-item fill="solid">
       <ion-label position="floating">Correo</ion-label>
       <ion-input formControlName="correo" placeholder="correo electrónico" ></ion-input>
     </ion-item>
-    <ion-item>
+    <ion-item fill="solid">
       <ion-label position="floating">DNI/NIF</ion-label>
       <ion-input formControlName="documentos" placeholder="documento de identidad" ></ion-input>
     </ion-item>
-    <ion-item>
+    <ion-item fill="solid">
       <ion-label>Alta</ion-label>
       <ion-checkbox formControlName="alta" slot="end" ></ion-checkbox>
     </ion-item>
     <ion-grid>
       <ion-row>
+        <ion-col id="btnDelete" style="text-align: left;">
+          <ion-button shape="round" color="danger" fill="outline" (click)="onDelete()">Eliminar</ion-button>
+        </ion-col>
         <ion-col style="text-align: right;">
           <ion-button shape="round" color="success" type="submit" [disabled]="this.formUsuario.pristine">Guardar</ion-button>
         </ion-col>
+  
       </ion-row>
     </ion-grid>
   </form>

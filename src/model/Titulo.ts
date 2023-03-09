@@ -1,4 +1,4 @@
 export interface Titulo{
-    id?:Number,
+    id?:number,
     nombre?:String
 }

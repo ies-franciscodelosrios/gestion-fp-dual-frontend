@@ -7,27 +7,25 @@
 <ion-content class="ion-padding">
 
   <form [formGroup]="formEdit" (ngSubmit)="updateUserCE()">
-    <ion-list>
-      <div style="display: flex; flex-direction: row;">
-        <ion-icon (click)="deleteUserCE()" color="danger" *ngIf="editable=='false'" name="trash" style="zoom:1.5"></ion-icon>
-      </div>
-      <ion-item>
-        <ion-label position="floating">Nombre</ion-label>
-        <ion-input type="text" formControlName="nombre" name="nombre"></ion-input>
-      </ion-item>
+    <ion-item>
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input type="text" formControlName="nombre"></ion-input>
+    </ion-item>
 
-      <ion-item>
-        <ion-label position="floating">Documento</ion-label>
-        <ion-input type="text" formControlName="doc" name="doc"></ion-input>
-      </ion-item>
+    <ion-item>
+      <ion-label position="floating">Documento</ion-label>
+      <ion-input type="text" formControlName="doc"></ion-input>
+    </ion-item>
 
-      <ion-item>
-        <ion-label position="floating">Correo electrónico</ion-label>
-        <ion-input type="email" formControlName="correo" name="correo"></ion-input>
-      </ion-item>
-    </ion-list>
-
-    <ion-button type="submit" [disabled]="!formEdit.valid">Update</ion-button>
+    <ion-item>
+      <ion-label position="floating">Correo electrónico</ion-label>
+      <ion-input type="email" formControlName="correo"></ion-input>
+    </ion-item>
+    
+    <ion-button class="btnUpdate" type="submit" [disabled]="!formEdit.valid">UPDATE</ion-button>
+    <div style="display: flex; flex-direction: row;">
+      <ion-icon class="iDelete" (click)="deleteUserCE()" color="danger" *ngIf="editable=='false'" name="trash" style="zoom:1.5"></ion-icon> 
+    </div>
   </form>
 
 </ion-content>

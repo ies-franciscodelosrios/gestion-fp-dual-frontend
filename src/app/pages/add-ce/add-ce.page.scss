@@ -1,0 +1,28 @@
+.buttons {
+    margin: 10px 0;
+    display: flex;
+}
+
+.btnSave {
+    border-radius: 70px/40px;
+    padding: 20px 20px;
+    border: none;
+    margin-right: 365px;
+    background-color: #8884ac;
+    color: white;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.btnCancel {
+    border-radius: 70px/40px;
+    padding: 20px 20px;
+    border: none;
+    color: white;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    background-color: #db1414;
+}
+
