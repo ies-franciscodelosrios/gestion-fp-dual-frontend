@@ -46,7 +46,7 @@ export class ModuloListaRaPage implements OnInit {
   submitForm() {
     try {
       this.apiS.addRA({
-        modulo: this.formRA.get('modulo')?.value,
+        modulo: {id: this.codmodul},
         resultado: this.formRA.get('resultado')?.value,
       }).subscribe(d => {
         //la respuesta del servidor

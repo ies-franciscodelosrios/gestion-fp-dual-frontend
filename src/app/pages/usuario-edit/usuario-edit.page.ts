@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, Output,EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ModalController, NavParams, NavController} from '@ionic/angular';
+import { ModalController, NavParams, NavController, AlertController} from '@ionic/angular';
 import { Usuario } from 'src/model/Usuario';
 import { APIService } from 'src/app/services/api.service';;
 
@@ -21,6 +21,7 @@ export class UsuarioEditPage implements OnInit {
     private modalCTRL: ModalController,
     private navController: NavController,
     private apiS: APIService,
+    private alrtCtrl: AlertController,
     navParams: NavParams
   ) {
   }
@@ -28,10 +29,12 @@ export class UsuarioEditPage implements OnInit {
   async ngOnInit() {
     if (this.mode == "create") {
       this.usuario = "Crear"
+      const btnelem = document.getElementById('btnDelete') as HTMLElement;
+      btnelem.style.display = 'none';
       this.formUsuario = this.formBuilder.group({ //creando los campos que serán controlados y validados por putUsuario
         nombre: ['', [Validators.required, Validators.minLength(4)]],
-        correo: '',
-        documentos: '',
+        correo: ['', [Validators.required, Validators.required]],
+        documentos: ['',[Validators.required, Validators.required]],
         rol: '',
         alta: true,
       })
@@ -40,8 +43,8 @@ export class UsuarioEditPage implements OnInit {
       //this.atribuser = await lastValueFrom(this.apiS.GetMailUsuario(<string>this.atribuser.correo));   
       this.formUsuario =  this.formBuilder.group({
         nombre: [this.atribuser.nombre, [Validators.required, Validators.minLength(4)]],
-        correo: [this.atribuser.correo],
-        documentos: [this.atribuser.documentos],
+        correo: [this.atribuser.correo, [Validators.required, Validators.required]],
+        documentos: [this.atribuser.documentos, [Validators.required, Validators.required]],
         rol: [this.atribuser.id_rol],
         alta: [this.atribuser.alta],
       })
@@ -90,7 +93,6 @@ export class UsuarioEditPage implements OnInit {
           //ocular loading
         }
       }
-      
       this.cancel();
     } else {
       if (emp != null) {
@@ -130,6 +132,30 @@ export class UsuarioEditPage implements OnInit {
       }
       this.cancel();
     }
+  }
+
+  onDelete(){
+    console.log(this.atribuser.id);
+    this.alrtCtrl.create({
+      header: '¿Estás seguro?',
+      message:'¿Realmente quieres eliminar?',
+      buttons:[
+        {
+          text: 'Cancelar',
+          role:'cancel'
+        },{
+          text: 'Eliminar',
+          handler:() => {
+            this.apiS.deleteUsuario(this.atribuser.id).subscribe((respuesta) => {
+              console.log(respuesta);
+            });
+            this.cancel();
+          }
+        }
+      ]
+    }).then(alrtElem => {
+      alrtElem.present();
+    })  
   }
 
 }

@@ -62,9 +62,11 @@
     <!--PRESIONA EL BOTÓN GUARDAR-->
     <ion-grid>
       <ion-row>
+        <ion-col id="btnDelete" style="text-align: left;">
+          <ion-button shape="round" color="danger" fill="outline" (click)="onDelete()">Eliminar</ion-button>
+        </ion-col>  
         <ion-col style="text-align: right;">
-          <ion-button shape="round" color="success" type="submit"
-            [disabled]="this.formPractica.pristine">Guardar</ion-button>
+          <ion-button shape="round" color="success" type="submit" [disabled]="this.formPractica.pristine">Guardar</ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>

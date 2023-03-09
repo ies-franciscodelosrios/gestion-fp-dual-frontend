@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ModalController, NavParams } from '@ionic/angular';
+import { AlertController, ModalController, NavParams } from '@ionic/angular';
 import { Usuario } from 'src/model/Usuario';
 import { APIService } from 'src/app/services/api.service';
 import { PeriodoPracticas } from 'src/model/PeriodoPracticas';
@@ -26,6 +26,7 @@ export class PracticasPage implements OnInit {
     private modalCTRL: ModalController,
     private apiS: APIService,
     private logsv: LoginService,
+    private alrtCtrl: AlertController,
     navParams: NavParams
   ) {
     this.practica = navParams.get('practicas de empresa')
@@ -33,6 +34,8 @@ export class PracticasPage implements OnInit {
   ngOnInit() {
     if (this.mode == "create") {
       this.practica = "Crear practica"
+      const btnelem = document.getElementById('btnDelete') as HTMLElement;
+      btnelem.style.display = 'none';
       this.formPractica = this.formBuilder.group({   //creando los campos que serán controlados y validados por formTitulo
         id_empresa: ['', [Validators.required, Validators.required]],
         id_alumno: ['', [Validators.required, Validators.required]],
@@ -95,15 +98,12 @@ export class PracticasPage implements OnInit {
     //metodo A para pasar el tipo de fecha a otro
     const a = new Date(this.formPractica.get('tiempo_inicio')?.value)
     const t_inicio = a.toISOString();
-
     const b = new Date(this.formPractica.get('tiempo_final')?.value)
     const t_final = b.toISOString();
-
     //let b: string = JSON.stringify(this.formPractica.get('tiempo_final')?.value)
     //const t_fi = b.split("+");
     //b = t_fi[0].substring(1) + ".000Z"
     //mostrar un loading....
-
     if (this.mode == "create") {
       try {
         this.apiS.addPractica({
@@ -141,7 +141,30 @@ export class PracticasPage implements OnInit {
         //ocular loading
       }
       this.cancel();
-
     }
+  }
+
+  onDelete(){
+    console.log(this.atribPP.id);
+    this.alrtCtrl.create({
+      header: '¿Estás seguro?',
+      message:'¿Realmente quieres eliminar?',
+      buttons:[
+        {
+          text: 'Cancelar',
+          role:'cancel'
+        },{
+          text: 'Eliminar',
+          handler:() => {
+            this.apiS.deletePP(this.atribPP.id).subscribe((respuesta) => {
+              console.log(respuesta);
+            });
+            this.cancel();
+          }
+        }
+      ]
+    }).then(alrtElem => {
+      alrtElem.present();
+    })  
   }
 }

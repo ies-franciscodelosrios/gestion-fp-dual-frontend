@@ -59,6 +59,19 @@ export class TituloPage implements OnInit {
     return await modal.present();
   }
 
+  public async editTitle(title:Titulo) {
+    const modal = await this.modalCtrl.create({
+      component: TituloEditPage,
+      componentProps: {
+        atribtitle: title
+      }
+    });
+    modal.onDidDismiss().then(() => {
+      window.location.reload();
+    });
+    return await modal.present();
+  }
+
   handleChange(event: any) {
     const searchTerm = event.target.value;
     this.filter = this.listTitulo;
