@@ -7,6 +7,8 @@ import { EditTaskPage } from 'src/app/pages/edit-task/edit-task.page';
 import { Encargo } from 'src/model/Encargo';
 import { LoginService } from 'src/app/services/login.service';
 import { Router } from '@angular/router';
+import { PeriodoPracticas } from 'src/model/PeriodoPracticas';
+import { Usuario } from 'src/model/Usuario';
 
 @Component({
   selector: 'app-tareas',
@@ -16,6 +18,7 @@ import { Router } from '@angular/router';
 export class TareasPage implements OnInit {
   @Input('tarea') tarea:Encargo; 
   public tareas:Array<Tarea>=[]=[];
+  public usuarios:Array<Usuario>=[]=[];
   constructor(
     private modalCtrl: ModalController, 
     private apiS: APIService,
@@ -31,9 +34,13 @@ export class TareasPage implements OnInit {
   public async loadTareas(){
     await this.login.keepSession();
     this.tareas=[];
-    this.apiS.getEncargosEmpresa(this.login.user.id).subscribe( (datos) => {
-      for(let elemento of datos){
-       this.tareas.push(<any>elemento);
+    this.usuarios=[];
+    this.apiS.getPeriodobyEmpresa(this.login.user.id).subscribe( tareas => {
+      for (let elemento of tareas){
+        for(let encargo of elemento.encargo){
+          this.usuarios.push(<any>elemento.id_alumno);
+          this.tareas.push(<any>encargo);
+        }
       }
     })
   }

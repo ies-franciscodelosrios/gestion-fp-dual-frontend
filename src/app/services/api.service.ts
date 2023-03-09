@@ -151,4 +151,9 @@ export class APIService {
     const url = environment.api.url + environment.api.endpoints.periodoEmpresa+id
     return this.http.get(url);
   }
+
+  deleteEncargo(id?:number){
+    const url = environment.api.url + environment.api.endpoints.encargo+id
+    return this.http.delete(url);
+  }
 }

@@ -21,7 +21,7 @@ export const environment = {
       ce: '/ce',
       periodopracticas: '/periodo_practica/',
       periodoEmpresa: '/periodo_practica/empresa/',
-      encargo: '/encargo',
+      encargo: '/encargo/',
       encargoAlumno: '/encargo/alumno/',
       encargoEmpresa: '/encargo/empresa/',
       mail: '/users/email/'

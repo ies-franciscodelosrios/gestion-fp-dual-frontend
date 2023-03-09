@@ -18,7 +18,7 @@
         <ion-label position="floating">Alumno</ion-label>
         <ion-select interface="popover" formControlName="taskuser" placeholder="Selecciona alumno">
           <ion-select-option
-            *ngFor="let periodo of this.periodos;let i=index" [value]="periodo.id_alumno?.id">{{periodo.id_alumno?.nombre}}</ion-select-option>
+            *ngFor="let periodo of this.periodos;let i=index" [value]="periodo.id">{{periodo.id_alumno?.nombre}}</ion-select-option>
         </ion-select>
       </ion-item>
     </ion-list>
@@ -34,7 +34,9 @@
       <ion-label position="floating">Comentario:</ion-label>
       <ion-input formControlName="taskcomment"></ion-input>
     </ion-item>
-
-    <ion-button shape="round" color="primary" fill="outline" type="submit" [disabled]="!formTask.valid">Guardar</ion-button>
+    <div position="center">
+    <ion-button shape="round" color="primary" fill="outline" type="submit">Guardar</ion-button>
+    <ion-button shape="round" color="primary" fill="outline" (click)="delete()">Eliminar</ion-button>
+  </div>
   </form>
 </ion-content>
