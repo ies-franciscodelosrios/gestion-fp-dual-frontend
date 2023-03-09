@@ -149,6 +149,11 @@ export class APIService {
     return this.http.get(url);
   }
 
+  deleteEncargo(id?:number){
+    const url = environment.api.url + environment.api.endpoints.encargo+id
+    return this.http.delete(url);
+  }
+
   //actualiza un valor al backend
   updatePractica(practica: any): Observable<any> {
     const url = environment.api.url + environment.api.endpoints.periodopracticas

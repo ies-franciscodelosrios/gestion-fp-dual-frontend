@@ -18,11 +18,11 @@
 
 <ion-content>
   <div class="container">
-    <ion-card (click)="this.editTask(tarea)" class="item" id="open-modal" *ngFor="let tarea of this.tareas;let i=index">
+    <ion-card (click)="this.editTask(tarea)" class="item" id="open-modal" *ngFor="let tarea of this.tareas; let i=index">
       <ion-icon name="document-attach-outline" style="zoom:10"></ion-icon>
       <ion-card-header>
-        <ion-card-title>{{tarea.tarea}}</ion-card-title>
-        <ion-card-subtitle>{{tarea.id_periodo}}</ion-card-subtitle>
+        <ion-card-title>{{ tarea.tarea }}</ion-card-title>
+        <ion-card-subtitle>{{ this.usuarios[i].nombre }}</ion-card-subtitle>
       </ion-card-header>
     </ion-card>
   </div>

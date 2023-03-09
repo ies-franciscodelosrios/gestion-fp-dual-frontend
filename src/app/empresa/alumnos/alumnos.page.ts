@@ -33,7 +33,6 @@ export class AlumnosPage implements OnInit {
         this.alumnos.push(<any>elemento.id_alumno)
       }
     })
-    console.log(this.alumnos);
   }
 
   public async viewAlumn(alumno:any){
@@ -41,7 +40,6 @@ export class AlumnosPage implements OnInit {
       component : InfoAlumnoPage,
       componentProps: { user : alumno},
     });
-    console.log(modal)
     return await modal.present();
   }
 
