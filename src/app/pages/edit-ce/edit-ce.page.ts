@@ -40,9 +40,6 @@ export class EditCEPage implements OnInit {
       correo: this.dUserCE.correo,
       alta: this.dUserCE.alta,
       rol: {"nombre":"Centro educativo"}
-  
-    }).subscribe(d => {
-      console.log(d);
     });
     
     this.closeModal.emit(true);
@@ -50,9 +47,7 @@ export class EditCEPage implements OnInit {
   }
 
   deleteUserCE() {
-    this.apiS.deleteCentroEducativo(this.dUserCE.id).subscribe((respuesta) => {
-      console.log(respuesta);
-    });
+    this.apiS.deleteCentroEducativo(this.dUserCE.id);
     this.modalCtrl.dismiss();
   }
 

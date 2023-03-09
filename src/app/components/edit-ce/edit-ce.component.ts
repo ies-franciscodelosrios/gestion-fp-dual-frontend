@@ -6,7 +6,6 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./edit-ce.component.scss'],
 })
 export class EditCEComponent implements OnInit {
-  @Input('editable') editable:string = "false";
   constructor() { }
 
   ngOnInit() {}
