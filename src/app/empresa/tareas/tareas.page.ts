@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { APIService } from 'src/app/services/api.service';
 import { ModalController } from '@ionic/angular';
 import { Tarea } from 'src/model/Tarea';
@@ -23,7 +23,8 @@ export class TareasPage implements OnInit {
     private modalCtrl: ModalController, 
     private apiS: APIService,
     private login: LoginService,
-    private router: Router) {
+    private router: Router,
+    private cdRef: ChangeDetectorRef) {
 
   }
 
@@ -57,13 +58,15 @@ export class TareasPage implements OnInit {
   }
 
   public async editTask(tarea:any){
+    console.log(tarea)
     const modal = await this.modalCtrl.create({
       component: EditTaskPage,
-      componentProps: { encargo : tarea }
+      componentProps: { encargo : tarea },
     });
     modal.onDidDismiss().then(() => {
       //window.location.reload();
       this.loadTareas();
+      //this.cdRef.detectChanges();
     });
     return await modal.present();
   }
