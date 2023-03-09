@@ -18,7 +18,7 @@
 
 <ion-content>
   <div class="container">
-    <ion-card (click)="this.editTask(tarea)" class="item" id="open-modal" *ngFor="let tarea of this.tareas; let i=index">
+    <ion-card style="cursor:pointer" (click)="this.editTask(tarea)" class="item" id="open-modal" *ngFor="let tarea of this.tareas; let i=index">
       <ion-icon name="document-attach-outline" style="zoom:10"></ion-icon>
       <ion-card-header>
         <ion-card-title>{{ tarea.tarea }}</ion-card-title>

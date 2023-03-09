@@ -133,7 +133,7 @@ export class APIService {
     return this.http.put(url, encargo);
   }
 
-  GetCentroEducativo(): Observable<any> {
+  getCentroEducativo(): Observable<any> {
     const url = environment.api.url + environment.api.endpoints.user
     return this.http.get<Usuario>(url, {
     });
@@ -169,5 +169,12 @@ export class APIService {
   deleteCentroEducativo(user: any): Observable<any> {
     const url = environment.api.url + environment.api.endpoints.user
     return this.http.delete(url);
+  }
+
+  getModulo(): Observable<Modulo[]> {
+    const url = environment.api.url + environment.api.endpoints.modulos
+    return this.http.get<Modulo[]>(url, {
+
+    });
   }
 }
