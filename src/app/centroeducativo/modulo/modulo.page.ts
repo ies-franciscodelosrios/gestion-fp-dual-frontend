@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { IonTitle, ModalController } from '@ionic/angular';
+import { Component, Input, OnInit } from '@angular/core';
+import { IonTitle, ModalController, NavParams } from '@ionic/angular';
 import { ModuloEditPage } from 'src/app/pages/modulo-edit/modulo-edit.page';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 import { APIService } from 'src/app/services/api.service';
 import { Modulo } from 'src/model/Modulo';
 import { RaPage } from '../ra/ra.page';
+import { Titulo } from 'src/model/Titulo';
 
 @Component({
   selector: 'app-modulo',
@@ -17,12 +18,13 @@ export class ModuloPage implements OnInit {
   public listModulo: Modulo[] = [];
   public filter: Modulo[] = [];
   public permision: boolean;
+
   constructor(
-    private http: HttpClient,
-    private router: Router,
     private apiS: APIService,
     private login: LoginService,
-    private modalCtrl: ModalController) { }
+    private modalCtrl: ModalController,
+    private actroute: ActivatedRoute) {
+  }
 
   ngOnInit() {
     this.load();
@@ -38,14 +40,7 @@ export class ModuloPage implements OnInit {
     })
   }
 
-  toBack() {
-    this.router.navigate(['/centroeducativo/titulo']);
-  }
 
-
-  public async toModultoRA() {
-    this.router.navigate(['/centroeducativo/modulo']);
-  }
 
   public async listaRAModul(atribModul: any) {
     const modal = await this.modalCtrl.create({

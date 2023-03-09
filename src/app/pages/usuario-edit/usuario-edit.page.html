@@ -27,6 +27,12 @@
       <ion-label>Alta</ion-label>
       <ion-checkbox formControlName="alta" slot="end" ></ion-checkbox>
     </ion-item>
-    <ion-button shape="round" color="primary" fill="outline" type="submit" [disabled]="!formUsuario.valid">Guardar</ion-button>
+    <ion-grid>
+      <ion-row>
+        <ion-col style="text-align: right;">
+          <ion-button shape="round" color="success" type="submit" [disabled]="this.formUsuario.pristine">Guardar</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </form>
 </ion-content>

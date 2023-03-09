@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Crear {{title}}</ion-title>
+    <ion-title>Crear título</ion-title>
     <!--Botón que permite cancelar y cerrar el modal-->
     <ion-buttons slot="end">
       <ion-button (click)="cancel()" [strong]="true"><ion-icon name="close-outline"></ion-icon></ion-button>
@@ -14,6 +14,12 @@
       <ion-label position="floating">Nombre</ion-label>
       <ion-input formControlName="titulo" placeholder="titulo" ></ion-input>
     </ion-item>
-    <ion-button shape="round" color="primary" fill="outline" type="submit" [disabled]="!formTitulo.valid">Guardar</ion-button>
+    <ion-grid>
+      <ion-row>
+        <ion-col style="text-align: right;">
+          <ion-button shape="round" color="success" type="submit" [disabled]="this.formTitulo.pristine">Guardar</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </form>
 </ion-content>

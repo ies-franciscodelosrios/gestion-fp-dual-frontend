@@ -19,9 +19,8 @@ export class TituloEditPage implements OnInit {
     private formBuilder: FormBuilder,
     private modalCTRL: ModalController,
     private apiS: APIService,
-    navParams: NavParams
   ) {
-    this.title = navParams.get('titulo')
+    
   }
   ngOnInit() {
     this.formTitulo = this.formBuilder.group({   //creando los campos que serán controlados y validados por formTitulo

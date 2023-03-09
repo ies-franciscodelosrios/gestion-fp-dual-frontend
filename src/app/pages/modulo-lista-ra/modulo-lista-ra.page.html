@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Nuevo RA  {{codmodul}}</ion-title>
+    <ion-title>Nuevo RA en {{nommodul}}</ion-title>
     <!--Botón que permite cancelar y cerrar el modal-->
     <ion-buttons slot="end">
       <ion-button (click)="cancel()" [strong]="true"><ion-icon name="close-outline"></ion-icon></ion-button>
@@ -10,9 +10,10 @@
 <ion-content class="ion-padding">
   <!--contenido dentro del modal que permite introducir datos y "guardarlos"-->
   <form [formGroup]="formRA" (ngSubmit)="submitForm()">
-  <ion-item>
+  <ion-item fill="solid">
     <ion-label position="floating">Nombre</ion-label>
-    <ion-input formControlName="resultado"> </ion-input>
+    <ion-input maxlength="120" formControlName="resultado"> </ion-input>
+    <ion-note slot="error">solo permite letras</ion-note>
   </ion-item>
   <ion-grid>
     <ion-row>

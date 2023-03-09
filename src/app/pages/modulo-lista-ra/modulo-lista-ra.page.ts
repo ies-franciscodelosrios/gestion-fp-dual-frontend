@@ -15,12 +15,13 @@ import { Ra } from 'src/model/Ra';
 export class ModuloListaRaPage implements OnInit {
   public formRA: FormGroup;
   public modulos: Modulo;
+  public listaModulos: Modulo[]=[];
   public ListaRa: Ra[] =[];
-  
-
+  customCounterFormatter(inputLength: number, maxLength: number) {
+    return `${maxLength - inputLength} characters remaining`;
+  }
   @Input('codmodul') codmodul: any;
   @Input('nommodul') nommodul: any;
-  @Output() RaUpdate: EventEmitter<boolean> = new EventEmitter<boolean>();
   constructor(
     private formBuilder: FormBuilder,
     private modalCTRL: ModalController,
@@ -33,13 +34,12 @@ export class ModuloListaRaPage implements OnInit {
     this.formRA = this.formBuilder.group({
       resultado: ['', [Validators.required, Validators.pattern('[A-zÁ-ÿ ]{3,120}')]],
     })
-    this.apiS.getTitulo().subscribe(titulo => {
-      //this.listaTitulos = titulo;
+    this.apiS.getModulo().subscribe(modulo => {
+      this.listaModulos = modulo;
     })
   }
 
   cancel() {
-    this.RaUpdate.emit(true);
     this.modalCTRL.dismiss(null, 'cancel');
   }
 
