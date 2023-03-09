@@ -3,10 +3,12 @@ import { ModalController } from '@ionic/angular';
 import { Usuario } from 'src/model/Usuario';
 import { AddCEPage } from '../pages/add-ce/add-ce.page';
 import { APIService } from '../services/api.service';
+import { LoginService } from '../services/login.service';
 import { EditCEComponent } from '../components/edit-ce/edit-ce.component';
 import { FormPage } from '../pages/form/form.page';
 import { LoginService } from '../services/login.service';
 import { EditCePageModule } from '../pages/edit-ce/edit-ce.module';
+
 
 
 @Component({
@@ -17,22 +19,25 @@ import { EditCePageModule } from '../pages/edit-ce/edit-ce.module';
 export class AdminPage implements OnInit {
 
   userCEList: Usuario[] = [];
+
   users: any = [];
   searchedUser: any;
 
   constructor(private modalCtrl: ModalController, 
     private userApiService: APIService,
-    private loginS:LoginService) { }
+    private login: LoginService) {
+   }
 
   ngOnInit() {
-    this.searchedUser = this.users;
-    this.userApiService.GetCentroEducativo().subscribe((response) => {
-      this.users = response
-    });
     this.refresUsers();
+
+    this.userApiService.GetUsuarioCentro().subscribe(rol => {
+      this.userCEList = <Usuario[]> rol.user
+      return this.userApiService
+    });
   }
 
-  refresUsers(){
+  refresUsers() {
     this.userApiService.GetCentroEducativo().subscribe((datos) => {
       for (let elemento of datos) {
         this.userCEList.push(<any>elemento);
@@ -47,14 +52,17 @@ export class AdminPage implements OnInit {
     return await modal.present();
   }
 
-  async editForm() {
+  async editUserCE(user: Usuario) {
     const modal = await this.modalCtrl.create({
-      component: EditCePageModule
+      component: EditCEPage,
+      componentProps: {
+        dUserCE: user
+      }
     });
     return await modal.present();
   }
 
-  searchAdmin(event:any) {
+  searchUserCentEduc(event:any) {
     const text = event.target.value;
     this.searchedUser = this.users;
     if(text && text.trim() != '') {
@@ -64,14 +72,7 @@ export class AdminPage implements OnInit {
     }
   }
 
-  handleRefresh(event:any) {
-    setTimeout(() => {
-      // Any calls to load data go here
-      event.target.complete();
-    }, 1000);
-  };
-
   cerrarSesion() {
-    this.loginS.logout();
+    this.login.logout();
   }
 }

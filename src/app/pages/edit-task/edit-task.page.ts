@@ -14,12 +14,10 @@ import { PeriodoPracticas } from 'src/model/PeriodoPracticas';
   styleUrls: ['./edit-task.page.scss'],
 })
 export class EditTaskPage implements OnInit {
-  public alumnos: Usuario[] = [];
-  public encargos: PeriodoPracticas[] = [];
+  public periodos: PeriodoPracticas[] = [];
   
   @Input() encargo:Encargo;
   @Output() closeModal: EventEmitter<boolean> = new EventEmitter<boolean>();
-
   public formTask: FormGroup;
   constructor(
     private formBuilder: FormBuilder,
@@ -33,16 +31,17 @@ export class EditTaskPage implements OnInit {
     const isoDate: string = now.toISOString();
     this.formTask = this.formBuilder.group({   //creando los campos que serán controlados y validados por formTitulo
       taskname: [this.encargo.tarea,[Validators.required, Validators.minLength(4)]],
-      taskuser: '',
+      taskuser: this.encargo.id_periodo,
       taskstatus: this.encargo.estado,
       taskdate: this.encargo.fecha,
       taskcomment: this.encargo.comentario
-    })
+    });
     this.apiS.getPeriodobyEmpresa(this.login.user.id).subscribe(periodo => {
       for(let elemento of periodo){
-        this.encargos.push(<any>elemento);
+        this.periodos.push(<any>elemento);
        }
-    })
+    });
+    console.log(this.periodos) 
   }
 
   cancel() {
@@ -51,9 +50,10 @@ export class EditTaskPage implements OnInit {
 
 
   submitForm() {
+    console.log(this.formTask.get('taskuser')?.value)
     this.encargo.tarea=this.formTask.get('taskname')?.value;
     this.encargo.estado= this.formTask.get('taskstatus')?.value;
-    this.encargo.id_periodo= 4;
+    this.encargo.id_periodo= this.formTask.get('taskuser')?.value;
     this.encargo.fecha= this.formTask.get('taskdate')?.value;
 
     try {
@@ -78,7 +78,14 @@ export class EditTaskPage implements OnInit {
     console.log(this.encargo)
     this.closeModal.emit(true)
     this.modalCTRL.dismiss()
-    
   }
- 
+  
+  delete(){
+    this.apiS.deleteEncargo(this.encargo.id).subscribe(d => {
+      //la respuesta del servidor
+      console.log(d);
+      //ocultador loading
+    })
+    this.modalCTRL.dismiss()
+  }
 }
