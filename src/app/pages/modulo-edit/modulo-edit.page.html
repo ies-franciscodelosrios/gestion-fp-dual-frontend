@@ -28,7 +28,12 @@
       </ion-select>
       <ion-note slot="error"></ion-note>
     </ion-item>
-    <ion-button shape="round" color="primary" fill="outline" type="submit"
-      [disabled]="!formModulo.valid">Guardar</ion-button>
+    <ion-grid>
+      <ion-row>
+        <ion-col style="text-align: right;">
+          <ion-button shape="round" color="success" type="submit" [disabled]="this.formModulo.pristine">Guardar</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </form>
 </ion-content>

@@ -15,12 +15,13 @@ import { Ra } from 'src/model/Ra';
 export class ModuloListaRaPage implements OnInit {
   public formRA: FormGroup;
   public modulos: Modulo;
+  public listaModulos: Modulo[]=[];
   public ListaRa: Ra[] =[];
-  
-
+  customCounterFormatter(inputLength: number, maxLength: number) {
+    return `${maxLength - inputLength} characters remaining`;
+  }
   @Input('codmodul') codmodul: any;
   @Input('nommodul') nommodul: any;
-  @Output() RaUpdate: EventEmitter<boolean> = new EventEmitter<boolean>();
   constructor(
     private formBuilder: FormBuilder,
     private modalCTRL: ModalController,
@@ -30,29 +31,15 @@ export class ModuloListaRaPage implements OnInit {
   }
 
   ngOnInit() {
-    if (!this.usuario) {
-      console.log("Crear usuario");
-    } else {
-      this.todo = this.formBuilder.group({
-        nombre: [this.usuario.nombre, [Validators.required,
-        Validators.minLength(5)]],
-        correo: [this.usuario.correo],
-        doc: [this.usuario.documentos],
-        alta: [this.usuario.alta],
-      })
-    }
-  }
-
-  content() {
-    this.showText = !this.showText;
-  }
-
-  logForm() {
-    console.log(this.todo.value);
+    this.formRA = this.formBuilder.group({
+      resultado: ['', [Validators.required, Validators.pattern('[A-zÁ-ÿ ]{3,120}')]],
+    })
+    this.apiS.getModulo().subscribe(modulo => {
+      this.listaModulos = modulo;
+    })
   }
 
   cancel() {
-    this.RaUpdate.emit(true);
     this.modalCTRL.dismiss(null, 'cancel');
   }
 

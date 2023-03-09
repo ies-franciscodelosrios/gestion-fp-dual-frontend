@@ -13,11 +13,12 @@ import { Titulo } from 'src/model/Titulo';
   styleUrls: ['./titulo.page.scss'],
 })
 export class TituloPage implements OnInit {
-  titulo = 'Título';
   public tituls: TituloEditPage[] = [];
   public results = this.tituls;
   public listTitulo: Titulo[] = [];
   public filter: Titulo[] = [];
+
+  public objsselect: any;
 
   constructor(
     private http: HttpClient,
@@ -42,15 +43,14 @@ export class TituloPage implements OnInit {
   }
 
   public async toTitleToModul(lista: any) {
-    this.router.navigate(['/centroeducativo/modulo']);
-
+    this.objsselect = lista
+    this.router.navigate(['/centroeducativo/modulo'],  { state: { elememe: this.objsselect} });
   }
 
   public async addTitle() {
     const modal = await this.modalCtrl.create({
       component: TituloEditPage,
       componentProps: {
-        titulo: this.titulo,
       }
     });
     modal.onDidDismiss().then(() => {

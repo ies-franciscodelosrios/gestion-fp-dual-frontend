@@ -13,18 +13,18 @@
   <form (ngSubmit)="submitForm()">
     <ion-toolbar>
       <ion-accordion-group expand="inset">
-        <ion-accordion value="first">
-          <ion-item slot="header" color="floatbuton" *ngFor="let lista of this.ListaRa;let i=index">
-            <ion-label>{{i}}. {{ListaRa}} </ion-label>
+        <ion-accordion value="first" *ngFor="let listaA of this.ListaRa;let ra=index">
+          <ion-item slot="header" color="floatbuton" >
+            <ion-label>{{ra}}. {{listaA.resultado}} </ion-label>
           </ion-item>
-          <ion-item class="ion-padding" slot="content">
-            <ion-label>{{1}}. se ha utilizado clases para ficheros </ion-label>
+          <ion-item class="ion-padding" slot="content" *ngFor="let listaE of this.ListaCe;let ce=index">
+            <ion-label>{{ce}}. {{listaE.descripcion}} </ion-label>
           </ion-item>
         </ion-accordion>
       </ion-accordion-group>
     </ion-toolbar>
     <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-      <ion-button  (click)="this.addRa()" style="zoom:1.25">
+      <ion-button (click)="this.addRa(nommodul)" style="zoom:1.25">
         <ion-icon name="add"></ion-icon>
       </ion-button>
     </ion-fab>

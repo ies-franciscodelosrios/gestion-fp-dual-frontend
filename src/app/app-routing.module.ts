@@ -85,10 +85,6 @@ const routes: Routes = [
     loadChildren: () => import('./centroeducativo/ra/ra.module').then( m => m.RaPageModule)
   },
   {
-    path: 'ce',
-    loadChildren: () => import('./centroeducativo/ce/ce.module').then( m => m.CePageModule)
-  },
-  {
     path: 'info-alumno',
     loadChildren: () => import('./pages/info-alumno/info-alumno.module').then( m => m.InfoAlumnoPageModule)
   },
