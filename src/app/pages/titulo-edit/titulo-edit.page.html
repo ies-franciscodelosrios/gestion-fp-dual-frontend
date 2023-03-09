@@ -10,12 +10,15 @@
 <!--contenido dentro del modal que permite introducir datos y "guardarlos"-->
 <ion-content class="ion-padding">
   <form [formGroup]="formTitulo" (ngSubmit)="submitForm()">
-    <ion-item>
+    <ion-item fill="solid">
       <ion-label position="floating">Nombre</ion-label>
       <ion-input formControlName="titulo" placeholder="titulo" ></ion-input>
     </ion-item>
     <ion-grid>
       <ion-row>
+        <ion-col id="btnDelete" style="text-align: left;">
+          <ion-button shape="round" color="danger" fill="outline" (click)="onDelete()">Eliminar</ion-button>
+        </ion-col>  
         <ion-col style="text-align: right;">
           <ion-button shape="round" color="success" type="submit" [disabled]="this.formTitulo.pristine">Guardar</ion-button>
         </ion-col>
