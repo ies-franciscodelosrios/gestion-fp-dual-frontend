@@ -5,7 +5,6 @@ import { AddCEPage } from '../pages/add-ce/add-ce.page';
 import { APIService } from '../services/api.service';
 import { LoginService } from '../services/login.service';
 import { EditCEComponent } from '../components/edit-ce/edit-ce.component';
-import { FormPage } from '../pages/form/form.page';
 import { EditCEPage } from '../pages/edit-ce/edit-ce.page';
 
 
@@ -30,23 +29,22 @@ export class AdminPage implements OnInit {
   ngOnInit() {
     this.refresUsers();
 
+  }
+
+ async refresUsers() {
+    await this.login.keepSession();
     this.userApiService.getUsuarioCentro().subscribe(rol => {
       this.userCEList = <Usuario[]> rol.user
       return this.userApiService
     });
   }
 
-  refresUsers() {
-    this.userApiService.GetCentroEducativo().subscribe((datos) => {
-      for (let elemento of datos) {
-        this.userCEList.push(<any>elemento);
-      }
-    });
-  }
-
   async openForm() {
     const modal = await this.modalCtrl.create({
       component: AddCEPage
+    });
+    modal.onDidDismiss().then(() => {
+      this.refresUsers();
     });
     return await modal.present();
   }
@@ -57,6 +55,9 @@ export class AdminPage implements OnInit {
       componentProps: {
         dUserCE: user
       }
+    });
+    modal.onDidDismiss().then(() => {
+      this.refresUsers();
     });
     return await modal.present();
   }

@@ -88,12 +88,6 @@ export class APIService {
     });
   }
 
-  GetCentroEducativo(): Observable<any> {
-    const url = environment.api.url + environment.api.endpoints.user
-    return this.http.get <Usuario>(url, {
-    });
-  }
-
   getRA(): Observable<Ra[]> {
     const url = environment.api.url + environment.api.endpoints.ra
     return this.http.get<Ra[]>(url, {
@@ -166,8 +160,8 @@ export class APIService {
     return this.http.put(url, user);
   }
 
-  deleteCentroEducativo(user: any): Observable<any> {
-    const url = environment.api.url + environment.api.endpoints.user
+  deleteCentroEducativo(id?: number): Observable<any> {
+    const url = environment.api.url + environment.api.endpoints.user+id
     return this.http.delete(url);
   }
 

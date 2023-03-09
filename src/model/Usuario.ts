@@ -1,5 +1,3 @@
-import { Rol } from "./Rol";
-
 export interface Usuario {
     id?:number,
     nombre?:string,
