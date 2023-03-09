@@ -30,6 +30,7 @@ export class LoginService {
     try {
       let userlog = await GoogleAuth.signIn();
       const mailLog = userlog.email
+      console.log(mailLog)
       this.user = await lastValueFrom(this.apiS.getMailUsuario(mailLog));
       localStorage.setItem('login', JSON.stringify(this.user));
       result=true;

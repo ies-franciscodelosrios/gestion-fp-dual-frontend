@@ -14,7 +14,7 @@ export const environment = {
     //url: 'http://3.215.80.129:8080',
     endpoints: {
       titulo: '/titulo',
-      user: '/users',
+      user: '/users/',
       roles: '/roles',
       modulos: '/modulo',
       ra: '/ra',
