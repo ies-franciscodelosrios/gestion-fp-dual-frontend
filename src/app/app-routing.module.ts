@@ -5,8 +5,6 @@ import { AuthGuardAdmin } from './guards/auth.guardAdmin';
 import { AuthGuardAlumno } from './guards/auth.guardAlumno';
 import { AuthGuardCE } from './guards/auth.guardCE';
 import { AuthGuardEmpresa } from './guards/auth.guardEmpresa';
-import { TabsAlumnoModule } from './tabs_alumno/tabs.module';
-import { Error404Page } from './pages/error404/error404.page';
 import { LoginPage } from './pages/login/login.page';
 
 const routes: Routes = [
@@ -66,7 +64,7 @@ const routes: Routes = [
   component: LoginPage },
   {
     path: 'edit-ce',
-    loadChildren: () => import('./pages/edit-ce/edit-ce.module').then( m => m.EditCePageModule)
+    loadChildren: () => import('./pages/edit-ce/edit-ce.module').then( m => m.EditCEPageModule)
   },
   {
     path: 'add-ce',

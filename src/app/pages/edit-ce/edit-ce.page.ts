@@ -40,9 +40,6 @@ export class EditCEPage implements OnInit {
       correo: this.dUserCE.correo,
       alta: this.dUserCE.alta,
       rol: {"nombre":"Centro educativo"}
-  
-    }).subscribe(d => {
-      console.log(d);
     });
     
     this.closeModal.emit(true);
