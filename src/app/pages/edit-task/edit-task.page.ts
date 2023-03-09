@@ -41,7 +41,8 @@ export class EditTaskPage implements OnInit {
         this.periodos.push(<any>elemento);
        }
     });
-    console.log(this.periodos) 
+    console.log(this.periodos);
+    console.log(this.encargo)
   }
 
   cancel() {

@@ -6,8 +6,7 @@ import { APIService } from '../services/api.service';
 import { LoginService } from '../services/login.service';
 import { EditCEComponent } from '../components/edit-ce/edit-ce.component';
 import { FormPage } from '../pages/form/form.page';
-import { LoginService } from '../services/login.service';
-import { EditCePageModule } from '../pages/edit-ce/edit-ce.module';
+import { EditCEPage } from '../pages/edit-ce/edit-ce.page';
 
 
 
@@ -31,7 +30,7 @@ export class AdminPage implements OnInit {
   ngOnInit() {
     this.refresUsers();
 
-    this.userApiService.GetUsuarioCentro().subscribe(rol => {
+    this.userApiService.getUsuarioCentro().subscribe(rol => {
       this.userCEList = <Usuario[]> rol.user
       return this.userApiService
     });
