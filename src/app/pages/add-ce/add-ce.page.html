@@ -24,11 +24,15 @@
       <ion-label position="floating">Correo electrónico</ion-label>
       <ion-input type="email" formControlName="correo"></ion-input>
     </ion-item>
-
-    <div class="buttons">
-      <button class="btnSave" type="submit" [disabled]="!addUserCEForm.valid">SAVE</button>
-      <button class="btnCancel" (click)="back()">CANCEL</button>
-    </div>
-
+    <ion-grid>
+      <ion-row>
+        <ion-col id="btn" style="text-align: left;">
+          <ion-button class="btnCancel" shape="round" color="danger" fill="outline" (click)="back()">CANCEL</ion-button>
+        </ion-col>
+        <ion-col  style="text-align: right;">
+          <ion-button class="btnSave" shape="round" color="success" type="submit" [disabled]="!addUserCEForm.valid">SAVE</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </form>
 <ion-content>

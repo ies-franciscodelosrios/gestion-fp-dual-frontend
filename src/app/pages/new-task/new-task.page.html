@@ -28,9 +28,15 @@
     </ion-item>
     <ion-item>
       <ion-label position="floating">Fecha</ion-label>
-      <ion-input formControlName="taskdate" placeholder="Fecha actual" ></ion-input>
+      <ion-input formControlName="taskdate" placeholder="Fecha actual"></ion-input>
     </ion-item>
 
-    <ion-button shape="round" color="primary" fill="outline" type="submit" [disabled]="!formTask.valid">Guardar</ion-button>
+    <ion-grid>
+      <ion-row>
+        <ion-col  style="text-align: right;">
+          <ion-button class="btnSave" shape="round" color="success" type="submit" [disabled]="!formTask.valid">SAVE</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </form>
 </ion-content>

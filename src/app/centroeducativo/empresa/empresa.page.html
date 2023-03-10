@@ -15,7 +15,7 @@
     <!--Busqueda y filtrado de empresas-->
     <ion-searchbar id="searchempresa" placeholder="Buscar" animated (ionChange)="handleChange($event)"></ion-searchbar>
     <!--Botón para agregar una nueva empresa-->
-    <ion-button (click)="nuevaempresa()" style="zoom:1.25"><ion-icon name="duplicate-outline"></ion-icon></ion-button>
+    <ion-button (click)="nuevaempresa()" style="--background: #141414; zoom:1.25"><ion-icon name="duplicate-outline" style="color: white;"></ion-icon></ion-button>
   </div>
   <!--Lista de objetos de tipo empresa que al seleccionar un "ion-card" se abra un modal con el contenido de esa empresa en concreto-->
   <div id="divlist">

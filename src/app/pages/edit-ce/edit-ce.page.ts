@@ -7,6 +7,7 @@ import { Usuario } from 'src/model/Usuario';
 @Component({
   selector: 'app-edit-ce',
   templateUrl: './edit-ce.page.html',
+  styleUrls: ['./edit-ce.page.scss']
 })
 export class EditCEPage implements OnInit {
 
@@ -40,7 +41,7 @@ export class EditCEPage implements OnInit {
       correo: this.dUserCE.correo,
       alta: this.dUserCE.alta,
       rol: {"nombre":"Centro educativo"}
-    });
+    }).subscribe();
     
     this.closeModal.emit(true);
     this.modalCtrl.dismiss();
