@@ -32,5 +32,10 @@ export class TareasPage implements OnInit {
       }
     });  
   }
+
+  cerrarSesion(){
+    this.login.logout();
+    console.log("Cerrando")
+  }
 }
 

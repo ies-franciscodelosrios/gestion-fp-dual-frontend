@@ -15,7 +15,7 @@
     <!--Busqueda y filtrado de títulos-->
     <ion-searchbar id="searchtitulo" placeholder="Buscar" animated (ionChange)="handleChange($event)"></ion-searchbar>
     <!--Botón para agregar un nuevo título-->
-    <ion-button (click)="this.addTitle()" style="zoom:1.25"><ion-icon name="duplicate-outline"></ion-icon></ion-button>
+    <ion-button (click)="this.addTitle()" style="--background: #141414; zoom:1.25"><ion-icon name="duplicate-outline" style="color: white;"></ion-icon></ion-button>
   </div>
 <!--Lista de objetos de tipo título que al seleccionar un "ion-item" pasa a la siguiente ventana en el que muestra los módulos de este título en concreto-->
   <ion-list lines="inset" *ngFor="let lista of this.filter;let i=index" (click)="toTitleToModul(lista)">

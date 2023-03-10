@@ -9,18 +9,13 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <div class="block">
+<nav>
+  <div style="display: flex; flex-direction: row;">
     <ion-searchbar (ionChange)="searchUserCentEduc($event)"></ion-searchbar>
+    <ion-button (click)="openForm()" style="--background: #141414; zoom:1.25"><ion-icon name="duplicate-outline" style="color: white;"></ion-icon></ion-button>
   </div>
-  <div class="blockButton">
-    <ion-fab>
-      <ion-fab-button class="buttonAdd" (click)="openForm()">
-        <ion-icon name="add"></ion-icon>
-      </ion-fab-button>
-    </ion-fab>
-  </div>
-
+</nav>
+<ion-content class="ion-padding">
   <ion-item *ngFor="let user of searchedUser">
     <ion-label>
       <h2>{{user.nombre}}</h2>
