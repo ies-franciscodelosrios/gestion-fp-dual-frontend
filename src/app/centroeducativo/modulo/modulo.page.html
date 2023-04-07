@@ -1,7 +1,13 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <!--Botón que permite salir de la sesión actual con el ultimo usuario logueado-->
+      <ion-button (click)="backToTitle()">
+        <ion-icon slot="icon-only" name="arrow-undo-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
     <!--nos permite dirigirnos a la pagina anterior a esta-->
-    <ion-title>Módulos</ion-title>
+    <ion-title>Módulos de {{tittle}} </ion-title>
     <ion-buttons slot="end">
       <!--Botón que permite salir de la sesión actual con el ultimo usuario logueado-->
       <ion-button (click)="cerrarSesion()">
@@ -22,8 +28,8 @@
   <ion-list lines="inset">
     <ion-item id="open-modal" *ngFor="let lista of this.filter;let i=index" expand="block" (click)="listaRAModul(lista)">
       <ion-label>
-        <h3>Có. Boja: {{lista.cod_mod_boja}}</h3>
-        <p>{{lista.nombre}}</p>
+        <h3>{{lista.nombre}}</h3>
+        <p>Có. Boja: {{lista.cod_mod_boja}}</p>
       </ion-label>
     </ion-item>
   </ion-list>

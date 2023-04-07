@@ -1,17 +1,15 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AlertController, IonTitle, ModalController, NavParams } from '@ionic/angular';
-import { IonModal } from '@ionic/angular';
-import { OverlayEventDetail } from '@ionic/core/components';
+import { AlertController, IonTitle, ModalController } from '@ionic/angular';
 import { APIService } from 'src/app/services/api.service';
 import { Titulo } from 'src/model/Titulo';
-import { LoginService } from '../../services/login.service';
+
 @Component({
-  selector: 'app-titulo-edit',
-  templateUrl: './titulo-edit.page.html',
-  styleUrls: ['./titulo-edit.page.scss'],
+  selector: 'app-ce-title-edit',
+  templateUrl: './ce-title-edit.page.html',
+  styleUrls: ['./ce-title-edit.page.scss'],
 })
-export class TituloEditPage implements OnInit {
+export class CeTitleEditPage implements OnInit {
   public title: string = "";
   public formTitulo: FormGroup;  //el grupo del formulario reactivo , ojo con importar ReactiveFormModule
 

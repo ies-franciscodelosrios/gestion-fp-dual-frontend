@@ -2,12 +2,12 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
-import { UsuarioEditPage } from './usuario-edit.page';
+import { CEUserEditPage } from './ce-user-edit.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: UsuarioEditPage
+    component: CEUserEditPage
   }
 ];
 
@@ -15,4 +15,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class UsuarioEditPageRoutingModule {}
+export class CEUserEditPageRoutingModule {}

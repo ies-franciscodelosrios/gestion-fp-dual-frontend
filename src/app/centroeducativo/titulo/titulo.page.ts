@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { TituloEditPage } from 'src/app/pages/titulo-edit/titulo-edit.page';
+import { CeTitleEditPage } from 'src/app/pages/ce-title-edit/ce-title-edit.page';
 import { APIService } from 'src/app/services/api.service';
 import { LoginService } from 'src/app/services/login.service';
 import { Titulo } from 'src/model/Titulo';
@@ -13,12 +13,12 @@ import { Titulo } from 'src/model/Titulo';
   styleUrls: ['./titulo.page.scss'],
 })
 export class TituloPage implements OnInit {
-  public tituls: TituloEditPage[] = [];
+  public tituls: CeTitleEditPage[] = [];
   public results = this.tituls;
   public listTitulo: Titulo[] = [];
   public filter: Titulo[] = [];
 
-  public objsselect: any;
+  public tittle: any;
 
   constructor(
     private http: HttpClient,
@@ -42,14 +42,14 @@ export class TituloPage implements OnInit {
     })
   }
 
-  public async toTitleToModul(lista: any) {
-    this.objsselect = lista
-    this.router.navigate(['/centroeducativo/modulo'],  { state: { elememe: this.objsselect} });
+  public async toTitleToModul(tittle: any) {
+    this.tittle = tittle;
+    this.router.navigate(['/centroeducativo/modulo'], tittle.id);
   }
 
   public async addTitle() {
     const modal = await this.modalCtrl.create({
-      component: TituloEditPage,
+      component: CeTitleEditPage,
       componentProps: {
       }
     });
@@ -59,9 +59,9 @@ export class TituloPage implements OnInit {
     return await modal.present();
   }
 
-  public async editTitle(title:Titulo) {
+  public async editTitle(title: Titulo) {
     const modal = await this.modalCtrl.create({
-      component: TituloEditPage,
+      component: CeTitleEditPage,
       componentProps: {
         atribtitle: title
       }

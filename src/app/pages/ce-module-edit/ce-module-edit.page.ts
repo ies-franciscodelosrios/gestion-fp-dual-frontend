@@ -1,17 +1,15 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from "@angular/core";
+import { Component, EventEmitter, OnInit, Output } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { IonModal, IonTitle, ModalController } from "@ionic/angular";
+import { ModalController } from "@ionic/angular";
 import { APIService } from "src/app/services/api.service";
-import { Modulo } from "src/model/Modulo";
 import { Titulo } from "src/model/Titulo";
 
-
 @Component({
-  selector: 'app-modulo-edit',
-  templateUrl: './modulo-edit.page.html',
-  styleUrls: ['./modulo-edit.page.scss'],
+  selector: 'app-ce-module-edit',
+  templateUrl:'./ce-module-edit.page.html',
+  styleUrls: ['./ce-module-edit.page.scss'],
 })
-export class ModuloEditPage implements OnInit {
+export class CeModuleEditPage implements OnInit {
   public formModulo: FormGroup;
   public listaTitulos: Titulo[] = []
   customCounterFormatter(inputLength: number, maxLength: number) {
@@ -57,4 +55,6 @@ export class ModuloEditPage implements OnInit {
     }
     this.cancel();
   }
+  
 }
+

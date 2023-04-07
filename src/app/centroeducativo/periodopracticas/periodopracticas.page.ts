@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { InfiniteScrollCustomEvent, IonInfiniteScroll, ModalController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { PracticasPage } from 'src/app/pages/practicas/practicas.page';
+import { CePracticesEditPage } from 'src/app/pages/ce-practices-edit/ce-practices-edit.page';
 import { APIService } from 'src/app/services/api.service';
 import { PeriodoPracticas } from 'src/model/PeriodoPracticas';
 import { LoginService } from 'src/app/services/login.service';
@@ -14,7 +14,7 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class PeriodopracticasPage implements OnInit {
   practica = 'Practicas';
-  public practicas: PracticasPage[] = [];
+  public practicas: CePracticesEditPage[] = [];
   public listPracticas: PeriodoPracticas[] = [];
   public filter: PeriodoPracticas[] = [];
   public results = this.practicas;
@@ -44,7 +44,7 @@ export class PeriodopracticasPage implements OnInit {
 
   public async nuevaPractica() {
     const modal = await this.modalCtrl.create({
-      component: PracticasPage,
+      component: CePracticesEditPage,
       componentProps: {
         practica: this.practica,
         mode: "create"
@@ -58,7 +58,7 @@ export class PeriodopracticasPage implements OnInit {
 
   public async editPractica(pract: PeriodoPracticas) {
     const modal = await this.modalCtrl.create({
-      component: PracticasPage,
+      component: CePracticesEditPage,
       componentProps: {
         practica: this.practica,
         mode: "edit",

@@ -23,10 +23,6 @@ const routes: Routes = [
     canActivate: [AuthGuard, AuthGuardEmpresa]
   }, //para hacer pruebas
   {
-    path: 'editar_usuario',
-    loadChildren: () => import('./pages/usuario-edit/usuario-edit.module').then(m => m.UsuarioEditPageModule)
-  },
-  {
     path: 'admin',
     loadChildren: () => import('./admin/admin.module').then(m => m.AdminPageModule),
     canActivate: [AuthGuard, AuthGuardAdmin]
@@ -41,24 +37,12 @@ const routes: Routes = [
     loadChildren: () => import('./pages/error404/error404.module').then(m => m.Error404PageModule)
   },
   {
-    path: 'modulo-lista-ra',
-    loadChildren: () => import('./pages/modulo-lista-ra/modulo-lista-ra.module').then(m => m.ModuloListaRaPageModule)
-  },
-  {
-    path: 'modulo-edit',
-    loadChildren: () => import('./pages/modulo-edit/modulo-edit.module').then( m => m.ModuloEditPageModule)
-  },
-  {
     path: 'titulo',
     loadChildren: () => import('./centroeducativo/titulo/titulo.module').then( m => m.TituloPageModule)
   },
   {
-    path: 'titulo-edit',
-    loadChildren: () => import('./pages/titulo-edit/titulo-edit.module').then( m => m.TituloEditPageModule)
-  },
-  {
-    path: 'practicas',
-    loadChildren: () => import('./pages/practicas/practicas.module').then( m => m.PracticasPageModule)
+    path: 'modulo/:id',
+    loadChildren: () => import('./centroeducativo/modulo/modulo.module').then( m => m.ModuloPageModule)
   },
   { path: '**', pathMatch: 'full', 
   component: LoginPage },
@@ -86,6 +70,31 @@ const routes: Routes = [
     path: 'info-alumno',
     loadChildren: () => import('./pages/info-alumno/info-alumno.module').then( m => m.InfoAlumnoPageModule)
   },
+  {
+    path: 'ce-user-edit',
+    loadChildren: () => import('./pages/ce-user-edit/ce-user-edit.module').then( m => m.CEUserEditPageModule)
+  },
+  {
+    path: 'ce-title-edit',
+    loadChildren: () => import('./pages/ce-title-edit/ce-title-edit.module').then( m => m.CeTitleEditPageModule)
+  },
+  {
+    path: 'ce-practices-edit',
+    loadChildren: () => import('./pages/ce-practices-edit/ce-practices-edit.module').then( m => m.CePracticesEditPageModule)
+  },
+  {
+    path: 'ce-module-edit',
+    loadChildren: () => import('./pages/ce-module-edit/ce-module-edit.module').then( m => m.CeModuleEditPageModule)
+  },
+  {
+    path: 'ce-module-ra-edit',
+    loadChildren: () => import('./pages/ce-module-ra-edit/ce-module-ra-edit.module').then( m => m.CeModuleRaEditPageModule)
+  },
+
+
+
+
+
 
 
 
