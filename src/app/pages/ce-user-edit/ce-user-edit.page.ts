@@ -2,16 +2,15 @@ import { Component, Input, OnInit, Output,EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalController, NavParams, NavController, AlertController} from '@ionic/angular';
 import { Usuario } from 'src/model/Usuario';
-import { APIService } from 'src/app/services/api.service';;
+import { APIService } from 'src/app/services/api.service';
 
 @Component({
-  selector: 'app-usuario-edit',
-  templateUrl: './usuario-edit.page.html',
-  styleUrls: ['./usuario-edit.page.scss'],
+  selector: 'app-ce-user-edit',
+  templateUrl: './ce-user-edit.page.html',
+  styleUrls: ['./ce-user-edit.page.scss'],
 })
-export class UsuarioEditPage implements OnInit {
+export class CEUserEditPage implements OnInit {
   public usuario: string = "";
-
   public formUsuario: FormGroup;  //el grupo del formulario reactivo , ojo con importar ReactiveFormModule
   @Input('atribuser') atribuser: Usuario;
   @Input('mode') mode: string;

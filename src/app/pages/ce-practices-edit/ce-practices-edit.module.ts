@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { TituloEditPage } from './titulo-edit.page';
-import { TituloEditPageRoutingModule } from './titulo-edit.routing.module';
+import { CePracticesEditPageRoutingModule } from './ce-practices-edit-routing.module';
+import { CePracticesEditPage } from './ce-practices-edit.page';
 
 @NgModule({
   imports: [
@@ -11,8 +11,8 @@ import { TituloEditPageRoutingModule } from './titulo-edit.routing.module';
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    TituloEditPageRoutingModule
+    CePracticesEditPageRoutingModule
   ],
-  declarations: [TituloEditPage]
+  declarations: [CePracticesEditPage]
 })
-export class TituloEditPageModule {}
+export class CePracticesEditPageModule {}

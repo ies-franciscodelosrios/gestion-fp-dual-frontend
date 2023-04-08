@@ -1,9 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { IonicModule } from '@ionic/angular';
-import { ModuloEditPageRoutingModule } from './modulo-edit-routing.module';
-import { ModuloEditPage } from './modulo-edit.page';
+
+import { CeModuleEditPageRoutingModule } from './ce-module-edit-routing.module';
+
+import { CeModuleEditPage } from './ce-module-edit.page';
 
 @NgModule({
   imports: [
@@ -11,8 +14,8 @@ import { ModuloEditPage } from './modulo-edit.page';
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    ModuloEditPageRoutingModule
+    CeModuleEditPageRoutingModule
   ],
-  declarations: [ModuloEditPage]
+  declarations: [CeModuleEditPage]
 })
-export class ModuloEditPageModule {}
+export class CeModuleEditPageModule {}

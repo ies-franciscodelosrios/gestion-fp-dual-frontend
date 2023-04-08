@@ -7,12 +7,11 @@ import { PeriodoPracticas } from 'src/model/PeriodoPracticas';
 import { LoginService } from 'src/app/services/login.service';
 
 @Component({
-  selector: 'app-practicas',
-  templateUrl: './practicas.page.html',
-  styleUrls: ['./practicas.page.scss'],
+  selector: 'app-ce-practices-edit',
+  templateUrl: './ce-practices-edit.page.html',
+  styleUrls: ['./ce-practices-edit.page.scss'],
 })
-
-export class PracticasPage implements OnInit {
+export class CePracticesEditPage implements OnInit {
   public practica: string = "";
   public formPractica: FormGroup;  //el grupo del formulario reactivo , ojo con importar ReactiveFormModule
   public valor: string;
@@ -168,3 +167,4 @@ export class PracticasPage implements OnInit {
     })  
   }
 }
+

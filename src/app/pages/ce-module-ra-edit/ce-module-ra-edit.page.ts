@@ -1,18 +1,17 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { IonTitle, ModalController } from '@ionic/angular';
+import {  ModalController } from '@ionic/angular';
 import { APIService } from 'src/app/services/api.service';
 import { Modulo } from 'src/model/Modulo';
 import { Ra } from 'src/model/Ra';
 
-
 @Component({
-  selector: 'app-modulo-lista-ra',
-  templateUrl: './modulo-lista-ra.page.html',
-  styleUrls: ['./modulo-lista-ra.page.scss'],
+  selector: 'app-ce-module-ra-edit',
+  templateUrl: './ce-module-ra-edit.page.html',
+  styleUrls: ['./ce-module-ra-edit.page.scss'],
 })
-export class ModuloListaRaPage implements OnInit {
+export class CeModuleRaEditPage implements OnInit {
   public formRA: FormGroup;
   public modulos: Modulo;
   public listaModulos: Modulo[]=[];
@@ -58,5 +57,4 @@ export class ModuloListaRaPage implements OnInit {
     }
     this.cancel();
   }
-
 }

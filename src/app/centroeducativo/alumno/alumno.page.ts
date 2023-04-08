@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { InfiniteScrollCustomEvent, ModalController } from '@ionic/angular';
-import { UsuarioEditPage } from 'src/app/pages/usuario-edit/usuario-edit.page';
+import { CEUserEditPage } from 'src/app/pages/ce-user-edit/ce-user-edit.page';
 import { Usuario } from 'src/model/Usuario';
 import { APIService } from 'src/app/services/api.service';
 import { LoginService } from 'src/app/services/login.service';
@@ -46,7 +46,7 @@ export class AlumnoPage implements OnInit {
       emp.id = "Alumno"
     }
     const modal = await this.modalCtrl.create({
-      component: UsuarioEditPage,
+      component: CEUserEditPage,
       componentProps: {
         mode: "create"
       }
@@ -63,7 +63,7 @@ export class AlumnoPage implements OnInit {
       emp.id = "Alumno"
     }
     const modal = await this.modalCtrl.create({
-      component: UsuarioEditPage,
+      component: CEUserEditPage,
       componentProps: {
         mode: "edit",
         atribuser: alum

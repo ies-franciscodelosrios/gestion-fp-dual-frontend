@@ -2,10 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-
-import { UsuarioEditPageRoutingModule } from './usuario-edit-routing.module';
-
-import { UsuarioEditPage } from './usuario-edit.page';
+import { CEUserEditPageRoutingModule } from './ce-user-edit-routing.module';
+import { CEUserEditPage } from './ce-user-edit.page';
 
 @NgModule({
   imports: [
@@ -13,8 +11,8 @@ import { UsuarioEditPage } from './usuario-edit.page';
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    UsuarioEditPageRoutingModule
+    CEUserEditPageRoutingModule
   ],
-  declarations: [UsuarioEditPage]
+  declarations: [CEUserEditPage]
 })
-export class UsuarioEditPageModule {}
+export class CEUserEditPageModule {}

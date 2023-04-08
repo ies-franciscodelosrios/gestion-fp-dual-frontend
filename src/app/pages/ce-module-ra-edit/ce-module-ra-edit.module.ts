@@ -1,12 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
 import { IonicModule } from '@ionic/angular';
-
-import { ModuloListaRaPageRoutingModule } from './modulo-lista-ra-routing.module';
-
-import { ModuloListaRaPage } from './modulo-lista-ra.page';
+import { CeModuleRaEditPageRoutingModule } from './ce-module-ra-edit-routing.module';
+import { CeModuleRaEditPage } from './ce-module-ra-edit.page';
 
 @NgModule({
   imports: [
@@ -14,8 +11,8 @@ import { ModuloListaRaPage } from './modulo-lista-ra.page';
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    ModuloListaRaPageRoutingModule
+    CeModuleRaEditPageRoutingModule
   ],
-  declarations: [ModuloListaRaPage]
+  declarations: [CeModuleRaEditPage]
 })
-export class ModuloListaRaPageModule {}
+export class CeModuleRaEditPageModule {}

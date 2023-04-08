@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IonAccordion, ModalController } from '@ionic/angular';
-import { ModuloListaRaPage } from 'src/app/pages/modulo-lista-ra/modulo-lista-ra.page';
+import { CeModuleRaEditPage } from 'src/app/pages/ce-module-ra-edit/ce-module-ra-edit.page';
 import { APIService } from 'src/app/services/api.service';
 import { LoginService } from 'src/app/services/login.service';
 import { Ce } from 'src/model/Ce';
@@ -53,7 +53,7 @@ export class RaPage implements OnInit {
 
   public async addRa(modul: any) {
     const modal = await this.modalCtrl.create({
-      component: ModuloListaRaPage,
+      component: CeModuleRaEditPage,
       componentProps: {
         nommodul: modul
 

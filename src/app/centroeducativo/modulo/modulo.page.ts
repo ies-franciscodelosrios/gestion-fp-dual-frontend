@@ -1,13 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { IonTitle, ModalController, NavParams } from '@ionic/angular';
-import { ModuloEditPage } from 'src/app/pages/modulo-edit/modulo-edit.page';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { CeModuleEditPage } from 'src/app/pages/ce-module-edit/ce-module-edit.page';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 import { APIService } from 'src/app/services/api.service';
 import { Modulo } from 'src/model/Modulo';
 import { RaPage } from '../ra/ra.page';
-import { Titulo } from 'src/model/Titulo';
 
 @Component({
   selector: 'app-modulo',
@@ -18,16 +16,22 @@ export class ModuloPage implements OnInit {
   public listModulo: Modulo[] = [];
   public filter: Modulo[] = [];
   public permision: boolean;
+  public tittle: any; 
 
   constructor(
     private apiS: APIService,
     private login: LoginService,
+    private router: Router,
+    private route: ActivatedRoute,
     private modalCtrl: ModalController,
     private actroute: ActivatedRoute) {
   }
 
   ngOnInit() {
     this.load();
+    const id = this.route.snapshot.paramMap.get('id');
+    // Obtenga el elemento seleccionado de su origen de datos según su id
+    this.tittle = id;
   }
   public async load() {
     await this.login.keepSession();
@@ -40,7 +44,9 @@ export class ModuloPage implements OnInit {
     })
   }
 
-
+  backToTitle(){
+    this.router.navigate(['/centroeducativo/titulo'])
+  }
 
   public async listaRAModul(atribModul: any) {
     const modal = await this.modalCtrl.create({
@@ -48,6 +54,7 @@ export class ModuloPage implements OnInit {
       componentProps: {
         codmodul: atribModul.cod_mod_boja,
         nommodul: atribModul.nombre
+        
       }
     });
     modal.onDidDismiss().then(() => {
@@ -58,7 +65,7 @@ export class ModuloPage implements OnInit {
 
   public async addModul() {
     const modal = await this.modalCtrl.create({
-      component: ModuloEditPage
+      component: CeModuleEditPage
     });
     modal.onDidDismiss().then(() => {
       window.location.reload();

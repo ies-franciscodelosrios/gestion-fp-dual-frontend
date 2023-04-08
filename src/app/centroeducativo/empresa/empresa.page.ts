@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { UsuarioEditPage } from 'src/app/pages/usuario-edit/usuario-edit.page';
+import { CEUserEditPage } from 'src/app/pages/ce-user-edit/ce-user-edit.page';
 import { Title } from '@angular/platform-browser';
 import { Usuario } from 'src/model/Usuario';
 import { APIService } from 'src/app/services/api.service';
@@ -17,7 +17,7 @@ export class EmpresaPage implements OnInit {
   empresa = 'Empresa';
   public listEmpresa: Usuario[] = [];
   public filter: Usuario[] = [];
-  public empresas: UsuarioEditPage[] = [];
+  public empresas: CEUserEditPage[] = [];
 
   constructor(
     private titleSV: Title,
@@ -49,7 +49,7 @@ export class EmpresaPage implements OnInit {
       emp.id = "Empresa"
     }
     const modal = await this.modalCtrl.create({
-      component: UsuarioEditPage,
+      component: CEUserEditPage,
       componentProps: {
         mode: "create"
       }
@@ -65,7 +65,7 @@ export class EmpresaPage implements OnInit {
       emp.id = "Empresa"
     }
     const modal = await this.modalCtrl.create({
-      component: UsuarioEditPage,
+      component: CEUserEditPage,
       componentProps: {
         mode: "edit",
         atribuser: empr
