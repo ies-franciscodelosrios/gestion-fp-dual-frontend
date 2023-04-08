@@ -22,6 +22,7 @@ export class TareasPage implements OnInit {
     this.login.keepSession();
     //se obtienen los encargos y se insertan en el array encargos
     this.refresEncargos();
+    this.login.getRol();
   
   }
 
