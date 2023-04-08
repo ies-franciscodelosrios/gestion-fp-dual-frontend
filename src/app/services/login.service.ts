@@ -58,6 +58,18 @@ export class LoginService {
     else { 
       let a= ''+localStorage.getItem('login');
       this.user = JSON.parse(a);
+      
+    }
+  }
+
+  public  getRol():number{
+    if(localStorage.getItem('login') != null) {
+      let n =-1;
+      let a= ''+localStorage.getItem('login');
+      let user=JSON.parse(a);
+     return user.id_rol;
+    }else{
+      return -1;
     }
   }
 }
