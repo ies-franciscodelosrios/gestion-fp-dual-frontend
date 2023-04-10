@@ -25,7 +25,8 @@ export class EditTaskPage implements OnInit,OnChanges {
     private apiS: APIService,
     private login : LoginService,
     private ref: ChangeDetectorRef
-  ) {}
+  ) {
+  }
 
   async ngOnInit() {
     const now: Date = new Date();
@@ -43,7 +44,6 @@ export class EditTaskPage implements OnInit,OnChanges {
   }
 
   async ngOnChanges(){
-
     this.ref.markForCheck();
   }
 

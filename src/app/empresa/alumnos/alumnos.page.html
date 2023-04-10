@@ -9,16 +9,13 @@
   </ion-toolbar>
 </ion-header>
 
-<nav>
-  <div style="display: flex; flex-direction: row;">
-    <ion-searchbar id="searchempresa" placeholder="Buscar" animated (ionChange)="handleChange($event)"></ion-searchbar>
-  </div>
-</nav>
-
 <ion-content>
   <div id="divsearch">
-  <div class="container">
-      <ion-card (click)="this.viewAlumn(alumno)" class="item" id="open-modal" *ngFor="let alumno of this.alumnos;let i=index">
+    <!--Busqueda y filtrado de alumnos-->
+    <ion-searchbar id="searchempresa" placeholder="Buscar" animated (ionChange)="handleChange($event)" ></ion-searchbar>
+  </div>
+    <div id="divlist" *ngIf="permision">
+      <ion-card (click)="this.viewAlumn(alumno)" class="item" id="open-modal" *ngFor="let alumno of this.filter;let i=index">
         <ion-icon name="person-outline" style="zoom:10"></ion-icon>
         <ion-card-header>
           <ion-card-title>{{alumno.nombre}}</ion-card-title>
@@ -26,5 +23,4 @@
         </ion-card-header>
       </ion-card>
   </div>
-</div>
 </ion-content>
