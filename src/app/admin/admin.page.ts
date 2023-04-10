@@ -6,8 +6,6 @@ import { APIService } from '../services/api.service';
 import { LoginService } from '../services/login.service';
 import { EditCEPage } from '../pages/edit-ce/edit-ce.page';
 
-
-
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.page.html',
@@ -16,9 +14,7 @@ import { EditCEPage } from '../pages/edit-ce/edit-ce.page';
 export class AdminPage implements OnInit {
 
   userCEList: Usuario[] = [];
-
-  users: any = [];
-  searchedUser: any;
+  searchedUser: Usuario[] = [];
 
   constructor(private modalCtrl: ModalController, 
     private userApiService: APIService,
@@ -27,14 +23,18 @@ export class AdminPage implements OnInit {
 
   ngOnInit() {
     this.refresUsers();
-
   }
 
  async refresUsers() {
     await this.login.keepSession();
     this.userApiService.getUsuarioCentro().subscribe(rol => {
-      this.userCEList = <Usuario[]> rol.user
-      return this.userApiService
+      this.userCEList = <Usuario[]> rol.user;
+      return this.userCEList;
+    });
+
+    this.userApiService.getUsuarioCentro().subscribe(rol => {
+      this.searchedUser = <Usuario[]> rol.user;
+      return this.searchedUser;
     });
   }
 
@@ -63,11 +63,11 @@ export class AdminPage implements OnInit {
 
   searchUserCentEduc(event:any) {
     const text = event.target.value;
-    this.searchedUser = this.users;
+    this.searchedUser = this.userCEList;
     if(text && text.trim() != '') {
-      this.searchedUser = this.searchedUser.filter((user: any)=>{
-          return (user.name.toLowerCase().indexOf(text.toLowerCase()) > -1);
-      })
+      this.searchedUser = this.searchedUser.filter((usuario: any)=>{
+          return (usuario.nombre?.toLowerCase().indexOf(text.toLowerCase()) > -1);
+      });
     }
   }
 
