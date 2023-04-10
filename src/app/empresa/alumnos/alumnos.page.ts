@@ -14,7 +14,8 @@ import { PeriodoPracticas } from 'src/model/PeriodoPracticas';
 })
 export class AlumnosPage implements OnInit {
   public alumnos:Array<Usuario>=[]=[];
-  public filter: Array<Usuario>;
+  public filter: Array<Usuario>=[]=[];
+  public permision: boolean;
   constructor(
     private modalCtrl: ModalController,
     private apiS: APIService,
@@ -28,7 +29,7 @@ export class AlumnosPage implements OnInit {
 
   public async loadUsers(){
     await this.login.keepSession();
-
+    this.permision = true; 
     this.apiS.getPeriodobyEmpresa(this.login.user.id).subscribe(periodos=>{
       for (let elemento of periodos) {
         this.alumnos.push(<any>elemento.id_alumno)
@@ -49,7 +50,7 @@ export class AlumnosPage implements OnInit {
     return await modal.present();
   }
 
-   handleChange(event: any) {
+  handleChange(event: any) {
     const searchTerm = event.target.value;
     this.filter = this.alumnos;
     if (searchTerm && searchTerm.trim() != '') {

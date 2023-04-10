@@ -15,3 +15,17 @@
     text-align: center;
 
 }
+
+#divsearch {
+  display: flex;
+  flex-direction: row;
+}
+
+#divlist {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-content: center;
+  align-items: center;
+  width: 100%;
+}
