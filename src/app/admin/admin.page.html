@@ -11,24 +11,19 @@
 
 <nav>
   <div style="display: flex; flex-direction: row;">
-    <ion-searchbar (ionChange)="searchUserCentEduc($event)"></ion-searchbar>
+    <ion-searchbar placeholder="Search" (ionChange)="searchUserCentEduc($event)"></ion-searchbar>
     <ion-button (click)="openForm()" style="--background: #141414; zoom:1.25"><ion-icon name="duplicate-outline" style="color: white;"></ion-icon></ion-button>
   </div>
 </nav>
+
 <ion-content class="ion-padding">
-  <ion-item *ngFor="let user of searchedUser">
-    <ion-label>
-      <h2>{{user.nombre}}</h2>
-    </ion-label>
-  </ion-item>
 
   <ion-list class="listUserCE">
-    <ion-item *ngFor="let user of userCEList" (click)="editUserCE(user)">
+    <ion-item *ngFor="let user of searchedUser" (click)="editUserCE(user)">
       <ion-label>
         <h2>{{user.nombre}}</h2>
       </ion-label>
     </ion-item>
   </ion-list>
-  
-  
+
 </ion-content>
