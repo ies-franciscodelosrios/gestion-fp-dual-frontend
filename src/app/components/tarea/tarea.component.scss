@@ -2,7 +2,6 @@
     font-weight: bolder;
 }
 ion-title{
-    color: black;
     margin-top: 5pt;
 }
 #fecha{
@@ -18,5 +17,9 @@ ion-title{
     padding-left: 17px;
     color: rgb(230, 146, 12);
     font-size: 25pt;
+}
+.div-title{
+    display: flexbox; 
+    flex-direction: row;
 }
 

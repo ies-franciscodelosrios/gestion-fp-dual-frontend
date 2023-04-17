@@ -1,8 +1,6 @@
 <nav (click)="editEncargo()" >
-  <div  style="display: flex; flex-direction: row;">
+  <div class="div-title" >
     <ion-title id="title">{{encargo.tarea}}</ion-title>
-    <ion-icon *ngIf="edit" name="pencil" style="zoom:1.5"></ion-icon>
-    <ion-icon *ngIf="edit" color="danger" name="trash" style="zoom:1.5"></ion-icon>
   </div>
   <ion-title *ngIf="encargo.comentario.length > 0">{{encargo.comentario}}</ion-title>
   <div style="display: flex; flex-direction: row;">
