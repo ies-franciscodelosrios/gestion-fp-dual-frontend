@@ -18,12 +18,15 @@ export class LoginPage implements OnInit {
   }
 
   public logging=false;
+  darkMode: boolean;
 
   ngOnInit() {
     if (localStorage.getItem('login') != null) {
       this.loginS.user = JSON.parse(localStorage.getItem('login')!);
       //this.router.navigate(['/login']);
     }
+    this.darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    this.theme();
   }
 
   public async signin() {
@@ -45,6 +48,13 @@ export class LoginPage implements OnInit {
       this.router.navigate(['/empresa']);
     }else if (rol == 4) {
       this.router.navigate(['/alumnos']);
+    }
+  }
+
+  theme(){
+    if(this.darkMode){
+      console.log("esta oscuro")
+      document.body.classList.toggle( 'dark' );
     }
   }
 }
