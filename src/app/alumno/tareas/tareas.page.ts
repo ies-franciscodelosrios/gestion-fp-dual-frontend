@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./tareas.page.scss'],
 })
 export class TareasPage implements OnInit {
+  //tema oscuro o claro
+  darkMode: boolean;
   //donde se van a guradar los encargos
   public encargos: Array<Encargo> = [] = [];
   constructor(
@@ -23,7 +25,8 @@ export class TareasPage implements OnInit {
     //se obtienen los encargos y se insertan en el array encargos
     this.refresEncargos();
     this.login.getRol();
-  
+    this.darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    this.theme();
   }
 
   refresEncargos(){
@@ -38,5 +41,17 @@ export class TareasPage implements OnInit {
     this.login.logout();
     console.log("Cerrando")
   }
+
+  theme(){
+    if(this.darkMode){
+      console.log("esta oscuro")
+      document.body.classList.toggle( 'dark' );
+    }
+  }
+  cambio() {
+    document.body.classList.toggle( 'dark' );
+  }
+  
+   
 }
 
