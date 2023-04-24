@@ -1,5 +1,5 @@
 export const environment = {
-  production: true,
+  production: false,
   firebaseConfig: {
     apiKey: "AIzaSyBZa96-X3IRhfcx_z_Q9pgCJnCJ1z-b-ss",
     authDomain: "gestionfp-83d49.firebaseapp.com",
@@ -14,14 +14,14 @@ export const environment = {
     //url: 'http://3.215.80.129:8080',
     endpoints: {
       titulo: '/titulo',
-      user: '/users',
+      user: '/users/',
       roles: '/roles',
       modulos: '/modulo',
       ra: '/ra',
       ce: '/ce',
       periodopracticas: '/periodo_practica/',
       periodoEmpresa: '/periodo_practica/empresa/',
-      encargo: '/encargo',
+      encargo: '/encargo/',
       encargoAlumno: '/encargo/alumno/',
       encargoEmpresa: '/encargo/empresa/',
       mail: '/users/email/'

@@ -21,13 +21,6 @@
       <ion-input maxlength="120" formControlName="nombre" placeholder="Nombre"></ion-input>
       <ion-note slot="error">solo permite letras</ion-note>
     </ion-item>
-    <ion-item counter="true" fill="solid">
-      <ion-select interface="popover" formControlName="titulo" placeholder="Selecciona título">
-        <ion-select-option *ngFor="let lista of listaTitulos">
-        [value]="lista.id">{{lista.nombre}}</ion-select-option>
-      </ion-select>
-      <ion-note slot="error"></ion-note>
-    </ion-item>
     <ion-grid>
       <ion-row>
         <ion-col style="text-align: right;">

@@ -44,11 +44,11 @@ export class CePracticesEditPage implements OnInit {
       })
       this.apiS.getUsuarioEmpresa().subscribe(rol => {
         this.listEmp = <Usuario[]>rol.user;
-        return this.listEmp
+        return this.listEmp;
       })
       this.apiS.getUsuarioAlumno().subscribe(rol => {
         this.listAlu = <Usuario[]>rol.user;
-        return this.listAlu
+        return this.listAlu;
       })
     } else if (this.mode == "edit") {
       this.practica = "Editar practica"

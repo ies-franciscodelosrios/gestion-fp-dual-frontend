@@ -6,6 +6,8 @@ import { CeTitleEditPage } from 'src/app/pages/ce-title-edit/ce-title-edit.page'
 import { APIService } from 'src/app/services/api.service';
 import { LoginService } from 'src/app/services/login.service';
 import { Titulo } from 'src/model/Titulo';
+import { ModuloPage } from '../modulo/modulo.page';
+import { Modulo } from 'src/model/Modulo';
 
 @Component({
   selector: 'app-titulo',
@@ -17,7 +19,6 @@ export class TituloPage implements OnInit {
   public results = this.tituls;
   public listTitulo: Titulo[] = [];
   public filter: Titulo[] = [];
-
   public tittle: any;
 
   constructor(
@@ -36,15 +37,11 @@ export class TituloPage implements OnInit {
     this.apiS.getTitulo().subscribe(listTitulo => {
       this.listTitulo = listTitulo;
     })
+    
     this.apiS.getTitulo().subscribe(rol => {
-      this.filter = this.listTitulo;
-      return this.filter
+     this.filter = this.listTitulo;
+     return this.filter
     })
-  }
-
-  public async toTitleToModul(tittle: any) {
-    this.tittle = tittle;
-    this.router.navigate(['/centroeducativo/modulo'], tittle.id);
   }
 
   public async addTitle() {

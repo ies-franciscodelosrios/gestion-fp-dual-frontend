@@ -35,11 +35,11 @@ export class EmpresaPage implements OnInit {
     await this.login.keepSession();
     this.apiS.getUsuarioEmpresa().subscribe(rol => {
       this.listEmpresa = <Usuario[]>rol.user;
-      return this.listEmpresa
+      return this.listEmpresa;
     });
     this.apiS.getUsuarioEmpresa().subscribe(rol => {
       this.filter = <Usuario[]>rol.user;
-      return this.filter
+      return this.filter;
     });
   }
 
