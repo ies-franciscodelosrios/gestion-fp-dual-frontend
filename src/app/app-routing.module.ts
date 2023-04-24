@@ -41,7 +41,7 @@ const routes: Routes = [
     loadChildren: () => import('./centroeducativo/titulo/titulo.module').then( m => m.TituloPageModule)
   },
   {
-    path: 'modulo/:id',
+    path: 'modulo/:nombre',
     loadChildren: () => import('./centroeducativo/modulo/modulo.module').then( m => m.ModuloPageModule)
   },
   { path: '**', pathMatch: 'full', 

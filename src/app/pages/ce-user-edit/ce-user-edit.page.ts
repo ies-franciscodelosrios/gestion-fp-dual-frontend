@@ -14,7 +14,7 @@ export class CEUserEditPage implements OnInit {
   public formUsuario: FormGroup;  //el grupo del formulario reactivo , ojo con importar ReactiveFormModule
   @Input('atribuser') atribuser: Usuario;
   @Input('mode') mode: string;
-  @Output() usrUpdate: EventEmitter<boolean>=new EventEmitter<boolean>();
+ @Output() usrUpdate: EventEmitter<boolean>=new EventEmitter<boolean>();
   constructor(
     private formBuilder: FormBuilder,
     private modalCTRL: ModalController,
@@ -51,7 +51,7 @@ export class CEUserEditPage implements OnInit {
   }
 
   cancel() {
-    this.usrUpdate.emit(true);
+   this.usrUpdate.emit(true);
     this.modalCTRL.dismiss(null, 'cancel');
   }
 

@@ -15,13 +15,13 @@ import { Ra } from 'src/model/Ra';
 
 export class RaPage implements OnInit {
   public letras = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'ñ', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-  public numero = [1,2,3,4,5,6,7,8,9];
+  public numero = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   public formRA: FormGroup;
   public ListaRa: Ra[] = [];
   public ListaCe: Ce[] = [];
-  
+
   public abreIndice: number = -1;
-  
+
 
 
 

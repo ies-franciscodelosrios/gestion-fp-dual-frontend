@@ -113,7 +113,7 @@ export class APIService {
   }
 
   getEncargosAlumno(id?: number): Observable<any> {
-    const url = environment.api.url + environment.api.endpoints.encargoAlumno + id
+    const url = environment.api.url + environment.api.endpoints.encargoAlumno +  id
     return this.http.get(url);
   }
 
@@ -143,6 +143,13 @@ export class APIService {
     return this.http.get<Modulo[]>(url, {
     });
   }
+
+  getModuleByTittle(id: Titulo): Observable<Titulo> {
+    const url = environment.api.url + environment.api.endpoints.titulo + "/" + id.id
+    return this.http.get<Titulo>(url, {
+    });
+  }
+
 
   //actualiza un valor al backend
   updatePractica(practica: any): Observable<any> {

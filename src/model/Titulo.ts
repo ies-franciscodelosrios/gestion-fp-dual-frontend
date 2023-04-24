@@ -1,4 +1,7 @@
+import { Modulo } from "./Modulo";
+
 export interface Titulo{
     id?:number,
-    nombre?:String
+    nombre?:String,
+    modulo?:Modulo[]
 }

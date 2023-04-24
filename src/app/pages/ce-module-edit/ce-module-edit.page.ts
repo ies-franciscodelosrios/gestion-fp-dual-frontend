@@ -1,6 +1,7 @@
-import { Component, EventEmitter, OnInit, Output } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ModalController } from "@ionic/angular";
+import { ModuloPage } from "src/app/centroeducativo/modulo/modulo.page";
 import { APIService } from "src/app/services/api.service";
 import { Titulo } from "src/model/Titulo";
 
@@ -12,6 +13,7 @@ import { Titulo } from "src/model/Titulo";
 export class CeModuleEditPage implements OnInit {
   public formModulo: FormGroup;
   public listaTitulos: Titulo[] = []
+  @Input('atribMdl') atribMdl: Titulo;
   customCounterFormatter(inputLength: number, maxLength: number) {
     return `${maxLength - inputLength} characters remaining`;
   }
@@ -24,6 +26,7 @@ export class CeModuleEditPage implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.atribMdl)
     this.formModulo = this.formBuilder.group({
       cod_mod_boja: ['', [Validators.required, Validators.pattern('\[0-9]{4}')]],
       nombre: ['', [Validators.required,Validators.pattern('[A-zÁ-ÿ ]{3,120}') ]],
@@ -40,11 +43,12 @@ export class CeModuleEditPage implements OnInit {
   }
 
   submitForm() {
+    
     try {
       this.apiS.addModulo({
         cod_mod_boja: this.formModulo.get('cod_mod_boja')?.value,
         nombre: this.formModulo.get('nombre')?.value,
-        titulo: {id:this.formModulo.get('titulo')?.value},
+        titulo: {id: this.atribMdl.id},
       }).subscribe(d => {
         //la respuesta del servidor
         //ocultador loading
