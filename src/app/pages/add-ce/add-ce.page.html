@@ -1,18 +1,20 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Nuevo Centro</ion-title>
+    <ion-title>Nuevo Centro Educativo</ion-title>
   </ion-toolbar>
 </ion-header>
  
 <ion-content class="ion-padding">
-  <form [formGroup]="addUserCEForm" (ngSubmit)="onSubmit()">
+
+  <form [formGroup]="addUser" (ngSubmit)="onSubmit()">
+
     <div style="display: flex; flex-direction: row;">
       <ion-icon color="danger" *ngIf="editable=='true'" name="trash" style="zoom:1.5"></ion-icon>
     </div>
 
     <ion-item>
-        <ion-label position="floating">Nombre</ion-label>
-        <ion-input type="text" formControlName="nombre"></ion-input>
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input type="text" formControlName="nombre"></ion-input>
     </ion-item>
       
     <ion-item>
@@ -24,15 +26,21 @@
       <ion-label position="floating">Correo electrónico</ion-label>
       <ion-input type="email" formControlName="correo"></ion-input>
     </ion-item>
+
     <ion-grid>
       <ion-row>
+
         <ion-col id="btn" style="text-align: left;">
-          <ion-button class="btnCancel" shape="round" color="danger" fill="outline" (click)="back()">CANCEL</ion-button>
+          <ion-button shape="round" color="danger" fill="outline" (click)="back()">CANCEL</ion-button>
         </ion-col>
-        <ion-col  style="text-align: right;">
-          <ion-button class="btnSave" shape="round" color="success" type="submit" [disabled]="!addUserCEForm.valid">SAVE</ion-button>
+
+        <ion-col style="text-align: right;">
+          <ion-button shape="round" color="success" type="submit" [disabled]="!addUser.valid">SAVE</ion-button>
         </ion-col>
+
       </ion-row>
     </ion-grid>
+
   </form>
+
 <ion-content>

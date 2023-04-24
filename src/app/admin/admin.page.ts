@@ -13,11 +13,11 @@ import { EditCEPage } from '../pages/edit-ce/edit-ce.page';
 })
 export class AdminPage implements OnInit {
 
-  userCEList: Usuario[] = [];
-  searchedUser: Usuario[] = [];
+  user: Usuario[] = [];
+  searched: Usuario[] = [];
 
   constructor(private modalCtrl: ModalController, 
-    private userApiService: APIService,
+    private apiS: APIService,
     private login: LoginService) {
    }
 
@@ -27,18 +27,18 @@ export class AdminPage implements OnInit {
 
  async refresUsers() {
     await this.login.keepSession();
-    this.userApiService.getUsuarioCentro().subscribe(rol => {
-      this.userCEList = <Usuario[]> rol.user;
-      return this.userCEList;
+    this.apiS.getUsuarioCentro().subscribe(rol => {
+      this.user = <Usuario[]> rol.user;
+      return this.user;
     });
 
-    this.userApiService.getUsuarioCentro().subscribe(rol => {
-      this.searchedUser = <Usuario[]> rol.user;
-      return this.searchedUser;
+    this.apiS.getUsuarioCentro().subscribe(rol => {
+      this.searched = <Usuario[]> rol.user;
+      return this.searched;
     });
   }
 
-  async openForm() {
+  async addUser() {
     const modal = await this.modalCtrl.create({
       component: AddCEPage
     });
@@ -48,11 +48,11 @@ export class AdminPage implements OnInit {
     return await modal.present();
   }
 
-  async editUserCE(user: Usuario) {
+  async editUser(user: Usuario) {
     const modal = await this.modalCtrl.create({
       component: EditCEPage,
       componentProps: {
-        dUserCE: user
+        dataUser: user
       }
     });
     modal.onDidDismiss().then(() => {
@@ -61,17 +61,17 @@ export class AdminPage implements OnInit {
     return await modal.present();
   }
 
-  searchUserCentEduc(event:any) {
+  searchUserByName(event:any) {
     const text = event.target.value;
-    this.searchedUser = this.userCEList;
+    this.searched = this.user;
     if(text && text.trim() != '') {
-      this.searchedUser = this.searchedUser.filter((usuario: any)=>{
-          return (usuario.nombre?.toLowerCase().indexOf(text.toLowerCase()) > -1);
+      this.searched = this.searched.filter((user: any) => {
+          return (user.nombre?.toLowerCase().indexOf(text.toLowerCase()) > -1);
       });
     }
   }
 
-  cerrarSesion() {
+  logOut() {
     this.login.logout();
   }
 }
