@@ -12,9 +12,9 @@ import { Usuario } from 'src/model/Usuario';
 export class EditCEPage implements OnInit {
 
   @Input('editable') editable:string = "false";
-  @Input() dUserCE: Usuario;
+  @Input() dataUser: Usuario;
   @Output() closeModal: EventEmitter<boolean> = new EventEmitter<boolean>();
-  public formEdit: FormGroup
+  public editUser: FormGroup
 
   constructor(private modalCtrl: ModalController, 
     private formBuilder: FormBuilder, 
@@ -22,35 +22,33 @@ export class EditCEPage implements OnInit {
   }
 
   ngOnInit() {
-    this.formEdit = this.formBuilder.group({
-      nombre: [this.dUserCE.nombre, [Validators.required]],
-      doc: [this.dUserCE.documentos],
-      correo: [this.dUserCE.correo]
+    this.editUser = this.formBuilder.group({
+      nombre: [this.dataUser.nombre, [Validators.required]],
+      doc: [this.dataUser.documentos],
+      correo: [this.dataUser.correo]
     })
   }
 
-  updateUserCE() {
-    this.dUserCE.nombre = this.formEdit.get('nombre')?.value;
-    this.dUserCE.documentos = this.formEdit.get('doc')?.value;
-    this.dUserCE.correo = this.formEdit.get('correo')?.value;
+  updateUser() {
+    this.dataUser.nombre = this.editUser.get('nombre')?.value;
+    this.dataUser.documentos = this.editUser.get('doc')?.value;
+    this.dataUser.correo = this.editUser.get('correo')?.value;
 
     this.apiS.updateCentroEducativo({
-      id: this.dUserCE.id,
-      nombre: this.dUserCE.nombre,
-      documentos: this.dUserCE.documentos,
-      correo: this.dUserCE.correo,
-      alta: this.dUserCE.alta,
-      rol: {"nombre":"Centro educativo"}
+      id: this.dataUser.id,
+      nombre: this.dataUser.nombre,
+      documentos: this.dataUser.documentos,
+      correo: this.dataUser.correo,
+      alta: this.dataUser.alta,
+      rol: { "nombre": "Centro educativo" }
     }).subscribe();
     
     this.closeModal.emit(true);
     this.modalCtrl.dismiss();
   }
 
-  deleteUserCE() {
-    this.apiS.deleteUsuario(this.dUserCE.id).subscribe((respuesta) => {
-      console.log(respuesta);
-    });
+  deleteUser() {
+    this.apiS.deleteUsuario(this.dataUser.id);
     this.modalCtrl.dismiss();
   }
 

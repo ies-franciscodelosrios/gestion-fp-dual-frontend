@@ -13,8 +13,8 @@ export class AddCEPage implements OnInit {
 
   @Input('editable') editable:string = "false";
 
-  userCEList: Usuario[] = [];
-  addUserCEForm: FormGroup;
+  user: Usuario[] = [];
+  addUser: FormGroup;
   enEdicion = false; // variable que indica si el formulario está en modo de edición
   @Output() closeModal: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -23,14 +23,14 @@ export class AddCEPage implements OnInit {
     private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    this.addUserCEForm = this.formBuilder.group({
+    this.addUser = this.formBuilder.group({
       nombre: ['', Validators.required],
-      doc: ['', [Validators.required, this.validateDocumento]],
+      doc: ['', [Validators.required, this.validateDocument]],
       correo: ['', [Validators.required, Validators.email]]
     });
   }
 
-  validateDocumento(control:any) {
+  validateDocument(control: any) {
     const pattern = /^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKET]$/i;
     if (pattern.test(control.value)) {
       return pattern;
@@ -40,11 +40,11 @@ export class AddCEPage implements OnInit {
 
   onSubmit() {
     this.apiS.addUsuario({
-      nombre: this.addUserCEForm.get('nombre')?.value,
+      nombre: this.addUser.get('nombre')?.value,
       alta: true,
-      rol: {id:2, nombre:'Centro educativo'},
-      documentos: this.addUserCEForm.get('doc')?.value,
-      correo: this.addUserCEForm.get('correo')?.value,    
+      rol: { id: 2, nombre: 'Centro educativo' },
+      documentos: this.addUser.get('doc')?.value,
+      correo: this.addUser.get('correo')?.value
     }).subscribe(d => {
         console.log(d);
     });
