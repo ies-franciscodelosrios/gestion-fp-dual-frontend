@@ -13,6 +13,8 @@ import { EditCEPage } from '../pages/edit-ce/edit-ce.page';
 })
 export class AdminPage implements OnInit {
 
+  //tema oscuro o claro
+  darkMode: boolean;
   user: Usuario[] = [];
   searched: Usuario[] = [];
 
@@ -23,6 +25,7 @@ export class AdminPage implements OnInit {
 
   ngOnInit() {
     this.refresUsers();
+    this.darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
   }
 
  async refresUsers() {
@@ -74,4 +77,9 @@ export class AdminPage implements OnInit {
   logOut() {
     this.login.logout();
   }
+
+  cambio() {
+    document.body.classList.toggle( 'dark' );
+  }
+
 }
