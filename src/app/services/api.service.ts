@@ -20,7 +20,6 @@ export class APIService {
 
   //añade un contenido a la bbdd
   addTitulo(titulo: any): Observable<any> {
-    console.log(environment.api.url + environment.api.endpoints.titulo)
     const url = environment.api.url + environment.api.endpoints.titulo
     return this.http.post(url, titulo);
   }
@@ -91,6 +90,12 @@ export class APIService {
   getRA(): Observable<Ra[]> {
     const url = environment.api.url + environment.api.endpoints.ra
     return this.http.get<Ra[]>(url, {
+    });
+  }
+
+  getRAByModul(id:Modulo): Observable<Modulo> {
+    const url = environment.api.url + environment.api.endpoints.modulos + "/" + id.id
+    return this.http.get<Modulo>(url, {
     });
   }
 
@@ -185,12 +190,12 @@ export class APIService {
   }
 
   deleteTitulo(id?: number) {
-    const url = environment.api.url + environment.api.endpoints.titulo + id
+    const url = environment.api.url + environment.api.endpoints.titulo + "/"+ id
     return this.http.delete(url);
   }
 
   deleteModulo(id?: number) {
-    const url = environment.api.url + environment.api.endpoints.modulos + id
+    const url = environment.api.url + environment.api.endpoints.modulos +"/"+ id
     return this.http.delete(url);
   }
 

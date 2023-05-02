@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { CEUserEditPage } from 'src/app/pages/ce-user-edit/ce-user-edit.page';
 import { Title } from '@angular/platform-browser';

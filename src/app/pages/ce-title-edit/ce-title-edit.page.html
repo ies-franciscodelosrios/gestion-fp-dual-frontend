@@ -10,9 +10,10 @@
 <!--contenido dentro del modal que permite introducir datos y "guardarlos"-->
 <ion-content class="ion-padding">
   <form [formGroup]="formTitulo" (ngSubmit)="submitForm()">
-    <ion-item fill="solid">
+    <ion-item counter="true" fill="solid">
       <ion-label position="floating">Nombre</ion-label>
-      <ion-input formControlName="titulo" placeholder="titulo" ></ion-input>
+      <ion-input maxlength="7" formControlName="titulo" placeholder="titulo" ></ion-input>
+      <ion-note slot="error">solo permite letras</ion-note>
     </ion-item>
     <ion-grid>
       <ion-row>

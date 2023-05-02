@@ -26,7 +26,6 @@ export class CeModuleEditPage implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.atribMdl)
     this.formModulo = this.formBuilder.group({
       cod_mod_boja: ['', [Validators.required, Validators.pattern('\[0-9]{4}')]],
       nombre: ['', [Validators.required,Validators.pattern('[A-zÁ-ÿ ]{3,120}') ]],

@@ -49,7 +49,6 @@ export class EditCEPage implements OnInit {
 
   deleteUserCE() {
     this.apiS.deleteUsuario(this.dUserCE.id).subscribe((respuesta) => {
-      console.log(respuesta);
     });
     this.modalCtrl.dismiss();
   }

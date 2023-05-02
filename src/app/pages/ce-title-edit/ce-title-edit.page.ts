@@ -26,7 +26,7 @@ export class CeTitleEditPage implements OnInit {
     const btnelem = document.getElementById('btnDelete') as HTMLElement;
     btnelem.style.display = 'none';
     this.formTitulo = this.formBuilder.group({   //creando los campos que serán controlados y validados por formTitulo
-      titulo: ['', [Validators.required, Validators.minLength(2)]],
+      titulo: ['', [Validators.required, Validators.pattern('\[aA-zZ]{2,7}')]],
     })
   }
   cancel() {
@@ -47,7 +47,6 @@ export class CeTitleEditPage implements OnInit {
   }
 
   onDelete(){
-    console.log(this.atribtitle.id);
     this.alrtCtrl.create({
       header: '¿Estás seguro?',
       message:'¿Realmente quieres eliminar?',
@@ -59,7 +58,6 @@ export class CeTitleEditPage implements OnInit {
           text: 'Eliminar',
           handler:() => {
             this.apiS.deleteTitulo(this.atribtitle.id).subscribe((respuesta) => {
-              console.log(respuesta);
             });
             this.cancel();
           }

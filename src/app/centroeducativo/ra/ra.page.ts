@@ -5,6 +5,7 @@ import { CeModuleRaEditPage } from 'src/app/pages/ce-module-ra-edit/ce-module-ra
 import { APIService } from 'src/app/services/api.service';
 import { LoginService } from 'src/app/services/login.service';
 import { Ce } from 'src/model/Ce';
+import { Modulo } from 'src/model/Modulo';
 import { Ra } from 'src/model/Ra';
 
 @Component({
@@ -19,14 +20,12 @@ export class RaPage implements OnInit {
   public formRA: FormGroup;
   public ListaRa: Ra[] = [];
   public ListaCe: Ce[] = [];
-
   public abreIndice: number = -1;
-
-
-
+  public module: Modulo;
 
   @Input('codmodul') codmodul: any;
   @Input('nommodul') nommodul: any;
+  @Input('idmodul') idmodul: any;
   @Output() RaUpdate: EventEmitter<boolean> = new EventEmitter<boolean>();
   @ViewChildren(IonAccordion) accordions: QueryList<IonAccordion>;
   constructor(
@@ -43,12 +42,10 @@ export class RaPage implements OnInit {
   }
   public async load() {
     await this.login.keepSession();
-
-    this.apiS.getRA().subscribe(listaRA => {
-      this.ListaRa = listaRA;
-      console.log(this.ListaRa)
+    this.apiS.getRAByModul(this.idmodul).subscribe(modul => {
+      this.ListaRa =<Ra[]>modul.ra;
+      return this.ListaRa;
     })
-
   }
 
   public async addRa(modul: any) {
@@ -56,7 +53,6 @@ export class RaPage implements OnInit {
       component: CeModuleRaEditPage,
       componentProps: {
         nommodul: modul
-
       }
     });
     modal.onDidDismiss().then(() => {

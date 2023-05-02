@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { AlertController, ModalController } from '@ionic/angular';
 import { CeModuleEditPage } from 'src/app/pages/ce-module-edit/ce-module-edit.page';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
@@ -7,7 +7,6 @@ import { APIService } from 'src/app/services/api.service';
 import { Modulo } from 'src/model/Modulo';
 import { RaPage } from '../ra/ra.page';
 import { Titulo } from 'src/model/Titulo';
-import { log } from 'console';
 
 @Component({
   selector: 'app-modulo',
@@ -22,16 +21,17 @@ export class ModuloPage implements OnInit {
   public listModulo: Modulo[] = [];
   public filter: Modulo[] = [];
 
+  @Output() modulUpdate: EventEmitter<boolean> = new EventEmitter<boolean>();
   constructor(
     private apiS: APIService,
     private login: LoginService,
     private router: Router,
+    private alrtCtrl: AlertController,
     private modalCtrl: ModalController,
     private actroute: ActivatedRoute) {
   }
 
   ngOnInit() {
-
     this.load();
   }
 
@@ -53,7 +53,6 @@ export class ModuloPage implements OnInit {
       this.filter = <Modulo[]>tittle.modulo;
       return this.filter;
     });
-
   }
 
   backToTitle() {
@@ -65,7 +64,8 @@ export class ModuloPage implements OnInit {
       component: RaPage,
       componentProps: {
         codmodul: atribModul.cod_mod_boja,
-        nommodul: atribModul.nombre
+        nommodul: atribModul.nombre,
+        idmodul: atribModul.id
       }
     });
     modal.onDidDismiss().then(() => {
@@ -86,6 +86,33 @@ export class ModuloPage implements OnInit {
       window.location.reload();
     });
     return await modal.present();
+  }
+
+  public async delModul(thisModul: Modulo) {
+    this.alrtCtrl.create({
+      header: '¿Estás seguro?',
+      message: "¿Realmente quieres eliminar  " + thisModul.nombre + " y su contenido? ",
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel'
+        }, {
+          text: 'Eliminar',
+          handler: () => {
+            this.apiS.deleteModulo(thisModul.id).subscribe((respuesta) => {
+            });
+            this.cancel();
+          }
+        }
+      ]
+    }).then(alrtElem => {
+      alrtElem.present();
+    })
+  }
+
+  cancel() {
+    this.modulUpdate.emit(true);
+    this.load();
   }
 
   handleChange(event: any) {
