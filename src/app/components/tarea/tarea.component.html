@@ -1,8 +1,8 @@
 <nav (click)="editEncargo()" >
   <div class="div-title" >
-    <ion-title id="title">{{encargo.tarea}}</ion-title>
+    <ion-title >{{encargo.tarea}}</ion-title>
   </div>
-  <ion-title *ngIf="encargo.comentario.length > 0">{{encargo.comentario}}</ion-title>
+  <ion-label *ngIf="encargo.comentario.length > 0">{{encargo.comentario}}</ion-label>
   <div style="display: flex; flex-direction: row;">
     <ion-icon id="proces" *ngIf="!encargo.estado" name="clipboard"></ion-icon>
     <ion-icon id="check" *ngIf="encargo.estado" name="checkbox"></ion-icon>
