@@ -15,8 +15,6 @@ import { TabsAlumnoModule } from './tabs_alumno/tabs.module';
 import es from '@angular/common/locales/es';
 registerLocaleData(es);
 
-
-
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, IonicModule.forRoot(), HttpClientModule, AppRoutingModule, 

@@ -19,6 +19,8 @@ export class TituloPage implements OnInit {
   public tittle: any;
   public tituls: CeTitleEditPage[] = [];
   public results = this.tituls;
+  //tema oscuro o claro
+  darkMode: boolean;
   @Output() tittleUpdate: EventEmitter<boolean> = new EventEmitter<boolean>();
   constructor(
     private http: HttpClient,
@@ -54,6 +56,7 @@ export class TituloPage implements OnInit {
     const modal = await this.modalCtrl.create({
       component: CeTitleEditPage,
       componentProps: {
+        mode: "create"
       }
     });
     modal.onDidDismiss().then(() => {
@@ -62,33 +65,12 @@ export class TituloPage implements OnInit {
     return await modal.present();
   }
 
-  public async delTittle(thisTittle: Titulo) {
-    this.alrtCtrl.create({
-      header: '¿Estás seguro?',
-      message: "¿Realmente quieres eliminar  "+ thisTittle.nombre+  " y su contenido? ",
-      buttons: [
-        {
-          text: 'Cancelar',
-          role: 'cancel'
-        }, {
-          text: 'Eliminar',
-          handler: () => {
-            this.apiS.deleteTitulo(thisTittle.id).subscribe((respuesta) => {
-            });
-            this.cancel();
-          }
-        }
-      ]
-    }).then(alrtElem => {
-      alrtElem.present();
-    })
-  }
-
   public async editTitle(title: Titulo) {
     const modal = await this.modalCtrl.create({
       component: CeTitleEditPage,
       componentProps: {
-        atribtitle: title
+        atribtitle: title,
+        mode: "edit"
       }
     });
     modal.onDidDismiss().then(() => {
@@ -105,6 +87,10 @@ export class TituloPage implements OnInit {
         return (titulo.nombre?.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1);
       })
     }
+  }
+
+  cambio() {
+    document.body.classList.toggle('dark');
   }
 
   cerrarSesion() {

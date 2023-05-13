@@ -20,6 +20,8 @@ export class ModuloPage implements OnInit {
   public tittleName: string;
   public listModulo: Modulo[] = [];
   public filter: Modulo[] = [];
+  //tema oscuro o claro
+  darkMode: boolean;
 
   @Output() modulUpdate: EventEmitter<boolean> = new EventEmitter<boolean>();
   constructor(
@@ -47,6 +49,7 @@ export class ModuloPage implements OnInit {
     })
     this.apiS.getModuleByTittle(this.Tittles).subscribe(tittle => {
       this.listModulo = <Modulo[]>tittle.modulo;
+      console.log(this.listModulo)
       return this.listModulo;
     });
     this.apiS.getModuleByTittle(this.Tittles).subscribe(tittle => {
@@ -78,8 +81,8 @@ export class ModuloPage implements OnInit {
     const modal = await this.modalCtrl.create({
       component: CeModuleEditPage,
       componentProps: {
-        mode: "edit",
-        atribMdl: this.Tittles
+        mode: "create",
+        atribtitle: this.Tittles
       }
     });
     modal.onDidDismiss().then(() => {
@@ -88,26 +91,18 @@ export class ModuloPage implements OnInit {
     return await modal.present();
   }
 
-  public async delModul(thisModul: Modulo) {
-    this.alrtCtrl.create({
-      header: '¿Estás seguro?',
-      message: "¿Realmente quieres eliminar  " + thisModul.nombre + " y su contenido? ",
-      buttons: [
-        {
-          text: 'Cancelar',
-          role: 'cancel'
-        }, {
-          text: 'Eliminar',
-          handler: () => {
-            this.apiS.deleteModulo(thisModul.id).subscribe((respuesta) => {
-            });
-            this.cancel();
-          }
-        }
-      ]
-    }).then(alrtElem => {
-      alrtElem.present();
-    })
+  public async editModule(modul: Modulo) {
+    const modal = await this.modalCtrl.create({
+      component: CeModuleEditPage,
+      componentProps: {
+        atribModule: modul,
+        mode: "edit"
+      }
+    });
+    modal.onDidDismiss().then(() => {
+      window.location.reload();
+    });
+    return await modal.present();
   }
 
   cancel() {
@@ -123,6 +118,10 @@ export class ModuloPage implements OnInit {
         return (modulo.nombre?.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1);
       })
     }
+  }
+
+  cambio() {
+    document.body.classList.toggle('dark');
   }
 
   cerrarSesion() {

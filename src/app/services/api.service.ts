@@ -25,7 +25,7 @@ export class APIService {
   }
 
   addModulo(modulo: any): Observable<any> {
-    const url = environment.api.url + environment.api.endpoints.modulos
+    const url = environment.api.url + environment.api.endpoints.modulo
     return this.http.post(url, modulo);
   }
 
@@ -94,7 +94,7 @@ export class APIService {
   }
 
   getRAByModul(id:Modulo): Observable<Modulo> {
-    const url = environment.api.url + environment.api.endpoints.modulos + "/" + id.id
+    const url = environment.api.url + environment.api.endpoints.modulo + "/" + id
     return this.http.get<Modulo>(url, {
     });
   }
@@ -144,7 +144,7 @@ export class APIService {
   }
 
   getModulo(): Observable<Modulo[]> {
-    const url = environment.api.url + environment.api.endpoints.modulos
+    const url = environment.api.url + environment.api.endpoints.modulo
     return this.http.get<Modulo[]>(url, {
     });
   }
@@ -195,7 +195,7 @@ export class APIService {
   }
 
   deleteModulo(id?: number) {
-    const url = environment.api.url + environment.api.endpoints.modulos +"/"+ id
+    const url = environment.api.url + environment.api.endpoints.modulo +"/"+ id
     return this.http.delete(url);
   }
 

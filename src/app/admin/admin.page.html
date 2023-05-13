@@ -1,8 +1,14 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Admin</ion-title>
+    <ion-title>Administrador</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="cerrarSesion()">
+      <ion-item>
+        <ion-icon slot="start" name="moon"></ion-icon>
+        <ion-toggle slot="end"
+                    [ngModel]="darkMode"
+                    (ionChange)="cambio()"></ion-toggle>
+      </ion-item>
+      <ion-button (click)="logOut()">
         <ion-icon slot="icon-only" name="exit"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -11,15 +17,17 @@
 
 <nav>
   <div style="display: flex; flex-direction: row;">
-    <ion-searchbar placeholder="Search" (ionChange)="searchUserCentEduc($event)"></ion-searchbar>
-    <ion-button (click)="openForm()" style="--background: #141414; zoom:1.25"><ion-icon name="duplicate-outline" style="color: white;"></ion-icon></ion-button>
+    <ion-searchbar placeholder="Search..." (ionChange)="searchUserByName($event)"></ion-searchbar>
+    <ion-button (click)="addUser()" style="--background: #141414; zoom:1.25">
+      <ion-icon name="duplicate-outline" style="color: white;"></ion-icon>
+    </ion-button>
   </div>
 </nav>
 
 <ion-content class="ion-padding">
 
-  <ion-list class="listUserCE">
-    <ion-item *ngFor="let user of searchedUser" (click)="editUserCE(user)">
+  <ion-list class="list">
+    <ion-item *ngFor="let user of searched" (click)="editUser(user)">
       <ion-label>
         <h2>{{user.nombre}}</h2>
       </ion-label>

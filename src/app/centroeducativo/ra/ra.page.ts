@@ -21,11 +21,10 @@ export class RaPage implements OnInit {
   public ListaRa: Ra[] = [];
   public ListaCe: Ce[] = [];
   public abreIndice: number = -1;
-  public module: Modulo;
 
-  @Input('codmodul') codmodul: any;
-  @Input('nommodul') nommodul: any;
-  @Input('idmodul') idmodul: any;
+  @Input('codmodul') codmodul: Modulo;
+  @Input('nommodul') nommodul: Modulo;
+  @Input('idmodul') idmodul: Modulo;
   @Output() RaUpdate: EventEmitter<boolean> = new EventEmitter<boolean>();
   @ViewChildren(IonAccordion) accordions: QueryList<IonAccordion>;
   constructor(
@@ -42,17 +41,39 @@ export class RaPage implements OnInit {
   }
   public async load() {
     await this.login.keepSession();
+    console.log(this.idmodul)
     this.apiS.getRAByModul(this.idmodul).subscribe(modul => {
       this.ListaRa =<Ra[]>modul.ra;
+      console.log(this.ListaRa)
       return this.ListaRa;
     })
   }
 
-  public async addRa(modul: any) {
+  public async addRa() {
     const modal = await this.modalCtrl.create({
       component: CeModuleRaEditPage,
       componentProps: {
-        nommodul: modul
+        nommodul: this.nommodul,
+        codmodul: this.codmodul,
+        idmodul: this.idmodul,
+        mode: "create"
+      }
+    });
+    modal.onDidDismiss().then(() => {
+      window.location.reload();
+    });
+    return await modal.present();
+  }
+
+  public async editRa(atribRa:Ra) {
+    const modal = await this.modalCtrl.create({
+      component: CeModuleRaEditPage,
+      componentProps: {
+        nommodul: this.nommodul,
+        codmodul: this.codmodul,
+        idmodul: this.idmodul,
+        atribRa: atribRa,
+        mode: "edit"
       }
     });
     modal.onDidDismiss().then(() => {

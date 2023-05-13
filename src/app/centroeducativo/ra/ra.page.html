@@ -1,31 +1,36 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Có. Boja {{codmodul}} </ion-title>
+    
     <!--Botón que permite cancelar y cerrar el modal-->
     <ion-buttons slot="end">
       <ion-button (click)="cancel()" [strong]="true"><ion-icon name="close-outline"></ion-icon></ion-button>
     </ion-buttons>
   </ion-toolbar>
-  <div class="ion-padding">Resultado de Apredizaje de {{nommodul}}</div>
+  <p>Resultado de Apredizaje de {{nommodul}}</p>
 </ion-header>
 <ion-content class="ion-padding">
   <!--contenido dentro del modal que permite introducir datos y "guardarlos"-->
   <form (ngSubmit)="submitForm()">
     <ion-toolbar>
       <ion-accordion-group expand="inset">
-        <ion-accordion value="first" *ngFor="let listaA of this.ListaRa;let ra=index">
+        <ion-accordion *ngFor="let listaA of this.ListaRa;let ra=index">
           <ion-item slot="header">
             {{[ra]}}. {{listaA.resultado}}
+            <ion-buttons slot="end">
+              <ion-button (click)="editRa(listaA)">
+                <ion-icon slot="icon-only" color="black" name="newspaper-outline"></ion-icon>
+              </ion-button>
+            </ion-buttons>
           </ion-item>
           <ion-item slot="content" *ngFor="let listaE of this.ListaRa[ra].ce;let ce=index">
             {{letras[ce]}}. {{listaE.descripcion}}
           </ion-item>
-
         </ion-accordion>
       </ion-accordion-group>
     </ion-toolbar>
     <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-      <ion-button id="addbuton" (click)="this.addRa(nommodul)" style="zoom:1.25">
+      <ion-button id="addbuton" (click)="this.addRa()" style="--background: #141414; zoom:1.25">
         <ion-icon name="add"></ion-icon>
       </ion-button>
     </ion-fab>

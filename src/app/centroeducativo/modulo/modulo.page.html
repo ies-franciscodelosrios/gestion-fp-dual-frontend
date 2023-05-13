@@ -7,6 +7,9 @@
       </ion-button>
     </ion-buttons>
     <ion-title>Módulos de {{tittleName}} </ion-title>
+    <ion-toggle 
+    slot="end" [ngModel]="darkMode" (ionChange)="cambio()">
+    </ion-toggle>
     <ion-buttons slot="end">
       <!--Botón que permite salir de la sesión actual con el ultimo usuario logueado-->
       <ion-button (click)="cerrarSesion()">
@@ -21,7 +24,7 @@
     <!--Busqueda y filtrado de modulos-->
     <ion-searchbar id="searchmodulo" placeholder="Buscar" animated (ionChange)="handleChange($event)"></ion-searchbar>
     <!--Botón para agregar una nuevo módulo-->
-    <ion-button (click)="this.addModul()" style="zoom:1.25"><ion-icon name="duplicate-outline"></ion-icon></ion-button>
+    <ion-button (click)="this.addModul()" style="--background: #141414; zoom:1.25"><ion-icon name="duplicate-outline"></ion-icon></ion-button>
   </div>
 <!--Lista de objetos de tipo modulo que al seleccionar un "ion-item" se abra un modal con el contenido de RA que se da en este modulo en concreto-->
   <ion-list lines="inset">
@@ -31,8 +34,8 @@
         <p>Có. Boja: {{listamodul.cod_mod_boja}}</p>
       </ion-label>
       <ion-buttons slot="end">
-        <ion-button (click)="delModul(listamodul)">
-          <ion-icon slot="icon-only" color="danger" name="trash-outline"></ion-icon>
+        <ion-button (click)="editModule(listamodul)">
+          <ion-icon slot="icon-only" color="black" name="newspaper-outline"></ion-icon>
         </ion-button>
       </ion-buttons>
     </ion-item>
