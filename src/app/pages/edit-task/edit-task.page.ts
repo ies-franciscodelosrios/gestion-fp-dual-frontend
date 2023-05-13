@@ -13,8 +13,9 @@ import { lastValueFrom } from 'rxjs';
   styleUrls: ['./edit-task.page.scss']
 })
 export class EditTaskPage implements OnInit,OnChanges {
+  public now: Date = new Date();
+  public guarDate: string = this.now.toJSON();
   public periodos: PeriodoPracticas[] = [];
-  
   @Input() encargo:Encargo;
   @Output() closeModal: EventEmitter<boolean> = new EventEmitter<boolean>();
   @ViewChild('select') select:IonSelect;
@@ -29,12 +30,11 @@ export class EditTaskPage implements OnInit,OnChanges {
   }
 
   async ngOnInit() {
-    const now: Date = new Date();
-    const isoDate: string = now.toISOString();
+    const dateform = new Date(this.encargo.fecha)
     this.formTask = this.formBuilder.group({   //creando los campos que serán controlados y validados por formTitulo
       taskname: [this.encargo.tarea,[Validators.required, Validators.minLength(4)]],
       taskstatus: this.encargo.estado,
-      taskdate: this.encargo.fecha,
+      taskdate: dateform.toLocaleString('es-ES', { timeZone: 'UTC' }),
       taskcomment: this.encargo.comentario
     });
     
@@ -63,7 +63,7 @@ export class EditTaskPage implements OnInit,OnChanges {
       this.apiS.updateEncargo({
         id: this.encargo.id,
         tarea: this.encargo.tarea,
-        fecha: this.encargo.fecha,
+        fecha: this.guarDate,
         estado: this.encargo.estado,
         comentario: this.encargo.comentario,
         periodo_practica: {

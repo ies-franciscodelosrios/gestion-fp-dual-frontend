@@ -1,5 +1,5 @@
 .container {
-    display: flex;
+  display: flex;
   justify-content: center;
   flex-wrap: wrap;
   align-content: center;
@@ -8,10 +8,9 @@
 
 }
 
-.item {
-    width: 15%;
-    height: 250px;
-    margin: 0.5%;
-    text-align: center;
-
+.card {
+  width: 15%;
+  height: 250px;
+  margin: 0.5%;
+  text-align: center;
 }

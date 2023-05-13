@@ -16,6 +16,8 @@ import { Usuario } from 'src/model/Usuario';
   styleUrls: ['./tareas.page.scss'],
 })
 export class TareasPage implements OnInit {
+  //tema oscuro o claro
+  darkMode: boolean;
   @Input('tarea') tarea:Encargo; 
   public tareas:Array<Tarea>=[]=[];
   public usuarios:Array<Usuario>=[]=[];
@@ -30,6 +32,7 @@ export class TareasPage implements OnInit {
 
   ngOnInit() {
     this.loadTareas();
+    this.darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
   }
 
   public async loadTareas(){
@@ -76,4 +79,7 @@ export class TareasPage implements OnInit {
     console.log("Cerrando")
   }
 
+  cambio() {
+    document.body.classList.toggle( 'dark' );
+  }
 }
