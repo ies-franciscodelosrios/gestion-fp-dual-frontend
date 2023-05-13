@@ -13,6 +13,8 @@ import { PeriodoPracticas } from 'src/model/PeriodoPracticas';
   styleUrls: ['./alumnos.page.scss'],
 })
 export class AlumnosPage implements OnInit {
+  //tema oscuro o claro
+  darkMode: boolean;
   public alumnos:Array<Usuario>=[]=[];
   public filter: Array<Usuario>=[]=[];
   public permision: boolean;
@@ -25,6 +27,7 @@ export class AlumnosPage implements OnInit {
 
   ngOnInit() {
     this.loadUsers();
+    this.darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
   }
 
   public async loadUsers(){
@@ -62,5 +65,9 @@ export class AlumnosPage implements OnInit {
 
   cerrarSesion(){
     this.login.logout();
+  }
+
+  cambio() {
+    document.body.classList.toggle( 'dark' );
   }
 }

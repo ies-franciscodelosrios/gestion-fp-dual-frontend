@@ -15,8 +15,10 @@ import { Encargo } from 'src/model/Encargo';
   styleUrls: ['./new-task.page.scss'],
 })
 export class NewTaskPage implements OnInit {
+  public now: Date = new Date();
+  public guarDate: string = this.now.toJSON();
+  public isoDate: string = this.now.toLocaleString('es-ES', { timeZone: 'UTC' });
   public periodos: PeriodoPracticas[] = [];
-  
   public encargo: Encargo;
   public formTask: FormGroup;  //importar ReactiveFormModule en module.ts
   @Output() closeModal: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -32,12 +34,10 @@ export class NewTaskPage implements OnInit {
   }
 
   async ngOnInit() {
-    const now: Date = new Date();
-    const isoDate: string = now.toISOString();
     this.formTask = this.formBuilder.group({   //creando los campos que serán controlados y validados por formTitulo
       taskname: ['', [Validators.required, Validators.minLength(4)]],
       taskstatus: true,
-      taskdate: isoDate
+      taskdate: this.isoDate
     })
     this.encargo = {
       id: 0,
@@ -62,12 +62,12 @@ export class NewTaskPage implements OnInit {
   submitForm() {
     //mostrar un loading....
     this.encargo.id_periodo= this.select.value;
-    console.log(this.encargo.id_periodo)
+    console.log()
     try {
       this.apiS.addTarea({
         tarea: this.formTask.get('taskname')?.value,
         estado: this.formTask.get('taskstatus')?.value,
-        fecha: this.formTask.get('taskdate')?.value,
+        fecha: this.guarDate,
         comentario: '',
         periodo_practica: {
           id: this.encargo.id_periodo

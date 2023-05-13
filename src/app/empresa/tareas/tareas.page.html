@@ -1,6 +1,12 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar style="display: flex; flex-direction: row;">
     <ion-title>Tareas</ion-title>
+    <ion-item slot="end">
+      <ion-icon slot="start" name="moon"></ion-icon>
+      <ion-toggle slot="end"
+                  [ngModel]="darkMode"
+                  (ionChange)="cambio()"></ion-toggle>
+    </ion-item>
     <ion-buttons slot="end">
       <ion-button (click)="cerrarSesion()">
         <ion-icon slot="icon-only" name="exit"></ion-icon>
@@ -18,7 +24,7 @@
 
 <ion-content>
   <div class="container">
-    <ion-card style="cursor:pointer" (click)="this.editTask(tarea)" class="item" id="open-modal" *ngFor="let tarea of this.tareas; let i=index">
+    <ion-card style="cursor:pointer" (click)="this.editTask(tarea)" class="card" id="open-modal" *ngFor="let tarea of this.tareas; let i=index">
       <ion-icon name="document-attach-outline" style="zoom:10"></ion-icon>
       <ion-card-header>
         <ion-card-title>{{ tarea.tarea }}</ion-card-title>
