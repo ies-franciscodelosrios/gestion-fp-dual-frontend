@@ -29,7 +29,7 @@
 <!--Lista de objetos de tipo modulo que al seleccionar un "ion-item" se abra un modal con el contenido de RA que se da en este modulo en concreto-->
   <ion-list lines="inset">
     <ion-item id="open-modal" *ngFor="let listamodul of this.filter;let i=index" >
-      <ion-label (click)="listaRAModul(listamodul)">
+      <ion-label  (click)="navToRa(listamodul)">
         <h3>{{listamodul.nombre}}</h3>
         <p>Có. Boja: {{listamodul.cod_mod_boja}}</p>
       </ion-label>

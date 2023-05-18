@@ -13,7 +13,6 @@ import { Titulo } from 'src/model/Titulo';
   styleUrls: ['./titulo.page.scss'],
 })
 export class TituloPage implements OnInit {
-
   public listTitulo: Titulo[] = [];
   public filter: Titulo[] = [];
   public tittle: any;
@@ -87,6 +86,11 @@ export class TituloPage implements OnInit {
         return (titulo.nombre?.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1);
       })
     }
+  }
+
+  navToModule(tittle: Titulo) {
+    const dynamicPath = '/modulo/'+ tittle.nombre +";id=" + tittle.id;
+    this.router.navigateByUrl(dynamicPath), { queryParams: tittle };
   }
 
   cambio() {

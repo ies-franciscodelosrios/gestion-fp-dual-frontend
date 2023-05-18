@@ -45,7 +45,7 @@ export class CeModuleRaEditPage implements OnInit {
     } else if (this.mode == "edit") {
       this.title == "Editar";
       this.formRA = this.formBuilder.group({
-        resultado: ['', [Validators.required, Validators.pattern('[A-zÁ-ÿ ]{3,120}')]],
+        resultado: [this.atribRa.resultado, [Validators.required, Validators.pattern('[A-zÁ-ÿ ]{3,120}')]],
       })
     }
   }
@@ -72,7 +72,9 @@ export class CeModuleRaEditPage implements OnInit {
     try {
       this.apiS.addRA({
         id: this.atribRa.id,
-        nombre: this.formRA.get('nombre')?.value,
+        modulo:  { id: this.idmodul},
+        resultado: this.formRA.get('resultado')?.value,
+        
       }).subscribe(d => {
       })
     } catch (error) {

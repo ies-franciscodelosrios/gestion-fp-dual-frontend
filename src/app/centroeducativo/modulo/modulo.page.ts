@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { AlertController, ModalController } from '@ionic/angular';
+import { ModalController, NavParams } from '@ionic/angular';
 import { CeModuleEditPage } from 'src/app/pages/ce-module-edit/ce-module-edit.page';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
@@ -28,13 +28,12 @@ export class ModuloPage implements OnInit {
     private apiS: APIService,
     private login: LoginService,
     private router: Router,
-    private alrtCtrl: AlertController,
     private modalCtrl: ModalController,
     private actroute: ActivatedRoute) {
   }
 
   ngOnInit() {
-    this.load();
+   this.load();
   }
 
   public async load() {
@@ -49,7 +48,6 @@ export class ModuloPage implements OnInit {
     })
     this.apiS.getModuleByTittle(this.Tittles).subscribe(tittle => {
       this.listModulo = <Modulo[]>tittle.modulo;
-      console.log(this.listModulo)
       return this.listModulo;
     });
     this.apiS.getModuleByTittle(this.Tittles).subscribe(tittle => {
@@ -81,8 +79,8 @@ export class ModuloPage implements OnInit {
     const modal = await this.modalCtrl.create({
       component: CeModuleEditPage,
       componentProps: {
+        atribTittle: this.Tittles,
         mode: "create",
-        atribtitle: this.Tittles
       }
     });
     modal.onDidDismiss().then(() => {
@@ -96,6 +94,7 @@ export class ModuloPage implements OnInit {
       component: CeModuleEditPage,
       componentProps: {
         atribModule: modul,
+        atribTittle: this.Tittles,
         mode: "edit"
       }
     });
@@ -118,6 +117,11 @@ export class ModuloPage implements OnInit {
         return (modulo.nombre?.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1);
       })
     }
+  }
+
+  navToRa(module: Modulo) {
+    const dynamicPath = '/ra/'+ module.nombre +";id=" + module.id;
+    this.router.navigateByUrl(dynamicPath, { state: { tid: this.tittleId , tname: this.tittleName  } });
   }
 
   cambio() {

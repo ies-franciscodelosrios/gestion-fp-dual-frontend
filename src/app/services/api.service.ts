@@ -54,7 +54,6 @@ export class APIService {
   addPractica(practica: any): Observable<any> {
     const url = environment.api.url + environment.api.endpoints.periodopracticas
     return this.http.post(url, practica, {
-
     });
   }
   //devuelve un valor al frontend
@@ -94,7 +93,7 @@ export class APIService {
   }
 
   getRAByModul(id:Modulo): Observable<Modulo> {
-    const url = environment.api.url + environment.api.endpoints.modulo + "/" + id
+    const url = environment.api.url + environment.api.endpoints.modulo + "/" + id.id
     return this.http.get<Modulo>(url, {
     });
   }
@@ -173,6 +172,7 @@ export class APIService {
     return this.http.put(url, encargo);
   }
 
+
   //elimina un valor del backend
   deleteUsuario(id?: number): Observable<any> {
     const url = environment.api.url + environment.api.endpoints.user + id
@@ -200,7 +200,7 @@ export class APIService {
   }
 
   deleteRa(id?: number) {
-    const url = environment.api.url + environment.api.endpoints.ra + id
+    const url = environment.api.url + environment.api.endpoints.ra + "/"+ id
     return this.http.delete(url);
   }
 

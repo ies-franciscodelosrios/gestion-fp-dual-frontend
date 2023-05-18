@@ -44,6 +44,10 @@ const routes: Routes = [
     path: 'modulo/:nombre',
     loadChildren: () => import('./centroeducativo/modulo/modulo.module').then( m => m.ModuloPageModule)
   },
+  {
+    path: 'ra/:nombre',
+    loadChildren: () => import('./centroeducativo/ra/ra.module').then( m => m.RaPageModule)
+  },
   { path: '**', pathMatch: 'full', 
   component: LoginPage },
   {
@@ -61,10 +65,6 @@ const routes: Routes = [
   {
     path: 'edit-task',
     loadChildren: () => import('./pages/edit-task/edit-task.module').then( m => m.EditTaskPageModule)
-  },
-  {
-    path: 'ra',
-    loadChildren: () => import('./centroeducativo/ra/ra.module').then( m => m.RaPageModule)
   },
   {
     path: 'info-alumno',
