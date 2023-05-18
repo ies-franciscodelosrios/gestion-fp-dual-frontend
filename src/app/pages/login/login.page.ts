@@ -12,20 +12,20 @@ import { APIService } from 'src/app/services/api.service';
 })
 export class LoginPage implements OnInit {
   public userinfo: any;
+  private darkMode:boolean;
   constructor(private loginS: LoginService,
     private apiS: APIService,
     private router: Router) {
   }
 
   public logging=false;
-  darkMode: boolean;
 
   ngOnInit() {
     if (localStorage.getItem('login') != null) {
       this.loginS.user = JSON.parse(localStorage.getItem('login')!);
       //this.router.navigate(['/login']);
     }
-    this.darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    localStorage.setItem('theme', JSON.stringify(window.matchMedia('(prefers-color-scheme: dark)').matches));
     this.theme();
   }
 
@@ -51,9 +51,9 @@ export class LoginPage implements OnInit {
     }
   }
 
-  theme(){
+  theme(){ 
+    this.darkMode=JSON.parse(localStorage.getItem('theme')!);
     if(this.darkMode){
-      console.log("esta oscuro")
       document.body.classList.toggle( 'dark' );
     }
   }

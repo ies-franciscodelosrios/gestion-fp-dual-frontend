@@ -25,7 +25,6 @@ export class TareasPage implements OnInit {
     //se obtienen los encargos y se insertan en el array encargos
     this.refresEncargos();
     this.login.getRol();
-    this.darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
     this.theme();
   }
 
@@ -42,13 +41,27 @@ export class TareasPage implements OnInit {
     console.log("Cerrando")
   }
 
-  theme(){
+ 
+  theme(){ 
+    const body = document.body;
+    this.darkMode=JSON.parse(localStorage.getItem('theme')!);
     if(this.darkMode){
-      console.log("esta oscuro")
-      document.body.classList.toggle( 'dark' );
+      if (!body.classList.contains('dark')) {
+        document.body.classList.toggle( 'dark' );
+      }
+    }else{
+      if (body.classList.contains('dark')) {
+        document.body.classList.toggle( 'dark' );
+      }
     }
   }
   cambio() {
+    const body = document.body;
+    if (body.classList.contains('dark')) {
+      localStorage.setItem('theme', JSON.stringify(false));
+    }else{
+      localStorage.setItem('theme', JSON.stringify(true));
+    }
     document.body.classList.toggle( 'dark' );
   }
   
