@@ -5,5 +5,6 @@ export interface Usuario {
     id_rol?:number,
     documentos?:string,
     password?:string,
-    correo?:string
+    correo?:string,
+    imagen?:string
 }

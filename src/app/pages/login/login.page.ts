@@ -13,20 +13,22 @@ import { APIService } from 'src/app/services/api.service';
 export class LoginPage implements OnInit {
   public userinfo: any;
   private darkMode:boolean;
+  public logging:boolean;
   constructor(private loginS: LoginService,
     private apiS: APIService,
     private router: Router) {
   }
 
-  public logging=false;
-
+  
+  ionViewWillEnter() {
+   
+  }
   ngOnInit() {
+    this.theme();
+    this.logging=false;
     if (localStorage.getItem('login') != null) {
       this.loginS.user = JSON.parse(localStorage.getItem('login')!);
-      //this.router.navigate(['/login']);
     }
-    localStorage.setItem('theme', JSON.stringify(window.matchMedia('(prefers-color-scheme: dark)').matches));
-    this.theme();
   }
 
   public async signin() {
@@ -51,10 +53,12 @@ export class LoginPage implements OnInit {
     }
   }
 
+  
   theme(){ 
-    this.darkMode=JSON.parse(localStorage.getItem('theme')!);
-    if(this.darkMode){
-      document.body.classList.toggle( 'dark' );
+     //localStorage.setItem('theme', JSON.stringify(window.matchMedia('(prefers-color-scheme: dark)').matches));
+      this.darkMode=JSON.parse(localStorage.getItem('theme')!);
+      if(this.darkMode){
+        document.body.classList.toggle( 'dark' );
+        }
     }
   }
-}
