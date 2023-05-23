@@ -20,13 +20,12 @@ export class APIService {
 
   //añade un contenido a la bbdd
   addTitulo(titulo: any): Observable<any> {
-    console.log(environment.api.url + environment.api.endpoints.titulo)
     const url = environment.api.url + environment.api.endpoints.titulo
     return this.http.post(url, titulo);
   }
 
   addModulo(modulo: any): Observable<any> {
-    const url = environment.api.url + environment.api.endpoints.modulos
+    const url = environment.api.url + environment.api.endpoints.modulo
     return this.http.post(url, modulo);
   }
 
@@ -55,7 +54,6 @@ export class APIService {
   addPractica(practica: any): Observable<any> {
     const url = environment.api.url + environment.api.endpoints.periodopracticas
     return this.http.post(url, practica, {
-
     });
   }
   //devuelve un valor al frontend
@@ -91,6 +89,12 @@ export class APIService {
   getRA(): Observable<Ra[]> {
     const url = environment.api.url + environment.api.endpoints.ra
     return this.http.get<Ra[]>(url, {
+    });
+  }
+
+  getRAByModul(id:Modulo): Observable<Modulo> {
+    const url = environment.api.url + environment.api.endpoints.modulo + "/" + id.id
+    return this.http.get<Modulo>(url, {
     });
   }
 
@@ -139,7 +143,7 @@ export class APIService {
   }
 
   getModulo(): Observable<Modulo[]> {
-    const url = environment.api.url + environment.api.endpoints.modulos
+    const url = environment.api.url + environment.api.endpoints.modulo
     return this.http.get<Modulo[]>(url, {
     });
   }
@@ -168,6 +172,7 @@ export class APIService {
     return this.http.put(url, encargo);
   }
 
+
   //elimina un valor del backend
   deleteUsuario(id?: number): Observable<any> {
     const url = environment.api.url + environment.api.endpoints.user + id
@@ -185,17 +190,17 @@ export class APIService {
   }
 
   deleteTitulo(id?: number) {
-    const url = environment.api.url + environment.api.endpoints.titulo + id
+    const url = environment.api.url + environment.api.endpoints.titulo + "/"+ id
     return this.http.delete(url);
   }
 
   deleteModulo(id?: number) {
-    const url = environment.api.url + environment.api.endpoints.modulos + id
+    const url = environment.api.url + environment.api.endpoints.modulo +"/"+ id
     return this.http.delete(url);
   }
 
   deleteRa(id?: number) {
-    const url = environment.api.url + environment.api.endpoints.ra + id
+    const url = environment.api.url + environment.api.endpoints.ra + "/"+ id
     return this.http.delete(url);
   }
 

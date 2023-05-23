@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ModalController, NavParams } from '@ionic/angular';
 import { CeModuleEditPage } from 'src/app/pages/ce-module-edit/ce-module-edit.page';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
@@ -7,7 +7,6 @@ import { APIService } from 'src/app/services/api.service';
 import { Modulo } from 'src/model/Modulo';
 import { RaPage } from '../ra/ra.page';
 import { Titulo } from 'src/model/Titulo';
-import { log } from 'console';
 
 @Component({
   selector: 'app-modulo',
@@ -21,7 +20,10 @@ export class ModuloPage implements OnInit {
   public tittleName: string;
   public listModulo: Modulo[] = [];
   public filter: Modulo[] = [];
+  //tema oscuro o claro
+  darkMode: boolean;
 
+  @Output() modulUpdate: EventEmitter<boolean> = new EventEmitter<boolean>();
   constructor(
     private apiS: APIService,
     private login: LoginService,
@@ -31,8 +33,7 @@ export class ModuloPage implements OnInit {
   }
 
   ngOnInit() {
-
-    this.load();
+   this.load();
   }
 
   public async load() {
@@ -53,7 +54,6 @@ export class ModuloPage implements OnInit {
       this.filter = <Modulo[]>tittle.modulo;
       return this.filter;
     });
-
   }
 
   backToTitle() {
@@ -65,7 +65,8 @@ export class ModuloPage implements OnInit {
       component: RaPage,
       componentProps: {
         codmodul: atribModul.cod_mod_boja,
-        nommodul: atribModul.nombre
+        nommodul: atribModul.nombre,
+        idmodul: atribModul.id
       }
     });
     modal.onDidDismiss().then(() => {
@@ -78,14 +79,34 @@ export class ModuloPage implements OnInit {
     const modal = await this.modalCtrl.create({
       component: CeModuleEditPage,
       componentProps: {
-        mode: "edit",
-        atribMdl: this.Tittles
+        atribTittle: this.Tittles,
+        mode: "create",
       }
     });
     modal.onDidDismiss().then(() => {
       window.location.reload();
     });
     return await modal.present();
+  }
+
+  public async editModule(modul: Modulo) {
+    const modal = await this.modalCtrl.create({
+      component: CeModuleEditPage,
+      componentProps: {
+        atribModule: modul,
+        atribTittle: this.Tittles,
+        mode: "edit"
+      }
+    });
+    modal.onDidDismiss().then(() => {
+      window.location.reload();
+    });
+    return await modal.present();
+  }
+
+  cancel() {
+    this.modulUpdate.emit(true);
+    this.load();
   }
 
   handleChange(event: any) {
@@ -96,6 +117,15 @@ export class ModuloPage implements OnInit {
         return (modulo.nombre?.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1);
       })
     }
+  }
+
+  navToRa(module: Modulo) {
+    const dynamicPath = '/ra/'+ module.nombre +";id=" + module.id;
+    this.router.navigateByUrl(dynamicPath, { state: { tid: this.tittleId , tname: this.tittleName  } });
+  }
+
+  cambio() {
+    document.body.classList.toggle('dark');
   }
 
   cerrarSesion() {

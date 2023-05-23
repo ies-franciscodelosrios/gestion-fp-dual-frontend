@@ -1,7 +1,10 @@
+import { Ra } from "./Ra"
 import { Titulo } from "./Titulo"
 
 export interface Modulo{
-    cod_mod_boja?:number,
+    id?: number,
+    cod_mod_boja?:string,
     nombre?:string,
-    titulo?:Titulo
+    id_titulo?:Titulo,
+    ra?:Ra[] 
 }

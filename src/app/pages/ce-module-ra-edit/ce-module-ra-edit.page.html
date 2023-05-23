@@ -11,12 +11,15 @@
   <!--contenido dentro del modal que permite introducir datos y "guardarlos"-->
   <form [formGroup]="formRA" (ngSubmit)="submitForm()">
   <ion-item fill="solid">
-    <ion-label position="floating">Nombre</ion-label>
+    <ion-label position="floating">Nombre del Resultado de Ra</ion-label>
     <ion-input maxlength="120" formControlName="resultado"> </ion-input>
     <ion-note slot="error">solo permite letras</ion-note>
   </ion-item>
   <ion-grid>
     <ion-row>
+      <ion-col id="btnDelete" style="text-align: left;">
+        <ion-button shape="round" color="danger" fill="outline" (click)="onDelete()">Eliminar</ion-button>
+      </ion-col> 
       <ion-col style="text-align: right;">
         <ion-button shape="round" color="success" type="submit" [disabled]="this.formRA.pristine">Guardar</ion-button>
       </ion-col>
