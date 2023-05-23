@@ -31,9 +31,9 @@ export class CEUserEditPage implements OnInit {
       const btnelem = document.getElementById('btnDelete') as HTMLElement;
       btnelem.style.display = 'none';
       this.formUsuario = this.formBuilder.group({ //creando los campos que serán controlados y validados por putUsuario
-        nombre: ['', [Validators.required, Validators.minLength(4)]],
-        correo: ['', [Validators.required, Validators.required]],
-        documentos: ['',[Validators.required, Validators.required]],
+        nombre: ['', [Validators.required, Validators.pattern('\[A-zÁ-ÿ ]{3,50}')]],
+        correo: ['', [Validators.required, Validators.email]],
+        documentos: ['',[Validators.required, Validators.pattern(/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i)]],
         rol: '',
         alta: true,
       })
@@ -134,7 +134,6 @@ export class CEUserEditPage implements OnInit {
   }
 
   onDelete(){
-    console.log(this.atribuser.id);
     this.alrtCtrl.create({
       header: '¿Estás seguro?',
       message:'¿Realmente quieres eliminar?',
@@ -146,7 +145,6 @@ export class CEUserEditPage implements OnInit {
           text: 'Eliminar',
           handler:() => {
             this.apiS.deleteUsuario(this.atribuser.id).subscribe((respuesta) => {
-              console.log(respuesta);
             });
             this.cancel();
           }

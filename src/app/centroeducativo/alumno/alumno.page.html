@@ -1,8 +1,11 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Alumno</ion-title>
+    <ion-toggle 
+    slot="end" [ngModel]="darkMode" (ionChange)="cambio()">
+    </ion-toggle>
     <!--Botón qu permite salir de la sesión actual con el ultimo usuario logueado-->
-    <ion-buttons slot="end">   
+    <ion-buttons slot="end">
       <ion-button (click)="cerrarSesion()">
         <ion-icon slot="icon-only" name="exit"></ion-icon>
       </ion-button>
@@ -13,14 +16,14 @@
 <ion-content>
   <div id="divsearch">
     <!--Busqueda y filtrado de alumnos-->
-    <ion-searchbar id="searchempresa" placeholder="Buscar" animated (ionChange)="handleChange($event)" ></ion-searchbar>
-     <!--Botón para agregar un nuevo alumno-->
-    <ion-button (click)="nuevoalumno()" style="--background: #141414; zoom:1.25" ><ion-icon
-        name="duplicate-outline" style="color: white;"></ion-icon></ion-button>
+    <ion-searchbar id="searchempresa" placeholder="Buscar" animated (ionChange)="handleChange($event)"></ion-searchbar>
+    <!--Botón para agregar un nuevo alumno-->
+    <ion-button (click)="nuevoalumno()" style="--background: #141414; zoom:1.25"><ion-icon name="duplicate-outline"
+        style="color: white;"></ion-icon></ion-button>
   </div>
   <!--Lista de objetos de tipo alumno que al seleccionar un "ion-card" se abra un modal con el contenido de ese alumno en concreto-->
   <div id="divlist" *ngIf="permision">
-    <ion-card id="open-modal" *ngFor="let lista of this.filter;let i=index" (click) ="this.editalumno(lista)">
+    <ion-card id="open-modal" *ngFor="let lista of this.filter;let i=index" (click)="this.editalumno(lista)">
       <img src="assets/add.png" style="z-index: -1;" />
       <ion-card-header>
         <ion-card-title>{{lista.nombre}}</ion-card-title>

@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { CEUserEditPage } from 'src/app/pages/ce-user-edit/ce-user-edit.page';
 import { Title } from '@angular/platform-browser';
@@ -18,7 +18,8 @@ export class EmpresaPage implements OnInit {
   public listEmpresa: Usuario[] = [];
   public filter: Usuario[] = [];
   public empresas: CEUserEditPage[] = [];
-
+   //tema oscuro o claro
+  darkMode: boolean;
   constructor(
     private titleSV: Title,
     private apiS: APIService,
@@ -85,6 +86,10 @@ export class EmpresaPage implements OnInit {
         return (usuario.nombre?.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1);
       })
     }
+  }
+
+  cambio() {
+    document.body.classList.toggle( 'dark' );
   }
 
   cerrarSesion() {

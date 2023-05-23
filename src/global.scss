@@ -28,10 +28,29 @@
 
 :root {
     --ion-color-floatbuton: #33d9f0;
-    --ion-color-primary: #33d9f0;
+    //--ion-color-floatbuton: #000000;
+    //--ion-color-primary: #000000;
     --ion-color-floatbuton-rgb: 51, 217, 240;
     --ion-color-floatbuton-contrast: #000000;
     --ion-color-floatbuton-contrast-rgb: 0, 0, 0;
     --ion-color-floatbuton-shade: #2dbfd3;
     --ion-color-floatbuton-tint: #47ddf2;
 }
+
+.dark {
+    --ion-color-primary: #fff;
+    --ion-color-primary-rgb: 255, 255, 255;
+    --ion-color-primary-contrast: #000;
+    --ion-color-primary-contrast-rgb: 0, 0, 0;
+    --ion-color-secondary: #fff;
+    --ion-color-secondary-rgb: 255, 255, 255;
+    --ion-color-secondary-contrast: #000;
+    --ion-color-secondary-contrast-rgb: 0, 0, 0;
+    --ion-color-tertiary: #fff;
+    --ion-color-tertiary-rgb: 255, 255, 255;
+    --ion-color-tertiary-contrast: #000;
+    --ion-color-tertiary-contrast-rgb: 0, 0, 0;
+    // rest of the color variables...
+    background-color: #222;
+    color: #fff;
+  }
