@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Edit Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="formProfile" (ngSubmit)="submitForm()">
+
+    <ion-img class="img" [src]="image"></ion-img>
+    <ion-button (click)="chooseImage()" expand="block" color="success">Choose Image</ion-button>
+ 
+    <ion-grid>
+      <ion-row>
+        <ion-col id="btn" style="text-align: left;">
+          <ion-button class="btnCancel" shape="round" color="danger" fill="outline" (click)="cancel()">CANCEL</ion-button>
+        </ion-col>
+        <ion-col  style="text-align: right;">
+          <ion-button class="btnSave" shape="round" color="success" type="submit" >SAVE</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
