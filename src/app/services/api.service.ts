@@ -48,7 +48,6 @@ export class APIService {
   addUsuario(user: any): Observable<any> {
     const url = environment.api.url + environment.api.endpoints.user
     return this.http.post(url, user, {
-
     });
   }
   addPractica(practica: any): Observable<any> {
