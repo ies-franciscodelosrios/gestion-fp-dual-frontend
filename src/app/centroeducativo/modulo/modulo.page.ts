@@ -37,6 +37,7 @@ export class ModuloPage implements OnInit {
   }
 
   public async load() {
+    this.theme();
     await this.login.keepSession();
     // Obtiene el titulo seleccionado de su origen de datos según su id
     this.actroute.paramMap.subscribe(params => {
@@ -124,8 +125,27 @@ export class ModuloPage implements OnInit {
     this.router.navigateByUrl(dynamicPath, { state: { tid: this.tittleId , tname: this.tittleName  } });
   }
 
+  theme(){ 
+    const body = document.body;
+    this.darkMode=JSON.parse(localStorage.getItem('theme')!);
+    if(this.darkMode){
+      if (!body.classList.contains('dark')) {
+        document.body.classList.toggle( 'dark' );
+      }
+    }else{
+      if (body.classList.contains('dark')) {
+        document.body.classList.toggle( 'dark' );
+      }
+    }
+  }
   cambio() {
-    document.body.classList.toggle('dark');
+    const body = document.body;
+    if (body.classList.contains('dark')) {
+      localStorage.setItem('theme', JSON.stringify(false));
+    }else{
+      localStorage.setItem('theme', JSON.stringify(true));
+    }
+    document.body.classList.toggle( 'dark' );
   }
 
   cerrarSesion() {

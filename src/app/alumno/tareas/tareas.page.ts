@@ -41,7 +41,6 @@ export class TareasPage implements OnInit {
     console.log("Cerrando")
   }
 
- 
   theme(){ 
     const body = document.body;
     this.darkMode=JSON.parse(localStorage.getItem('theme')!);

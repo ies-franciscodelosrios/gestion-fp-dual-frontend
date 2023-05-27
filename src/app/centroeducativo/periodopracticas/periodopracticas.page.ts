@@ -13,13 +13,14 @@ import { LoginService } from 'src/app/services/login.service';
   styleUrls: ['./periodopracticas.page.scss'],
 })
 export class PeriodopracticasPage implements OnInit {
+
   practica = 'Practicas';
   public practicas: CePracticesEditPage[] = [];
   public listPracticas: PeriodoPracticas[] = [];
   public filter: PeriodoPracticas[] = [];
   public results = this.practicas;
-
-
+  //tema oscuro o claro
+  darkMode: boolean;
   constructor(
     private http: HttpClient,
     private router: Router,
@@ -32,6 +33,7 @@ export class PeriodopracticasPage implements OnInit {
     this.load();
   }
   public async load() {
+    this.theme();
     await this.login.keepSession();
     this.apiS.getPP().subscribe(listPracticas => {
       this.listPracticas = listPracticas;
@@ -79,6 +81,30 @@ export class PeriodopracticasPage implements OnInit {
         return (usuario.nombre?.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1);
       })
     }
+  }
+
+  theme() {
+    const body = document.body;
+    this.darkMode = JSON.parse(localStorage.getItem('theme')!);
+    if (this.darkMode) {
+      if (!body.classList.contains('dark')) {
+        document.body.classList.toggle('dark');
+      }
+    } else {
+      if (body.classList.contains('dark')) {
+        document.body.classList.toggle('dark');
+      }
+    }
+  }
+
+  cambio() {
+    const body = document.body;
+    if (body.classList.contains('dark')) {
+      localStorage.setItem('theme', JSON.stringify(false));
+    } else {
+      localStorage.setItem('theme', JSON.stringify(true));
+    }
+    document.body.classList.toggle('dark');
   }
 
   cerrarSesion() {

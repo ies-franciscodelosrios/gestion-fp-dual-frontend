@@ -30,6 +30,7 @@ export class AlumnoPage implements OnInit {
   }
   
   public async load() {
+    this.theme();
     await this.login.keepSession();
     this.permision = true;
     this.apiS.getUsuarioAlumno().subscribe(rol => {
@@ -87,7 +88,26 @@ export class AlumnoPage implements OnInit {
     }
   }
   
+  theme(){ 
+    const body = document.body;
+    this.darkMode=JSON.parse(localStorage.getItem('theme')!);
+    if(this.darkMode){
+      if (!body.classList.contains('dark')) {
+        document.body.classList.toggle( 'dark' );
+      }
+    }else{
+      if (body.classList.contains('dark')) {
+        document.body.classList.toggle( 'dark' );
+      }
+    }
+  }
   cambio() {
+    const body = document.body;
+    if (body.classList.contains('dark')) {
+      localStorage.setItem('theme', JSON.stringify(false));
+    }else{
+      localStorage.setItem('theme', JSON.stringify(true));
+    }
     document.body.classList.toggle( 'dark' );
   }
 

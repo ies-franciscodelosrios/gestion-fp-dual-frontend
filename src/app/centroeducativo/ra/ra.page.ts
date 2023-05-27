@@ -46,6 +46,7 @@ export class RaPage implements OnInit {
     this.load();
   }
   public async load() {
+    this.theme();
     await this.login.keepSession();
     this.router.getCurrentNavigation()?.extras.state;
       this.tittleId = history.state.tid;
@@ -114,8 +115,27 @@ export class RaPage implements OnInit {
     this.router.navigateByUrl(dynamicPath);
   }
 
+  theme(){ 
+    const body = document.body;
+    this.darkMode=JSON.parse(localStorage.getItem('theme')!);
+    if(this.darkMode){
+      if (!body.classList.contains('dark')) {
+        document.body.classList.toggle( 'dark' );
+      }
+    }else{
+      if (body.classList.contains('dark')) {
+        document.body.classList.toggle( 'dark' );
+      }
+    }
+  }
   cambio() {
-    document.body.classList.toggle('dark');
+    const body = document.body;
+    if (body.classList.contains('dark')) {
+      localStorage.setItem('theme', JSON.stringify(false));
+    }else{
+      localStorage.setItem('theme', JSON.stringify(true));
+    }
+    document.body.classList.toggle( 'dark' );
   }
 
   cerrarSesion() {
