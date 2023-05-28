@@ -22,7 +22,11 @@
   </div>
     <div id="divlist" *ngIf="permision">
       <ion-card (click)="this.viewAlumn(alumno)" class="card" id="open-modal" *ngFor="let alumno of this.filter;let i=index">
-        <ion-icon name="person-outline" style="zoom:10"></ion-icon>
+        <ion-img
+          *ngIf="alumno.imagen!=null"
+          src={{alumno.imagen}}
+        ></ion-img>
+        <ion-icon *ngIf="alumno.imagen==null" name="person-outline" style="zoom:10"></ion-icon>
         <ion-card-header>
           <ion-card-title>{{alumno.nombre}}</ion-card-title>
           <ion-card-subtitle>{{alumno.correo}}</ion-card-subtitle>
