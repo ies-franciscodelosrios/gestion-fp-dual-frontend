@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Crear ciclo formativo</ion-title>
+    <ion-title>{{title}} ciclo formativo</ion-title>
     <!--Botón que permite cancelar y cerrar el modal-->
     <ion-buttons slot="end">
       <ion-button (click)="cancel()" [strong]="true"><ion-icon name="close-outline"></ion-icon></ion-button>
@@ -10,9 +10,10 @@
 <!--contenido dentro del modal que permite introducir datos y "guardarlos"-->
 <ion-content class="ion-padding">
   <form [formGroup]="formTitulo" (ngSubmit)="submitForm()">
-    <ion-item fill="solid">
+    <ion-item counter="true" fill="solid">
       <ion-label position="floating">Nombre</ion-label>
-      <ion-input formControlName="titulo" placeholder="titulo" ></ion-input>
+      <ion-input maxlength="7" formControlName="nombre" placeholder="nombre" ></ion-input>
+      <ion-note slot="error">solo permite letras</ion-note>
     </ion-item>
     <ion-grid>
       <ion-row>

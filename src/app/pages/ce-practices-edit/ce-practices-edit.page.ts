@@ -144,7 +144,6 @@ export class CePracticesEditPage implements OnInit {
   }
 
   onDelete(){
-    console.log(this.atribPP.id);
     this.alrtCtrl.create({
       header: '¿Estás seguro?',
       message:'¿Realmente quieres eliminar?',
@@ -156,7 +155,6 @@ export class CePracticesEditPage implements OnInit {
           text: 'Eliminar',
           handler:() => {
             this.apiS.deletePP(this.atribPP.id).subscribe((respuesta) => {
-              console.log(respuesta);
             });
             this.cancel();
           }

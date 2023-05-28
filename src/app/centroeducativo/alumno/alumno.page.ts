@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { InfiniteScrollCustomEvent, ModalController } from '@ionic/angular';
+import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 import { CEUserEditPage } from 'src/app/pages/ce-user-edit/ce-user-edit.page';
 import { Usuario } from 'src/model/Usuario';
 import { APIService } from 'src/app/services/api.service';
@@ -12,11 +12,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./alumno.page.scss'],
 })
 export class AlumnoPage implements OnInit {
-
   //public alumnos: UsuarioEditPage[] = [];
   public listAlumno: Usuario[] = [];
   public filter: Usuario[] = [];
   public permision: boolean;
+  //tema oscuro o claro
+  darkMode: boolean;
   constructor(
     private apiS: APIService,
     private login: LoginService,
@@ -27,6 +28,7 @@ export class AlumnoPage implements OnInit {
   ngOnInit() {
     this.load();
   }
+  
   public async load() {
     await this.login.keepSession();
     this.permision = true;
@@ -83,6 +85,10 @@ export class AlumnoPage implements OnInit {
         return (usuario.nombre?.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1);
       })
     }
+  }
+  
+  cambio() {
+    document.body.classList.toggle( 'dark' );
   }
 
   cerrarSesion() {

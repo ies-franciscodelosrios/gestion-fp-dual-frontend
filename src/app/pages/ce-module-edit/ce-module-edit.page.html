@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Crear modulo</ion-title>
+    <ion-title>{{title}} modulo</ion-title>
     <!--Botón que permite cancelar y cerrar el modal-->
     <ion-buttons slot="end">
       <ion-button (click)="cancel()" [strong]="true"><ion-icon name="close-outline"></ion-icon></ion-button>
@@ -23,6 +23,9 @@
     </ion-item>
     <ion-grid>
       <ion-row>
+        <ion-col id="btnDelete" style="text-align: left;">
+          <ion-button shape="round" color="danger" fill="outline" (click)="onDelete()">Eliminar</ion-button>
+        </ion-col>  
         <ion-col style="text-align: right;">
           <ion-button shape="round" color="success" type="submit"
             [disabled]="this.formModulo.pristine">Guardar</ion-button>

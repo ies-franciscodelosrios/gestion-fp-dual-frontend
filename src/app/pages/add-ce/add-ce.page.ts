@@ -46,7 +46,6 @@ export class AddCEPage implements OnInit {
       documentos: this.addUser.get('doc')?.value,
       correo: this.addUser.get('correo')?.value
     }).subscribe(d => {
-        console.log(d);
     });
     this.closeModal.emit(true);
     this.modalCtrl.dismiss();

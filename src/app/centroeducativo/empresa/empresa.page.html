@@ -1,6 +1,9 @@
 <ion-header [translucent]="true" id="Empresa">
   <ion-toolbar>
     <ion-title>{{empresa}}</ion-title>
+    <ion-toggle 
+    slot="end" [ngModel]="darkMode" (ionChange)="cambio()">
+    </ion-toggle>
     <!--Botón qu permite salir de la sesión actual con el ultimo usuario logueadoo-->
     <ion-buttons slot="end">
       <ion-button (click)="cerrarSesion()">
