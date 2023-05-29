@@ -27,9 +27,6 @@ export class LoginPage implements OnInit {
   ngOnInit() {
    
   }
-  ngOnInit() {
-    
-  }
 
   public async signin() {
     this.logging=true;

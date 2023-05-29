@@ -65,7 +65,7 @@ export class EditProfilePage implements OnInit {
         correo: this.user.correo,
         documentos: this.user.documentos,
         "rol": {  
-          "nombre": 'Alumno',
+          "nombre": rol,
         },
         alta: this.user.alta,
         imagen: this.user.imagen
