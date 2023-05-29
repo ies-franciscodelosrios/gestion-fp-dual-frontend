@@ -1,13 +1,16 @@
 <ion-header>
-  <ion-toolbar style="display: flex; flex-direction: row;">
+  <ion-toolbar>
     <ion-title>Alumno</ion-title>
-    <ion-item slot="end">
-      <ion-icon slot="start" name="moon"></ion-icon>
-      <ion-toggle slot="end"
-                  [ngModel]="darkMode"
-                  (ionChange)="cambio()"></ion-toggle>
-    </ion-item>
     <ion-buttons slot="end">
+      <ion-item>
+        <ion-icon slot="start" name="moon"></ion-icon>
+        <ion-toggle slot="end"
+                    [ngModel]="darkMode"
+                    (ionChange)="cambio()"></ion-toggle>
+      </ion-item>
+      <ion-button (click)="editProfile()">
+        <ion-icon name="person-outline"></ion-icon>
+      </ion-button>
       <ion-button (click)="cerrarSesion()">
         <ion-icon slot="icon-only" name="exit"></ion-icon>
       </ion-button>

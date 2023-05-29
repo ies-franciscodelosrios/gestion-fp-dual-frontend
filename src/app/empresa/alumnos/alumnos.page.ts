@@ -5,6 +5,7 @@ import { InfoAlumnoPage } from 'src/app/pages/info-alumno/info-alumno.page';
 import { ModalController } from '@ionic/angular';
 import { LoginService } from 'src/app/services/login.service';
 import { Router } from '@angular/router';
+import { EditProfilePage } from 'src/app/pages/edit-profile/edit-profile.page';
 import { PeriodoPracticas } from 'src/model/PeriodoPracticas';
 
 @Component({
@@ -69,5 +70,14 @@ export class AlumnosPage implements OnInit {
 
   cambio() {
     document.body.classList.toggle( 'dark' );
+  }
+
+  public async editProfile(){
+  
+    const modal = await this.modalCtrl.create({
+      component: EditProfilePage,
+      componentProps: { },
+    });
+    return await modal.present();
   }
 }

@@ -21,14 +21,14 @@ export class LoginPage implements OnInit {
 
   
   ionViewWillEnter() {
-   
-  }
-  ngOnInit() {
     this.theme();
     this.logging=false;
     if (localStorage.getItem('login') != null) {
       this.loginS.user = JSON.parse(localStorage.getItem('login')!);
     }
+  }
+  ngOnInit() {
+    
   }
 
   public async signin() {

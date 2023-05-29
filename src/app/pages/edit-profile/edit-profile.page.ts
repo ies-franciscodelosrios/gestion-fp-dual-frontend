@@ -44,7 +44,7 @@ export class EditProfilePage implements OnInit {
     this.imageBase64=this.photoService.base64Image;
     if(this.user!=null && this.imageBase64!=null){
       let rol;
-      switch(this.user.id){
+      switch(this.user.id_rol){
         case 1:
          rol= 'Admin'
         break;
