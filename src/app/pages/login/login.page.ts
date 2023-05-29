@@ -23,9 +23,9 @@ export class LoginPage implements OnInit {
   ionViewWillEnter() {
     this.theme();
     this.logging=false;
-    if (localStorage.getItem('login') != null) {
-      this.loginS.user = JSON.parse(localStorage.getItem('login')!);
-    }
+  }
+  ngOnInit() {
+   
   }
   ngOnInit() {
     
@@ -33,6 +33,9 @@ export class LoginPage implements OnInit {
 
   public async signin() {
     this.logging=true;
+    if (localStorage.getItem('login') != null) {
+      this.loginS.user = JSON.parse(localStorage.getItem('login')!);
+    }
    let valid= await this.loginS.login();
     if(valid){
       this.redirectLogged(this.loginS.user.id_rol);
@@ -55,10 +58,27 @@ export class LoginPage implements OnInit {
 
   
   theme(){ 
-     //localStorage.setItem('theme', JSON.stringify(window.matchMedia('(prefers-color-scheme: dark)').matches));
-      this.darkMode=JSON.parse(localStorage.getItem('theme')!);
-      if(this.darkMode){
-        document.body.classList.toggle( 'dark' );
-        }
+    //En caso de que no se haya guardado la variable se deja false por defecto
+    if(localStorage.getItem('darkTheme')==null){
+     localStorage.setItem('darkTheme', "False");
     }
+     //pilla el tema oscuro del localstore
+     let theme =localStorage.getItem('darkTheme');
+     //Em caso de  tema oscuro esta desactivado
+     if(theme=="False"){
+       //si la pagina esta oscuro
+       if(document.body.classList.contains('dark')){
+         //cambia a claro 
+         document.body.classList.toggle('dark'); 
+       }
+     //Em caso de tema oscuto esta activado
+     }else{
+       //si la pagina NO esta oscuro
+       if(!document.body.classList.contains('dark')){
+         //cambia a oscuro
+         document.body.classList.toggle('dark'); 
+       }
+     }
   }
+
+}

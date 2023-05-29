@@ -24,9 +24,9 @@ export class EditProfilePage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.formProfile = this.formBuilder.group({
-      
-    })
+    this.formProfile = this.formBuilder.group({})
+    this.user=JSON.parse(localStorage.getItem('login')!);
+    this.image=this.user?.imagen;
   }
 
   async chooseImage(){
@@ -40,7 +40,6 @@ export class EditProfilePage implements OnInit {
   }
 
   async submitForm() {
-    this.user=JSON.parse(localStorage.getItem('login')!);
     this.imageBase64=this.photoService.base64Image;
     if(this.user!=null && this.imageBase64!=null){
       let rol;
@@ -66,7 +65,7 @@ export class EditProfilePage implements OnInit {
         correo: this.user.correo,
         documentos: this.user.documentos,
         "rol": {  
-          "nombre": rol,
+          "nombre": 'Alumno',
         },
         alta: this.user.alta,
         imagen: this.user.imagen
