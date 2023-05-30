@@ -29,12 +29,6 @@ export class EditProfilePage implements OnInit {
     })
   }
 
-  async chooseImage(){
-    await this.photoService.addNewToGallery();
-    this.image= this.photoService.webviewPath;
-   
-  }
-
   cancel() {
     this.modalCTRL.dismiss(null, 'cancel');
   }

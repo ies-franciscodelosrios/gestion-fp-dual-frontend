@@ -16,7 +16,7 @@ export const environment = {
       titulo: '/titulo',
       user: '/users/',
       roles: '/roles',
-      modulos: '/modulo',
+      modulo: '/modulo',
       ra: '/ra',
       ce: '/ce',
       periodopracticas: '/periodo_practica/',
