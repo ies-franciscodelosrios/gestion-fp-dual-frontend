@@ -8,7 +8,7 @@
   <form [formGroup]="formProfile" (ngSubmit)="submitForm()">
 
     <ion-img class="img" [src]="image"></ion-img>
-    <ion-button  expand="block" color="success">Choose Image</ion-button>
+    <ion-button (click)="chooseImage()" expand="block" color="success">Choose Image</ion-button>
  
     <ion-grid>
       <ion-row>
