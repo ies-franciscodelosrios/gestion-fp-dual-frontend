@@ -49,7 +49,6 @@ export class TareasPage implements OnInit {
     this.login.logout();
   }
 
- 
   theme(){ 
     //pilla el tema oscuro del localstore
     let theme =localStorage.getItem('darkTheme');

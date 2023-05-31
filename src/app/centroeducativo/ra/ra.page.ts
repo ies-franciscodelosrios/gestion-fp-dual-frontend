@@ -9,6 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Ra } from 'src/model/Ra';
 import { Modulo } from 'src/model/Modulo';
 import { Titulo } from 'src/model/Titulo';
+import { EditProfilePage } from 'src/app/pages/edit-profile/edit-profile.page';
 
 @Component({
   selector: 'app-ra',
@@ -46,6 +47,7 @@ export class RaPage implements OnInit {
     this.load();
   }
   public async load() {
+    this.theme();
     await this.login.keepSession();
     this.router.getCurrentNavigation()?.extras.state;
       this.tittleId = history.state.tid;
@@ -99,14 +101,12 @@ export class RaPage implements OnInit {
     return await modal.present();
   }
 
-  toggleAccordion(index: number) {
-    if (index === this.abreIndice) {
-      // Si el índice es el mismo que el actual, cerrar el accordion
-      this.abreIndice = -1;
-    } else {
-      // Si el índice es diferente al actual, abrir el accordion
-      this.abreIndice = index;
-    }
+  public async editAvatar(){
+    const modal = await this.modalCtrl.create({
+      component: EditProfilePage,
+      componentProps: { },
+    });
+    return await modal.present();
   }
   
   backToModule() {
@@ -114,7 +114,31 @@ export class RaPage implements OnInit {
     this.router.navigateByUrl(dynamicPath);
   }
 
-  cambio() {
+theme(){ 
+    //A traves de localStorage se obtene la cadena 'darkTheme'
+    let theme =localStorage.getItem('darkTheme');
+    //Se comprueba si esta 'true' o 'false' para detectar el cambio de tema
+    if(theme=="False"){
+      if(document.body.classList.contains('dark')){
+        document.body.classList.toggle('dark'); 
+      }
+    }else{
+      if(!document.body.classList.contains('dark')){
+        document.body.classList.toggle('dark'); 
+      }
+    }
+  }
+
+  //Funcion auxiliar para theme
+  change() {
+    let theme =localStorage.getItem('darkTheme');
+    if(theme=="False"){
+      this.darkMode=true;
+      localStorage.setItem('darkTheme', "True");
+    }else{
+      this.darkMode=false;
+      localStorage.setItem('darkTheme', "False");
+    }
     document.body.classList.toggle('dark');
   }
 

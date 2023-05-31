@@ -7,5 +7,6 @@ export interface PeriodoPracticas {
     id_alumno?: Usuario,
     tiempo_inicio?: Date,
     tiempo_final?: Date,
-    estado?: boolean
+    estado?: boolean,
+    imagen?:string
 }

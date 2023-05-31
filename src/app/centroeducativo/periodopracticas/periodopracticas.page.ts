@@ -6,6 +6,7 @@ import { CePracticesEditPage } from 'src/app/pages/ce-practices-edit/ce-practice
 import { APIService } from 'src/app/services/api.service';
 import { PeriodoPracticas } from 'src/model/PeriodoPracticas';
 import { LoginService } from 'src/app/services/login.service';
+import { EditProfilePage } from 'src/app/pages/edit-profile/edit-profile.page';
 
 @Component({
   selector: 'app-periodopracticas',
@@ -13,13 +14,14 @@ import { LoginService } from 'src/app/services/login.service';
   styleUrls: ['./periodopracticas.page.scss'],
 })
 export class PeriodopracticasPage implements OnInit {
+
   practica = 'Practicas';
   public practicas: CePracticesEditPage[] = [];
   public listPracticas: PeriodoPracticas[] = [];
   public filter: PeriodoPracticas[] = [];
   public results = this.practicas;
-
-
+  //tema oscuro o claro
+  darkMode: boolean;
   constructor(
     private http: HttpClient,
     private router: Router,
@@ -32,6 +34,7 @@ export class PeriodopracticasPage implements OnInit {
     this.load();
   }
   public async load() {
+    this.theme();
     await this.login.keepSession();
     this.apiS.getPP().subscribe(listPracticas => {
       this.listPracticas = listPracticas;
@@ -71,6 +74,14 @@ export class PeriodopracticasPage implements OnInit {
     return await modal.present();
   }
 
+  public async editAvatar(){
+    const modal = await this.modalCtrl.create({
+      component: EditProfilePage,
+      componentProps: { },
+    });
+    return await modal.present();
+  }
+
   handleChange(event: any) {
     const searchTerm = event.target.value;
     this.filter = this.listPracticas;
@@ -79,6 +90,33 @@ export class PeriodopracticasPage implements OnInit {
         return (usuario.nombre?.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1);
       })
     }
+  }
+  theme(){ 
+    //A traves de localStorage se obtene la cadena 'darkTheme'
+    let theme =localStorage.getItem('darkTheme');
+    //Se comprueba si esta 'true' o 'false' para detectar el cambio de tema
+    if(theme=="False"){
+      if(document.body.classList.contains('dark')){
+        document.body.classList.toggle('dark'); 
+      }
+    }else{
+      if(!document.body.classList.contains('dark')){
+        document.body.classList.toggle('dark'); 
+      }
+    }
+  }
+
+  //Funcion auxiliar para theme
+  change() {
+    let theme =localStorage.getItem('darkTheme');
+    if(theme=="False"){
+      this.darkMode=true;
+      localStorage.setItem('darkTheme', "True");
+    }else{
+      this.darkMode=false;
+      localStorage.setItem('darkTheme', "False");
+    }
+    document.body.classList.toggle('dark');
   }
 
   cerrarSesion() {

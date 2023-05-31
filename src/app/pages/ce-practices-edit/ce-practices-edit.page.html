@@ -10,7 +10,7 @@
 <!--contenido dentro del modal que permite introducir datos y "guardarlos"-->
 <ion-content>
   <form [formGroup]="formPractica" (ngSubmit)="submitForm()">
-    <!--SELECIONAR EMPRESA-->
+    <!--Muestra una lista de todas las empresas creadas-->
     <ion-list>
       <ion-item>
         <ion-label position="floating">Empresa</ion-label>
@@ -20,7 +20,7 @@
         </ion-select>
       </ion-item>
     </ion-list>
-    <!--SELECIONAR ALUMNO-->
+    <!--Muestra una lista de todos los alumnos creados-->
     <ion-list>
       <ion-item>
         <ion-label position="floating">Alumno</ion-label>
