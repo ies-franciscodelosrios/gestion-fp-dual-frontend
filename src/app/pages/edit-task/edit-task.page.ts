@@ -30,6 +30,8 @@ export class EditTaskPage implements OnInit,OnChanges {
   }
 
   async ngOnInit() {
+    console.log(this.encargo)
+    console.log(this.select)
     const dateform = new Date(this.encargo.fecha)
     this.formTask = this.formBuilder.group({   //creando los campos que serán controlados y validados por formTitulo
       taskname: [this.encargo.tarea,[Validators.required, Validators.minLength(4)]],
@@ -53,7 +55,6 @@ export class EditTaskPage implements OnInit,OnChanges {
 
 
   submitForm() {
-    console.log(this.formTask.get('taskuser')?.value)
     this.encargo.tarea=this.formTask.get('taskname')?.value;
     this.encargo.estado= this.formTask.get('taskstatus')?.value;
     this.encargo.id_periodo= this.select.value;
@@ -71,14 +72,14 @@ export class EditTaskPage implements OnInit,OnChanges {
         }
       }).subscribe(d => {
         //la respuesta del servidor
-        console.log(d);
+        
         //ocultador loading
       })
     } catch (error) {
       console.error(error);
       //ocular loading
     }
-    console.log(this.encargo)
+    
     this.closeModal.emit(true)
     this.modalCTRL.dismiss()
   }
@@ -86,7 +87,7 @@ export class EditTaskPage implements OnInit,OnChanges {
   delete(){
     this.apiS.deleteEncargo(this.encargo.id).subscribe(d => {
       //la respuesta del servidor
-      console.log(d);
+      
       //ocultador loading
     })
     this.modalCTRL.dismiss()

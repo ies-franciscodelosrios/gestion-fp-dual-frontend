@@ -1,11 +1,17 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar style="display: flex; flex-direction: row;">
     <ion-title>Alumno</ion-title>
-    <ion-toggle 
-    slot="end" [ngModel]="darkMode" (ionChange)="cambio()">
-    </ion-toggle>
-    <!--Botón qu permite salir de la sesión actual con el ultimo usuario logueado-->
     <ion-buttons slot="end">
+      <ion-item>
+        <ion-icon slot="start" name="moon"></ion-icon>
+        <!--Botón que permite cambiar de tema-->
+        <ion-toggle slot="end" [ngModel]="darkMode" (ionChange)="change()">
+        </ion-toggle>
+      </ion-item>
+      <ion-button (click)="editAvatar()">
+        <ion-icon name="person-outline"></ion-icon>
+      </ion-button>
+      <!--Botón qu permite salir de la sesión actual con el ultimo usuario logueado-->
       <ion-button (click)="cerrarSesion()">
         <ion-icon slot="icon-only" name="exit"></ion-icon>
       </ion-button>
@@ -24,7 +30,8 @@
   <!--Lista de objetos de tipo alumno que al seleccionar un "ion-card" se abra un modal con el contenido de ese alumno en concreto-->
   <div id="divlist" *ngIf="permision">
     <ion-card id="open-modal" *ngFor="let lista of this.filter;let i=index" (click)="this.editalumno(lista)">
-      <img src="assets/add.png" style="z-index: -1;" />
+      <ion-img *ngIf="lista.imagen!=null" src={{lista.imagen}}></ion-img>
+      <ion-icon *ngIf="lista.imagen==null" name="person-outline" style="zoom:10"></ion-icon>
       <ion-card-header>
         <ion-card-title>{{lista.nombre}}</ion-card-title>
         <ion-card-subtitle>{{lista.correo}}</ion-card-subtitle>

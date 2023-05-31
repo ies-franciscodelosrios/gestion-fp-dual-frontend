@@ -6,6 +6,7 @@ import { Usuario } from 'src/model/Usuario';
 import { APIService } from 'src/app/services/api.service';
 import { LoginService } from 'src/app/services/login.service';
 import { Router } from '@angular/router';
+import { EditProfilePage } from 'src/app/pages/edit-profile/edit-profile.page';
 
 @Component({
   selector: 'app-empresa',
@@ -61,6 +62,15 @@ export class EmpresaPage implements OnInit {
     });
     return await modal.present();
   }
+
+  public async editAvatar(){
+    const modal = await this.modalCtrl.create({
+      component: EditProfilePage,
+      componentProps: { },
+    });
+    return await modal.present();
+  }
+
   public async editaempresa(empr: Usuario) {
     let emp = document.getElementById("Alumno");
     if (emp != null) {
@@ -90,26 +100,31 @@ export class EmpresaPage implements OnInit {
   }
 
   theme(){ 
-    const body = document.body;
-    this.darkMode=JSON.parse(localStorage.getItem('theme')!);
-    if(this.darkMode){
-      if (!body.classList.contains('dark')) {
-        document.body.classList.toggle( 'dark' );
+    //A traves de localStorage se obtene la cadena 'darkTheme'
+    let theme =localStorage.getItem('darkTheme');
+    //Se comprueba si esta 'true' o 'false' para detectar el cambio de tema
+    if(theme=="False"){
+      if(document.body.classList.contains('dark')){
+        document.body.classList.toggle('dark'); 
       }
     }else{
-      if (body.classList.contains('dark')) {
-        document.body.classList.toggle( 'dark' );
+      if(!document.body.classList.contains('dark')){
+        document.body.classList.toggle('dark'); 
       }
     }
   }
-  cambio() {
-    const body = document.body;
-    if (body.classList.contains('dark')) {
-      localStorage.setItem('theme', JSON.stringify(false));
+
+  //Funcion auxiliar para theme
+  change() {
+    let theme =localStorage.getItem('darkTheme');
+    if(theme=="False"){
+      this.darkMode=true;
+      localStorage.setItem('darkTheme', "True");
     }else{
-      localStorage.setItem('theme', JSON.stringify(true));
+      this.darkMode=false;
+      localStorage.setItem('darkTheme', "False");
     }
-    document.body.classList.toggle( 'dark' );
+    document.body.classList.toggle('dark');
   }
 
   cerrarSesion() {
