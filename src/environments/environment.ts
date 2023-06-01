@@ -11,7 +11,7 @@ export const environment = {
   },
   api: {
     url: 'http://localhost:8100/api',
-    //url: 'http://3.215.80.129:8080',
+    //url: 'http://gestionfp.mooo.com:8080',
     endpoints: {
       titulo: '/titulo',
       user: '/users/',
