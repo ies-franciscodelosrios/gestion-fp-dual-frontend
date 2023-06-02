@@ -6,7 +6,7 @@
         <ion-icon slot="start" name="moon"></ion-icon>
         <ion-toggle slot="end"
                     [ngModel]="darkMode"
-                    (ionChange)="cambio()"></ion-toggle>
+                    (ionChange)="change()"></ion-toggle>
       </ion-item>
       <ion-button (click)="logOut()">
         <ion-icon slot="icon-only" name="exit"></ion-icon>
@@ -18,9 +18,9 @@
 <nav>
   <div style="display: flex; flex-direction: row;">
     <ion-searchbar placeholder="Search..." (ionChange)="searchUserByName($event)"></ion-searchbar>
-    <ion-button (click)="addUser()" style="--background: #141414; zoom:1.25">
-      <ion-icon name="duplicate-outline" style="color: white;"></ion-icon>
-    </ion-button>
+      <ion-button (click)="addUser()" class="button-border" color="white" style="zoom:1.25">
+        <ion-icon name="duplicate-outline" color="dark"></ion-icon>
+      </ion-button>
   </div>
 </nav>
 
@@ -28,6 +28,8 @@
 
   <ion-list class="list">
     <ion-item *ngFor="let user of searched" (click)="editUser(user)">
+      <ion-img *ngIf="user.imagen!=null" src={{user.imagen}}></ion-img>
+      <ion-icon class="icon" *ngIf="user.imagen==null" name="person-outline" style="zoom:10"></ion-icon>
       <ion-label>
         <h2>{{user.nombre}}</h2>
       </ion-label>
