@@ -61,14 +61,6 @@ export class AlumnoPage implements OnInit {
     return await modal.present();
   }
 
-  public async editAvatar(){
-    const modal = await this.modalCtrl.create({
-      component: EditProfilePage,
-      componentProps: { },
-    });
-    return await modal.present();
-  }
-
   public async editalumno(alum: Usuario) {
     let emp = document.getElementById("Empresa");
     if (emp != null) {

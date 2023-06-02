@@ -8,6 +8,7 @@ import { registerLocaleData } from '@angular/common';
 import { AppComponent } from './app.component';
 import { AdminPageModule } from './admin/admin.module';
 import { TabsPageModule } from './tabs_centrosEducativo/tabs.module';
+
 import { APIService } from './services/api.service';
 import { EmpresaPageModule } from './centroeducativo/empresa/empresa.module';
 import { TareasPageModule } from './empresa/tareas/tareas.module';
