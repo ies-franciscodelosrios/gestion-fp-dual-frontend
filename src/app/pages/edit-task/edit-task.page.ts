@@ -39,10 +39,8 @@ export class EditTaskPage implements OnInit,OnChanges {
       taskdate: dateform.toLocaleString('es-ES', { timeZone: 'UTC' }),
       taskcomment: this.encargo.comentario
     });
-    
     this.periodos = await lastValueFrom(this.apiS.getPeriodobyEmpresa(this.login.user.id));
     this.select.value=this.encargo.id_periodo;
-
   }
 
   async ngOnChanges(){
