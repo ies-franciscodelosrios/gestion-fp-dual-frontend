@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar style="display: flex; flex-direction: row;">
     <ion-buttons slot="start">
       <!--nos permite dirigirnos a la pagina anterior a esta-->
       <ion-button (click)="backToModule()">
@@ -7,14 +7,21 @@
       </ion-button>
     </ion-buttons>
     <ion-title>Có. Boja {{this.modulCMB}} </ion-title>
-    <ion-toggle slot="end" [ngModel]="darkMode" (ionChange)="cambio()">
-    </ion-toggle>
     <ion-buttons slot="end">
-      <!--Botón que permite salir de la sesión actual con el ultimo usuario logueado-->
-      <ion-button (click)="cerrarSesion()">
-        <ion-icon slot="icon-only" name="exit"></ion-icon>
+      <ion-item>
+        <ion-icon slot="start" name="moon"></ion-icon>
+        <!--Botón que permite cambiar de tema-->
+        <ion-toggle slot="end" [ngModel]="darkMode" (ionChange)="change()">
+        </ion-toggle>
+      </ion-item>
+      <ion-button (click)="editAvatar()">
+        <ion-icon name="person-outline"></ion-icon>
       </ion-button>
-    </ion-buttons>
+      <!--Botón qu permite salir de la sesión actual con el ultimo usuario logueado-->
+        <ion-button (click)="cerrarSesion()">
+          <ion-icon slot="icon-only" name="exit"></ion-icon>
+        </ion-button>
+      </ion-buttons>
   </ion-toolbar>
 
 </ion-header>

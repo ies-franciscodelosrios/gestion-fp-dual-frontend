@@ -30,9 +30,6 @@ export class CeModuleEditPage implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.mode)
-    console.log(this.atribModule)
-    console.log(this.atribTittle)
     if (this.mode == "create") {
       this.title == "Crear";
       const btnelem = document.getElementById('btnDelete') as HTMLElement;
