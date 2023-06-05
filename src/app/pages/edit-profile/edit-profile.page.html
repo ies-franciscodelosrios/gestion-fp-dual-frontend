@@ -6,10 +6,8 @@
 
 <ion-content>
   <form [formGroup]="formProfile" (ngSubmit)="submitForm()">
-
-    <ion-img class="img" [src]="image"></ion-img>
-    <ion-button (click)="chooseImage()" expand="block" color="success">Choose Image</ion-button>
- 
+    <ion-icon *ngIf="image==null" (click)="chooseImage()"  class="img" name="person-outline" style="zoom:10"></ion-icon>
+    <ion-img *ngIf="image!=null" (click)="chooseImage()"  class="icon" [src]="image"></ion-img>
     <ion-grid>
       <ion-row>
         <ion-col id="btn" style="text-align: left;">
