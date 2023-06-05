@@ -22,7 +22,7 @@ export class TareasPage implements OnInit {
     private login: LoginService,
     private router:Router,
     private modalCtrl: ModalController,
-    ) { }
+    ) {}
 
   ionViewWillEnter() {
     this.login.keepSession();
