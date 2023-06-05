@@ -1,16 +1,14 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar style="display: flex; flex-direction: row;">
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons>
     <ion-title>Alumno</ion-title>
     <ion-buttons slot="end">
       <ion-item>
         <ion-icon slot="start" name="moon"></ion-icon>
-        <ion-toggle slot="end"
-                    [ngModel]="darkMode"
-                    (ionChange)="cambio()"></ion-toggle>
+        <ion-toggle slot="end" [ngModel]="darkMode" (ionChange)="cambio()"></ion-toggle>
       </ion-item>
-      <ion-button (click)="editProfile()">
-        <ion-icon name="person-outline"></ion-icon>
-      </ion-button>
       <ion-button (click)="cerrarSesion()">
         <ion-icon slot="icon-only" name="exit"></ion-icon>
       </ion-button>
@@ -18,9 +16,15 @@
   </ion-toolbar>
 </ion-header>
 
+<nav>
+  <div id="divsearch">
+    <ion-searchbar id="searchempresa" placeholder="Buscar" animated (ionChange)="handleChange($event)"></ion-searchbar>
+  </div>
+</nav>
+<!--
 <ion-content>
   <div id="divsearch">
-    <!--Busqueda y filtrado de alumnos-->
+    Busqueda y filtrado de alumnos
     <ion-searchbar id="searchempresa" placeholder="Buscar" animated (ionChange)="handleChange($event)" ></ion-searchbar>
   </div>
     <div id="divlist" *ngIf="permision">
@@ -36,4 +40,25 @@
         </ion-card-header>
       </ion-card>
   </div>
+</ion-content>
+-->
+
+<ion-content class="ion-padding">
+  <ion-list class="list">
+    <ion-item *ngFor="let alumno of this.filter;let i=index">
+      <div>
+        <ion-img class="image" style="border-radius: 100%;" *ngIf="alumno.imagen!=null" src={{alumno.imagen}}></ion-img>
+      </div>
+      <ion-icon class="icn" style="border-radius: 100%;" style="border-radius: 100%;" *ngIf="alumno.imagen==null"
+        name="person-outline"></ion-icon>
+      <div>
+        <div>
+          <ion-label>{{alumno.nombre}}</ion-label>
+        </div>
+        <div>
+          <ion-label>{{alumno.correo}}</ion-label>
+        </div>
+      </div>
+    </ion-item>
+  </ion-list>
 </ion-content>
