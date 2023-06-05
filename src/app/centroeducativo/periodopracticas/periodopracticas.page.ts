@@ -32,16 +32,17 @@ export class PeriodopracticasPage implements OnInit {
 
   ngOnInit() {
     this.load();
+    this.darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
   }
   public async load() {
-    this.theme();
     await this.login.keepSession();
     this.apiS.getPP().subscribe(listPracticas => {
       this.listPracticas = listPracticas;
+      return this.listPracticas;
     })
     this.apiS.getPP().subscribe(rol => {
       this.filter = this.listPracticas;
-      return this.filter
+      return this.filter;
     })
   }
 
@@ -74,14 +75,6 @@ export class PeriodopracticasPage implements OnInit {
     return await modal.present();
   }
 
-  public async editAvatar(){
-    const modal = await this.modalCtrl.create({
-      component: EditProfilePage,
-      componentProps: { },
-    });
-    return await modal.present();
-  }
-
   handleChange(event: any) {
     const searchTerm = event.target.value;
     this.filter = this.listPracticas;
@@ -91,32 +84,10 @@ export class PeriodopracticasPage implements OnInit {
       })
     }
   }
-  theme(){ 
-    //A traves de localStorage se obtene la cadena 'darkTheme'
-    let theme =localStorage.getItem('darkTheme');
-    //Se comprueba si esta 'true' o 'false' para detectar el cambio de tema
-    if(theme=="False"){
-      if(document.body.classList.contains('dark')){
-        document.body.classList.toggle('dark'); 
-      }
-    }else{
-      if(!document.body.classList.contains('dark')){
-        document.body.classList.toggle('dark'); 
-      }
-    }
-  }
 
   //Funcion auxiliar para theme
   change() {
-    let theme =localStorage.getItem('darkTheme');
-    if(theme=="False"){
-      this.darkMode=true;
-      localStorage.setItem('darkTheme', "True");
-    }else{
-      this.darkMode=false;
-      localStorage.setItem('darkTheme', "False");
-    }
-    document.body.classList.toggle('dark');
+    document.body.classList.toggle( 'dark' );
   }
 
   cerrarSesion() {
