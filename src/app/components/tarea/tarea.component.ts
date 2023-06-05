@@ -9,17 +9,13 @@ import { TareaEditPage } from 'src/app/pages/tarea-edit/tarea-edit.page';
   styleUrls: ['./tarea.component.scss'],
 })
 export class TareaComponent implements OnInit {
-  
+  //Encargo que tendra los datos de la tarea
   @Input('encargo') encargo:Encargo;
-  @Input('edit') edit:boolean;
-
   constructor(private modalCtrl: ModalController) { }
 
-  ngOnInit() {
-    this.edit=false;
-    
-  }
+  ngOnInit() {}
 
+  //abirira un modal para editar la tarea
   public async editEncargo(){
     const modal:HTMLIonModalElement = await this.modalCtrl.create({
       component: TareaEditPage,

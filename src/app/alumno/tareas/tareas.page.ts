@@ -13,9 +13,9 @@ import { EditProfilePage } from 'src/app/pages/edit-profile/edit-profile.page';
   styleUrls: ['./tareas.page.scss'],
 })
 export class TareasPage implements OnInit {
-  //tema oscuro o claro
+  //Esta variable indicara el estado del botón del tema oscuro
   darkMode?: boolean;
-  //donde se van a guradar los encargos
+  //array con todos los encargos del alumno
   public encargos: Array<Encargo> = [] = [];
   constructor(
     private apiS: APIService, 
@@ -25,18 +25,21 @@ export class TareasPage implements OnInit {
     ) { }
 
   ionViewWillEnter() {
+    //mantendra iniciado la cesión del usuario aunque recargue la pagina
     this.login.keepSession();
     //se obtienen los encargos y se insertan en el array encargos
     this.refresEncargos();
+    //En caso de que este activado el tema oscuro lo aplicara
     this.theme();
     
   }
 
-
   ngOnInit() {
+    //cambia el estado del boton del tema oscuro
     this.changeButton();
   }
 
+  //Obtiene los esncargos del alumno
   refresEncargos(){
     this.apiS.getEncargosAlumno(this.login.user.id).subscribe((datos) => {
       for (let elemento of datos) {
@@ -45,22 +48,23 @@ export class TareasPage implements OnInit {
     });  
   }
 
+  //cierra la cesion iniciada por el usuario
   cerrarSesion(){
     this.login.logout();
   }
 
  
   theme(){ 
-    //pilla el tema oscuro del localstore
+    //obtiene la variable del tema oscuro del localstore
     let theme =localStorage.getItem('darkTheme');
-    //Em caso de  tema oscuro esta desactivado
+    //En caso de que el tema oscuro esta desactivado
     if(theme=="False"){
-      //si la pagina esta oscuro
+      //si la pagina esta en oscuro
       if(document.body.classList.contains('dark')){
         //cambia a claro 
         document.body.classList.toggle('dark'); 
       }
-    //Em caso de tema oscuto esta activado
+    //En caso de que el tema oscuro este activado
     }else{
       //si la pagina NO esta oscuro
       if(!document.body.classList.contains('dark')){
@@ -71,24 +75,25 @@ export class TareasPage implements OnInit {
   }
 
   cambio() {
-    //pilla el tema oscuro del localstore
+     //obtiene la variable del tema oscuro del localstore
     let theme =localStorage.getItem('darkTheme');
-    //Em caso de  tema oscuro esta desactivado
+     //En caso de que el tema oscuro esta desactivado
     if(theme=="False"){
-      //El boton de tema oscuro se activa
+      //Cambiamos darkMode a true para dejar el boton de tema oscuro como encendido
       this.darkMode=true;
-      //cambiamos a que guarde que tenga el tema oscuro
+      //Guardamos darkTheme con "True" para entender que el tema oscuro esta activo
       localStorage.setItem('darkTheme', "True");
     }else{
-      //El boton de tema oscuro se desactiva
+       //Cambiamos darkMode a false para dejar el boton de tema oscuro como apagado
       this.darkMode=false;
-      //cambiamos a que guarde que NO tenga el tema oscuro
+      //Guardamos darkTheme con "False" para entender que el tema oscuro esta desactivado
       localStorage.setItem('darkTheme', "False");
     }
     document.body.classList.toggle('dark');
   }
 
   changeButton(){
+    //En caso de que la darkTheme sea False o True el boton de tema oscuro cambiara
     let theme =localStorage.getItem('darkTheme');
     if(theme=="False"){
       this.darkMode=false;
@@ -97,15 +102,13 @@ export class TareasPage implements OnInit {
     }
   }
 
-  public async editTask(){
-  
+  //Abre un modal para editar la imagel del perfil del alumno
+  public async editProfile(){
     const modal = await this.modalCtrl.create({
       component: EditProfilePage,
       componentProps: { },
     });
     return await modal.present();
   }
-  
-   
 }
 

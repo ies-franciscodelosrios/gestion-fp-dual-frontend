@@ -109,7 +109,7 @@ export class APIService {
     });
   }
 
-  getMailUsuario(email: string): Observable<Usuario> {
+  getMailUsuario(email?: string): Observable<Usuario> {
     const url = environment.api.url + environment.api.endpoints.mail + email
     return this.http.get<Usuario>(url, {
     });
