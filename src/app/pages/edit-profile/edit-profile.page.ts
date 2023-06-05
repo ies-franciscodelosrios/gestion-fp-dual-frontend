@@ -66,7 +66,6 @@ export class EditProfilePage implements OnInit {
       case 4:
         rol='Alumno'
       break;
-      
     }
     this.user.imagen=this.imageBase64;
     this.apiS.addUsuario({

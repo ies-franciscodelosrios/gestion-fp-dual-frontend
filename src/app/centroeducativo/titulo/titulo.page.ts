@@ -6,6 +6,7 @@ import { CeTitleEditPage } from 'src/app/pages/ce-title-edit/ce-title-edit.page'
 import { APIService } from 'src/app/services/api.service';
 import { LoginService } from 'src/app/services/login.service';
 import { Titulo } from 'src/model/Titulo';
+import { EditProfilePage } from 'src/app/pages/edit-profile/edit-profile.page';
 
 @Component({
   selector: 'app-titulo',
@@ -29,9 +30,9 @@ export class TituloPage implements OnInit {
     private alrtCtrl: AlertController,
     private modalCtrl: ModalController) { }
 
-
   ngOnInit() {
     this.load();
+    this.darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
   }
   public async load() {
     await this.login.keepSession();
@@ -89,12 +90,13 @@ export class TituloPage implements OnInit {
   }
 
   navToModule(tittle: Titulo) {
-    const dynamicPath = '/modulo/'+ tittle.nombre +";id=" + tittle.id;
+    const dynamicPath = '/modulo/' + tittle.nombre + ";id=" + tittle.id;
     this.router.navigateByUrl(dynamicPath), { queryParams: tittle };
   }
 
-  cambio() {
-    document.body.classList.toggle('dark');
+  //Funcion auxiliar para theme
+  change() {
+    document.body.classList.toggle( 'dark' );
   }
 
   cerrarSesion() {

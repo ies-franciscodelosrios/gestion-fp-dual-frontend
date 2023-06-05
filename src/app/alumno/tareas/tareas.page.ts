@@ -22,7 +22,7 @@ export class TareasPage implements OnInit {
     private login: LoginService,
     private router:Router,
     private modalCtrl: ModalController,
-    ) { }
+    ) {}
 
   ionViewWillEnter() {
     //mantendra iniciado la cesión del usuario aunque recargue la pagina
@@ -53,7 +53,6 @@ export class TareasPage implements OnInit {
     this.login.logout();
   }
 
- 
   theme(){ 
     //obtiene la variable del tema oscuro del localstore
     let theme =localStorage.getItem('darkTheme');

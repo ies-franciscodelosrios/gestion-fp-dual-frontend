@@ -9,6 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Ra } from 'src/model/Ra';
 import { Modulo } from 'src/model/Modulo';
 import { Titulo } from 'src/model/Titulo';
+import { EditProfilePage } from 'src/app/pages/edit-profile/edit-profile.page';
 
 @Component({
   selector: 'app-ra',
@@ -44,6 +45,7 @@ export class RaPage implements OnInit {
 
   ngOnInit() { 
     this.load();
+    this.darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
   }
   public async load() {
     await this.login.keepSession();
@@ -98,24 +100,16 @@ export class RaPage implements OnInit {
     });
     return await modal.present();
   }
-
-  toggleAccordion(index: number) {
-    if (index === this.abreIndice) {
-      // Si el índice es el mismo que el actual, cerrar el accordion
-      this.abreIndice = -1;
-    } else {
-      // Si el índice es diferente al actual, abrir el accordion
-      this.abreIndice = index;
-    }
-  }
   
   backToModule() {
     const dynamicPath = '/modulo/'+ this.tittleName +";id=" + this.tittleId;
     this.router.navigateByUrl(dynamicPath);
   }
 
-  cambio() {
-    document.body.classList.toggle('dark');
+
+  //Funcion auxiliar para theme
+  change() {
+    document.body.classList.toggle( 'dark' );
   }
 
   cerrarSesion() {

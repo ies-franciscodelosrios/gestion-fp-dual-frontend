@@ -89,10 +89,12 @@ const routes: Routes = [
   {
     path: 'ce-module-ra-edit',
     loadChildren: () => import('./pages/ce-module-ra-edit/ce-module-ra-edit.module').then( m => m.CeModuleRaEditPageModule)
-  },  {
+  },
+  {
     path: 'edit-profile',
     loadChildren: () => import('./pages/edit-profile/edit-profile.module').then( m => m.EditProfilePageModule)
   },
+
 
 
 

@@ -14,18 +14,25 @@ import { EditCEPage } from '../pages/edit-ce/edit-ce.page';
 export class AdminPage implements OnInit {
 
   //tema oscuro o claro
-  darkMode: boolean;
+  darkMode?: boolean;
   user: Usuario[] = [];
   searched: Usuario[] = [];
 
   constructor(private modalCtrl: ModalController, 
     private apiS: APIService,
     private login: LoginService) {
-   }
+  }
+
+  ionViewWillEnter() {
+    this.login.keepSession();
+    //se obtienen los encargos y se insertan en el array encargos
+    this.refresUsers();
+    this.theme();
+    
+  }
 
   ngOnInit() {
-    this.refresUsers();
-    this.darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    this.changeButton();
   }
 
  async refresUsers() {
@@ -78,8 +85,51 @@ export class AdminPage implements OnInit {
     this.login.logout();
   }
 
-  cambio() {
-    document.body.classList.toggle( 'dark' );
+  theme() { 
+    //Pilla el tema oscuro del localstore
+    let theme = localStorage.getItem('darkTheme');
+    //En caso de tema oscuro esta desactivado
+    if(theme == "False") {
+      //Si la pagina esta oscuro
+      if(document.body.classList.contains('dark')) {
+        //Cambia a claro 
+        document.body.classList.toggle('dark'); 
+      }
+    //En caso de tema oscuto esta activado
+    }else {
+      //Si la pagina NO esta oscuro
+      if(!document.body.classList.contains('dark')) {
+        //Cambia a oscuro
+        document.body.classList.toggle('dark'); 
+      }
+    }
+  }
+
+  change() {
+    //Pilla el tema oscuro del localstore
+    let theme = localStorage.getItem('darkTheme');
+    //En caso de tema oscuro esta desactivado
+    if(theme == "False") {
+      //El boton de tema oscuro se activa
+      this.darkMode = true;
+      //Cambiamos a que guarde que tenga el tema oscuro
+      localStorage.setItem('darkTheme', "True");
+    }else  {
+      //El boton de tema oscuro se desactiva
+      this.darkMode = false;
+      //Cambiamos a que guarde que NO tenga el tema oscuro
+      localStorage.setItem('darkTheme', "False");
+    }
+    document.body.classList.toggle('dark');
+  }
+
+  changeButton() {
+    let theme = localStorage.getItem('darkTheme');
+    if(theme == "False") {
+      this.darkMode = false;
+    }else {
+      this.darkMode = true;
+    }
   }
 
 }

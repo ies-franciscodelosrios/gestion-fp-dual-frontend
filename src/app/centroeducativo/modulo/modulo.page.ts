@@ -7,6 +7,7 @@ import { APIService } from 'src/app/services/api.service';
 import { Modulo } from 'src/model/Modulo';
 import { RaPage } from '../ra/ra.page';
 import { Titulo } from 'src/model/Titulo';
+import { EditProfilePage } from 'src/app/pages/edit-profile/edit-profile.page';
 
 @Component({
   selector: 'app-modulo',
@@ -34,6 +35,7 @@ export class ModuloPage implements OnInit {
 
   ngOnInit() {
    this.load();
+   this.darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
   }
 
   public async load() {
@@ -124,8 +126,9 @@ export class ModuloPage implements OnInit {
     this.router.navigateByUrl(dynamicPath, { state: { tid: this.tittleId , tname: this.tittleName  } });
   }
 
-  cambio() {
-    document.body.classList.toggle('dark');
+  //Funcion auxiliar para theme
+  change() {
+    document.body.classList.toggle( 'dark' );
   }
 
   cerrarSesion() {
