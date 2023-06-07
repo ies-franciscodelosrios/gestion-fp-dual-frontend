@@ -1,5 +1,5 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { InfiniteScrollCustomEvent, IonInfiniteScroll, ModalController } from '@ionic/angular';
+import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { CePracticesEditPage } from 'src/app/pages/ce-practices-edit/ce-practices-edit.page';

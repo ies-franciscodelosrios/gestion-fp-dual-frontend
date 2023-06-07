@@ -6,8 +6,23 @@
   }
 }
 
-
 #divsearch {
   display: flex;
   flex-direction: row;
+}
+
+ion-list {
+  ion-item {
+    border-radius: 6px; 
+    margin: 3px;
+    &:hover {
+      cursor: pointer; 
+      ion-label{
+        color:#2dbfd3;
+      }
+    }
+  }
+  &:hover {
+    border-radius: 6px;
+  }
 }
