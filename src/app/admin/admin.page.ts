@@ -103,6 +103,7 @@ export class AdminPage implements OnInit {
   theme() { 
     //Pilla el tema oscuro del localstore
     let theme = localStorage.getItem('darkTheme');
+    console.log(localStorage.getItem('darkTheme'))
     //En caso de tema oscuro esta desactivado
     if(theme == "False") {
       //Si la pagina esta oscuro
