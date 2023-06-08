@@ -7,13 +7,3 @@
     width: 2px;
     margin-right: 1px;
 }
-
-.button-border {
-    --background: white;
-    --color: black;
-    --border-color: black;
-}
-  
-.button-border::part(native) {
-    border: 1px solid var(--border-color);
-}

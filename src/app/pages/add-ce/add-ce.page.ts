@@ -13,7 +13,8 @@ export class AddCEPage implements OnInit {
 
   @Input('editable') editable:string = "false";
 
-  user: Usuario[] = [];
+  // Array de usuarios almacenados
+  user: Usuario[] = []; 
   addUser: FormGroup;
   enEdicion = false; // variable que indica si el formulario está en modo de edición
   @Output() closeModal: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -22,6 +23,8 @@ export class AddCEPage implements OnInit {
     private apiS: APIService,
     private formBuilder: FormBuilder) { }
 
+  /* Este método consiste en rellenar todos los campos
+  del formulario para la creación de un nuevo usuario. */
   ngOnInit() {
     this.addUser = this.formBuilder.group({
       nombre: ['', Validators.required],
@@ -30,6 +33,7 @@ export class AddCEPage implements OnInit {
     });
   }
 
+  /* Este método consiste en validar un DNI correcto */
   validateDocument(control: any) {
     const pattern = /^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKET]$/i;
     if (pattern.test(control.value)) {
@@ -38,6 +42,8 @@ export class AddCEPage implements OnInit {
     return { 'invalidDocumento': true };
   }
 
+  /* Este método consiste en añadir un nuevo usuario
+  mediante sus propios datos/atributos. */
   onSubmit() {
     this.apiS.addUsuario({
       nombre: this.addUser.get('nombre')?.value,
@@ -51,6 +57,8 @@ export class AddCEPage implements OnInit {
     this.modalCtrl.dismiss();
   }
 
+  /* Este método consiste en volver hacia atrás,
+  es decir, hacer click en el botón Cancelar. */
   back() {
     if (this.enEdicion) {
       // Desactivar el modo de edición del formulario

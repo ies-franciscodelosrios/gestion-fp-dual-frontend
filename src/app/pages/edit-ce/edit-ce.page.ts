@@ -21,6 +21,8 @@ export class EditCEPage implements OnInit {
     private apiS: APIService) {
   }
 
+  /* Este método consiste en editar cualquier campo
+  del formulario. */
   ngOnInit() {
     this.editUser = this.formBuilder.group({
       nombre: [this.dataUser.nombre, [Validators.required]],
@@ -29,6 +31,10 @@ export class EditCEPage implements OnInit {
     })
   }
 
+  /* Este método consiste en mostrar los datos del
+  usuarios que hayas clicado y se muestren los datos
+  en los campos del formulario.
+  También consiste en actualizar dicho usuario dado. */
   updateUser() {
     this.dataUser.nombre = this.editUser.get('nombre')?.value;
     this.dataUser.documentos = this.editUser.get('doc')?.value;
@@ -47,6 +53,7 @@ export class EditCEPage implements OnInit {
     this.modalCtrl.dismiss();
   }
 
+  /* Este método consiste en eliminar un usuario dado */
   deleteUser() {
     this.apiS.deleteUsuario(this.dataUser.id);
     this.modalCtrl.dismiss();
