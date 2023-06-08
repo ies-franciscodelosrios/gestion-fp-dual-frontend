@@ -1,15 +1,28 @@
-
 .menu-header-bg{
   height: 180px;
   width: 350px;
   background: #2dbfd3;
-  background: linear-gradient(90deg, white 0%, #2dbfd3 100%);
-  box-shadow: 0px 1px 10px rgba(98, 140, 255, 0.5);
+  //background: linear-gradient(90deg, white 0%, #2dbfd3 100%);
+  //box-shadow: 0px 1px 10px rgba(98, 140, 255, 0.5);
   transform: rotate( 0deg);
   border-radius: 10px 10px 10px 50px;
   margin-left: -18px;
   margin-top: -50px;
   margin-bottom: 60px;
+
+}
+
+.content-cs {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+ion-button{
+  --background: #2dbfd3;
+  --background-hover: #75e6f5;
+  --background-activated: #2dbfd3;
+  --background-focused: #2dbfd3;
 }
 
 .header-content {
@@ -55,6 +68,11 @@
   }
 }
 
+.menu-item ion-item.active {
+  background-color: #2dbfd3; 
+  color: #2dbfd3;
+}
+
 .ac-button {
   display: flex;
   justify-content: center;
@@ -76,9 +94,9 @@
 ion-menu::part(backdrop) {
 background-color: rgba(228, 235, 234, 0.5);
 }
-  
+
 ion-menu::part(container) {
 border-radius: 0 20px 20px 0;
-  
-box-shadow: 4px 0px 16px #2dbfd3;
+
+//box-shadow: 4px 0px 16px #2dbfd3;
 }

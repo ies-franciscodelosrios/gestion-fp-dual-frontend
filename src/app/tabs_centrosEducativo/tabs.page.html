@@ -2,29 +2,35 @@
   <ion-menu menuId="main-menu" contentId="main">
     <ion-content>
       <div class="menu-header-bg"></div>
+      <div class="content-cs">
+        <ion-button (click)="cerrarSesion()" >
+          <ion-icon slot="icon-only" name="exit"></ion-icon>
+        </ion-button>
+      </div>
       <div class="header-content">
-        
-        <img src="" alt="" (click)="editAvatar()">
+        <ion-icon *ngIf="this.img==null" name="person-outline" style="zoom:4" color="light"
+          (click)="editAvatar()"></ion-icon>
+        <img *ngIf="this.img!=null" [src]="img" alt="" (click)="editAvatar()">
         <ion-label>
           <h2>{{name}}</h2>
           <p>{{subtittle}}</p>
         </ion-label>
       </div>
       <ion-list class="menu-item" lines="none">
-        <ion-item class="active" tab="empresa" button detail="true" (click)="redirectTo('empresa')" (click)="clMenu()">
+        <ion-item [class.active]="activeTab === 'empresa'" tab="empresa" button detail="true" (click)="redirectTo('empresa')" (click)="clMenu()">
           <ion-icon name="calendar-outline"></ion-icon>
           <p>Empresa</p>
         </ion-item>
-        <ion-item class="active" tab="alumno" button detail="true" (click)="redirectTo('alumno')" (click)="clMenu()">
+        <ion-item [class.active]="activeTab === 'alumno'" tab="alumno" button detail="true" (click)="redirectTo('alumno')" (click)="clMenu()">
           <ion-icon name="school"></ion-icon>
           <p>Alumno </p>
         </ion-item>
-        <ion-item class="active" tab="titulo" button detail="true" (click)="redirectTo('titulo')" (click)="clMenu()">
+        <ion-item [class.active]="activeTab === 'titulo'" tab="titulo" button detail="true" (click)="redirectTo('titulo')" (click)="clMenu()">
           <ion-icon name="briefcase-outline"></ion-icon>
           <p>Ciclo Formativo</p>
         </ion-item>
 
-        <ion-item class="active" tab="periodopracticas" button detail="true" (click)="redirectTo('periodopracticas')"
+        <ion-item [class.active]="activeTab === 'periodopracticas'" tab="periodopracticas" button detail="true" (click)="redirectTo('periodopracticas')"
           (click)="clMenu()">
           <ion-icon name="color-palette-outline"></ion-icon>
           <p> Practicas</p>

@@ -15,14 +15,15 @@ export class PhotoService {
     const capturedPhoto = await Camera.getPhoto({
       resultType: CameraResultType.Uri,
       source: CameraSource.Camera,
-      quality: 60
+      quality: 60,
+      width: 800, // Ancho deseado de la imagen
+      height: 600,
     });
     this.webviewPath= capturedPhoto.webPath;
     this.convertToBase64();
   }
 
   public convertToBase64() {
-    console.log(this.webviewPath);
     const img =""+this.webviewPath;
     fetch(img)
   .then(res => res.blob())

@@ -15,7 +15,9 @@ export class AdminPage implements OnInit {
 
   //tema oscuro o claro
   darkMode?: boolean;
+  /* Array de usuarios que vamos a almacenar */
   user: Usuario[] = [];
+  /* Array de usuarios buscados */
   searched: Usuario[] = [];
 
   constructor(private modalCtrl: ModalController, 
@@ -23,9 +25,12 @@ export class AdminPage implements OnInit {
     private login: LoginService) {
   }
 
+  /* Este método consiste en mantener la sesión del usuario
+  y los usuarios que hayan creados en la lista 
+  una vez que refresques la página. */
   ionViewWillEnter() {
     this.login.keepSession();
-    //se obtienen los encargos y se insertan en el array encargos
+    //se obtienen los usuarios y se insertan en el array usuarios
     this.refresUsers();
     this.theme();
     
@@ -35,6 +40,9 @@ export class AdminPage implements OnInit {
     this.changeButton();
   }
 
+  /* Este método se encarga de refrescar los usuarios
+  a la hora de que sean insertados o modificados y 
+  mostrar sólo los usuarios cuyo rol sean centros educativos */
  async refresUsers() {
     await this.login.keepSession();
     this.apiS.getUsuarioCentro().subscribe(rol => {
@@ -48,6 +56,8 @@ export class AdminPage implements OnInit {
     });
   }
 
+  /* Este método consiste en abrir un modal
+  mediante un botón para la creación del nuevo usuario. */
   async addUser() {
     const modal = await this.modalCtrl.create({
       component: AddCEPage
@@ -58,6 +68,8 @@ export class AdminPage implements OnInit {
     return await modal.present();
   }
 
+  /* Este método consiste en abrir un modal
+  para editar el usuario dado */
   async editUser(user: Usuario) {
     const modal = await this.modalCtrl.create({
       component: EditCEPage,
@@ -71,6 +83,8 @@ export class AdminPage implements OnInit {
     return await modal.present();
   }
 
+  /* Este método consiste en buscar los usuarios
+  por su nombre */
   searchUserByName(event:any) {
     const text = event.target.value;
     this.searched = this.user;
@@ -81,6 +95,7 @@ export class AdminPage implements OnInit {
     }
   }
 
+  /* Este método consiste en cerrar sesión del usuario */
   logOut() {
     this.login.logout();
   }
@@ -124,6 +139,8 @@ export class AdminPage implements OnInit {
     document.body.classList.toggle('dark');
   }
 
+  /* Este método consiste en cambiar el botón
+  a modo claro o a modo oscuro */
   changeButton() {
     let theme = localStorage.getItem('darkTheme');
     if(theme == "False") {

@@ -35,10 +35,10 @@ export class ModuloPage implements OnInit {
 
   ngOnInit() {
    this.load();
+   this.darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
   }
 
   public async load() {
-    this.theme();
     await this.login.keepSession();
     // Obtiene el titulo seleccionado de su origen de datos según su id
     this.actroute.paramMap.subscribe(params => {
@@ -126,40 +126,9 @@ export class ModuloPage implements OnInit {
     this.router.navigateByUrl(dynamicPath, { state: { tid: this.tittleId , tname: this.tittleName  } });
   }
 
-  public async editAvatar(){
-    const modal = await this.modalCtrl.create({
-      component: EditProfilePage,
-      componentProps: { },
-    });
-    return await modal.present();
-  }
-
-  theme(){ 
-    //A traves de localStorage se obtene la cadena 'darkTheme'
-    let theme =localStorage.getItem('darkTheme');
-    //Se comprueba si esta 'true' o 'false' para detectar el cambio de tema
-    if(theme=="False"){
-      if(document.body.classList.contains('dark')){
-        document.body.classList.toggle('dark'); 
-      }
-    }else{
-      if(!document.body.classList.contains('dark')){
-        document.body.classList.toggle('dark'); 
-      }
-    }
-  }
-
   //Funcion auxiliar para theme
   change() {
-    let theme =localStorage.getItem('darkTheme');
-    if(theme=="False"){
-      this.darkMode=true;
-      localStorage.setItem('darkTheme', "True");
-    }else{
-      this.darkMode=false;
-      localStorage.setItem('darkTheme', "False");
-    }
-    document.body.classList.toggle('dark');
+    document.body.classList.toggle( 'dark' );
   }
 
   cerrarSesion() {

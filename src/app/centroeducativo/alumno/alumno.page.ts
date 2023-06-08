@@ -18,7 +18,7 @@ export class AlumnoPage implements OnInit {
   public filter: Usuario[] = [];
   public permision: boolean;
   //tema oscuro o claro
-  darkMode?: boolean;
+  darkMode: boolean;
   constructor(
     private apiS: APIService,
     private login: LoginService,
@@ -28,10 +28,10 @@ export class AlumnoPage implements OnInit {
 
   ngOnInit() {
     this.load();
+    this.darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
   }
   
   public async load() {
-    this.theme();
     await this.login.keepSession();
     this.permision = true;
     this.apiS.getUsuarioAlumno().subscribe(rol => {
@@ -89,32 +89,10 @@ export class AlumnoPage implements OnInit {
     }
   }
   
-  theme(){ 
-    //A traves de localStorage se obtene la cadena 'darkTheme'
-    let theme =localStorage.getItem('darkTheme');
-    //Se comprueba si esta 'true' o 'false' para detectar el cambio de tema
-    if(theme=="False"){
-      if(document.body.classList.contains('dark')){
-        document.body.classList.toggle('dark'); 
-      }
-    }else{
-      if(!document.body.classList.contains('dark')){
-        document.body.classList.toggle('dark'); 
-      }
-    }
-  }
 
   //Funcion auxiliar para theme
   change() {
-    let theme =localStorage.getItem('darkTheme');
-    if(theme=="False"){
-      this.darkMode=true;
-      localStorage.setItem('darkTheme', "True");
-    }else{
-      this.darkMode=false;
-      localStorage.setItem('darkTheme', "False");
-    }
-    document.body.classList.toggle('dark');
+    document.body.classList.toggle( 'dark' );
   }
 
   cerrarSesion() {
