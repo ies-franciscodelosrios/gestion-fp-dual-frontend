@@ -10,23 +10,21 @@
 <!--contenido dentro del modal que permite introducir datos y "guardarlos"-->
 <ion-content>
   <form [formGroup]="formPractica" (ngSubmit)="submitForm()">
-    <!--SELECIONAR EMPRESA-->
+    <!--Muestra una lista de todas las empresas creadas-->
     <ion-list>
       <ion-item>
         <ion-label position="floating">Empresa</ion-label>
-        <ion-select interface="popover" formControlName="id_empresa" placeholder="Selecciona empresa">
-          <ion-select-option *ngFor="let listaE of this.listEmp;let i=index"
-            [value]="listaE.id">{{listaE.nombre}}</ion-select-option>
+        <ion-select #selectBusiness interface="popover" placeholder="Selecciona empresa">
+          <ion-select-option *ngFor="let listaE of this.listEmp;let i=index " [value]="listaE.id">{{listaE.nombre}}</ion-select-option>
         </ion-select>
       </ion-item>
     </ion-list>
-    <!--SELECIONAR ALUMNO-->
+    <!--Muestra una lista de todos los alumnos creados-->
     <ion-list>
       <ion-item>
         <ion-label position="floating">Alumno</ion-label>
-        <ion-select interface="popover" formControlName="id_alumno" placeholder="Selecciona alumno">
-          <ion-select-option *ngFor="let listaA of this.listAlu;let i=index"
-            [value]="listaA.id">{{listaA.nombre}}</ion-select-option>
+        <ion-select #selectAlumn interface="popover" placeholder="Selecciona alumno">
+          <ion-select-option *ngFor="let listaA of this.listAlu;let i=index" [value]="listaA.id">{{listaA.nombre}}</ion-select-option>
         </ion-select>
       </ion-item>
     </ion-list>

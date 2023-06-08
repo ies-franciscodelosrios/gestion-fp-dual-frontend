@@ -1,12 +1,21 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar style="display: flex; flex-direction: row;">
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons>
     <ion-title>Periodo de {{practica}}</ion-title>
     <ion-buttons slot="end">
+      <ion-item>
+        <ion-icon slot="start" name="moon"></ion-icon>
+        <!--Botón que permite cambiar de tema-->
+        <ion-toggle slot="end" [ngModel]="darkMode" (ionChange)="change()">
+        </ion-toggle>
+      </ion-item>
       <!--Botón qu permite salir de la sesión actual con el ultimo usuario logueado-->
-      <ion-button (click)="cerrarSesion()">
-        <ion-icon slot="icon-only" name="exit"></ion-icon>
-      </ion-button>
-    </ion-buttons>
+        <ion-button (click)="cerrarSesion()">
+          <ion-icon slot="icon-only" name="exit"></ion-icon>
+        </ion-button>
+      </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -21,7 +30,8 @@
   <!--Lista de objetos de tipo periodos de practicas que al seleccionar un "ion-card" se abra un modal con el contenido de este periodo de practicas en concreto-->
   <div id="divlist">
     <ion-card id="open-modal" *ngFor="let lista of this.filter;let i=index" (click)="this.editPractica(lista)">
-      <img src="assets/add.png" style="z-index: -1;" />
+      <ion-img *ngIf="lista.imagen!=null" src={{lista.imagen}}></ion-img>
+      <ion-icon *ngIf="lista.imagen==null" name="person-outline" style="zoom:10"></ion-icon>
       <ion-card-header>
         <ion-card-title> {{lista.id_empresa?.nombre}}</ion-card-title>
         <h4>{{lista.id_alumno?.nombre}}</h4>

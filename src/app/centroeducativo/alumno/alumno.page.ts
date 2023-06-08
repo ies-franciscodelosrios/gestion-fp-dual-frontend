@@ -5,6 +5,7 @@ import { Usuario } from 'src/model/Usuario';
 import { APIService } from 'src/app/services/api.service';
 import { LoginService } from 'src/app/services/login.service';
 import { Router } from '@angular/router';
+import { EditProfilePage } from 'src/app/pages/edit-profile/edit-profile.page';
 
 @Component({
   selector: 'app-alumno',
@@ -27,6 +28,7 @@ export class AlumnoPage implements OnInit {
 
   ngOnInit() {
     this.load();
+    this.darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
   }
   
   public async load() {
@@ -87,7 +89,9 @@ export class AlumnoPage implements OnInit {
     }
   }
   
-  cambio() {
+
+  //Funcion auxiliar para theme
+  change() {
     document.body.classList.toggle( 'dark' );
   }
 

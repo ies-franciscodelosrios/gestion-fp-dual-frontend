@@ -1,36 +1,44 @@
-import { Component, Input, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, ElementRef, ChangeDetectorRef, OnChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AlertController, ModalController, NavParams } from '@ionic/angular';
+import { IonSelect, AlertController, ModalController, NavParams } from '@ionic/angular';
 import { Usuario } from 'src/model/Usuario';
 import { APIService } from 'src/app/services/api.service';
 import { PeriodoPracticas } from 'src/model/PeriodoPracticas';
 import { LoginService } from 'src/app/services/login.service';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-ce-practices-edit',
   templateUrl: './ce-practices-edit.page.html',
   styleUrls: ['./ce-practices-edit.page.scss'],
 })
-export class CePracticesEditPage implements OnInit {
+export class CePracticesEditPage implements OnInit, OnChanges {
   public practica: string = "";
   public formPractica: FormGroup;  //el grupo del formulario reactivo , ojo con importar ReactiveFormModule
   public valor: string;
   public listAlu: Usuario[] = [];
   public listEmp: Usuario[] = [];
-  @Input('atribPP') atribPP: PeriodoPracticas;
+  @Input() atribPP: PeriodoPracticas;
   @Input('mode') mode: string;
   @ViewChild('inputElement', { static: true }) inputElement: ElementRef;
+  @ViewChild('selectBusiness') selectBusiness: IonSelect;
+  @ViewChild('selectAlumn') selectAlumn: IonSelect;
   constructor(
     private formBuilder: FormBuilder,
     private modalCTRL: ModalController,
     private apiS: APIService,
     private logsv: LoginService,
     private alrtCtrl: AlertController,
-    navParams: NavParams
+    navParams: NavParams,
+    private ref: ChangeDetectorRef
   ) {
     this.practica = navParams.get('practicas de empresa')
   }
   ngOnInit() {
+    this.load();
+  }
+
+  public async load() {
     if (this.mode == "create") {
       this.practica = "Crear practica"
       const btnelem = document.getElementById('btnDelete') as HTMLElement;
@@ -42,34 +50,43 @@ export class CePracticesEditPage implements OnInit {
         tiempo_final: '',
         estado: true,
       })
-      this.apiS.getUsuarioEmpresa().subscribe(rol => {
-        this.listEmp = <Usuario[]>rol.user;
-        return this.listEmp;
-      })
-      this.apiS.getUsuarioAlumno().subscribe(rol => {
-        this.listAlu = <Usuario[]>rol.user;
-        return this.listAlu;
-      })
+      try {
+        this.apiS.getUsuarioEmpresa().subscribe(rol => {
+          this.listEmp = <Usuario[]>rol.user;
+          return this.listEmp;
+        })
+        this.apiS.getUsuarioAlumno().subscribe(rol => {
+          this.listAlu = <Usuario[]>rol.user;
+          return this.listAlu;
+        })
+      } catch (error) {
+      }
+
     } else if (this.mode == "edit") {
+      console.log(this.atribPP)
       this.practica = "Editar practica"
       this.formPractica = this.formBuilder.group({   //creando los campos que serán controlados y validados por formTitulo
         id_empresa: [this.atribPP.id_empresa?.nombre, [Validators.required, Validators.required]],
         id_alumno: [this.atribPP.id_alumno?.nombre, [Validators.required, Validators.required]],
-        tiempo_inicio: [this.atribPP.tiempo_inicio],
-        tiempo_final: [this.atribPP.tiempo_final],
+        tiempo_inicio: [this.atribPP.tiempo_inicio, [Validators.required, Validators.required]],
+        tiempo_final: [this.atribPP.tiempo_final, [Validators.required, Validators.required]],
         estado: [this.atribPP.estado],
       })
-      this.apiS.getUsuarioEmpresa().subscribe(rol => {
-        this.listEmp = <Usuario[]>rol.user;
-        return this.listEmp
-      })
-      this.apiS.getUsuarioAlumno().subscribe(rol => {
-        this.listAlu = <Usuario[]>rol.user;
-        return this.listAlu
-      })
+      try {
+        this.apiS.getUsuarioEmpresa().subscribe(rol => {
+          this.listEmp = <Usuario[]>rol.user;
+          this.selectBusiness.value = this.atribPP.id_empresa?.id;
+          return this.listEmp
+        })
+        this.apiS.getUsuarioAlumno().subscribe(rol => {
+          this.listAlu = <Usuario[]>rol.user;
+          this.selectAlumn.value = this.atribPP.id_alumno?.id;
+          return this.listAlu
+        })
+      } catch (error) {
+      }
     }
   }
-
 
   cancel() {
     this.modalCTRL.dismiss(null, 'cancel');
@@ -82,6 +99,10 @@ export class CePracticesEditPage implements OnInit {
   selecEmp(valors: string) {
     this.valor = valors;
     this.inputElement.nativeElement = valors;
+  }
+
+  async ngOnChanges() {
+    this.ref.markForCheck();
   }
 
   onDateChange(event: any) {
@@ -107,7 +128,7 @@ export class CePracticesEditPage implements OnInit {
       try {
         this.apiS.addPractica({
           id_empresa: { id: this.formPractica.get('id_empresa')?.value },
-          id_centro: { id:  this.logsv.user.id},
+          id_centro: { id: this.logsv.user.id },
           id_alumno: { id: this.formPractica.get('id_alumno')?.value },
           tiempo_inicio: t_inicio,
           tiempo_final: t_final,
@@ -122,12 +143,12 @@ export class CePracticesEditPage implements OnInit {
       }
       this.cancel();
     } else {
+      this.atribPP.id_alumno = this.selectAlumn.value;
+      this.atribPP.id_empresa = this.selectAlumn.value;
       try {
         this.apiS.updatePractica({
           id: this.atribPP.id,
-          id_empresa: { id: this.formPractica.get('id_empresa')?.value },
           id_centro: { id: this.logsv.user.id },
-          id_alumno: { id: this.formPractica.get('id_alumno')?.value },
           tiempo_inicio: t_inicio,
           tiempo_final: t_final,
           estado: this.formPractica.get('estado')?.value,
@@ -143,17 +164,17 @@ export class CePracticesEditPage implements OnInit {
     }
   }
 
-  onDelete(){
+  onDelete() {
     this.alrtCtrl.create({
       header: '¿Estás seguro?',
-      message:'¿Realmente quieres eliminar?',
-      buttons:[
+      message: '¿Realmente quieres eliminar?',
+      buttons: [
         {
           text: 'Cancelar',
-          role:'cancel'
-        },{
+          role: 'cancel'
+        }, {
           text: 'Eliminar',
-          handler:() => {
+          handler: () => {
             this.apiS.deletePP(this.atribPP.id).subscribe((respuesta) => {
             });
             this.cancel();
@@ -162,7 +183,7 @@ export class CePracticesEditPage implements OnInit {
       ]
     }).then(alrtElem => {
       alrtElem.present();
-    })  
+    })
   }
 }
 

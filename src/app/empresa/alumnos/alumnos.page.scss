@@ -32,3 +32,19 @@ ion-img{
   align-items: center;
   width: 100%;
 }
+
+.list {
+  margin-top: 18px;
+}
+
+.image{
+  width: 100px; /* ancho deseado */
+  height: 100px; /* altura deseada */
+  mask-image: radial-gradient(circle, white 100%, transparent 100%,); /* crea una máscara circular */
+}
+
+.icn{
+  width: 100px; /* ancho deseado */
+  height: 100px; /* altura deseada */
+  mask-image: radial-gradient(circle, white 100%, transparent 100%,); /* crea una máscara circular */
+}

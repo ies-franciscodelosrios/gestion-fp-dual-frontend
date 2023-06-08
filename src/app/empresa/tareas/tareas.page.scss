@@ -8,9 +8,25 @@
 
 }
 
+.list {
+  margin-top: 18px;
+}
+
 .card {
   width: 15%;
   height: 250px;
   margin: 0.5%;
   text-align: center;
 }
+
+.button-border {
+  --background: white;
+  --color: black;
+  --border-color: black;
+}
+
+.icn{
+  width: 70px; /* ancho deseado */
+  height: 70px; /* altura deseada */
+}
+

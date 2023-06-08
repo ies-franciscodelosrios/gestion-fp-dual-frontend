@@ -1,13 +1,14 @@
 <ion-header>
   <ion-toolbar style="display: flex; flex-direction: row;">
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons>
     <ion-title>Tareas</ion-title>
-    <ion-item slot="end">
-      <ion-icon slot="start" name="moon"></ion-icon>
-      <ion-toggle slot="end"
-                  [ngModel]="darkMode"
-                  (ionChange)="cambio()"></ion-toggle>
-    </ion-item>
     <ion-buttons slot="end">
+      <ion-item>
+        <ion-icon slot="start" name="moon"></ion-icon>
+        <ion-toggle slot="end" [ngModel]="darkMode" (ionChange)="cambio()"></ion-toggle>
+      </ion-item>
       <ion-button (click)="cerrarSesion()">
         <ion-icon slot="icon-only" name="exit"></ion-icon>
       </ion-button>
@@ -18,18 +19,25 @@
 <nav>
   <div style="display: flex; flex-direction: row;">
     <ion-searchbar></ion-searchbar>
-    <ion-button (click)="this.addTask()" style="--background: #141414; zoom:1.25"><ion-icon name="duplicate-outline" style="color: white;"></ion-icon></ion-button>
+    <ion-button (click)="addTask()" class="button-border" color="white" style="zoom:1.25">
+      <ion-icon name="duplicate-outline" color="dark"></ion-icon>
+    </ion-button>
   </div>
 </nav>
 
-<ion-content>
-  <div class="container">
-    <ion-card style="cursor:pointer" (click)="this.editTask(tarea)" class="card" id="open-modal" *ngFor="let tarea of this.tareas; let i=index">
-      <ion-icon name="document-attach-outline" style="zoom:10"></ion-icon>
-      <ion-card-header>
-        <ion-card-title>{{ tarea.tarea }}</ion-card-title>
-        <ion-card-subtitle>{{ this.usuarios[i].nombre }}</ion-card-subtitle>
-      </ion-card-header>
-    </ion-card>
-  </div>
+<ion-content class="ion-padding">
+  <ion-list class="list">
+    <ion-item style="cursor:pointer" (click)="this.editTask(tarea)" id="open-modal"
+      *ngFor="let tarea of this.tareas; let i=index">
+      <ion-icon class="icn" name="document-attach-outline"></ion-icon>
+      <div>
+        <div>
+          <ion-label>Nombre del alumno: {{this.usuarios[i].nombre}}</ion-label>
+        </div>
+        <div>
+          <ion-label>Tarea Asignada a Alumno: {{tarea.tarea}}</ion-label>
+        </div>
+      </div>
+    </ion-item>
+  </ion-list>
 </ion-content>

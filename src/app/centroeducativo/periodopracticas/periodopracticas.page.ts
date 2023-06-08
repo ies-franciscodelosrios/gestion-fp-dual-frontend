@@ -6,6 +6,7 @@ import { CePracticesEditPage } from 'src/app/pages/ce-practices-edit/ce-practice
 import { APIService } from 'src/app/services/api.service';
 import { PeriodoPracticas } from 'src/model/PeriodoPracticas';
 import { LoginService } from 'src/app/services/login.service';
+import { EditProfilePage } from 'src/app/pages/edit-profile/edit-profile.page';
 
 @Component({
   selector: 'app-periodopracticas',
@@ -13,13 +14,14 @@ import { LoginService } from 'src/app/services/login.service';
   styleUrls: ['./periodopracticas.page.scss'],
 })
 export class PeriodopracticasPage implements OnInit {
+
   practica = 'Practicas';
   public practicas: CePracticesEditPage[] = [];
   public listPracticas: PeriodoPracticas[] = [];
   public filter: PeriodoPracticas[] = [];
   public results = this.practicas;
-
-
+  //tema oscuro o claro
+  darkMode: boolean;
   constructor(
     private http: HttpClient,
     private router: Router,
@@ -30,15 +32,17 @@ export class PeriodopracticasPage implements OnInit {
 
   ngOnInit() {
     this.load();
+    this.darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
   }
   public async load() {
     await this.login.keepSession();
     this.apiS.getPP().subscribe(listPracticas => {
       this.listPracticas = listPracticas;
+      return this.listPracticas;
     })
     this.apiS.getPP().subscribe(rol => {
       this.filter = this.listPracticas;
-      return this.filter
+      return this.filter;
     })
   }
 
@@ -79,6 +83,11 @@ export class PeriodopracticasPage implements OnInit {
         return (usuario.nombre?.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1);
       })
     }
+  }
+
+  //Funcion auxiliar para theme
+  change() {
+    document.body.classList.toggle( 'dark' );
   }
 
   cerrarSesion() {

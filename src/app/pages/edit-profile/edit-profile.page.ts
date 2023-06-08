@@ -67,7 +67,6 @@ export class EditProfilePage implements OnInit {
       case 4:
         rol='Alumno'
       break;
-      
     }
     //se modifica la imagen del usuario con la que elegio 
     this.user.imagen=this.imageBase64;
