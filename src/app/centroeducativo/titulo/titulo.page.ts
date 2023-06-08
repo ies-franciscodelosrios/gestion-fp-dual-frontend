@@ -56,8 +56,8 @@ export class TituloPage implements OnInit {
     const modal = await this.modalCtrl.create({
       component: CeTitleEditPage,
       componentProps: {
-        mode: "create"
-      }
+        mode: "create",
+      },
     });
     modal.onDidDismiss().then(() => {
       window.location.reload();
@@ -70,7 +70,8 @@ export class TituloPage implements OnInit {
       component: CeTitleEditPage,
       componentProps: {
         atribtitle: title,
-        mode: "edit"
+        mode: "edit",
+        adjustSize: true
       }
     });
     modal.onDidDismiss().then(() => {

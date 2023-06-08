@@ -11,10 +11,6 @@
         <ion-toggle slot="end" [ngModel]="darkMode" (ionChange)="change()">
         </ion-toggle>
       </ion-item>
-      <!--Botón qu permite salir de la sesión actual con el ultimo usuario logueado-->
-      <ion-button (click)="cerrarSesion()">
-        <ion-icon slot="icon-only" name="exit"></ion-icon>
-      </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -28,6 +24,7 @@
         style="color: white;"></ion-icon></ion-button>
   </div>
   <!--Lista de objetos de tipo alumno que al seleccionar un "ion-card" se abra un modal con el contenido de ese alumno en concreto-->
+    <!--
   <div id="divlist" *ngIf="permision">
     <ion-card id="open-modal" *ngFor="let lista of this.filter;let i=index" (click)="this.editalumno(lista)">
       <ion-img *ngIf="lista.imagen!=null" src={{lista.imagen}}></ion-img>
@@ -38,4 +35,22 @@
       </ion-card-header>
     </ion-card>
   </div>
+  -->
+  <ion-list class="list">
+    <ion-item  *ngFor="let lista of this.filter;let i=index" (click)="this.editalumno(lista)">
+      <div>
+        <ion-img class="image" style="border-radius: 100%;" *ngIf="lista.imagen!=null" src={{lista.imagen}}></ion-img>
+      </div>
+      <ion-icon class="icn" style="border-radius: 100%;" style="border-radius: 100%;" *ngIf="lista.imagen==null"
+        name="person-outline"></ion-icon>
+      <div>
+        <div>
+          <ion-label>{{lista.nombre}}</ion-label>
+        </div>
+        <div>
+          <ion-label>{{lista.correo}}</ion-label>
+        </div>
+      </div>
+    </ion-item>
+  </ion-list>
 </ion-content>
