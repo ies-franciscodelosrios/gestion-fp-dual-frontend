@@ -55,16 +55,16 @@ export class EditProfilePage implements OnInit {
     let rol;
     switch(this.user.id_rol){
       case 1:
-       rol= 'Admin'
+       rol= 'admin'
       break;
       case 2:
-       rol= 'Centro Educativo'
+       rol= 'centro educativo'
       break;
       case 3:
-       rol= 'Empresa'
+       rol= 'empresa'
       break;
       case 4:
-        rol='Alumno'
+        rol='alumno'
       break;
     }
     this.user.imagen=this.imageBase64;

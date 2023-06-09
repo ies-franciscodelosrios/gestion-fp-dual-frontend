@@ -5,7 +5,6 @@ import { Usuario } from 'src/model/Usuario';
 import { APIService } from 'src/app/services/api.service';
 import { PeriodoPracticas } from 'src/model/PeriodoPracticas';
 import { LoginService } from 'src/app/services/login.service';
-import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-ce-practices-edit',
@@ -13,6 +12,7 @@ import { lastValueFrom } from 'rxjs';
   styleUrls: ['./ce-practices-edit.page.scss'],
 })
 export class CePracticesEditPage implements OnInit, OnChanges {
+  public tiempoInicioValue: string; 
   public practica: string = "";
   public formPractica: FormGroup;  //el grupo del formulario reactivo , ojo con importar ReactiveFormModule
   public valor: string;
@@ -39,6 +39,7 @@ export class CePracticesEditPage implements OnInit, OnChanges {
   }
 
   public async load() {
+    
     if (this.mode == "create") {
       this.practica = "Crear practica"
       const btnelem = document.getElementById('btnDelete') as HTMLElement;
@@ -46,8 +47,8 @@ export class CePracticesEditPage implements OnInit, OnChanges {
       this.formPractica = this.formBuilder.group({   //creando los campos que serán controlados y validados por formTitulo
         id_empresa: ['', [Validators.required, Validators.required]],
         id_alumno: ['', [Validators.required, Validators.required]],
-        tiempo_inicio: '',
-        tiempo_final: '',
+        tiempo_inicio:  null,
+        tiempo_final: null,
         estado: true,
       })
       try {
@@ -63,7 +64,6 @@ export class CePracticesEditPage implements OnInit, OnChanges {
       }
 
     } else if (this.mode == "edit") {
-      console.log(this.atribPP)
       this.practica = "Editar practica"
       this.formPractica = this.formBuilder.group({   //creando los campos que serán controlados y validados por formTitulo
         id_empresa: [this.atribPP.id_empresa?.nombre, [Validators.required, Validators.required]],
@@ -76,12 +76,12 @@ export class CePracticesEditPage implements OnInit, OnChanges {
         this.apiS.getUsuarioEmpresa().subscribe(rol => {
           this.listEmp = <Usuario[]>rol.user;
           this.selectBusiness.value = this.atribPP.id_empresa?.id;
-          return this.listEmp
+          return this.listEmp;
         })
         this.apiS.getUsuarioAlumno().subscribe(rol => {
           this.listAlu = <Usuario[]>rol.user;
           this.selectAlumn.value = this.atribPP.id_alumno?.id;
-          return this.listAlu
+          return this.listAlu;
         })
       } catch (error) {
       }
@@ -107,11 +107,7 @@ export class CePracticesEditPage implements OnInit, OnChanges {
 
   onDateChange(event: any) {
     let newDate = new Date(event.detail.value);
-    let formattedDate = newDate.toISOString();
-  }
-
-  onItemClick(item: any) {
-    let selectedItem = this.listEmp.find(i => i.nombre === item.name);
+    this.tiempoInicioValue = newDate.toISOString();
   }
 
   submitForm() {
@@ -125,6 +121,8 @@ export class CePracticesEditPage implements OnInit, OnChanges {
     //b = t_fi[0].substring(1) + ".000Z"
     //mostrar un loading....
     if (this.mode == "create") {
+      console.log( "empresa : " + this.formPractica.get('id_empresa')?.value )
+      console.log("alumno : " + this.formPractica.get('id_alumno')?.value )
       try {
         this.apiS.addPractica({
           id_empresa: { id: this.formPractica.get('id_empresa')?.value },
@@ -142,13 +140,17 @@ export class CePracticesEditPage implements OnInit, OnChanges {
         //ocular loading
       }
       this.cancel();
-    } else {
+
+    }
+     else {
       this.atribPP.id_alumno = this.selectAlumn.value;
-      this.atribPP.id_empresa = this.selectAlumn.value;
+      this.atribPP.id_empresa = this.selectBusiness.value;
       try {
         this.apiS.updatePractica({
           id: this.atribPP.id,
+          id_empresa:  { id:this.atribPP.id_empresa },
           id_centro: { id: this.logsv.user.id },
+          id_alumno: { id: this.atribPP.id_alumno},
           tiempo_inicio: t_inicio,
           tiempo_final: t_final,
           estado: this.formPractica.get('estado')?.value,

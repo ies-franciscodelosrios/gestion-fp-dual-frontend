@@ -11,7 +11,7 @@ import { APIService } from 'src/app/services/api.service';
 })
 export class CEUserEditPage implements OnInit {
   public usuario: string = "";
-  public formUsuario: FormGroup;  //el grupo del formulario reactivo , ojo con importar ReactiveFormModule
+  public formUsuario: FormGroup; //el grupo del formulario reactivo , ojo con importar ReactiveFormModule
   @Input('atribuser') atribuser: Usuario;
   @Input('mode') mode: string;
  @Output() usrUpdate: EventEmitter<boolean>=new EventEmitter<boolean>();
@@ -65,7 +65,7 @@ export class CEUserEditPage implements OnInit {
             nombre: this.formUsuario.get('nombre')?.value,
             correo: this.formUsuario.get('correo')?.value,
             documentos: this.formUsuario.get('documentos')?.value,
-            rol: { nombre: "Empresa" },
+            rol: { nombre: "empresa" },
             alta: this.formUsuario.get('alta')?.value,
           }).subscribe(d => {
             //la respuesta del servidor
@@ -81,7 +81,7 @@ export class CEUserEditPage implements OnInit {
             nombre: this.formUsuario.get('nombre')?.value,
             correo: this.formUsuario.get('correo')?.value,
             documentos: this.formUsuario.get('documentos')?.value,
-            rol: { nombre: "Alumno" },
+            rol: { nombre: "alumno" },
             alta: this.formUsuario.get('alta')?.value,
           }).subscribe(d => {
             //la respuesta del servidor
@@ -101,7 +101,7 @@ export class CEUserEditPage implements OnInit {
             nombre: this.formUsuario.get('nombre')?.value,
             correo: this.formUsuario.get('correo')?.value,
             documentos: this.formUsuario.get('documentos')?.value,
-            rol: { nombre: "Empresa" },
+            rol: { nombre: "empresa" },
             alta: this.formUsuario.get('alta')?.value,
           }).subscribe(d => {
             //la respuesta del servidor
@@ -118,7 +118,7 @@ export class CEUserEditPage implements OnInit {
             nombre: this.formUsuario.get('nombre')?.value,
             correo: this.formUsuario.get('correo')?.value,
             documentos: this.formUsuario.get('documentos')?.value,
-            rol: { nombre: "Alumno" },
+            rol: { nombre: "alumno" },
             alta: this.formUsuario.get('alta')?.value,
           }).subscribe(d => {
             //la respuesta del servidor

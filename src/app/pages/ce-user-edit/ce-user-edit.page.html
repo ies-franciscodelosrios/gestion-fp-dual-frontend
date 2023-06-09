@@ -36,7 +36,7 @@
           <ion-button shape="round" color="danger" fill="outline" (click)="onDelete()">Eliminar</ion-button>
         </ion-col>
         <ion-col style="text-align: right;">
-          <ion-button shape="round" color="success" type="submit" [disabled]="this.formUsuario.pristine">Guardar</ion-button>
+          <ion-button shape="round" color="success" type="submit" [disabled]="!formUsuario.invalid">Guardar</ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>
