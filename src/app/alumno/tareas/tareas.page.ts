@@ -31,12 +31,17 @@ export class TareasPage implements OnInit {
     this.refresEncargos();
     //En caso de que este activado el tema oscuro lo aplicara
     this.theme();
-    
+    this.changeButton();
+  }
+  ionViewDidEnter() {
+   // this.changeButton();
   }
 
   ngOnInit() {
     //cambia el estado del boton del tema oscuro
-    this.changeButton();
+    
+   // this.changeButton();
+    
   }
 
   //Obtiene los esncargos del alumno
@@ -54,8 +59,8 @@ export class TareasPage implements OnInit {
   }
 
   theme(){ 
-    //obtiene la variable del tema oscuro del localstore
-    let theme =localStorage.getItem('darkTheme');
+   //Pilla el tema oscuro del localstore
+    let theme = localStorage.getItem('darkTheme');
     //En caso de que el tema oscuro esta desactivado
     if(theme=="False"){
       //si la pagina esta en oscuro
@@ -88,10 +93,11 @@ export class TareasPage implements OnInit {
       //Guardamos darkTheme con "False" para entender que el tema oscuro esta desactivado
       localStorage.setItem('darkTheme', "False");
     }
-    document.body.classList.toggle('dark');
+    //document.body.classList.toggle('dark');
   }
 
   changeButton(){
+    console.log("alumno")
     //En caso de que la darkTheme sea False o True el boton de tema oscuro cambiara
     let theme =localStorage.getItem('darkTheme');
     if(theme=="False"){

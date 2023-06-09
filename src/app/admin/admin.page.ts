@@ -32,9 +32,9 @@ export class AdminPage implements OnInit {
     this.login.keepSession();
     //se obtienen los usuarios y se insertan en el array usuarios
     this.refresUsers();
-    this.theme();
-    
+    this.theme();   
   }
+ 
 
   ngOnInit() {
     this.changeButton();
@@ -103,7 +103,6 @@ export class AdminPage implements OnInit {
   theme() { 
     //Pilla el tema oscuro del localstore
     let theme = localStorage.getItem('darkTheme');
-    console.log(localStorage.getItem('darkTheme'))
     //En caso de tema oscuro esta desactivado
     if(theme == "False") {
       //Si la pagina esta oscuro
@@ -136,7 +135,7 @@ export class AdminPage implements OnInit {
       //Cambiamos a que guarde que NO tenga el tema oscuro
       localStorage.setItem('darkTheme', "False");
     }
-    document.body.classList.toggle('dark');
+    //document.body.classList.toggle('dark');
   }
 
   /* Este método consiste en cambiar el botón

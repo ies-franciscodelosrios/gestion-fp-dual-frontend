@@ -50,6 +50,7 @@ export class EditProfilePage implements OnInit {
 
   //actualiza el usuario con la imagen escogida
  async submitForm() {
+  //coge la imagen escogida por el usuario
   this.imageBase64=this.photoService.base64Image;
   if(this.user!=null && this.imageBase64!=null){
     let rol;
@@ -67,7 +68,9 @@ export class EditProfilePage implements OnInit {
         rol='Alumno'
       break;
     }
+    //se modifica la imagen del usuario con la que elegio 
     this.user.imagen=this.imageBase64;
+    //se actualiza en el back
     this.apiS.addUsuario({
       id: this.user.id,
       nombre: this.user.nombre,

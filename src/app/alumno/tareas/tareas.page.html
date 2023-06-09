@@ -1,20 +1,10 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title id="title">Tareas</ion-title>
-    <ion-buttons slot="end">
-      <ion-item>
-        <ion-icon slot="start" name="moon"></ion-icon>
-        <ion-toggle slot="end"
-                    [ngModel]="darkMode"
-                    (ionChange)="cambio()"></ion-toggle>
-      </ion-item>
-      <ion-button (click)="editProfile()">
-        <ion-icon name="person-outline"></ion-icon>
-      </ion-button>
-      <ion-button (click)="cerrarSesion()">
-        <ion-icon slot="icon-only" name="exit"></ion-icon>
-      </ion-button>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
     </ion-buttons>
+    <ion-title slot="end" id="title">Tareas</ion-title>
+    
   </ion-toolbar>
 </ion-header>
 <ion-content>
