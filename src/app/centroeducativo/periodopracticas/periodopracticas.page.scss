@@ -1,3 +1,30 @@
+#divsearch {
+  display: flex;
+  flex-direction: row;
+}
+
+img {
+  width: 150px;
+  height: 150px;
+}
+
+ion-list {
+  ion-item {
+    border-radius: 6px; 
+    margin: 3px;
+    &:hover {
+      cursor: pointer; 
+      ion-label{
+        color:#2dbfd3;
+      }
+    }
+  }
+  &:hover {
+    border-radius: 6px;
+  }
+}
+
+/*
 ion-card {
   display: flex;
   flex-wrap: wrap;
@@ -5,15 +32,6 @@ ion-card {
   align-content: center;
   width: 200px;
   text-align: center;
-}
-
-#divlist {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  align-content: center;
-  align-items: center;
-  width: 100%;
 }
 
 #divsearch {
@@ -52,3 +70,4 @@ img {
   }
 
 }
+*/

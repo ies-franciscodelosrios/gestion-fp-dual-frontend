@@ -20,10 +20,22 @@
     <!--Busqueda y filtrado de empresas-->
     <ion-searchbar id="searchempresa" placeholder="Buscar" animated (ionChange)="handleChange($event)"></ion-searchbar>
     <!--Botón para agregar una nueva empresa-->
-    <ion-button (click)="nuevaempresa()" style="--background: #141414; zoom:1.25"><ion-icon name="duplicate-outline"
-        style="color: white;"></ion-icon></ion-button>
+    <ion-button (click)="nuevaempresa()" style=" zoom:1.25"><ion-icon name="duplicate-outline"></ion-icon></ion-button>
   </div>
   <!--Lista de objetos de tipo empresa que al seleccionar un "ion-card" se abra un modal con el contenido de esa empresa en concreto-->
+  <div id="divlist" *ngIf="permision">
+    <ion-list class="list">
+      <ion-item *ngFor="let lista of this.filter;let i=index" (click)="this.editaempresa(lista)">
+        <ion-img class="image" style="border-radius: 100%;" *ngIf="lista.imagen!=null" src={{lista.imagen}}></ion-img>
+        <ion-icon class="icn" style="border-radius: 100%;" style="border-radius: 100%;" *ngIf="lista.imagen==null"
+          name="person-outline"></ion-icon>
+        <h4> <ion-label>{{lista.nombre}}</ion-label>
+          <ion-label>Correo: {{lista.correo}}</ion-label>
+        </h4>
+      </ion-item>
+    </ion-list>
+  </div>
+  <!--
   <div id="divlist">
     <ion-card id="open-modal" *ngFor="let lista of this.filter;let i=index" (click)="this.editaempresa(lista)">
       <ion-img *ngIf="lista.imagen!=null" src={{lista.imagen}}></ion-img>
@@ -34,4 +46,5 @@
       </ion-card-header>
     </ion-card>
   </div>
+  -->
 </ion-content>

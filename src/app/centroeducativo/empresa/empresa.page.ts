@@ -19,8 +19,10 @@ export class EmpresaPage implements OnInit {
   public listEmpresa: Usuario[] = [];
   public filter: Usuario[] = [];
   public empresas: CEUserEditPage[] = [];
+  public permision: boolean;
    //tema oscuro o claro
   darkMode: boolean;
+  
   constructor(
     private titleSV: Title,
     private apiS: APIService,
@@ -32,10 +34,16 @@ export class EmpresaPage implements OnInit {
 
   ngOnInit() {
     this.load();
-    this.darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    this.changeButton();
   }
+
+  ionViewWillEnter() {
+    this.theme();
+  }
+
   public async load() {
     await this.login.keepSession();
+    this.permision = true;
     this.apiS.getUsuarioEmpresa().subscribe(rol => {
       this.listEmpresa = <Usuario[]>rol.user;
       return this.listEmpresa;
@@ -72,7 +80,7 @@ export class EmpresaPage implements OnInit {
       component: CEUserEditPage,
       componentProps: {
         mode: "edit",
-        atribPP: empr
+        atribuser: empr
       }
     });
     modal.onDidDismiss().then(() => {
@@ -91,9 +99,52 @@ export class EmpresaPage implements OnInit {
     }
   }
 
-  //Funcion auxiliar para theme
+  theme(){ 
+    //obtiene la variable del tema oscuro del localstore
+    let theme =localStorage.getItem('darkTheme');
+    //En caso de que el tema oscuro esta desactivado
+    if(theme=="False"){
+      //si la pagina esta en oscuro
+      if(document.body.classList.contains('dark')){
+        //cambia a claro 
+        document.body.classList.toggle('dark'); 
+      }
+    //En caso de que el tema oscuro este activado
+    }else{
+      //si la pagina NO esta oscuro
+      if(!document.body.classList.contains('dark')){
+        //cambia a oscuro
+        document.body.classList.toggle('dark'); 
+      }
+    }
+  }
+
   change() {
-    document.body.classList.toggle( 'dark' );
+     //obtiene la variable del tema oscuro del localstore
+    let theme =localStorage.getItem('darkTheme');
+     //En caso de que el tema oscuro esta desactivado
+    if(theme=="False"){
+      //Cambiamos darkMode a true para dejar el boton de tema oscuro como encendido
+      this.darkMode=true;
+      //Guardamos darkTheme con "True" para entender que el tema oscuro esta activo
+      localStorage.setItem('darkTheme', "True");
+    }else{
+       //Cambiamos darkMode a false para dejar el boton de tema oscuro como apagado
+      this.darkMode=false;
+      //Guardamos darkTheme con "False" para entender que el tema oscuro esta desactivado
+      localStorage.setItem('darkTheme', "False");
+    }
+    document.body.classList.toggle('dark');
+  }
+
+  changeButton(){
+    //En caso de que la darkTheme sea False o True el boton de tema oscuro cambiara
+    let theme =localStorage.getItem('darkTheme');
+    if(theme=="False"){
+      this.darkMode=false;
+    }else{
+      this.darkMode=true;
+    }
   }
 
   cerrarSesion() {

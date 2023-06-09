@@ -32,8 +32,13 @@ export class PeriodopracticasPage implements OnInit {
 
   ngOnInit() {
     this.load();
-    this.darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    this.changeButton();
   }
+
+  ionViewWillEnter() {
+    this.theme();
+  }
+
   public async load() {
     await this.login.keepSession();
     this.apiS.getPP().subscribe(listPracticas => {
@@ -79,15 +84,58 @@ export class PeriodopracticasPage implements OnInit {
     const searchTerm = event.target.value;
     this.filter = this.listPracticas;
     if (searchTerm && searchTerm.trim() != '') {
-      this.filter = this.filter.filter((usuario: any) => {
-        return (usuario.nombre?.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1);
+      this.filter = this.filter.filter((practica: any) => {
+        return (practica.id_empresa.nombre?.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1);
       })
     }
   }
 
-  //Funcion auxiliar para theme
+  theme(){ 
+    //obtiene la variable del tema oscuro del localstore
+    let theme =localStorage.getItem('darkTheme');
+    //En caso de que el tema oscuro esta desactivado
+    if(theme=="False"){
+      //si la pagina esta en oscuro
+      if(document.body.classList.contains('dark')){
+        //cambia a claro 
+        document.body.classList.toggle('dark'); 
+      }
+    //En caso de que el tema oscuro este activado
+    }else{
+      //si la pagina NO esta oscuro
+      if(!document.body.classList.contains('dark')){
+        //cambia a oscuro
+        document.body.classList.toggle('dark'); 
+      }
+    }
+  }
+
   change() {
-    document.body.classList.toggle( 'dark' );
+     //obtiene la variable del tema oscuro del localstore
+    let theme =localStorage.getItem('darkTheme');
+     //En caso de que el tema oscuro esta desactivado
+    if(theme=="False"){
+      //Cambiamos darkMode a true para dejar el boton de tema oscuro como encendido
+      this.darkMode=true;
+      //Guardamos darkTheme con "True" para entender que el tema oscuro esta activo
+      localStorage.setItem('darkTheme', "True");
+    }else{
+       //Cambiamos darkMode a false para dejar el boton de tema oscuro como apagado
+      this.darkMode=false;
+      //Guardamos darkTheme con "False" para entender que el tema oscuro esta desactivado
+      localStorage.setItem('darkTheme', "False");
+    }
+    document.body.classList.toggle('dark');
+  }
+
+  changeButton(){
+    //En caso de que la darkTheme sea False o True el boton de tema oscuro cambiara
+    let theme =localStorage.getItem('darkTheme');
+    if(theme=="False"){
+      this.darkMode=false;
+    }else{
+      this.darkMode=true;
+    }
   }
 
   cerrarSesion() {
