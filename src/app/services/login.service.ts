@@ -57,7 +57,6 @@ export class LoginService {
     else { 
       let a= ''+localStorage.getItem('login');
       this.user = JSON.parse(a);
-      console.log("la iamgen que pilla en tareas.ts" + this.user.imagen)
     }
   }
 

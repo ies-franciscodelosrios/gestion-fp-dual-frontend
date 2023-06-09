@@ -1,2 +1,21 @@
-<ion-tabs>
-</ion-tabs>
+<ion-app>
+    <ion-menu menuId="main-menu" contentId="main">
+      <ion-content>
+        <div class="menu-header-bg"></div>
+        <div class="header-content">
+          <ion-icon *ngIf="this.img==null" name="person-outline" style="zoom:4" color="light" (click)="editAvatar()"></ion-icon>
+          <img *ngIf="this.img!=null" [src]="img" alt="" (click)="editAvatar()">
+          <ion-label>
+            <h2>{{name}}</h2>
+            <p>{{subtittle}}</p>
+          </ion-label>
+        </div>
+      </ion-content>
+      <ion-content style="bottom: auto;">
+        <ion-button (click)="cerrarSesion()">
+          <ion-icon slot="icon-only" name="exit"></ion-icon>
+        </ion-button>
+      </ion-content>
+    </ion-menu>
+    <ion-router-outlet id="main"></ion-router-outlet>
+  </ion-app>
