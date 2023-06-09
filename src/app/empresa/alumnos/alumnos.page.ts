@@ -26,18 +26,16 @@ export class AlumnosPage implements OnInit {
     ) {}
 
   ionViewWillEnter() {
-    //this.loadUsers();
+    this.login.keepSession(); 
+    //this.loadUsers(); 
     //se obtienen los encargos y se insertan en el array encargos
-    this.theme(); 
   }
 
   ngOnInit() {
     this.loadUsers();
-    this.changeButton();
   }
 
   public async loadUsers(){
-    await this.login.keepSession(); 
     this.permision = true; 
     this.apiS.getPeriodobyEmpresa(this.login.user.id).subscribe(periodos=>{
       for (let elemento of periodos) {
@@ -71,53 +69,6 @@ export class AlumnosPage implements OnInit {
 
   cerrarSesion(){
     this.login.logout();
-  }
-
-  theme(){ 
-    //pilla el tema oscuro del localstore
-    let theme =localStorage.getItem('darkTheme');
-    //Em caso de  tema oscuro esta desactivado
-    if(theme=="False"){
-      //si la pagina esta oscuro
-      if(document.body.classList.contains('dark')){
-        //cambia a claro 
-        document.body.classList.toggle('dark'); 
-      }
-    //Em caso de tema oscuto esta activado
-    }else{
-      //si la pagina NO esta oscuro
-      if(!document.body.classList.contains('dark')){
-        //cambia a oscuro
-        document.body.classList.toggle('dark'); 
-      }
-    }
-  }
-
-  cambio() {
-    //pilla el tema oscuro del localstore
-    let theme =localStorage.getItem('darkTheme');
-    //Em caso de  tema oscuro esta desactivado
-    if(theme=="False"){
-      //El boton de tema oscuro se activa
-      this.darkMode=true;
-      //cambiamos a que guarde que tenga el tema oscuro
-      localStorage.setItem('darkTheme', "True");
-    }else{
-      //El boton de tema oscuro se desactiva
-      this.darkMode=false;
-      //cambiamos a que guarde que NO tenga el tema oscuro
-      localStorage.setItem('darkTheme', "False");
-    }
-    document.body.classList.toggle('dark');
-  }
-
-  changeButton(){
-    let theme =localStorage.getItem('darkTheme');
-    if(theme=="False"){
-      this.darkMode=false;
-    }else{
-      this.darkMode=true;
-    }
   }
 
   public async editProfile(){

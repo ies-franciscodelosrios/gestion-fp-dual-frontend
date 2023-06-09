@@ -14,6 +14,7 @@ export class CeTitleEditPage implements OnInit {
   public formTitulo: FormGroup;  //el grupo del formulario reactivo , ojo con importar ReactiveFormModule
   @Input('atribtitle') atribtitle: Titulo;
   @Input('mode') mode: string;
+  navParams: any;
   constructor(
     private formBuilder: FormBuilder,
     private modalCTRL: ModalController,
@@ -22,6 +23,7 @@ export class CeTitleEditPage implements OnInit {
   ) {
 
   }
+  
   ngOnInit() {
     if (this.mode == "create") {
       this.title == "Crear";

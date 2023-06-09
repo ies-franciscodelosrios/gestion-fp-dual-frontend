@@ -12,12 +12,17 @@ import { EditProfilePage } from '../pages/edit-profile/edit-profile.page';
 export class TabsPage implements OnInit{
   public name?: string;
   public subtittle?: string;
+  public img?: string;
+  public activeTab: string
 
   constructor(
     private menu: MenuController,
     private router: Router,
     private modalCtrl: ModalController,
-    private login: LoginService,) { }
+    private login: LoginService,) {
+
+      this.activeTab = "empresa";
+     }
 
   ngOnInit() {
     this.loadUsers();
@@ -27,6 +32,7 @@ export class TabsPage implements OnInit{
     await this.login.keepSession(); 
     this.name= await this.login.user.nombre;
     this.subtittle = await this.login.user.correo;
+    this.img= this.login.user.imagen;
   }
   
   openFirst() {
@@ -54,6 +60,12 @@ export class TabsPage implements OnInit{
 
   redirectTo(valor: string) {
     this.router.navigate(['/centroeducativo/', valor]);
+    this.activeTab = valor;
+  }
+
+
+  cerrarSesion(){
+    this.login.logout();
   }
 
 }
