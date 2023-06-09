@@ -3,15 +3,7 @@
     <ion-buttons slot="start">
       <ion-menu-button menu="main-menu"></ion-menu-button>
     </ion-buttons>
-    <ion-title>Ciclo Formativo</ion-title>
-    <ion-buttons slot="end">
-      <ion-item>
-        <ion-icon slot="start" name="moon"></ion-icon>
-        <!--Botón que permite cambiar de tema-->
-        <ion-toggle slot="end" [ngModel]="darkMode" (ionChange)="change()">
-        </ion-toggle>
-      </ion-item>
-      </ion-buttons>
+    <ion-title slot="end">Ciclo Formativo</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -20,7 +12,7 @@
     <!--Busqueda y filtrado de títulos-->
     <ion-searchbar id="searchtitulo" placeholder="Buscar" animated (ionChange)="handleChange($event)"></ion-searchbar>
     <!--Botón para agregar un nuevo título-->
-    <ion-button (click)="this.addTittle()" style="--background: #141414; zoom:1.25"><ion-icon name="duplicate-outline" style="color: white;"></ion-icon></ion-button>
+    <ion-button (click)="this.addTittle()" style=" zoom:1.25"><ion-icon name="duplicate-outline"></ion-icon></ion-button>
   </div>
 <!--Lista de objetos de tipo título que al seleccionar un "ion-item" pasa a la siguiente ventana en el que muestra los módulos de este título en concreto-->
   <ion-list lines="inset">

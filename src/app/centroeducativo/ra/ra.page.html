@@ -6,15 +6,7 @@
         <ion-icon slot="icon-only" name="arrow-undo-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>Có. Boja {{this.modulCMB}} </ion-title>
-    <ion-buttons slot="end">
-      <ion-item>
-        <ion-icon slot="start" name="moon"></ion-icon>
-        <!--Botón que permite cambiar de tema-->
-        <ion-toggle slot="end" [ngModel]="darkMode" (ionChange)="change()">
-        </ion-toggle>
-      </ion-item>
-      </ion-buttons>
+    <ion-title slot="end">Có. Boja {{this.modulCMB}} </ion-title>
   </ion-toolbar>
 
 </ion-header>
@@ -23,7 +15,7 @@
     <ion-toolbar>
       <ion-title slot="start"> Resultado de Apredizaje de {{modulName}}</ion-title> 
       <!--Botón para agregar una nuevo Ra-->
-      <ion-button slot="end" (click)="this.addRa()" style="--background: #141414; zoom:1.25"><ion-icon name="duplicate-outline"></ion-icon></ion-button>
+      <ion-button slot="end" (click)="this.addRa()" style=" zoom:1.25"><ion-icon name="duplicate-outline"></ion-icon></ion-button>
   </ion-toolbar>
   </div>
   <form>

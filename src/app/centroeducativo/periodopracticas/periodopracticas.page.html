@@ -3,15 +3,7 @@
     <ion-buttons slot="start">
       <ion-menu-button menu="main-menu"></ion-menu-button>
     </ion-buttons>
-    <ion-title>Periodo de {{practica}}</ion-title>
-    <ion-buttons slot="end">
-      <ion-item>
-        <ion-icon slot="start" name="moon"></ion-icon>
-        <!--Botón que permite cambiar de tema-->
-        <ion-toggle slot="end" [ngModel]="darkMode" (ionChange)="change()">
-        </ion-toggle>
-      </ion-item>
-    </ion-buttons>
+    <ion-title slot="end">Periodo de {{practica}}</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -19,8 +11,7 @@
     <!--Busqueda y filtrado de periodos de practicas-->
     <ion-searchbar id="searchpp" placeholder="Buscar" animated (ionChange)="handleChange($event)"></ion-searchbar>
     <!--Botón para agregar un nuevo periodo de practicas-->
-    <ion-button (click)="nuevaPractica()" style="--background: #141414; zoom:1.25"><ion-icon name="duplicate-outline"
-        style="color: white;"></ion-icon></ion-button>
+    <ion-button (click)="nuevaPractica()" style=" zoom:1.25"><ion-icon name="duplicate-outline"></ion-icon></ion-button>
   </div>
   <div id="divlist">
     <ion-list lines="inset">

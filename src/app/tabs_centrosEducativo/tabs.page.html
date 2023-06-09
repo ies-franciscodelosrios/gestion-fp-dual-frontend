@@ -2,11 +2,6 @@
   <ion-menu menuId="main-menu" contentId="main">
     <ion-content>
       <div class="menu-header-bg"></div>
-      <div class="content-cs">
-        <ion-button (click)="cerrarSesion()" >
-          <ion-icon slot="icon-only" name="exit"></ion-icon>
-        </ion-button>
-      </div>
       <div class="header-content">
         <ion-icon *ngIf="this.img==null" name="person-outline" style="zoom:4" color="light"
           (click)="editAvatar()"></ion-icon>
@@ -29,13 +24,27 @@
           <ion-icon name="briefcase-outline"></ion-icon>
           <p>Ciclo Formativo</p>
         </ion-item>
-
         <ion-item [class.active]="activeTab === 'periodopracticas'" tab="periodopracticas" button detail="true" (click)="redirectTo('periodopracticas')"
           (click)="clMenu()">
           <ion-icon name="color-palette-outline"></ion-icon>
           <p> Practicas</p>
         </ion-item>
       </ion-list>
+      <ion-list class="content-wrapper">
+        <div class="content-item">
+          <ion-item>
+            <ion-label>Dark Mode&nbsp;&nbsp;&nbsp;</ion-label>
+            <ion-icon name="sunny-outline"></ion-icon>
+            <ion-toggle slot="end" [ngModel]="darkMode" (ionChange)="cambio()"></ion-toggle>
+            <ion-icon slot="end" name="moon"></ion-icon>
+          </ion-item>
+        </div>
+        <div class="content-item">
+          <ion-button slot="start" (click)="cerrarSesion()">Cerrar Sesión
+            <ion-icon slot="end" name="exit"></ion-icon>
+          </ion-button>
+        </div>
+    </ion-list>
     </ion-content>
   </ion-menu>
   <ion-router-outlet id="main"></ion-router-outlet>
