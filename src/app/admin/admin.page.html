@@ -25,15 +25,15 @@
 </nav>
 
 <ion-content class="ion-padding">
-
   <ion-list class="list">
     <ion-item *ngFor="let user of searched" (click)="editUser(user)">
-      <ion-img *ngIf="user.imagen!=null" src={{user.imagen}}></ion-img>
-      <ion-icon class="icon" *ngIf="user.imagen==null" name="person-outline" style="zoom:10"></ion-icon>
-      <ion-label>
-        <h2>{{user.nombre}}</h2>
-      </ion-label>
+      <div>
+       <ion-img class="image" style="border-radius: 100%;" *ngIf="user.imagen!=null" src={{user.imagen}}></ion-img>
+      </div>
+      <ion-icon class="icn" style="border-radius: 100%;" *ngIf="user.imagen==null" name="person-outline"></ion-icon>
+      <div>
+        <ion-label>&nbsp;&nbsp;{{user.nombre}}</ion-label>
+      </div>
     </ion-item>
   </ion-list>
-
 </ion-content>

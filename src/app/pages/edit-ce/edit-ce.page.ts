@@ -55,7 +55,9 @@ export class EditCEPage implements OnInit {
 
   /* Este método consiste en eliminar un usuario dado */
   deleteUser() {
-    this.apiS.deleteUsuario(this.dataUser.id);
+    console.log(this.dataUser.id)
+    this.apiS.deleteUsuario(this.dataUser.id).subscribe();
+    this.closeModal.emit(true);
     this.modalCtrl.dismiss();
   }
 

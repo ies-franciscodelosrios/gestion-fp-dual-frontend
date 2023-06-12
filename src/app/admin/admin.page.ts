@@ -135,7 +135,7 @@ export class AdminPage implements OnInit {
       //Cambiamos a que guarde que NO tenga el tema oscuro
       localStorage.setItem('darkTheme', "False");
     }
-    //document.body.classList.toggle('dark');
+    document.body.classList.toggle('dark');
   }
 
   /* Este método consiste en cambiar el botón
@@ -148,5 +148,4 @@ export class AdminPage implements OnInit {
       this.darkMode = true;
     }
   }
-
 }

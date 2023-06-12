@@ -4,14 +4,6 @@
       <ion-menu-button menu="main-menu"></ion-menu-button>
     </ion-buttons>
     <ion-title>Alumno</ion-title>
-    <ion-buttons slot="end">
-      <ion-item>
-        <ion-icon slot="start" name="moon"></ion-icon>
-        <!--Botón que permite cambiar de tema-->
-        <ion-toggle slot="end" [ngModel]="darkMode" (ionChange)="change()">
-        </ion-toggle>
-      </ion-item>
-    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -20,7 +12,9 @@
     <!--Busqueda y filtrado de alumnos-->
     <ion-searchbar id="searchempresa" placeholder="Buscar" animated (ionChange)="handleChange($event)"></ion-searchbar>
     <!--Botón para agregar un nuevo alumno-->
-    <ion-button (click)="nuevoalumno()" style=" zoom:1.25"><ion-icon name="duplicate-outline"></ion-icon></ion-button>
+    <ion-button (click)="nuevoalumno()" color="white" style=" zoom:1.25">
+      <ion-icon name="duplicate-outline" color="dark"></ion-icon>
+    </ion-button>
   </div>
 <!--Lista de objetos de tipo alumno que al seleccionar un "ion-card" se abra un modal con el contenido de ese alumno en concreto-->
 <div id="divlist" *ngIf="permision">
