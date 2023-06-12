@@ -22,7 +22,7 @@ export class InfoAlumnoPage implements OnInit {
   }
 
   ngOnInit() {
-    console.log("Esto se abre")
+    
   }
 
   cancel() {
