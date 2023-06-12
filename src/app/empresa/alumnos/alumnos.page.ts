@@ -27,14 +27,14 @@ export class AlumnosPage implements OnInit {
 
   ionViewWillEnter() {
     this.login.keepSession(); 
-    //this.loadUsers(); 
-    //se obtienen los encargos y se insertan en el array encargos
   }
 
   ngOnInit() {
     this.loadUsers();
   }
 
+  //Este método carga los usuarios y los periódos de prácticas
+  //que están asociados a la empresa con la que nos hemos logueado
   public async loadUsers(){
     this.permision = true; 
     this.apiS.getPeriodobyEmpresa(this.login.user.id).subscribe(periodos=>{
@@ -65,17 +65,5 @@ export class AlumnosPage implements OnInit {
         return (usuario.nombre?.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1);
       })
     }
-  }
-
-  cerrarSesion(){
-    this.login.logout();
-  }
-
-  public async editProfile(){
-    const modal = await this.modalCtrl.create({
-      component: EditProfilePage,
-      componentProps: { },
-    });
-    return await modal.present();
   }
 }

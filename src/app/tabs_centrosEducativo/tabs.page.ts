@@ -14,6 +14,7 @@ export class TabsPage implements OnInit{
   public subtittle?: string;
   public img?: string;
   public activeTab: string
+  public darkMode: boolean;
 
   constructor(
     private menu: MenuController,
@@ -24,6 +25,9 @@ export class TabsPage implements OnInit{
       this.activeTab = "empresa";
      }
 
+  ionViewWillEnter() {
+    this.theme(); 
+  }
   ngOnInit() {
     this.loadUsers();
   }
@@ -66,6 +70,53 @@ export class TabsPage implements OnInit{
 
   cerrarSesion(){
     this.login.logout();
+  }
+  
+  theme(){ 
+    //pilla el tema oscuro del localstore
+    let theme =localStorage.getItem('darkTheme');
+    //Em caso de  tema oscuro esta desactivado
+    if(theme=="False"){
+      //si la pagina esta oscuro
+      if(document.body.classList.contains('dark')){
+        //cambia a claro 
+        document.body.classList.toggle('dark'); 
+      }
+    //Em caso de tema oscuto esta activado
+    }else{
+      //si la pagina NO esta oscuro
+      if(!document.body.classList.contains('dark')){
+        //cambia a oscuro
+        document.body.classList.toggle('dark'); 
+      }
+    }
+  }
+  
+  cambio() {
+    //pilla el tema oscuro del localstore
+    let theme =localStorage.getItem('darkTheme');
+    //Em caso de  tema oscuro esta desactivado
+    if(theme=="False"){
+      //El boton de tema oscuro se activa
+      this.darkMode=true;
+      //cambiamos a que guarde que tenga el tema oscuro
+      localStorage.setItem('darkTheme', "True");
+    }else{
+      //El boton de tema oscuro se desactiva
+      this.darkMode=false;
+      //cambiamos a que guarde que NO tenga el tema oscuro
+      localStorage.setItem('darkTheme', "False");
+    }
+    document.body.classList.toggle('dark');
+  }
+  
+  changeButton(){
+    let theme =localStorage.getItem('darkTheme');
+    if(theme=="False"){
+      this.darkMode=false;
+    }else{
+      this.darkMode=true;
+    }
   }
 
 }
